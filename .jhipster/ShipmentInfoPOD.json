@@ -1,0 +1,31 @@
+{
+    "name": "ShipmentInfoPOD",
+    "fields": [
+        {
+            "fieldName": "pod",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "any"
+        },
+        {
+            "fieldName": "comments",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "shipmentInfo",
+            "otherEntityName": "shipmentInfo",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190327183238",
+    "entityTableName": "shipment_info_pod",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -1,0 +1,27 @@
+{
+  "cargotrackerApp": {
+    "shiperReceiverInfo": {
+      "home": {
+        "title": "ShiperReceiverInfos",
+        "createLabel": "नया Shiper Receiver Info बनाएँ",
+        "createOrEditLabel": "Shiper Receiver Info बनाएँ या संपादित करें",
+        "search": "Shiper Receiver Info खोजें"
+      },
+      "created": "एक नया Shiper Receiver Info [identifier: {{ param }}] तैयार है",
+      "updated": "एक Shiper Receiver Info [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Shiper Receiver Info [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Shiper Receiver Info [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Shiper Receiver Info"
+      },
+      "type": "Type",
+      "shipperName": "Shipper Name",
+      "phoneNo": "Phone No",
+      "address": "Address",
+      "emailId": "Email Id",
+      "shipmentInfo": "Shipment Info"
+    }
+  }
+}
