@@ -1,0 +1,43 @@
+{
+  "cargotrackerApp": {
+    "shipmentInfo": {
+      "home": {
+        "title": "Shipment Infos",
+        "createLabel": "Shipment Info-ஐ உருவாக்கு",
+        "createOrEditLabel": "Shipment Info -ஐ மாற்று (அ) உருவாக்கு",
+        "search": "Search for Shipment Info"
+      },
+      "created": "Shipment Info புதிதாக உருவாக்கப்பட்டது, அடையாளம் {{ param }}",
+      "updated": "Shipment Info மாற்றப்பட்டது, அடையாளம்  {{ param }}",
+      "deleted": "A Shipment Info நீக்கப்பட்டது, அடையாளம {{ param }}",
+      "delete": {
+        "question": "நீக்குவதற்கு உறுதி செய் Shipment Info {{ id }}?"
+      },
+      "detail": {
+        "title": "Shipment Info"
+      },
+      "consignmentNo": "Consignment No",
+      "isThirdParty": "Is Third Party",
+      "carrier": "Carrier",
+      "courier": "Courier",
+      "carrierRefNo": "Carrier Ref No",
+      "shipmentType": "Shipment Type",
+      "shipmentMode": "Shipment Mode",
+      "origin": "Origin",
+      "destination": "Destination",
+      "pickupDate": "Pickup Date",
+      "expectedDeliveryDate": "Expected Delivery Date",
+      "weight": "Weight",
+      "quantity": "Quantity",
+      "totalFright": "Total Fright",
+      "packageDesciption": "Package Desciption",
+      "paymentMode": "Payment Mode",
+      "status": "Status",
+      "comments": "Comments",
+      "vendor": "Vendor",
+      "origin": "Origin",
+      "destination": "Destination",
+      "shipperREceiverInfo": "Shipper R Eceiver Info"
+    }
+  }
+}

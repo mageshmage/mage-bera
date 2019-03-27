@@ -1,0 +1,10 @@
+{
+  "cargotrackerApp": {
+    "ShipmentMode": {
+      "null": "",
+      "AIR": "AIR",
+      "ROAD": "ROAD",
+      "SEA": "SEA"
+    }
+  }
+}

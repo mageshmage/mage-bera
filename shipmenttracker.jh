@@ -1,0 +1,101 @@
+entity Vendor {
+	name String required,
+    pan String required,
+    gstin String required,
+}
+
+enum ShiperReceiverType {
+    DOCUMENT, PARCEL, PACKAGE
+}
+
+entity ShiperReceiverInfo {
+	type ShiperReceiverType required,
+	shipperName String required,
+    phoneNo String required,
+    address String required,
+    emailId String
+}
+
+enum ShipmentType {
+    DOCUMENT, PARCEL, PACKAGE
+}
+
+enum ShipmentMode {
+	AIR, ROAD, SEA
+}
+
+enum PaymentMode {
+	TOPAY, PAID, CREDIT, CASH, CHEQUE, ACCOUNT, UPI 
+}
+
+enum CARRIER {
+	DHL, FEDEX
+}
+
+enum Status {
+	INTRANSIENT,
+    PENDING,
+    DELIVERED,
+    DELAYED,
+    ONHOLD
+}
+
+entity ShipmentInfo {
+	consignmentNo String required,
+    isThirdParty Boolean,
+    carrier CARRIER,
+    courier String,
+    carrierRefNo String,
+    shipmentType ShipmentType required,
+    shipmentMode ShipmentMode required,
+    origin String required,
+    destination String required,
+    pickupDate LocalDate required,
+    expectedDeliveryDate LocalDate required,
+    weight BigDecimal ,
+    quantity Long,
+    totalFright BigDecimal,
+    packageDesciption String,
+    paymentMode PaymentMode required,
+    status Status required,
+    comments String
+}
+
+relationship OneToOne {
+	ShipmentInfo{vendor} to Vendor
+}
+
+relationship OneToMany {
+	ShipmentInfo{shipperREceiverInfo} to ShiperReceiverInfo,
+}
+
+entity State {
+	stateCode String,
+    stateName String
+}
+
+entity Country {
+	countryCode String,
+    countryName String
+}
+
+relationship OneToOne {
+	State{country} to Country
+}
+
+relationship OneToOne {
+	ShipmentInfo{origin} to State
+}
+
+relationship OneToOne {
+	ShipmentInfo{destination} to State
+}
+
+// Set pagination options
+paginate ShipmentInfo, ShiperReceiverInfo with pagination
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl

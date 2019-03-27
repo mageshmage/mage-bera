@@ -1,0 +1,14 @@
+{
+  "cargotrackerApp": {
+    "PaymentMode": {
+      "null": "",
+      "TOPAY": "TOPAY",
+      "PAID": "PAID",
+      "CREDIT": "CREDIT",
+      "CASH": "CASH",
+      "CHEQUE": "CHEQUE",
+      "ACCOUNT": "ACCOUNT",
+      "UPI": "UPI"
+    }
+  }
+}
