@@ -1,0 +1,9 @@
+{
+  "cargotrackerApp": {
+    "CARRIER": {
+      "null": "",
+      "DHL": "DHL",
+      "FEDEX": "FEDEX"
+    }
+  }
+}

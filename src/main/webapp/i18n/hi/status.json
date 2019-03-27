@@ -1,0 +1,12 @@
+{
+  "cargotrackerApp": {
+    "Status": {
+      "null": "",
+      "INTRANSIENT": "INTRANSIENT",
+      "PENDING": "PENDING",
+      "DELIVERED": "DELIVERED",
+      "DELAYED": "DELAYED",
+      "ONHOLD": "ONHOLD"
+    }
+  }
+}

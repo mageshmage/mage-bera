@@ -1,0 +1,24 @@
+{
+  "cargotrackerApp": {
+    "vendor": {
+      "home": {
+        "title": "Vendors",
+        "createLabel": "नवीन Vendor तयार करा",
+        "createOrEditLabel": "Vendor तयार किंवा संपादित करा",
+        "search": "Vendor शोधा"
+      },
+      "created": "Vendor [identifier: {{ param }}] तयार आहे",
+      "updated": "Vendor [identifier: {{ param }}] सुधारित केले आहे",
+      "deleted": "Vendor [identifier: {{ param }}] हटविले आहे",
+      "delete": {
+        "question": "Vendor [id: {{ id }}] काढून टाकण्याबाबत पुष्टी?"
+      },
+      "detail": {
+        "title": "Vendor"
+      },
+      "name": "Name",
+      "pan": "Pan",
+      "gstin": "Gstin"
+    }
+  }
+}
