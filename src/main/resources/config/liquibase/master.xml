@@ -5,6 +5,30 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181128_added_entity_Vendor.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181129_added_entity_ShiperReceiverInfo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181130_added_entity_ShipmentType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181131_added_entity_ShipmentMode.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181132_added_entity_PaymentMode.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181133_added_entity_CarrierDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181134_added_entity_TrackingStatus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181135_added_entity_ShipmentInfo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181136_added_entity_ShipmentTracking.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181137_added_entity_ShipmentInfoPOD.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181138_added_entity_City.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181139_added_entity_State.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181140_added_entity_Country.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20190329181129_added_entity_constraints_ShiperReceiverInfo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181130_added_entity_constraints_ShipmentType.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181131_added_entity_constraints_ShipmentMode.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181132_added_entity_constraints_PaymentMode.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181133_added_entity_constraints_CarrierDetails.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181134_added_entity_constraints_TrackingStatus.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181135_added_entity_constraints_ShipmentInfo.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181136_added_entity_constraints_ShipmentTracking.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181137_added_entity_constraints_ShipmentInfoPOD.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181138_added_entity_constraints_City.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20190329181139_added_entity_constraints_State.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

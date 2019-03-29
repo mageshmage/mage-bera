@@ -1,0 +1,45 @@
+{
+  "cargotrackerApp": {
+    "shipmentInfo": {
+      "home": {
+        "title": "Shipment Infos",
+        "createLabel": "नवीन Shipment Info तयार करा",
+        "createOrEditLabel": "Shipment Info तयार किंवा संपादित करा",
+        "search": "Shipment Info शोधा"
+      },
+      "created": "Shipment Info [identifier: {{ param }}] तयार आहे",
+      "updated": "Shipment Info [identifier: {{ param }}] सुधारित केले आहे",
+      "deleted": "Shipment Info [identifier: {{ param }}] हटविले आहे",
+      "delete": {
+        "question": "Shipment Info [id: {{ id }}] काढून टाकण्याबाबत पुष्टी?"
+      },
+      "detail": {
+        "title": "Shipment Info"
+      },
+      "consignmentNo": "Consignment No",
+      "bookingDate": "Booking Date",
+      "expectedDeliveryDate": "Expected Delivery Date",
+      "actualWeight": "Actual Weight",
+      "volumetricWeight": "Volumetric Weight",
+      "length": "Length",
+      "width": "Width",
+      "height": "Height",
+      "quantity": "Quantity",
+      "totalFright": "Total Fright",
+      "packageDesciption": "Package Desciption",
+      "isThirdParty": "Is Third Party",
+      "carrierRefNo": "Carrier Ref No",
+      "carrierDetails": "Carrier Details",
+      "shipmentType": "Shipment Type",
+      "shipmentMode": "Shipment Mode",
+      "paymentMode": "Payment Mode",
+      "trackingStatus": "Tracking Status",
+      "vendor": "Vendor",
+      "origin": "Origin",
+      "destination": "Destination",
+      "shipmentTrackings": "Shipment Trackings",
+      "shipmentInfoPODs": "Shipment Info PO Ds",
+      "shipperReceiverInfos": "Shipper Receiver Infos"
+    }
+  }
+}

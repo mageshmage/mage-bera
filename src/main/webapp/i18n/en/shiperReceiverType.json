@@ -1,0 +1,9 @@
+{
+  "cargotrackerApp": {
+    "ShiperReceiverType": {
+      "null": "",
+      "CONSIGNOR": "CONSIGNOR",
+      "CONSIGNEE": "CONSIGNEE"
+    }
+  }
+}

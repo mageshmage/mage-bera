@@ -1,0 +1,24 @@
+{
+  "cargotrackerApp": {
+    "trackingStatus": {
+      "home": {
+        "title": "Tracking Statuses",
+        "createLabel": "Create a new Tracking Status",
+        "createOrEditLabel": "Create or edit a Tracking Status",
+        "search": "Search for Tracking Status"
+      },
+      "created": "A new Tracking Status is created with identifier {{ param }}",
+      "updated": "A Tracking Status is updated with identifier {{ param }}",
+      "deleted": "A Tracking Status is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tracking Status {{ id }}?"
+      },
+      "detail": {
+        "title": "Tracking Status"
+      },
+      "value": "Value",
+      "desc": "Desc",
+      "vendor": "Vendor"
+    }
+  }
+}
