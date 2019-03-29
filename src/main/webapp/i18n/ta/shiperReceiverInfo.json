@@ -1,0 +1,30 @@
+{
+  "cargotrackerApp": {
+    "shiperReceiverInfo": {
+      "home": {
+        "title": "Shiper Receiver Infos",
+        "createLabel": "Shiper Receiver Info-ஐ உருவாக்கு",
+        "createOrEditLabel": "Shiper Receiver Info -ஐ மாற்று (அ) உருவாக்கு",
+        "search": "Search for Shiper Receiver Info"
+      },
+      "created": "Shiper Receiver Info புதிதாக உருவாக்கப்பட்டது, அடையாளம் {{ param }}",
+      "updated": "Shiper Receiver Info மாற்றப்பட்டது, அடையாளம்  {{ param }}",
+      "deleted": "A Shiper Receiver Info நீக்கப்பட்டது, அடையாளம {{ param }}",
+      "delete": {
+        "question": "நீக்குவதற்கு உறுதி செய் Shiper Receiver Info {{ id }}?"
+      },
+      "detail": {
+        "title": "Shiper Receiver Info"
+      },
+      "type": "Type",
+      "shipperName": "Shipper Name",
+      "phoneNo": "Phone No",
+      "address": "Address",
+      "otherCity": "Other City",
+      "pincode": "Pincode",
+      "emailId": "Email Id",
+      "city": "City",
+      "shipmentInfo": "Shipment Info"
+    }
+  }
+}

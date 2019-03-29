@@ -1,0 +1,24 @@
+{
+  "cargotrackerApp": {
+    "shipmentInfoPOD": {
+      "home": {
+        "title": "ShipmentInfoPODS",
+        "createLabel": "नया Shipment Info POD बनाएँ",
+        "createOrEditLabel": "Shipment Info POD बनाएँ या संपादित करें",
+        "search": "Shipment Info POD खोजें"
+      },
+      "created": "एक नया Shipment Info POD [identifier: {{ param }}] तैयार है",
+      "updated": "एक Shipment Info POD [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Shipment Info POD [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Shipment Info POD [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Shipment Info POD"
+      },
+      "pod": "Pod",
+      "comments": "Comments",
+      "shipmentInfo": "Shipment Info"
+    }
+  }
+}
