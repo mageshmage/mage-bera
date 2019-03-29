@@ -1,0 +1,24 @@
+{
+  "cargotrackerApp": {
+    "trackingStatus": {
+      "home": {
+        "title": "Tracking Statuses",
+        "createLabel": "Tracking Status-ஐ உருவாக்கு",
+        "createOrEditLabel": "Tracking Status -ஐ மாற்று (அ) உருவாக்கு",
+        "search": "Search for Tracking Status"
+      },
+      "created": "Tracking Status புதிதாக உருவாக்கப்பட்டது, அடையாளம் {{ param }}",
+      "updated": "Tracking Status மாற்றப்பட்டது, அடையாளம்  {{ param }}",
+      "deleted": "A Tracking Status நீக்கப்பட்டது, அடையாளம {{ param }}",
+      "delete": {
+        "question": "நீக்குவதற்கு உறுதி செய் Tracking Status {{ id }}?"
+      },
+      "detail": {
+        "title": "Tracking Status"
+      },
+      "value": "Value",
+      "desc": "Desc",
+      "vendor": "Vendor"
+    }
+  }
+}

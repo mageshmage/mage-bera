@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity ShipmentInfo.
+    -->
+    <changeSet id="20190329163518-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="carrier_details_id"
+                                 baseTableName="shipment_info"
+                                 constraintName="fk_shipment_info_carrier_details_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="carrier_details"/>
+
+        <addForeignKeyConstraint baseColumnNames="shipment_type_id"
+                                 baseTableName="shipment_info"
+                                 constraintName="fk_shipment_info_shipment_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="shipment_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="shipment_mode_id"
+                                 baseTableName="shipment_info"
+                                 constraintName="fk_shipment_info_shipment_mode_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="shipment_mode"/>
+
+        <addForeignKeyConstraint baseColumnNames="payment_mode_id"
+                                 baseTableName="shipment_info"
+                                 constraintName="fk_shipment_info_payment_mode_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="payment_mode"/>
+
+        <addForeignKeyConstraint baseColumnNames="tracking_status_id"
+                                 baseTableName="shipment_info"
+                                 constraintName="fk_shipment_info_tracking_status_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="tracking_status"/>
+
+        <addForeignKeyConstraint baseColumnNames="vendor_id"
+                                 baseTableName="shipment_info"
+                                 constraintName="fk_shipment_info_vendor_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vendor"/>
+
+        <addForeignKeyConstraint baseColumnNames="origin_id"
+                                 baseTableName="shipment_info"
+                                 constraintName="fk_shipment_info_origin_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="state"/>
+
+        <addForeignKeyConstraint baseColumnNames="destination_id"
+                                 baseTableName="shipment_info"
+                                 constraintName="fk_shipment_info_destination_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="state"/>
+
+    </changeSet>
+</databaseChangeLog>

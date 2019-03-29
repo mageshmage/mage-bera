@@ -1,0 +1,9 @@
+{
+  "cargotrackerApp": {
+    "ShiperReceiverType": {
+      "null": "",
+      "SHIPPER": "SHIPPER",
+      "RECEIVER": "RECEIVER"
+    }
+  }
+}

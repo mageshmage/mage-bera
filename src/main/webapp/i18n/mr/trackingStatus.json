@@ -1,0 +1,24 @@
+{
+  "cargotrackerApp": {
+    "trackingStatus": {
+      "home": {
+        "title": "Tracking Statuses",
+        "createLabel": "नवीन Tracking Status तयार करा",
+        "createOrEditLabel": "Tracking Status तयार किंवा संपादित करा",
+        "search": "Tracking Status शोधा"
+      },
+      "created": "Tracking Status [identifier: {{ param }}] तयार आहे",
+      "updated": "Tracking Status [identifier: {{ param }}] सुधारित केले आहे",
+      "deleted": "Tracking Status [identifier: {{ param }}] हटविले आहे",
+      "delete": {
+        "question": "Tracking Status [id: {{ id }}] काढून टाकण्याबाबत पुष्टी?"
+      },
+      "detail": {
+        "title": "Tracking Status"
+      },
+      "value": "Value",
+      "desc": "Desc",
+      "vendor": "Vendor"
+    }
+  }
+}

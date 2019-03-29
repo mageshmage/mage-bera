@@ -1,0 +1,24 @@
+{
+  "cargotrackerApp": {
+    "carrierDetails": {
+      "home": {
+        "title": "Carrier Details",
+        "createLabel": "नवीन Carrier Details तयार करा",
+        "createOrEditLabel": "Carrier Details तयार किंवा संपादित करा",
+        "search": "Carrier Details शोधा"
+      },
+      "created": "Carrier Details [identifier: {{ param }}] तयार आहे",
+      "updated": "Carrier Details [identifier: {{ param }}] सुधारित केले आहे",
+      "deleted": "Carrier Details [identifier: {{ param }}] हटविले आहे",
+      "delete": {
+        "question": "Carrier Details [id: {{ id }}] काढून टाकण्याबाबत पुष्टी?"
+      },
+      "detail": {
+        "title": "Carrier Details"
+      },
+      "value": "Value",
+      "desc": "Desc",
+      "vendor": "Vendor"
+    }
+  }
+}

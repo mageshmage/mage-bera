@@ -1,0 +1,24 @@
+{
+  "cargotrackerApp": {
+    "paymentMode": {
+      "home": {
+        "title": "Payment Modes",
+        "createLabel": "Payment Mode-ஐ உருவாக்கு",
+        "createOrEditLabel": "Payment Mode -ஐ மாற்று (அ) உருவாக்கு",
+        "search": "Search for Payment Mode"
+      },
+      "created": "Payment Mode புதிதாக உருவாக்கப்பட்டது, அடையாளம் {{ param }}",
+      "updated": "Payment Mode மாற்றப்பட்டது, அடையாளம்  {{ param }}",
+      "deleted": "A Payment Mode நீக்கப்பட்டது, அடையாளம {{ param }}",
+      "delete": {
+        "question": "நீக்குவதற்கு உறுதி செய் Payment Mode {{ id }}?"
+      },
+      "detail": {
+        "title": "Payment Mode"
+      },
+      "value": "Value",
+      "desc": "Desc",
+      "vendor": "Vendor"
+    }
+  }
+}
