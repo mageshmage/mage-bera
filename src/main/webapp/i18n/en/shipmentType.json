@@ -1,0 +1,24 @@
+{
+  "cargotrackerApp": {
+    "shipmentType": {
+      "home": {
+        "title": "Shipment Types",
+        "createLabel": "Create a new Shipment Type",
+        "createOrEditLabel": "Create or edit a Shipment Type",
+        "search": "Search for Shipment Type"
+      },
+      "created": "A new Shipment Type is created with identifier {{ param }}",
+      "updated": "A Shipment Type is updated with identifier {{ param }}",
+      "deleted": "A Shipment Type is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Shipment Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Shipment Type"
+      },
+      "value": "Value",
+      "desc": "Desc",
+      "vendor": "Vendor"
+    }
+  }
+}

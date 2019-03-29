@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <property name="now" value="now()" dbms="h2"/>
+    
+    <property name="now" value="now()" dbms="mysql"/>
+    <property name="autoIncrement" value="true"/>
+
+    <property name="floatType" value="float4" dbms="postgresql, h2"/>
+    <property name="floatType" value="float" dbms="mysql, oracle, mssql"/>
+
+    <!--
+        Added the entity ShipmentInfo.
+    -->
+    <changeSet id="20190329163518-1" author="jhipster">
+        <createTable tableName="shipment_info">
+            <column name="id" type="bigint" autoIncrement="${autoIncrement}">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="consignment_no" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="is_third_party" type="boolean">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="courier" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="carrier_ref_no" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="pickup_date" type="date">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="expected_delivery_date" type="date">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="weight" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="quantity" type="bigint">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="total_fright" type="decimal(10,2)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="package_desciption" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+
+            <column name="comments" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="carrier_details_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_shipment_info_carrier_details_id" />
+            </column>            <column name="shipment_type_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_shipment_info_shipment_type_id" />
+            </column>            <column name="shipment_mode_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_shipment_info_shipment_mode_id" />
+            </column>            <column name="payment_mode_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_shipment_info_payment_mode_id" />
+            </column>            <column name="tracking_status_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_shipment_info_tracking_status_id" />
+            </column>            <column name="vendor_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_shipment_info_vendor_id" />
+            </column>            <column name="origin_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_shipment_info_origin_id" />
+            </column>            <column name="destination_id" type="bigint">
+                <constraints unique="true" nullable="true" uniqueConstraintName="ux_shipment_info_destination_id" />
+            </column>
+            <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
+        </createTable>
+        
+    </changeSet>
+    <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
+</databaseChangeLog>
