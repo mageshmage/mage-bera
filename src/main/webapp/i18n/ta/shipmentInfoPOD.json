@@ -1,0 +1,24 @@
+{
+  "cargotrackerApp": {
+    "shipmentInfoPOD": {
+      "home": {
+        "title": "Shipment Info PODS",
+        "createLabel": "Shipment Info POD-ஐ உருவாக்கு",
+        "createOrEditLabel": "Shipment Info POD -ஐ மாற்று (அ) உருவாக்கு",
+        "search": "Search for Shipment Info POD"
+      },
+      "created": "Shipment Info POD புதிதாக உருவாக்கப்பட்டது, அடையாளம் {{ param }}",
+      "updated": "Shipment Info POD மாற்றப்பட்டது, அடையாளம்  {{ param }}",
+      "deleted": "A Shipment Info POD நீக்கப்பட்டது, அடையாளம {{ param }}",
+      "delete": {
+        "question": "நீக்குவதற்கு உறுதி செய் Shipment Info POD {{ id }}?"
+      },
+      "detail": {
+        "title": "Shipment Info POD"
+      },
+      "pod": "Pod",
+      "comments": "Comments",
+      "shipmentInfo": "Shipment Info"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "cargotrackerApp": {
+    "paymentMode": {
+      "home": {
+        "title": "PaymentModes",
+        "createLabel": "नया Payment Mode बनाएँ",
+        "createOrEditLabel": "Payment Mode बनाएँ या संपादित करें",
+        "search": "Payment Mode खोजें"
+      },
+      "created": "एक नया Payment Mode [identifier: {{ param }}] तैयार है",
+      "updated": "एक Payment Mode [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Payment Mode [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Payment Mode [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Payment Mode"
+      },
+      "value": "Value",
+      "desc": "Desc",
+      "vendor": "Vendor"
+    }
+  }
+}

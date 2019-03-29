@@ -8,6 +8,19 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
+        "vendor": "Vendor",
+        "shiperReceiverInfo": "Shiper Receiver Info",
+        "shipmentType": "Shipment Type",
+        "shipmentMode": "Shipment Mode",
+        "paymentMode": "Payment Mode",
+        "carrierDetails": "Carrier Details",
+        "trackingStatus": "Tracking Status",
+        "shipmentInfo": "Shipment Info",
+        "shipmentTracking": "Shipment Tracking",
+        "shipmentInfoPod": "Shipment Info POD",
+        "city": "City",
+        "state": "State",
+        "country": "Country",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

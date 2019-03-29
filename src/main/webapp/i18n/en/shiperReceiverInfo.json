@@ -1,0 +1,29 @@
+{
+  "cargotrackerApp": {
+    "shiperReceiverInfo": {
+      "home": {
+        "title": "Shiper Receiver Infos",
+        "createLabel": "Create a new Shiper Receiver Info",
+        "createOrEditLabel": "Create or edit a Shiper Receiver Info",
+        "search": "Search for Shiper Receiver Info"
+      },
+      "created": "A new Shiper Receiver Info is created with identifier {{ param }}",
+      "updated": "A Shiper Receiver Info is updated with identifier {{ param }}",
+      "deleted": "A Shiper Receiver Info is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Shiper Receiver Info {{ id }}?"
+      },
+      "detail": {
+        "title": "Shiper Receiver Info"
+      },
+      "type": "Type",
+      "name": "Name",
+      "phoneNo": "Phone No",
+      "address": "Address",
+      "city": "City",
+      "pincode": "Pincode",
+      "emailId": "Email Id",
+      "shipmentInfo": "Shipment Info"
+    }
+  }
+}

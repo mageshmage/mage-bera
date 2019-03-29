@@ -1,0 +1,24 @@
+{
+  "cargotrackerApp": {
+    "shipmentType": {
+      "home": {
+        "title": "Shipment Types",
+        "createLabel": "नवीन Shipment Type तयार करा",
+        "createOrEditLabel": "Shipment Type तयार किंवा संपादित करा",
+        "search": "Shipment Type शोधा"
+      },
+      "created": "Shipment Type [identifier: {{ param }}] तयार आहे",
+      "updated": "Shipment Type [identifier: {{ param }}] सुधारित केले आहे",
+      "deleted": "Shipment Type [identifier: {{ param }}] हटविले आहे",
+      "delete": {
+        "question": "Shipment Type [id: {{ id }}] काढून टाकण्याबाबत पुष्टी?"
+      },
+      "detail": {
+        "title": "Shipment Type"
+      },
+      "value": "Value",
+      "desc": "Desc",
+      "vendor": "Vendor"
+    }
+  }
+}

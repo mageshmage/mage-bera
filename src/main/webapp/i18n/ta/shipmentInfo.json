@@ -1,0 +1,45 @@
+{
+  "cargotrackerApp": {
+    "shipmentInfo": {
+      "home": {
+        "title": "Shipment Infos",
+        "createLabel": "Shipment Info-ஐ உருவாக்கு",
+        "createOrEditLabel": "Shipment Info -ஐ மாற்று (அ) உருவாக்கு",
+        "search": "Search for Shipment Info"
+      },
+      "created": "Shipment Info புதிதாக உருவாக்கப்பட்டது, அடையாளம் {{ param }}",
+      "updated": "Shipment Info மாற்றப்பட்டது, அடையாளம்  {{ param }}",
+      "deleted": "A Shipment Info நீக்கப்பட்டது, அடையாளம {{ param }}",
+      "delete": {
+        "question": "நீக்குவதற்கு உறுதி செய் Shipment Info {{ id }}?"
+      },
+      "detail": {
+        "title": "Shipment Info"
+      },
+      "consignmentNo": "Consignment No",
+      "bookingDate": "Booking Date",
+      "expectedDeliveryDate": "Expected Delivery Date",
+      "actualWeight": "Actual Weight",
+      "volumetricWeight": "Volumetric Weight",
+      "length": "Length",
+      "width": "Width",
+      "height": "Height",
+      "quantity": "Quantity",
+      "totalFright": "Total Fright",
+      "packageDesciption": "Package Desciption",
+      "isThirdParty": "Is Third Party",
+      "carrierRefNo": "Carrier Ref No",
+      "carrierDetails": "Carrier Details",
+      "shipmentType": "Shipment Type",
+      "shipmentMode": "Shipment Mode",
+      "paymentMode": "Payment Mode",
+      "trackingStatus": "Tracking Status",
+      "vendor": "Vendor",
+      "origin": "Origin",
+      "destination": "Destination",
+      "shipmentTrackings": "Shipment Trackings",
+      "shipmentInfoPODs": "Shipment Info PO Ds",
+      "shipperReceiverInfos": "Shipper Receiver Infos"
+    }
+  }
+}

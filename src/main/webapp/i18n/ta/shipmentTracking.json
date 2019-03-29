@@ -1,0 +1,24 @@
+{
+  "cargotrackerApp": {
+    "shipmentTracking": {
+      "home": {
+        "title": "Shipment Trackings",
+        "createLabel": "Shipment Tracking-ஐ உருவாக்கு",
+        "createOrEditLabel": "Shipment Tracking -ஐ மாற்று (அ) உருவாக்கு",
+        "search": "Search for Shipment Tracking"
+      },
+      "created": "Shipment Tracking புதிதாக உருவாக்கப்பட்டது, அடையாளம் {{ param }}",
+      "updated": "Shipment Tracking மாற்றப்பட்டது, அடையாளம்  {{ param }}",
+      "deleted": "A Shipment Tracking நீக்கப்பட்டது, அடையாளம {{ param }}",
+      "delete": {
+        "question": "நீக்குவதற்கு உறுதி செய் Shipment Tracking {{ id }}?"
+      },
+      "detail": {
+        "title": "Shipment Tracking"
+      },
+      "trackingDate": "Tracking Date",
+      "activities": "Activities",
+      "shipmentInfo": "Shipment Info"
+    }
+  }
+}
