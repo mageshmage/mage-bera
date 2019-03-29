@@ -1,0 +1,10 @@
+{
+  "cargotrackerApp": {
+    "ShiperReceiverType": {
+      "null": "",
+      "DOCUMENT": "DOCUMENT",
+      "PARCEL": "PARCEL",
+      "PACKAGE": "PACKAGE"
+    }
+  }
+}

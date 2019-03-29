@@ -1,0 +1,24 @@
+{
+  "cargotrackerApp": {
+    "shipmentInfoPOD": {
+      "home": {
+        "title": "Shipment Info PODS",
+        "createLabel": "Create a new Shipment Info POD",
+        "createOrEditLabel": "Create or edit a Shipment Info POD",
+        "search": "Search for Shipment Info POD"
+      },
+      "created": "A new Shipment Info POD is created with identifier {{ param }}",
+      "updated": "A Shipment Info POD is updated with identifier {{ param }}",
+      "deleted": "A Shipment Info POD is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Shipment Info POD {{ id }}?"
+      },
+      "detail": {
+        "title": "Shipment Info POD"
+      },
+      "pod": "Pod",
+      "comments": "Comments",
+      "shipmentInfo": "Shipment Info"
+    }
+  }
+}

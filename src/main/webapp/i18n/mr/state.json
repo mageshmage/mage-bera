@@ -1,0 +1,24 @@
+{
+  "cargotrackerApp": {
+    "state": {
+      "home": {
+        "title": "States",
+        "createLabel": "नवीन State तयार करा",
+        "createOrEditLabel": "State तयार किंवा संपादित करा",
+        "search": "State शोधा"
+      },
+      "created": "State [identifier: {{ param }}] तयार आहे",
+      "updated": "State [identifier: {{ param }}] सुधारित केले आहे",
+      "deleted": "State [identifier: {{ param }}] हटविले आहे",
+      "delete": {
+        "question": "State [id: {{ id }}] काढून टाकण्याबाबत पुष्टी?"
+      },
+      "detail": {
+        "title": "State"
+      },
+      "stateCode": "State Code",
+      "stateName": "State Name",
+      "country": "Country"
+    }
+  }
+}

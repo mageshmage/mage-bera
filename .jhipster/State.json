@@ -1,0 +1,30 @@
+{
+    "name": "State",
+    "fields": [
+        {
+            "fieldName": "stateCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "stateName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "country",
+            "otherEntityName": "country",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190329151202",
+    "entityTableName": "state",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}
