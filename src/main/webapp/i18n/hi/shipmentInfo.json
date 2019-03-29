@@ -1,0 +1,42 @@
+{
+  "cargotrackerApp": {
+    "shipmentInfo": {
+      "home": {
+        "title": "ShipmentInfos",
+        "createLabel": "नया Shipment Info बनाएँ",
+        "createOrEditLabel": "Shipment Info बनाएँ या संपादित करें",
+        "search": "Shipment Info खोजें"
+      },
+      "created": "एक नया Shipment Info [identifier: {{ param }}] तैयार है",
+      "updated": "एक Shipment Info [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Shipment Info [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Shipment Info [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Shipment Info"
+      },
+      "consignmentNo": "Consignment No",
+      "isThirdParty": "Is Third Party",
+      "courier": "Courier",
+      "carrierRefNo": "Carrier Ref No",
+      "pickupDate": "Pickup Date",
+      "expectedDeliveryDate": "Expected Delivery Date",
+      "weight": "Weight",
+      "quantity": "Quantity",
+      "totalFright": "Total Fright",
+      "packageDesciption": "Package Desciption",
+      "comments": "Comments",
+      "carrierDetails": "Carrier Details",
+      "shipmentType": "Shipment Type",
+      "shipmentMode": "Shipment Mode",
+      "paymentMode": "Payment Mode",
+      "trackingStatus": "Tracking Status",
+      "vendor": "Vendor",
+      "origin": "Origin",
+      "destination": "Destination",
+      "shipmentInfoPOD": "Shipment Info POD",
+      "shipperReceiverInfo": "Shipper Receiver Info"
+    }
+  }
+}
