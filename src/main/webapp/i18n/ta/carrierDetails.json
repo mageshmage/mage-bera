@@ -1,0 +1,24 @@
+{
+  "cargotrackerApp": {
+    "carrierDetails": {
+      "home": {
+        "title": "Carrier Details",
+        "createLabel": "Carrier Details-ஐ உருவாக்கு",
+        "createOrEditLabel": "Carrier Details -ஐ மாற்று (அ) உருவாக்கு",
+        "search": "Search for Carrier Details"
+      },
+      "created": "Carrier Details புதிதாக உருவாக்கப்பட்டது, அடையாளம் {{ param }}",
+      "updated": "Carrier Details மாற்றப்பட்டது, அடையாளம்  {{ param }}",
+      "deleted": "A Carrier Details நீக்கப்பட்டது, அடையாளம {{ param }}",
+      "delete": {
+        "question": "நீக்குவதற்கு உறுதி செய் Carrier Details {{ id }}?"
+      },
+      "detail": {
+        "title": "Carrier Details"
+      },
+      "value": "Value",
+      "desc": "Desc",
+      "vendor": "Vendor"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "cargotrackerApp": {
+    "shipmentMode": {
+      "home": {
+        "title": "Shipment Modes",
+        "createLabel": "नवीन Shipment Mode तयार करा",
+        "createOrEditLabel": "Shipment Mode तयार किंवा संपादित करा",
+        "search": "Shipment Mode शोधा"
+      },
+      "created": "Shipment Mode [identifier: {{ param }}] तयार आहे",
+      "updated": "Shipment Mode [identifier: {{ param }}] सुधारित केले आहे",
+      "deleted": "Shipment Mode [identifier: {{ param }}] हटविले आहे",
+      "delete": {
+        "question": "Shipment Mode [id: {{ id }}] काढून टाकण्याबाबत पुष्टी?"
+      },
+      "detail": {
+        "title": "Shipment Mode"
+      },
+      "value": "Value",
+      "desc": "Desc",
+      "vendor": "Vendor"
+    }
+  }
+}
