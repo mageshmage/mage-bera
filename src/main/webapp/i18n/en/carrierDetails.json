@@ -1,0 +1,24 @@
+{
+  "cargotrackerApp": {
+    "carrierDetails": {
+      "home": {
+        "title": "Carrier Details",
+        "createLabel": "Create a new Carrier Details",
+        "createOrEditLabel": "Create or edit a Carrier Details",
+        "search": "Search for Carrier Details"
+      },
+      "created": "A new Carrier Details is created with identifier {{ param }}",
+      "updated": "A Carrier Details is updated with identifier {{ param }}",
+      "deleted": "A Carrier Details is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Carrier Details {{ id }}?"
+      },
+      "detail": {
+        "title": "Carrier Details"
+      },
+      "value": "Value",
+      "desc": "Desc",
+      "vendor": "Vendor"
+    }
+  }
+}
