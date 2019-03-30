@@ -1,0 +1,174 @@
+{
+    "name": "ShipmentInfo",
+    "fields": [
+        {
+            "fieldName": "consignmentNo",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "bookingDate",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "expectedDeliveryDate",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "actualWeight",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "volumetricWeight",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "length",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "width",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "height",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "quantity",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "totalFright",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "packageDesciption",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "isThirdParty",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "carrierRefNo",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "deliveredDate",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "receivedBy",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "relationShip",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "carrierDetails",
+            "otherEntityRelationshipName": "shipmentInfo",
+            "relationshipName": "carrierDetails",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "shipmentType",
+            "otherEntityRelationshipName": "shipmentInfo",
+            "relationshipName": "shipmentType",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "shipmentMode",
+            "otherEntityRelationshipName": "shipmentInfo",
+            "relationshipName": "shipmentMode",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "paymentMode",
+            "otherEntityRelationshipName": "shipmentInfo",
+            "relationshipName": "paymentMode",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "trackingStatus",
+            "otherEntityRelationshipName": "shipmentInfo",
+            "relationshipName": "trackingStatus",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "vendor",
+            "otherEntityRelationshipName": "shipmentInfo",
+            "relationshipName": "vendor",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "state",
+            "otherEntityRelationshipName": "shipmentInfo",
+            "relationshipName": "origin",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "state",
+            "otherEntityRelationshipName": "shipmentInfo",
+            "relationshipName": "destination",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "shipmentTracking",
+            "otherEntityRelationshipName": "shipmentInfo",
+            "relationshipName": "shipmentTrackings"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "shipmentInfoPOD",
+            "otherEntityRelationshipName": "shipmentInfo",
+            "relationshipName": "shipmentInfoPODs"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "shiperReceiverInfo",
+            "otherEntityRelationshipName": "shipmentInfo",
+            "relationshipName": "shipperReceiverInfos"
+        }
+    ],
+    "changelogDate": "20190330143955",
+    "entityTableName": "shipment_info",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

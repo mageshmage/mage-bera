@@ -1,0 +1,25 @@
+{
+  "cargotrackerApp": {
+    "shipmentTracking": {
+      "home": {
+        "title": "ShipmentTrackings",
+        "createLabel": "नया Shipment Tracking बनाएँ",
+        "createOrEditLabel": "Shipment Tracking बनाएँ या संपादित करें",
+        "search": "Shipment Tracking खोजें"
+      },
+      "created": "एक नया Shipment Tracking [identifier: {{ param }}] तैयार है",
+      "updated": "एक Shipment Tracking [identifier: {{ param }}] का अद्यतन हुआ है",
+      "deleted": "Shipment Tracking [identifier: {{ param }}] हटा दिया है",
+      "delete": {
+        "question": "Shipment Tracking [id: {{ id }}] हटाने की पुष्टि करें"
+      },
+      "detail": {
+        "title": "Shipment Tracking"
+      },
+      "trackingDate": "Tracking Date",
+      "place": "Place",
+      "status": "Status",
+      "shipmentInfo": "Shipment Info"
+    }
+  }
+}

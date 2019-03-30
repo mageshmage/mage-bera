@@ -1,0 +1,36 @@
+{
+    "name": "State",
+    "fields": [
+        {
+            "fieldName": "stateCode",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "stateName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "otherEntityName": "city",
+            "otherEntityRelationshipName": "state",
+            "relationshipName": "cities"
+        },
+        {
+            "relationshipName": "country",
+            "otherEntityName": "country",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20190330143959",
+    "entityTableName": "state",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*"
+}

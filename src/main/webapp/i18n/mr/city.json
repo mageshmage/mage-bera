@@ -1,0 +1,24 @@
+{
+  "cargotrackerApp": {
+    "city": {
+      "home": {
+        "title": "Cities",
+        "createLabel": "नवीन City तयार करा",
+        "createOrEditLabel": "City तयार किंवा संपादित करा",
+        "search": "City शोधा"
+      },
+      "created": "City [identifier: {{ param }}] तयार आहे",
+      "updated": "City [identifier: {{ param }}] सुधारित केले आहे",
+      "deleted": "City [identifier: {{ param }}] हटविले आहे",
+      "delete": {
+        "question": "City [id: {{ id }}] काढून टाकण्याबाबत पुष्टी?"
+      },
+      "detail": {
+        "title": "City"
+      },
+      "cityCode": "City Code",
+      "cityName": "City Name",
+      "state": "State"
+    }
+  }
+}
