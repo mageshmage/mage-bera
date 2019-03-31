@@ -25,9 +25,8 @@ export class ShipmentInfoPODDetail extends React.Component<IShipmentInfoPODDetai
       <Row>
         <Col md="8">
           <h2>
-            <Translate contentKey="cargotrackerApp.shipmentInfoPOD.detail.title">ShipmentInfoPOD</Translate> [<b>
-              {shipmentInfoPODEntity.id}
-            </b>]
+            <Translate contentKey="cargotrackerApp.shipmentInfoPOD.detail.title">ShipmentInfoPOD</Translate> [
+            <b>{shipmentInfoPODEntity.id}</b>]
           </h2>
           <dl className="jh-entity-details">
             <dt>
@@ -39,7 +38,8 @@ export class ShipmentInfoPODDetail extends React.Component<IShipmentInfoPODDetai
               {shipmentInfoPODEntity.pod ? (
                 <div>
                   <a onClick={openFile(shipmentInfoPODEntity.podContentType, shipmentInfoPODEntity.pod)}>
-                    <Translate contentKey="entity.action.open">Open</Translate>&nbsp;
+                    <Translate contentKey="entity.action.open">Open</Translate>
+                    &nbsp;
                   </a>
                   <span>
                     {shipmentInfoPODEntity.podContentType}, {byteSize(shipmentInfoPODEntity.pod)}
@@ -56,14 +56,15 @@ export class ShipmentInfoPODDetail extends React.Component<IShipmentInfoPODDetai
             <dt>
               <Translate contentKey="cargotrackerApp.shipmentInfoPOD.shipmentInfo">Shipment Info</Translate>
             </dt>
-            <dd>{shipmentInfoPODEntity.shipmentInfo ? shipmentInfoPODEntity.shipmentInfo.id : ''}</dd>
+            <dd>{shipmentInfoPODEntity.shipmentInfoId ? shipmentInfoPODEntity.shipmentInfoId : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/shipment-info-pod" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}
             <span className="d-none d-md-inline">
               <Translate contentKey="entity.action.back">Back</Translate>
             </span>
-          </Button>&nbsp;
+          </Button>
+          &nbsp;
           <Button tag={Link} to={`/entity/shipment-info-pod/${shipmentInfoPODEntity.id}/edit`} replace color="primary">
             <FontAwesomeIcon icon="pencil-alt" />{' '}
             <span className="d-none d-md-inline">

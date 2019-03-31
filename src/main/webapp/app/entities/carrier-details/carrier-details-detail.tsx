@@ -25,7 +25,8 @@ export class CarrierDetailsDetail extends React.Component<ICarrierDetailsDetailP
       <Row>
         <Col md="8">
           <h2>
-            <Translate contentKey="cargotrackerApp.carrierDetails.detail.title">CarrierDetails</Translate> [<b>{carrierDetailsEntity.id}</b>]
+            <Translate contentKey="cargotrackerApp.carrierDetails.detail.title">CarrierDetails</Translate> [<b>{carrierDetailsEntity.id}</b>
+            ]
           </h2>
           <dl className="jh-entity-details">
             <dt>
@@ -43,14 +44,15 @@ export class CarrierDetailsDetail extends React.Component<ICarrierDetailsDetailP
             <dt>
               <Translate contentKey="cargotrackerApp.carrierDetails.vendor">Vendor</Translate>
             </dt>
-            <dd>{carrierDetailsEntity.vendor ? carrierDetailsEntity.vendor.id : ''}</dd>
+            <dd>{carrierDetailsEntity.vendorId ? carrierDetailsEntity.vendorId : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/carrier-details" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}
             <span className="d-none d-md-inline">
               <Translate contentKey="entity.action.back">Back</Translate>
             </span>
-          </Button>&nbsp;
+          </Button>
+          &nbsp;
           <Button tag={Link} to={`/entity/carrier-details/${carrierDetailsEntity.id}/edit`} replace color="primary">
             <FontAwesomeIcon icon="pencil-alt" />{' '}
             <span className="d-none d-md-inline">

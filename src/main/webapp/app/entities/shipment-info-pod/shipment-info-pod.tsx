@@ -49,7 +49,8 @@ export class ShipmentInfoPOD extends React.Component<IShipmentInfoPODProps, IShi
         <h2 id="shipment-info-pod-heading">
           <Translate contentKey="cargotrackerApp.shipmentInfoPOD.home.title">Shipment Info PODS</Translate>
           <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-            <FontAwesomeIcon icon="plus" />&nbsp;
+            <FontAwesomeIcon icon="plus" />
+            &nbsp;
             <Translate contentKey="cargotrackerApp.shipmentInfoPOD.home.createLabel">Create new Shipment Info POD</Translate>
           </Link>
         </h2>
@@ -118,8 +119,8 @@ export class ShipmentInfoPOD extends React.Component<IShipmentInfoPODProps, IShi
                   </td>
                   <td>{shipmentInfoPOD.comments}</td>
                   <td>
-                    {shipmentInfoPOD.shipmentInfo ? (
-                      <Link to={`shipment-info/${shipmentInfoPOD.shipmentInfo.id}`}>{shipmentInfoPOD.shipmentInfo.id}</Link>
+                    {shipmentInfoPOD.shipmentInfoId ? (
+                      <Link to={`shipment-info/${shipmentInfoPOD.shipmentInfoId}`}>{shipmentInfoPOD.shipmentInfoId}</Link>
                     ) : (
                       ''
                     )}

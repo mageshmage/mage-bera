@@ -49,7 +49,8 @@ export class ShipmentType extends React.Component<IShipmentTypeProps, IShipmentT
         <h2 id="shipment-type-heading">
           <Translate contentKey="cargotrackerApp.shipmentType.home.title">Shipment Types</Translate>
           <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-            <FontAwesomeIcon icon="plus" />&nbsp;
+            <FontAwesomeIcon icon="plus" />
+            &nbsp;
             <Translate contentKey="cargotrackerApp.shipmentType.home.createLabel">Create new Shipment Type</Translate>
           </Link>
         </h2>
@@ -105,7 +106,7 @@ export class ShipmentType extends React.Component<IShipmentTypeProps, IShipmentT
                   </td>
                   <td>{shipmentType.value}</td>
                   <td>{shipmentType.desc}</td>
-                  <td>{shipmentType.vendor ? <Link to={`vendor/${shipmentType.vendor.id}`}>{shipmentType.vendor.id}</Link> : ''}</td>
+                  <td>{shipmentType.vendorId ? <Link to={`vendor/${shipmentType.vendorId}`}>{shipmentType.vendorId}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${shipmentType.id}`} color="info" size="sm">

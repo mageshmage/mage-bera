@@ -43,14 +43,15 @@ export class ShipmentModeDetail extends React.Component<IShipmentModeDetailProps
             <dt>
               <Translate contentKey="cargotrackerApp.shipmentMode.vendor">Vendor</Translate>
             </dt>
-            <dd>{shipmentModeEntity.vendor ? shipmentModeEntity.vendor.id : ''}</dd>
+            <dd>{shipmentModeEntity.vendorId ? shipmentModeEntity.vendorId : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/shipment-mode" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}
             <span className="d-none d-md-inline">
               <Translate contentKey="entity.action.back">Back</Translate>
             </span>
-          </Button>&nbsp;
+          </Button>
+          &nbsp;
           <Button tag={Link} to={`/entity/shipment-mode/${shipmentModeEntity.id}/edit`} replace color="primary">
             <FontAwesomeIcon icon="pencil-alt" />{' '}
             <span className="d-none d-md-inline">

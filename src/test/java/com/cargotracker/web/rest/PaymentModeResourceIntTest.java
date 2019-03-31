@@ -6,6 +6,8 @@ import com.cargotracker.domain.PaymentMode;
 import com.cargotracker.repository.PaymentModeRepository;
 import com.cargotracker.repository.search.PaymentModeSearchRepository;
 import com.cargotracker.service.PaymentModeService;
+import com.cargotracker.service.dto.PaymentModeDTO;
+import com.cargotracker.service.mapper.PaymentModeMapper;
 import com.cargotracker.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -53,6 +55,9 @@ public class PaymentModeResourceIntTest {
 
     @Autowired
     private PaymentModeRepository paymentModeRepository;
+
+    @Autowired
+    private PaymentModeMapper paymentModeMapper;
 
     @Autowired
     private PaymentModeService paymentModeService;
@@ -120,9 +125,10 @@ public class PaymentModeResourceIntTest {
         int databaseSizeBeforeCreate = paymentModeRepository.findAll().size();
 
         // Create the PaymentMode
+        PaymentModeDTO paymentModeDTO = paymentModeMapper.toDto(paymentMode);
         restPaymentModeMockMvc.perform(post("/api/payment-modes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(paymentMode)))
+            .content(TestUtil.convertObjectToJsonBytes(paymentModeDTO)))
             .andExpect(status().isCreated());
 
         // Validate the PaymentMode in the database
@@ -143,11 +149,12 @@ public class PaymentModeResourceIntTest {
 
         // Create the PaymentMode with an existing ID
         paymentMode.setId(1L);
+        PaymentModeDTO paymentModeDTO = paymentModeMapper.toDto(paymentMode);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restPaymentModeMockMvc.perform(post("/api/payment-modes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(paymentMode)))
+            .content(TestUtil.convertObjectToJsonBytes(paymentModeDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the PaymentMode in the database
@@ -166,10 +173,11 @@ public class PaymentModeResourceIntTest {
         paymentMode.setValue(null);
 
         // Create the PaymentMode, which fails.
+        PaymentModeDTO paymentModeDTO = paymentModeMapper.toDto(paymentMode);
 
         restPaymentModeMockMvc.perform(post("/api/payment-modes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(paymentMode)))
+            .content(TestUtil.convertObjectToJsonBytes(paymentModeDTO)))
             .andExpect(status().isBadRequest());
 
         List<PaymentMode> paymentModeList = paymentModeRepository.findAll();
@@ -218,9 +226,7 @@ public class PaymentModeResourceIntTest {
     @Transactional
     public void updatePaymentMode() throws Exception {
         // Initialize the database
-        paymentModeService.save(paymentMode);
-        // As the test used the service layer, reset the Elasticsearch mock repository
-        reset(mockPaymentModeSearchRepository);
+        paymentModeRepository.saveAndFlush(paymentMode);
 
         int databaseSizeBeforeUpdate = paymentModeRepository.findAll().size();
 
@@ -231,10 +237,11 @@ public class PaymentModeResourceIntTest {
         updatedPaymentMode
             .value(UPDATED_VALUE)
             .desc(UPDATED_DESC);
+        PaymentModeDTO paymentModeDTO = paymentModeMapper.toDto(updatedPaymentMode);
 
         restPaymentModeMockMvc.perform(put("/api/payment-modes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedPaymentMode)))
+            .content(TestUtil.convertObjectToJsonBytes(paymentModeDTO)))
             .andExpect(status().isOk());
 
         // Validate the PaymentMode in the database
@@ -254,11 +261,12 @@ public class PaymentModeResourceIntTest {
         int databaseSizeBeforeUpdate = paymentModeRepository.findAll().size();
 
         // Create the PaymentMode
+        PaymentModeDTO paymentModeDTO = paymentModeMapper.toDto(paymentMode);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restPaymentModeMockMvc.perform(put("/api/payment-modes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(paymentMode)))
+            .content(TestUtil.convertObjectToJsonBytes(paymentModeDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the PaymentMode in the database
@@ -273,7 +281,7 @@ public class PaymentModeResourceIntTest {
     @Transactional
     public void deletePaymentMode() throws Exception {
         // Initialize the database
-        paymentModeService.save(paymentMode);
+        paymentModeRepository.saveAndFlush(paymentMode);
 
         int databaseSizeBeforeDelete = paymentModeRepository.findAll().size();
 
@@ -294,7 +302,7 @@ public class PaymentModeResourceIntTest {
     @Transactional
     public void searchPaymentMode() throws Exception {
         // Initialize the database
-        paymentModeService.save(paymentMode);
+        paymentModeRepository.saveAndFlush(paymentMode);
         when(mockPaymentModeSearchRepository.search(queryStringQuery("id:" + paymentMode.getId())))
             .thenReturn(Collections.singletonList(paymentMode));
         // Search the paymentMode
@@ -319,5 +327,28 @@ public class PaymentModeResourceIntTest {
         assertThat(paymentMode1).isNotEqualTo(paymentMode2);
         paymentMode1.setId(null);
         assertThat(paymentMode1).isNotEqualTo(paymentMode2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(PaymentModeDTO.class);
+        PaymentModeDTO paymentModeDTO1 = new PaymentModeDTO();
+        paymentModeDTO1.setId(1L);
+        PaymentModeDTO paymentModeDTO2 = new PaymentModeDTO();
+        assertThat(paymentModeDTO1).isNotEqualTo(paymentModeDTO2);
+        paymentModeDTO2.setId(paymentModeDTO1.getId());
+        assertThat(paymentModeDTO1).isEqualTo(paymentModeDTO2);
+        paymentModeDTO2.setId(2L);
+        assertThat(paymentModeDTO1).isNotEqualTo(paymentModeDTO2);
+        paymentModeDTO1.setId(null);
+        assertThat(paymentModeDTO1).isNotEqualTo(paymentModeDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(paymentModeMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(paymentModeMapper.fromId(null)).isNull();
     }
 }

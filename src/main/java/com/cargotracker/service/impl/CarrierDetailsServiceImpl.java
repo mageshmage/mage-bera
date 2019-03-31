@@ -4,12 +4,15 @@ import com.cargotracker.service.CarrierDetailsService;
 import com.cargotracker.domain.CarrierDetails;
 import com.cargotracker.repository.CarrierDetailsRepository;
 import com.cargotracker.repository.search.CarrierDetailsSearchRepository;
+import com.cargotracker.service.dto.CarrierDetailsDTO;
+import com.cargotracker.service.mapper.CarrierDetailsMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,24 +31,29 @@ public class CarrierDetailsServiceImpl implements CarrierDetailsService {
 
     private final CarrierDetailsRepository carrierDetailsRepository;
 
+    private final CarrierDetailsMapper carrierDetailsMapper;
+
     private final CarrierDetailsSearchRepository carrierDetailsSearchRepository;
 
-    public CarrierDetailsServiceImpl(CarrierDetailsRepository carrierDetailsRepository, CarrierDetailsSearchRepository carrierDetailsSearchRepository) {
+    public CarrierDetailsServiceImpl(CarrierDetailsRepository carrierDetailsRepository, CarrierDetailsMapper carrierDetailsMapper, CarrierDetailsSearchRepository carrierDetailsSearchRepository) {
         this.carrierDetailsRepository = carrierDetailsRepository;
+        this.carrierDetailsMapper = carrierDetailsMapper;
         this.carrierDetailsSearchRepository = carrierDetailsSearchRepository;
     }
 
     /**
      * Save a carrierDetails.
      *
-     * @param carrierDetails the entity to save
+     * @param carrierDetailsDTO the entity to save
      * @return the persisted entity
      */
     @Override
-    public CarrierDetails save(CarrierDetails carrierDetails) {
-        log.debug("Request to save CarrierDetails : {}", carrierDetails);
-        CarrierDetails result = carrierDetailsRepository.save(carrierDetails);
-        carrierDetailsSearchRepository.save(result);
+    public CarrierDetailsDTO save(CarrierDetailsDTO carrierDetailsDTO) {
+        log.debug("Request to save CarrierDetails : {}", carrierDetailsDTO);
+        CarrierDetails carrierDetails = carrierDetailsMapper.toEntity(carrierDetailsDTO);
+        carrierDetails = carrierDetailsRepository.save(carrierDetails);
+        CarrierDetailsDTO result = carrierDetailsMapper.toDto(carrierDetails);
+        carrierDetailsSearchRepository.save(carrierDetails);
         return result;
     }
 
@@ -56,9 +64,11 @@ public class CarrierDetailsServiceImpl implements CarrierDetailsService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<CarrierDetails> findAll() {
+    public List<CarrierDetailsDTO> findAll() {
         log.debug("Request to get all CarrierDetails");
-        return carrierDetailsRepository.findAll();
+        return carrierDetailsRepository.findAll().stream()
+            .map(carrierDetailsMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
 
@@ -70,9 +80,10 @@ public class CarrierDetailsServiceImpl implements CarrierDetailsService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Optional<CarrierDetails> findOne(Long id) {
+    public Optional<CarrierDetailsDTO> findOne(Long id) {
         log.debug("Request to get CarrierDetails : {}", id);
-        return carrierDetailsRepository.findById(id);
+        return carrierDetailsRepository.findById(id)
+            .map(carrierDetailsMapper::toDto);
     }
 
     /**
@@ -95,10 +106,11 @@ public class CarrierDetailsServiceImpl implements CarrierDetailsService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<CarrierDetails> search(String query) {
+    public List<CarrierDetailsDTO> search(String query) {
         log.debug("Request to search CarrierDetails for query {}", query);
         return StreamSupport
             .stream(carrierDetailsSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .map(carrierDetailsMapper::toDto)
             .collect(Collectors.toList());
     }
 }

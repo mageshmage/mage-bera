@@ -1,5 +1,3 @@
-import { IShipmentInfo } from 'app/shared/model/shipment-info.model';
-
 export const enum ShiperReceiverType {
   CONSIGNOR = 'CONSIGNOR',
   CONSIGNEE = 'CONSIGNEE'
@@ -14,7 +12,7 @@ export interface IShiperReceiverInfo {
   city?: string;
   pincode?: string;
   emailId?: string;
-  shipmentInfo?: IShipmentInfo;
+  shipmentInfoId?: number;
 }
 
 export const defaultValue: Readonly<IShiperReceiverInfo> = {};

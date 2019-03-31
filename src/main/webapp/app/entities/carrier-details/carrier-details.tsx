@@ -49,7 +49,8 @@ export class CarrierDetails extends React.Component<ICarrierDetailsProps, ICarri
         <h2 id="carrier-details-heading">
           <Translate contentKey="cargotrackerApp.carrierDetails.home.title">Carrier Details</Translate>
           <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-            <FontAwesomeIcon icon="plus" />&nbsp;
+            <FontAwesomeIcon icon="plus" />
+            &nbsp;
             <Translate contentKey="cargotrackerApp.carrierDetails.home.createLabel">Create new Carrier Details</Translate>
           </Link>
         </h2>
@@ -105,7 +106,7 @@ export class CarrierDetails extends React.Component<ICarrierDetailsProps, ICarri
                   </td>
                   <td>{carrierDetails.value}</td>
                   <td>{carrierDetails.desc}</td>
-                  <td>{carrierDetails.vendor ? <Link to={`vendor/${carrierDetails.vendor.id}`}>{carrierDetails.vendor.id}</Link> : ''}</td>
+                  <td>{carrierDetails.vendorId ? <Link to={`vendor/${carrierDetails.vendorId}`}>{carrierDetails.vendorId}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${carrierDetails.id}`} color="info" size="sm">

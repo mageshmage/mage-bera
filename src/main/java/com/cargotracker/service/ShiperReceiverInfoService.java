@@ -1,6 +1,6 @@
 package com.cargotracker.service;
 
-import com.cargotracker.domain.ShiperReceiverInfo;
+import com.cargotracker.service.dto.ShiperReceiverInfoDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,10 +15,10 @@ public interface ShiperReceiverInfoService {
     /**
      * Save a shiperReceiverInfo.
      *
-     * @param shiperReceiverInfo the entity to save
+     * @param shiperReceiverInfoDTO the entity to save
      * @return the persisted entity
      */
-    ShiperReceiverInfo save(ShiperReceiverInfo shiperReceiverInfo);
+    ShiperReceiverInfoDTO save(ShiperReceiverInfoDTO shiperReceiverInfoDTO);
 
     /**
      * Get all the shiperReceiverInfos.
@@ -26,7 +26,7 @@ public interface ShiperReceiverInfoService {
      * @param pageable the pagination information
      * @return the list of entities
      */
-    Page<ShiperReceiverInfo> findAll(Pageable pageable);
+    Page<ShiperReceiverInfoDTO> findAll(Pageable pageable);
 
 
     /**
@@ -35,7 +35,7 @@ public interface ShiperReceiverInfoService {
      * @param id the id of the entity
      * @return the entity
      */
-    Optional<ShiperReceiverInfo> findOne(Long id);
+    Optional<ShiperReceiverInfoDTO> findOne(Long id);
 
     /**
      * Delete the "id" shiperReceiverInfo.
@@ -52,5 +52,5 @@ public interface ShiperReceiverInfoService {
      * @param pageable the pagination information
      * @return the list of entities
      */
-    Page<ShiperReceiverInfo> search(String query, Pageable pageable);
+    Page<ShiperReceiverInfoDTO> search(String query, Pageable pageable);
 }

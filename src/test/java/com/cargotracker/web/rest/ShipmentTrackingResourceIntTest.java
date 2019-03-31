@@ -6,6 +6,8 @@ import com.cargotracker.domain.ShipmentTracking;
 import com.cargotracker.repository.ShipmentTrackingRepository;
 import com.cargotracker.repository.search.ShipmentTrackingSearchRepository;
 import com.cargotracker.service.ShipmentTrackingService;
+import com.cargotracker.service.dto.ShipmentTrackingDTO;
+import com.cargotracker.service.mapper.ShipmentTrackingMapper;
 import com.cargotracker.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -63,6 +65,9 @@ public class ShipmentTrackingResourceIntTest {
 
     @Autowired
     private ShipmentTrackingRepository shipmentTrackingRepository;
+
+    @Autowired
+    private ShipmentTrackingMapper shipmentTrackingMapper;
 
     @Autowired
     private ShipmentTrackingService shipmentTrackingService;
@@ -131,9 +136,10 @@ public class ShipmentTrackingResourceIntTest {
         int databaseSizeBeforeCreate = shipmentTrackingRepository.findAll().size();
 
         // Create the ShipmentTracking
+        ShipmentTrackingDTO shipmentTrackingDTO = shipmentTrackingMapper.toDto(shipmentTracking);
         restShipmentTrackingMockMvc.perform(post("/api/shipment-trackings")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentTracking)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentTrackingDTO)))
             .andExpect(status().isCreated());
 
         // Validate the ShipmentTracking in the database
@@ -155,11 +161,12 @@ public class ShipmentTrackingResourceIntTest {
 
         // Create the ShipmentTracking with an existing ID
         shipmentTracking.setId(1L);
+        ShipmentTrackingDTO shipmentTrackingDTO = shipmentTrackingMapper.toDto(shipmentTracking);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restShipmentTrackingMockMvc.perform(post("/api/shipment-trackings")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentTracking)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentTrackingDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the ShipmentTracking in the database
@@ -178,10 +185,11 @@ public class ShipmentTrackingResourceIntTest {
         shipmentTracking.setTrackingDate(null);
 
         // Create the ShipmentTracking, which fails.
+        ShipmentTrackingDTO shipmentTrackingDTO = shipmentTrackingMapper.toDto(shipmentTracking);
 
         restShipmentTrackingMockMvc.perform(post("/api/shipment-trackings")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentTracking)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentTrackingDTO)))
             .andExpect(status().isBadRequest());
 
         List<ShipmentTracking> shipmentTrackingList = shipmentTrackingRepository.findAll();
@@ -196,10 +204,11 @@ public class ShipmentTrackingResourceIntTest {
         shipmentTracking.setPlace(null);
 
         // Create the ShipmentTracking, which fails.
+        ShipmentTrackingDTO shipmentTrackingDTO = shipmentTrackingMapper.toDto(shipmentTracking);
 
         restShipmentTrackingMockMvc.perform(post("/api/shipment-trackings")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentTracking)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentTrackingDTO)))
             .andExpect(status().isBadRequest());
 
         List<ShipmentTracking> shipmentTrackingList = shipmentTrackingRepository.findAll();
@@ -214,10 +223,11 @@ public class ShipmentTrackingResourceIntTest {
         shipmentTracking.setStatus(null);
 
         // Create the ShipmentTracking, which fails.
+        ShipmentTrackingDTO shipmentTrackingDTO = shipmentTrackingMapper.toDto(shipmentTracking);
 
         restShipmentTrackingMockMvc.perform(post("/api/shipment-trackings")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentTracking)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentTrackingDTO)))
             .andExpect(status().isBadRequest());
 
         List<ShipmentTracking> shipmentTrackingList = shipmentTrackingRepository.findAll();
@@ -268,9 +278,7 @@ public class ShipmentTrackingResourceIntTest {
     @Transactional
     public void updateShipmentTracking() throws Exception {
         // Initialize the database
-        shipmentTrackingService.save(shipmentTracking);
-        // As the test used the service layer, reset the Elasticsearch mock repository
-        reset(mockShipmentTrackingSearchRepository);
+        shipmentTrackingRepository.saveAndFlush(shipmentTracking);
 
         int databaseSizeBeforeUpdate = shipmentTrackingRepository.findAll().size();
 
@@ -282,10 +290,11 @@ public class ShipmentTrackingResourceIntTest {
             .trackingDate(UPDATED_TRACKING_DATE)
             .place(UPDATED_PLACE)
             .status(UPDATED_STATUS);
+        ShipmentTrackingDTO shipmentTrackingDTO = shipmentTrackingMapper.toDto(updatedShipmentTracking);
 
         restShipmentTrackingMockMvc.perform(put("/api/shipment-trackings")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedShipmentTracking)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentTrackingDTO)))
             .andExpect(status().isOk());
 
         // Validate the ShipmentTracking in the database
@@ -306,11 +315,12 @@ public class ShipmentTrackingResourceIntTest {
         int databaseSizeBeforeUpdate = shipmentTrackingRepository.findAll().size();
 
         // Create the ShipmentTracking
+        ShipmentTrackingDTO shipmentTrackingDTO = shipmentTrackingMapper.toDto(shipmentTracking);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restShipmentTrackingMockMvc.perform(put("/api/shipment-trackings")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentTracking)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentTrackingDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the ShipmentTracking in the database
@@ -325,7 +335,7 @@ public class ShipmentTrackingResourceIntTest {
     @Transactional
     public void deleteShipmentTracking() throws Exception {
         // Initialize the database
-        shipmentTrackingService.save(shipmentTracking);
+        shipmentTrackingRepository.saveAndFlush(shipmentTracking);
 
         int databaseSizeBeforeDelete = shipmentTrackingRepository.findAll().size();
 
@@ -346,7 +356,7 @@ public class ShipmentTrackingResourceIntTest {
     @Transactional
     public void searchShipmentTracking() throws Exception {
         // Initialize the database
-        shipmentTrackingService.save(shipmentTracking);
+        shipmentTrackingRepository.saveAndFlush(shipmentTracking);
         when(mockShipmentTrackingSearchRepository.search(queryStringQuery("id:" + shipmentTracking.getId()), PageRequest.of(0, 20)))
             .thenReturn(new PageImpl<>(Collections.singletonList(shipmentTracking), PageRequest.of(0, 1), 1));
         // Search the shipmentTracking
@@ -372,5 +382,28 @@ public class ShipmentTrackingResourceIntTest {
         assertThat(shipmentTracking1).isNotEqualTo(shipmentTracking2);
         shipmentTracking1.setId(null);
         assertThat(shipmentTracking1).isNotEqualTo(shipmentTracking2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(ShipmentTrackingDTO.class);
+        ShipmentTrackingDTO shipmentTrackingDTO1 = new ShipmentTrackingDTO();
+        shipmentTrackingDTO1.setId(1L);
+        ShipmentTrackingDTO shipmentTrackingDTO2 = new ShipmentTrackingDTO();
+        assertThat(shipmentTrackingDTO1).isNotEqualTo(shipmentTrackingDTO2);
+        shipmentTrackingDTO2.setId(shipmentTrackingDTO1.getId());
+        assertThat(shipmentTrackingDTO1).isEqualTo(shipmentTrackingDTO2);
+        shipmentTrackingDTO2.setId(2L);
+        assertThat(shipmentTrackingDTO1).isNotEqualTo(shipmentTrackingDTO2);
+        shipmentTrackingDTO1.setId(null);
+        assertThat(shipmentTrackingDTO1).isNotEqualTo(shipmentTrackingDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(shipmentTrackingMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(shipmentTrackingMapper.fromId(null)).isNull();
     }
 }

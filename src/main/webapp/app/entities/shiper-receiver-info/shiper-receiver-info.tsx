@@ -89,7 +89,8 @@ export class ShiperReceiverInfo extends React.Component<IShiperReceiverInfoProps
         <h2 id="shiper-receiver-info-heading">
           <Translate contentKey="cargotrackerApp.shiperReceiverInfo.home.title">Shiper Receiver Infos</Translate>
           <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-            <FontAwesomeIcon icon="plus" />&nbsp;
+            <FontAwesomeIcon icon="plus" />
+            &nbsp;
             <Translate contentKey="cargotrackerApp.shiperReceiverInfo.home.createLabel">Create new Shiper Receiver Info</Translate>
           </Link>
         </h2>
@@ -169,8 +170,8 @@ export class ShiperReceiverInfo extends React.Component<IShiperReceiverInfoProps
                   <td>{shiperReceiverInfo.pincode}</td>
                   <td>{shiperReceiverInfo.emailId}</td>
                   <td>
-                    {shiperReceiverInfo.shipmentInfo ? (
-                      <Link to={`shipment-info/${shiperReceiverInfo.shipmentInfo.id}`}>{shiperReceiverInfo.shipmentInfo.id}</Link>
+                    {shiperReceiverInfo.shipmentInfoId ? (
+                      <Link to={`shipment-info/${shiperReceiverInfo.shipmentInfoId}`}>{shiperReceiverInfo.shipmentInfoId}</Link>
                     ) : (
                       ''
                     )}

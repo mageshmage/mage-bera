@@ -4,12 +4,15 @@ import com.cargotracker.service.ShipmentTypeService;
 import com.cargotracker.domain.ShipmentType;
 import com.cargotracker.repository.ShipmentTypeRepository;
 import com.cargotracker.repository.search.ShipmentTypeSearchRepository;
+import com.cargotracker.service.dto.ShipmentTypeDTO;
+import com.cargotracker.service.mapper.ShipmentTypeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,24 +31,29 @@ public class ShipmentTypeServiceImpl implements ShipmentTypeService {
 
     private final ShipmentTypeRepository shipmentTypeRepository;
 
+    private final ShipmentTypeMapper shipmentTypeMapper;
+
     private final ShipmentTypeSearchRepository shipmentTypeSearchRepository;
 
-    public ShipmentTypeServiceImpl(ShipmentTypeRepository shipmentTypeRepository, ShipmentTypeSearchRepository shipmentTypeSearchRepository) {
+    public ShipmentTypeServiceImpl(ShipmentTypeRepository shipmentTypeRepository, ShipmentTypeMapper shipmentTypeMapper, ShipmentTypeSearchRepository shipmentTypeSearchRepository) {
         this.shipmentTypeRepository = shipmentTypeRepository;
+        this.shipmentTypeMapper = shipmentTypeMapper;
         this.shipmentTypeSearchRepository = shipmentTypeSearchRepository;
     }
 
     /**
      * Save a shipmentType.
      *
-     * @param shipmentType the entity to save
+     * @param shipmentTypeDTO the entity to save
      * @return the persisted entity
      */
     @Override
-    public ShipmentType save(ShipmentType shipmentType) {
-        log.debug("Request to save ShipmentType : {}", shipmentType);
-        ShipmentType result = shipmentTypeRepository.save(shipmentType);
-        shipmentTypeSearchRepository.save(result);
+    public ShipmentTypeDTO save(ShipmentTypeDTO shipmentTypeDTO) {
+        log.debug("Request to save ShipmentType : {}", shipmentTypeDTO);
+        ShipmentType shipmentType = shipmentTypeMapper.toEntity(shipmentTypeDTO);
+        shipmentType = shipmentTypeRepository.save(shipmentType);
+        ShipmentTypeDTO result = shipmentTypeMapper.toDto(shipmentType);
+        shipmentTypeSearchRepository.save(shipmentType);
         return result;
     }
 
@@ -56,9 +64,11 @@ public class ShipmentTypeServiceImpl implements ShipmentTypeService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ShipmentType> findAll() {
+    public List<ShipmentTypeDTO> findAll() {
         log.debug("Request to get all ShipmentTypes");
-        return shipmentTypeRepository.findAll();
+        return shipmentTypeRepository.findAll().stream()
+            .map(shipmentTypeMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
 
@@ -70,9 +80,10 @@ public class ShipmentTypeServiceImpl implements ShipmentTypeService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Optional<ShipmentType> findOne(Long id) {
+    public Optional<ShipmentTypeDTO> findOne(Long id) {
         log.debug("Request to get ShipmentType : {}", id);
-        return shipmentTypeRepository.findById(id);
+        return shipmentTypeRepository.findById(id)
+            .map(shipmentTypeMapper::toDto);
     }
 
     /**
@@ -95,10 +106,11 @@ public class ShipmentTypeServiceImpl implements ShipmentTypeService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ShipmentType> search(String query) {
+    public List<ShipmentTypeDTO> search(String query) {
         log.debug("Request to search ShipmentTypes for query {}", query);
         return StreamSupport
             .stream(shipmentTypeSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .map(shipmentTypeMapper::toDto)
             .collect(Collectors.toList());
     }
 }

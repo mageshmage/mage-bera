@@ -1,6 +1,6 @@
 package com.cargotracker.service;
 
-import com.cargotracker.domain.ShipmentInfoPOD;
+import com.cargotracker.service.dto.ShipmentInfoPODDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,17 +13,17 @@ public interface ShipmentInfoPODService {
     /**
      * Save a shipmentInfoPOD.
      *
-     * @param shipmentInfoPOD the entity to save
+     * @param shipmentInfoPODDTO the entity to save
      * @return the persisted entity
      */
-    ShipmentInfoPOD save(ShipmentInfoPOD shipmentInfoPOD);
+    ShipmentInfoPODDTO save(ShipmentInfoPODDTO shipmentInfoPODDTO);
 
     /**
      * Get all the shipmentInfoPODS.
      *
      * @return the list of entities
      */
-    List<ShipmentInfoPOD> findAll();
+    List<ShipmentInfoPODDTO> findAll();
 
 
     /**
@@ -32,7 +32,7 @@ public interface ShipmentInfoPODService {
      * @param id the id of the entity
      * @return the entity
      */
-    Optional<ShipmentInfoPOD> findOne(Long id);
+    Optional<ShipmentInfoPODDTO> findOne(Long id);
 
     /**
      * Delete the "id" shipmentInfoPOD.
@@ -48,5 +48,5 @@ public interface ShipmentInfoPODService {
      * 
      * @return the list of entities
      */
-    List<ShipmentInfoPOD> search(String query);
+    List<ShipmentInfoPODDTO> search(String query);
 }

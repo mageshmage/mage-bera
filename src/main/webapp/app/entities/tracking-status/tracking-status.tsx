@@ -49,7 +49,8 @@ export class TrackingStatus extends React.Component<ITrackingStatusProps, ITrack
         <h2 id="tracking-status-heading">
           <Translate contentKey="cargotrackerApp.trackingStatus.home.title">Tracking Statuses</Translate>
           <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-            <FontAwesomeIcon icon="plus" />&nbsp;
+            <FontAwesomeIcon icon="plus" />
+            &nbsp;
             <Translate contentKey="cargotrackerApp.trackingStatus.home.createLabel">Create new Tracking Status</Translate>
           </Link>
         </h2>
@@ -105,7 +106,7 @@ export class TrackingStatus extends React.Component<ITrackingStatusProps, ITrack
                   </td>
                   <td>{trackingStatus.value}</td>
                   <td>{trackingStatus.desc}</td>
-                  <td>{trackingStatus.vendor ? <Link to={`vendor/${trackingStatus.vendor.id}`}>{trackingStatus.vendor.id}</Link> : ''}</td>
+                  <td>{trackingStatus.vendorId ? <Link to={`vendor/${trackingStatus.vendorId}`}>{trackingStatus.vendorId}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${trackingStatus.id}`} color="info" size="sm">

@@ -24,7 +24,7 @@
     ],
     "changelogDate": "20190330143953",
     "entityTableName": "carrier_details",
-    "dto": "no",
+    "dto": "mapstruct",
     "pagination": "no",
     "service": "serviceImpl",
     "jpaMetamodelFiltering": false,

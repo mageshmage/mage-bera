@@ -33,7 +33,7 @@
     ],
     "changelogDate": "20190330143956",
     "entityTableName": "shipment_tracking",
-    "dto": "no",
+    "dto": "mapstruct",
     "pagination": "pagination",
     "service": "serviceImpl",
     "jpaMetamodelFiltering": false,

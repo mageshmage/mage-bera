@@ -24,7 +24,7 @@
     ],
     "changelogDate": "20190330143952",
     "entityTableName": "payment_mode",
-    "dto": "no",
+    "dto": "mapstruct",
     "pagination": "no",
     "service": "serviceImpl",
     "jpaMetamodelFiltering": false,

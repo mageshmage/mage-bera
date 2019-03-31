@@ -1,6 +1,6 @@
 package com.cargotracker.service;
 
-import com.cargotracker.domain.ShipmentType;
+import com.cargotracker.service.dto.ShipmentTypeDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,17 +13,17 @@ public interface ShipmentTypeService {
     /**
      * Save a shipmentType.
      *
-     * @param shipmentType the entity to save
+     * @param shipmentTypeDTO the entity to save
      * @return the persisted entity
      */
-    ShipmentType save(ShipmentType shipmentType);
+    ShipmentTypeDTO save(ShipmentTypeDTO shipmentTypeDTO);
 
     /**
      * Get all the shipmentTypes.
      *
      * @return the list of entities
      */
-    List<ShipmentType> findAll();
+    List<ShipmentTypeDTO> findAll();
 
 
     /**
@@ -32,7 +32,7 @@ public interface ShipmentTypeService {
      * @param id the id of the entity
      * @return the entity
      */
-    Optional<ShipmentType> findOne(Long id);
+    Optional<ShipmentTypeDTO> findOne(Long id);
 
     /**
      * Delete the "id" shipmentType.
@@ -48,5 +48,5 @@ public interface ShipmentTypeService {
      * 
      * @return the list of entities
      */
-    List<ShipmentType> search(String query);
+    List<ShipmentTypeDTO> search(String query);
 }

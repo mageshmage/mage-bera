@@ -6,6 +6,8 @@ import com.cargotracker.domain.City;
 import com.cargotracker.repository.CityRepository;
 import com.cargotracker.repository.search.CitySearchRepository;
 import com.cargotracker.service.CityService;
+import com.cargotracker.service.dto.CityDTO;
+import com.cargotracker.service.mapper.CityMapper;
 import com.cargotracker.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -53,6 +55,9 @@ public class CityResourceIntTest {
 
     @Autowired
     private CityRepository cityRepository;
+
+    @Autowired
+    private CityMapper cityMapper;
 
     @Autowired
     private CityService cityService;
@@ -120,9 +125,10 @@ public class CityResourceIntTest {
         int databaseSizeBeforeCreate = cityRepository.findAll().size();
 
         // Create the City
+        CityDTO cityDTO = cityMapper.toDto(city);
         restCityMockMvc.perform(post("/api/cities")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(city)))
+            .content(TestUtil.convertObjectToJsonBytes(cityDTO)))
             .andExpect(status().isCreated());
 
         // Validate the City in the database
@@ -143,11 +149,12 @@ public class CityResourceIntTest {
 
         // Create the City with an existing ID
         city.setId(1L);
+        CityDTO cityDTO = cityMapper.toDto(city);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restCityMockMvc.perform(post("/api/cities")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(city)))
+            .content(TestUtil.convertObjectToJsonBytes(cityDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the City in the database
@@ -200,9 +207,7 @@ public class CityResourceIntTest {
     @Transactional
     public void updateCity() throws Exception {
         // Initialize the database
-        cityService.save(city);
-        // As the test used the service layer, reset the Elasticsearch mock repository
-        reset(mockCitySearchRepository);
+        cityRepository.saveAndFlush(city);
 
         int databaseSizeBeforeUpdate = cityRepository.findAll().size();
 
@@ -213,10 +218,11 @@ public class CityResourceIntTest {
         updatedCity
             .cityCode(UPDATED_CITY_CODE)
             .cityName(UPDATED_CITY_NAME);
+        CityDTO cityDTO = cityMapper.toDto(updatedCity);
 
         restCityMockMvc.perform(put("/api/cities")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedCity)))
+            .content(TestUtil.convertObjectToJsonBytes(cityDTO)))
             .andExpect(status().isOk());
 
         // Validate the City in the database
@@ -236,11 +242,12 @@ public class CityResourceIntTest {
         int databaseSizeBeforeUpdate = cityRepository.findAll().size();
 
         // Create the City
+        CityDTO cityDTO = cityMapper.toDto(city);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restCityMockMvc.perform(put("/api/cities")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(city)))
+            .content(TestUtil.convertObjectToJsonBytes(cityDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the City in the database
@@ -255,7 +262,7 @@ public class CityResourceIntTest {
     @Transactional
     public void deleteCity() throws Exception {
         // Initialize the database
-        cityService.save(city);
+        cityRepository.saveAndFlush(city);
 
         int databaseSizeBeforeDelete = cityRepository.findAll().size();
 
@@ -276,7 +283,7 @@ public class CityResourceIntTest {
     @Transactional
     public void searchCity() throws Exception {
         // Initialize the database
-        cityService.save(city);
+        cityRepository.saveAndFlush(city);
         when(mockCitySearchRepository.search(queryStringQuery("id:" + city.getId())))
             .thenReturn(Collections.singletonList(city));
         // Search the city
@@ -301,5 +308,28 @@ public class CityResourceIntTest {
         assertThat(city1).isNotEqualTo(city2);
         city1.setId(null);
         assertThat(city1).isNotEqualTo(city2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(CityDTO.class);
+        CityDTO cityDTO1 = new CityDTO();
+        cityDTO1.setId(1L);
+        CityDTO cityDTO2 = new CityDTO();
+        assertThat(cityDTO1).isNotEqualTo(cityDTO2);
+        cityDTO2.setId(cityDTO1.getId());
+        assertThat(cityDTO1).isEqualTo(cityDTO2);
+        cityDTO2.setId(2L);
+        assertThat(cityDTO1).isNotEqualTo(cityDTO2);
+        cityDTO1.setId(null);
+        assertThat(cityDTO1).isNotEqualTo(cityDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(cityMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(cityMapper.fromId(null)).isNull();
     }
 }

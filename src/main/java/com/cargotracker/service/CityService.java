@@ -1,6 +1,6 @@
 package com.cargotracker.service;
 
-import com.cargotracker.domain.City;
+import com.cargotracker.service.dto.CityDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,17 +13,17 @@ public interface CityService {
     /**
      * Save a city.
      *
-     * @param city the entity to save
+     * @param cityDTO the entity to save
      * @return the persisted entity
      */
-    City save(City city);
+    CityDTO save(CityDTO cityDTO);
 
     /**
      * Get all the cities.
      *
      * @return the list of entities
      */
-    List<City> findAll();
+    List<CityDTO> findAll();
 
 
     /**
@@ -32,7 +32,7 @@ public interface CityService {
      * @param id the id of the entity
      * @return the entity
      */
-    Optional<City> findOne(Long id);
+    Optional<CityDTO> findOne(Long id);
 
     /**
      * Delete the "id" city.
@@ -48,5 +48,5 @@ public interface CityService {
      * 
      * @return the list of entities
      */
-    List<City> search(String query);
+    List<CityDTO> search(String query);
 }

@@ -4,12 +4,15 @@ import com.cargotracker.service.VendorService;
 import com.cargotracker.domain.Vendor;
 import com.cargotracker.repository.VendorRepository;
 import com.cargotracker.repository.search.VendorSearchRepository;
+import com.cargotracker.service.dto.VendorDTO;
+import com.cargotracker.service.mapper.VendorMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,24 +31,29 @@ public class VendorServiceImpl implements VendorService {
 
     private final VendorRepository vendorRepository;
 
+    private final VendorMapper vendorMapper;
+
     private final VendorSearchRepository vendorSearchRepository;
 
-    public VendorServiceImpl(VendorRepository vendorRepository, VendorSearchRepository vendorSearchRepository) {
+    public VendorServiceImpl(VendorRepository vendorRepository, VendorMapper vendorMapper, VendorSearchRepository vendorSearchRepository) {
         this.vendorRepository = vendorRepository;
+        this.vendorMapper = vendorMapper;
         this.vendorSearchRepository = vendorSearchRepository;
     }
 
     /**
      * Save a vendor.
      *
-     * @param vendor the entity to save
+     * @param vendorDTO the entity to save
      * @return the persisted entity
      */
     @Override
-    public Vendor save(Vendor vendor) {
-        log.debug("Request to save Vendor : {}", vendor);
-        Vendor result = vendorRepository.save(vendor);
-        vendorSearchRepository.save(result);
+    public VendorDTO save(VendorDTO vendorDTO) {
+        log.debug("Request to save Vendor : {}", vendorDTO);
+        Vendor vendor = vendorMapper.toEntity(vendorDTO);
+        vendor = vendorRepository.save(vendor);
+        VendorDTO result = vendorMapper.toDto(vendor);
+        vendorSearchRepository.save(vendor);
         return result;
     }
 
@@ -56,9 +64,11 @@ public class VendorServiceImpl implements VendorService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<Vendor> findAll() {
+    public List<VendorDTO> findAll() {
         log.debug("Request to get all Vendors");
-        return vendorRepository.findAll();
+        return vendorRepository.findAll().stream()
+            .map(vendorMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
 
@@ -70,9 +80,10 @@ public class VendorServiceImpl implements VendorService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Optional<Vendor> findOne(Long id) {
+    public Optional<VendorDTO> findOne(Long id) {
         log.debug("Request to get Vendor : {}", id);
-        return vendorRepository.findById(id);
+        return vendorRepository.findById(id)
+            .map(vendorMapper::toDto);
     }
 
     /**
@@ -95,10 +106,11 @@ public class VendorServiceImpl implements VendorService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<Vendor> search(String query) {
+    public List<VendorDTO> search(String query) {
         log.debug("Request to search Vendors for query {}", query);
         return StreamSupport
             .stream(vendorSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .map(vendorMapper::toDto)
             .collect(Collectors.toList());
     }
 }

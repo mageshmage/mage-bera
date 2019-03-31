@@ -4,12 +4,15 @@ import com.cargotracker.service.ShipmentModeService;
 import com.cargotracker.domain.ShipmentMode;
 import com.cargotracker.repository.ShipmentModeRepository;
 import com.cargotracker.repository.search.ShipmentModeSearchRepository;
+import com.cargotracker.service.dto.ShipmentModeDTO;
+import com.cargotracker.service.mapper.ShipmentModeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,24 +31,29 @@ public class ShipmentModeServiceImpl implements ShipmentModeService {
 
     private final ShipmentModeRepository shipmentModeRepository;
 
+    private final ShipmentModeMapper shipmentModeMapper;
+
     private final ShipmentModeSearchRepository shipmentModeSearchRepository;
 
-    public ShipmentModeServiceImpl(ShipmentModeRepository shipmentModeRepository, ShipmentModeSearchRepository shipmentModeSearchRepository) {
+    public ShipmentModeServiceImpl(ShipmentModeRepository shipmentModeRepository, ShipmentModeMapper shipmentModeMapper, ShipmentModeSearchRepository shipmentModeSearchRepository) {
         this.shipmentModeRepository = shipmentModeRepository;
+        this.shipmentModeMapper = shipmentModeMapper;
         this.shipmentModeSearchRepository = shipmentModeSearchRepository;
     }
 
     /**
      * Save a shipmentMode.
      *
-     * @param shipmentMode the entity to save
+     * @param shipmentModeDTO the entity to save
      * @return the persisted entity
      */
     @Override
-    public ShipmentMode save(ShipmentMode shipmentMode) {
-        log.debug("Request to save ShipmentMode : {}", shipmentMode);
-        ShipmentMode result = shipmentModeRepository.save(shipmentMode);
-        shipmentModeSearchRepository.save(result);
+    public ShipmentModeDTO save(ShipmentModeDTO shipmentModeDTO) {
+        log.debug("Request to save ShipmentMode : {}", shipmentModeDTO);
+        ShipmentMode shipmentMode = shipmentModeMapper.toEntity(shipmentModeDTO);
+        shipmentMode = shipmentModeRepository.save(shipmentMode);
+        ShipmentModeDTO result = shipmentModeMapper.toDto(shipmentMode);
+        shipmentModeSearchRepository.save(shipmentMode);
         return result;
     }
 
@@ -56,9 +64,11 @@ public class ShipmentModeServiceImpl implements ShipmentModeService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ShipmentMode> findAll() {
+    public List<ShipmentModeDTO> findAll() {
         log.debug("Request to get all ShipmentModes");
-        return shipmentModeRepository.findAll();
+        return shipmentModeRepository.findAll().stream()
+            .map(shipmentModeMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
 
@@ -70,9 +80,10 @@ public class ShipmentModeServiceImpl implements ShipmentModeService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Optional<ShipmentMode> findOne(Long id) {
+    public Optional<ShipmentModeDTO> findOne(Long id) {
         log.debug("Request to get ShipmentMode : {}", id);
-        return shipmentModeRepository.findById(id);
+        return shipmentModeRepository.findById(id)
+            .map(shipmentModeMapper::toDto);
     }
 
     /**
@@ -95,10 +106,11 @@ public class ShipmentModeServiceImpl implements ShipmentModeService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ShipmentMode> search(String query) {
+    public List<ShipmentModeDTO> search(String query) {
         log.debug("Request to search ShipmentModes for query {}", query);
         return StreamSupport
             .stream(shipmentModeSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .map(shipmentModeMapper::toDto)
             .collect(Collectors.toList());
     }
 }

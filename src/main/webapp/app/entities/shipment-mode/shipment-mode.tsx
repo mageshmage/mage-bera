@@ -49,7 +49,8 @@ export class ShipmentMode extends React.Component<IShipmentModeProps, IShipmentM
         <h2 id="shipment-mode-heading">
           <Translate contentKey="cargotrackerApp.shipmentMode.home.title">Shipment Modes</Translate>
           <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-            <FontAwesomeIcon icon="plus" />&nbsp;
+            <FontAwesomeIcon icon="plus" />
+            &nbsp;
             <Translate contentKey="cargotrackerApp.shipmentMode.home.createLabel">Create new Shipment Mode</Translate>
           </Link>
         </h2>
@@ -105,7 +106,7 @@ export class ShipmentMode extends React.Component<IShipmentModeProps, IShipmentM
                   </td>
                   <td>{shipmentMode.value}</td>
                   <td>{shipmentMode.desc}</td>
-                  <td>{shipmentMode.vendor ? <Link to={`vendor/${shipmentMode.vendor.id}`}>{shipmentMode.vendor.id}</Link> : ''}</td>
+                  <td>{shipmentMode.vendorId ? <Link to={`vendor/${shipmentMode.vendorId}`}>{shipmentMode.vendorId}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${shipmentMode.id}`} color="info" size="sm">

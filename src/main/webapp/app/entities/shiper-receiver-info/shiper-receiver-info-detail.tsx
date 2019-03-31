@@ -25,9 +25,8 @@ export class ShiperReceiverInfoDetail extends React.Component<IShiperReceiverInf
       <Row>
         <Col md="8">
           <h2>
-            <Translate contentKey="cargotrackerApp.shiperReceiverInfo.detail.title">ShiperReceiverInfo</Translate> [<b>
-              {shiperReceiverInfoEntity.id}
-            </b>]
+            <Translate contentKey="cargotrackerApp.shiperReceiverInfo.detail.title">ShiperReceiverInfo</Translate> [
+            <b>{shiperReceiverInfoEntity.id}</b>]
           </h2>
           <dl className="jh-entity-details">
             <dt>
@@ -75,14 +74,15 @@ export class ShiperReceiverInfoDetail extends React.Component<IShiperReceiverInf
             <dt>
               <Translate contentKey="cargotrackerApp.shiperReceiverInfo.shipmentInfo">Shipment Info</Translate>
             </dt>
-            <dd>{shiperReceiverInfoEntity.shipmentInfo ? shiperReceiverInfoEntity.shipmentInfo.id : ''}</dd>
+            <dd>{shiperReceiverInfoEntity.shipmentInfoId ? shiperReceiverInfoEntity.shipmentInfoId : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/shiper-receiver-info" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}
             <span className="d-none d-md-inline">
               <Translate contentKey="entity.action.back">Back</Translate>
             </span>
-          </Button>&nbsp;
+          </Button>
+          &nbsp;
           <Button tag={Link} to={`/entity/shiper-receiver-info/${shiperReceiverInfoEntity.id}/edit`} replace color="primary">
             <FontAwesomeIcon icon="pencil-alt" />{' '}
             <span className="d-none d-md-inline">

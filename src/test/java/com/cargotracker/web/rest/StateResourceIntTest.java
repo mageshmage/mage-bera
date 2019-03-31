@@ -6,6 +6,8 @@ import com.cargotracker.domain.State;
 import com.cargotracker.repository.StateRepository;
 import com.cargotracker.repository.search.StateSearchRepository;
 import com.cargotracker.service.StateService;
+import com.cargotracker.service.dto.StateDTO;
+import com.cargotracker.service.mapper.StateMapper;
 import com.cargotracker.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -53,6 +55,9 @@ public class StateResourceIntTest {
 
     @Autowired
     private StateRepository stateRepository;
+
+    @Autowired
+    private StateMapper stateMapper;
 
     @Autowired
     private StateService stateService;
@@ -120,9 +125,10 @@ public class StateResourceIntTest {
         int databaseSizeBeforeCreate = stateRepository.findAll().size();
 
         // Create the State
+        StateDTO stateDTO = stateMapper.toDto(state);
         restStateMockMvc.perform(post("/api/states")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(state)))
+            .content(TestUtil.convertObjectToJsonBytes(stateDTO)))
             .andExpect(status().isCreated());
 
         // Validate the State in the database
@@ -143,11 +149,12 @@ public class StateResourceIntTest {
 
         // Create the State with an existing ID
         state.setId(1L);
+        StateDTO stateDTO = stateMapper.toDto(state);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restStateMockMvc.perform(post("/api/states")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(state)))
+            .content(TestUtil.convertObjectToJsonBytes(stateDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the State in the database
@@ -200,9 +207,7 @@ public class StateResourceIntTest {
     @Transactional
     public void updateState() throws Exception {
         // Initialize the database
-        stateService.save(state);
-        // As the test used the service layer, reset the Elasticsearch mock repository
-        reset(mockStateSearchRepository);
+        stateRepository.saveAndFlush(state);
 
         int databaseSizeBeforeUpdate = stateRepository.findAll().size();
 
@@ -213,10 +218,11 @@ public class StateResourceIntTest {
         updatedState
             .stateCode(UPDATED_STATE_CODE)
             .stateName(UPDATED_STATE_NAME);
+        StateDTO stateDTO = stateMapper.toDto(updatedState);
 
         restStateMockMvc.perform(put("/api/states")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedState)))
+            .content(TestUtil.convertObjectToJsonBytes(stateDTO)))
             .andExpect(status().isOk());
 
         // Validate the State in the database
@@ -236,11 +242,12 @@ public class StateResourceIntTest {
         int databaseSizeBeforeUpdate = stateRepository.findAll().size();
 
         // Create the State
+        StateDTO stateDTO = stateMapper.toDto(state);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restStateMockMvc.perform(put("/api/states")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(state)))
+            .content(TestUtil.convertObjectToJsonBytes(stateDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the State in the database
@@ -255,7 +262,7 @@ public class StateResourceIntTest {
     @Transactional
     public void deleteState() throws Exception {
         // Initialize the database
-        stateService.save(state);
+        stateRepository.saveAndFlush(state);
 
         int databaseSizeBeforeDelete = stateRepository.findAll().size();
 
@@ -276,7 +283,7 @@ public class StateResourceIntTest {
     @Transactional
     public void searchState() throws Exception {
         // Initialize the database
-        stateService.save(state);
+        stateRepository.saveAndFlush(state);
         when(mockStateSearchRepository.search(queryStringQuery("id:" + state.getId())))
             .thenReturn(Collections.singletonList(state));
         // Search the state
@@ -301,5 +308,28 @@ public class StateResourceIntTest {
         assertThat(state1).isNotEqualTo(state2);
         state1.setId(null);
         assertThat(state1).isNotEqualTo(state2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(StateDTO.class);
+        StateDTO stateDTO1 = new StateDTO();
+        stateDTO1.setId(1L);
+        StateDTO stateDTO2 = new StateDTO();
+        assertThat(stateDTO1).isNotEqualTo(stateDTO2);
+        stateDTO2.setId(stateDTO1.getId());
+        assertThat(stateDTO1).isEqualTo(stateDTO2);
+        stateDTO2.setId(2L);
+        assertThat(stateDTO1).isNotEqualTo(stateDTO2);
+        stateDTO1.setId(null);
+        assertThat(stateDTO1).isNotEqualTo(stateDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(stateMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(stateMapper.fromId(null)).isNull();
     }
 }

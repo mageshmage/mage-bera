@@ -4,12 +4,15 @@ import com.cargotracker.service.CityService;
 import com.cargotracker.domain.City;
 import com.cargotracker.repository.CityRepository;
 import com.cargotracker.repository.search.CitySearchRepository;
+import com.cargotracker.service.dto.CityDTO;
+import com.cargotracker.service.mapper.CityMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,24 +31,29 @@ public class CityServiceImpl implements CityService {
 
     private final CityRepository cityRepository;
 
+    private final CityMapper cityMapper;
+
     private final CitySearchRepository citySearchRepository;
 
-    public CityServiceImpl(CityRepository cityRepository, CitySearchRepository citySearchRepository) {
+    public CityServiceImpl(CityRepository cityRepository, CityMapper cityMapper, CitySearchRepository citySearchRepository) {
         this.cityRepository = cityRepository;
+        this.cityMapper = cityMapper;
         this.citySearchRepository = citySearchRepository;
     }
 
     /**
      * Save a city.
      *
-     * @param city the entity to save
+     * @param cityDTO the entity to save
      * @return the persisted entity
      */
     @Override
-    public City save(City city) {
-        log.debug("Request to save City : {}", city);
-        City result = cityRepository.save(city);
-        citySearchRepository.save(result);
+    public CityDTO save(CityDTO cityDTO) {
+        log.debug("Request to save City : {}", cityDTO);
+        City city = cityMapper.toEntity(cityDTO);
+        city = cityRepository.save(city);
+        CityDTO result = cityMapper.toDto(city);
+        citySearchRepository.save(city);
         return result;
     }
 
@@ -56,9 +64,11 @@ public class CityServiceImpl implements CityService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<City> findAll() {
+    public List<CityDTO> findAll() {
         log.debug("Request to get all Cities");
-        return cityRepository.findAll();
+        return cityRepository.findAll().stream()
+            .map(cityMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
 
@@ -70,9 +80,10 @@ public class CityServiceImpl implements CityService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Optional<City> findOne(Long id) {
+    public Optional<CityDTO> findOne(Long id) {
         log.debug("Request to get City : {}", id);
-        return cityRepository.findById(id);
+        return cityRepository.findById(id)
+            .map(cityMapper::toDto);
     }
 
     /**
@@ -95,10 +106,11 @@ public class CityServiceImpl implements CityService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<City> search(String query) {
+    public List<CityDTO> search(String query) {
         log.debug("Request to search Cities for query {}", query);
         return StreamSupport
             .stream(citySearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .map(cityMapper::toDto)
             .collect(Collectors.toList());
     }
 }

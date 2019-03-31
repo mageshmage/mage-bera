@@ -6,6 +6,8 @@ import com.cargotracker.domain.CarrierDetails;
 import com.cargotracker.repository.CarrierDetailsRepository;
 import com.cargotracker.repository.search.CarrierDetailsSearchRepository;
 import com.cargotracker.service.CarrierDetailsService;
+import com.cargotracker.service.dto.CarrierDetailsDTO;
+import com.cargotracker.service.mapper.CarrierDetailsMapper;
 import com.cargotracker.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -53,6 +55,9 @@ public class CarrierDetailsResourceIntTest {
 
     @Autowired
     private CarrierDetailsRepository carrierDetailsRepository;
+
+    @Autowired
+    private CarrierDetailsMapper carrierDetailsMapper;
 
     @Autowired
     private CarrierDetailsService carrierDetailsService;
@@ -120,9 +125,10 @@ public class CarrierDetailsResourceIntTest {
         int databaseSizeBeforeCreate = carrierDetailsRepository.findAll().size();
 
         // Create the CarrierDetails
+        CarrierDetailsDTO carrierDetailsDTO = carrierDetailsMapper.toDto(carrierDetails);
         restCarrierDetailsMockMvc.perform(post("/api/carrier-details")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(carrierDetails)))
+            .content(TestUtil.convertObjectToJsonBytes(carrierDetailsDTO)))
             .andExpect(status().isCreated());
 
         // Validate the CarrierDetails in the database
@@ -143,11 +149,12 @@ public class CarrierDetailsResourceIntTest {
 
         // Create the CarrierDetails with an existing ID
         carrierDetails.setId(1L);
+        CarrierDetailsDTO carrierDetailsDTO = carrierDetailsMapper.toDto(carrierDetails);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restCarrierDetailsMockMvc.perform(post("/api/carrier-details")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(carrierDetails)))
+            .content(TestUtil.convertObjectToJsonBytes(carrierDetailsDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the CarrierDetails in the database
@@ -166,10 +173,11 @@ public class CarrierDetailsResourceIntTest {
         carrierDetails.setValue(null);
 
         // Create the CarrierDetails, which fails.
+        CarrierDetailsDTO carrierDetailsDTO = carrierDetailsMapper.toDto(carrierDetails);
 
         restCarrierDetailsMockMvc.perform(post("/api/carrier-details")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(carrierDetails)))
+            .content(TestUtil.convertObjectToJsonBytes(carrierDetailsDTO)))
             .andExpect(status().isBadRequest());
 
         List<CarrierDetails> carrierDetailsList = carrierDetailsRepository.findAll();
@@ -218,9 +226,7 @@ public class CarrierDetailsResourceIntTest {
     @Transactional
     public void updateCarrierDetails() throws Exception {
         // Initialize the database
-        carrierDetailsService.save(carrierDetails);
-        // As the test used the service layer, reset the Elasticsearch mock repository
-        reset(mockCarrierDetailsSearchRepository);
+        carrierDetailsRepository.saveAndFlush(carrierDetails);
 
         int databaseSizeBeforeUpdate = carrierDetailsRepository.findAll().size();
 
@@ -231,10 +237,11 @@ public class CarrierDetailsResourceIntTest {
         updatedCarrierDetails
             .value(UPDATED_VALUE)
             .desc(UPDATED_DESC);
+        CarrierDetailsDTO carrierDetailsDTO = carrierDetailsMapper.toDto(updatedCarrierDetails);
 
         restCarrierDetailsMockMvc.perform(put("/api/carrier-details")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedCarrierDetails)))
+            .content(TestUtil.convertObjectToJsonBytes(carrierDetailsDTO)))
             .andExpect(status().isOk());
 
         // Validate the CarrierDetails in the database
@@ -254,11 +261,12 @@ public class CarrierDetailsResourceIntTest {
         int databaseSizeBeforeUpdate = carrierDetailsRepository.findAll().size();
 
         // Create the CarrierDetails
+        CarrierDetailsDTO carrierDetailsDTO = carrierDetailsMapper.toDto(carrierDetails);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restCarrierDetailsMockMvc.perform(put("/api/carrier-details")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(carrierDetails)))
+            .content(TestUtil.convertObjectToJsonBytes(carrierDetailsDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the CarrierDetails in the database
@@ -273,7 +281,7 @@ public class CarrierDetailsResourceIntTest {
     @Transactional
     public void deleteCarrierDetails() throws Exception {
         // Initialize the database
-        carrierDetailsService.save(carrierDetails);
+        carrierDetailsRepository.saveAndFlush(carrierDetails);
 
         int databaseSizeBeforeDelete = carrierDetailsRepository.findAll().size();
 
@@ -294,7 +302,7 @@ public class CarrierDetailsResourceIntTest {
     @Transactional
     public void searchCarrierDetails() throws Exception {
         // Initialize the database
-        carrierDetailsService.save(carrierDetails);
+        carrierDetailsRepository.saveAndFlush(carrierDetails);
         when(mockCarrierDetailsSearchRepository.search(queryStringQuery("id:" + carrierDetails.getId())))
             .thenReturn(Collections.singletonList(carrierDetails));
         // Search the carrierDetails
@@ -319,5 +327,28 @@ public class CarrierDetailsResourceIntTest {
         assertThat(carrierDetails1).isNotEqualTo(carrierDetails2);
         carrierDetails1.setId(null);
         assertThat(carrierDetails1).isNotEqualTo(carrierDetails2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(CarrierDetailsDTO.class);
+        CarrierDetailsDTO carrierDetailsDTO1 = new CarrierDetailsDTO();
+        carrierDetailsDTO1.setId(1L);
+        CarrierDetailsDTO carrierDetailsDTO2 = new CarrierDetailsDTO();
+        assertThat(carrierDetailsDTO1).isNotEqualTo(carrierDetailsDTO2);
+        carrierDetailsDTO2.setId(carrierDetailsDTO1.getId());
+        assertThat(carrierDetailsDTO1).isEqualTo(carrierDetailsDTO2);
+        carrierDetailsDTO2.setId(2L);
+        assertThat(carrierDetailsDTO1).isNotEqualTo(carrierDetailsDTO2);
+        carrierDetailsDTO1.setId(null);
+        assertThat(carrierDetailsDTO1).isNotEqualTo(carrierDetailsDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(carrierDetailsMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(carrierDetailsMapper.fromId(null)).isNull();
     }
 }

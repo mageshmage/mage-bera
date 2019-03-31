@@ -49,7 +49,8 @@ export class PaymentMode extends React.Component<IPaymentModeProps, IPaymentMode
         <h2 id="payment-mode-heading">
           <Translate contentKey="cargotrackerApp.paymentMode.home.title">Payment Modes</Translate>
           <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-            <FontAwesomeIcon icon="plus" />&nbsp;
+            <FontAwesomeIcon icon="plus" />
+            &nbsp;
             <Translate contentKey="cargotrackerApp.paymentMode.home.createLabel">Create new Payment Mode</Translate>
           </Link>
         </h2>
@@ -105,7 +106,7 @@ export class PaymentMode extends React.Component<IPaymentModeProps, IPaymentMode
                   </td>
                   <td>{paymentMode.value}</td>
                   <td>{paymentMode.desc}</td>
-                  <td>{paymentMode.vendor ? <Link to={`vendor/${paymentMode.vendor.id}`}>{paymentMode.vendor.id}</Link> : ''}</td>
+                  <td>{paymentMode.vendorId ? <Link to={`vendor/${paymentMode.vendorId}`}>{paymentMode.vendorId}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${paymentMode.id}`} color="info" size="sm">

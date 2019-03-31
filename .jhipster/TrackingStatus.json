@@ -24,7 +24,7 @@
     ],
     "changelogDate": "20190330143954",
     "entityTableName": "tracking_status",
-    "dto": "no",
+    "dto": "mapstruct",
     "pagination": "no",
     "service": "serviceImpl",
     "jpaMetamodelFiltering": false,

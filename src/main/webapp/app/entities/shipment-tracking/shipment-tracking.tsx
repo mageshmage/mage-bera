@@ -90,7 +90,8 @@ export class ShipmentTracking extends React.Component<IShipmentTrackingProps, IS
         <h2 id="shipment-tracking-heading">
           <Translate contentKey="cargotrackerApp.shipmentTracking.home.title">Shipment Trackings</Translate>
           <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-            <FontAwesomeIcon icon="plus" />&nbsp;
+            <FontAwesomeIcon icon="plus" />
+            &nbsp;
             <Translate contentKey="cargotrackerApp.shipmentTracking.home.createLabel">Create new Shipment Tracking</Translate>
           </Link>
         </h2>
@@ -155,8 +156,8 @@ export class ShipmentTracking extends React.Component<IShipmentTrackingProps, IS
                   <td>{shipmentTracking.place}</td>
                   <td>{shipmentTracking.status}</td>
                   <td>
-                    {shipmentTracking.shipmentInfo ? (
-                      <Link to={`shipment-info/${shipmentTracking.shipmentInfo.id}`}>{shipmentTracking.shipmentInfo.id}</Link>
+                    {shipmentTracking.shipmentInfoId ? (
+                      <Link to={`shipment-info/${shipmentTracking.shipmentInfoId}`}>{shipmentTracking.shipmentInfoId}</Link>
                     ) : (
                       ''
                     )}

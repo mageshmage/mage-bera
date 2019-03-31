@@ -49,7 +49,8 @@ export class State extends React.Component<IStateProps, IStateState> {
         <h2 id="state-heading">
           <Translate contentKey="cargotrackerApp.state.home.title">States</Translate>
           <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-            <FontAwesomeIcon icon="plus" />&nbsp;
+            <FontAwesomeIcon icon="plus" />
+            &nbsp;
             <Translate contentKey="cargotrackerApp.state.home.createLabel">Create new State</Translate>
           </Link>
         </h2>
@@ -105,7 +106,7 @@ export class State extends React.Component<IStateProps, IStateState> {
                   </td>
                   <td>{state.stateCode}</td>
                   <td>{state.stateName}</td>
-                  <td>{state.country ? <Link to={`country/${state.country.id}`}>{state.country.id}</Link> : ''}</td>
+                  <td>{state.countryId ? <Link to={`country/${state.countryId}`}>{state.countryId}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${state.id}`} color="info" size="sm">

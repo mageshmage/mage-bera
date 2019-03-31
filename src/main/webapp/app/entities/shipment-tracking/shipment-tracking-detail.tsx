@@ -25,9 +25,8 @@ export class ShipmentTrackingDetail extends React.Component<IShipmentTrackingDet
       <Row>
         <Col md="8">
           <h2>
-            <Translate contentKey="cargotrackerApp.shipmentTracking.detail.title">ShipmentTracking</Translate> [<b>
-              {shipmentTrackingEntity.id}
-            </b>]
+            <Translate contentKey="cargotrackerApp.shipmentTracking.detail.title">ShipmentTracking</Translate> [
+            <b>{shipmentTrackingEntity.id}</b>]
           </h2>
           <dl className="jh-entity-details">
             <dt>
@@ -53,14 +52,15 @@ export class ShipmentTrackingDetail extends React.Component<IShipmentTrackingDet
             <dt>
               <Translate contentKey="cargotrackerApp.shipmentTracking.shipmentInfo">Shipment Info</Translate>
             </dt>
-            <dd>{shipmentTrackingEntity.shipmentInfo ? shipmentTrackingEntity.shipmentInfo.id : ''}</dd>
+            <dd>{shipmentTrackingEntity.shipmentInfoId ? shipmentTrackingEntity.shipmentInfoId : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/shipment-tracking" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}
             <span className="d-none d-md-inline">
               <Translate contentKey="entity.action.back">Back</Translate>
             </span>
-          </Button>&nbsp;
+          </Button>
+          &nbsp;
           <Button tag={Link} to={`/entity/shipment-tracking/${shipmentTrackingEntity.id}/edit`} replace color="primary">
             <FontAwesomeIcon icon="pencil-alt" />{' '}
             <span className="d-none d-md-inline">

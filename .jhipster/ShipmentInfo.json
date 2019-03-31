@@ -164,7 +164,7 @@
     ],
     "changelogDate": "20190330143955",
     "entityTableName": "shipment_info",
-    "dto": "no",
+    "dto": "mapstruct",
     "pagination": "pagination",
     "service": "serviceImpl",
     "jpaMetamodelFiltering": false,

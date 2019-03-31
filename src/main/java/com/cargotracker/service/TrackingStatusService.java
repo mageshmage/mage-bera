@@ -1,6 +1,6 @@
 package com.cargotracker.service;
 
-import com.cargotracker.domain.TrackingStatus;
+import com.cargotracker.service.dto.TrackingStatusDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,17 +13,17 @@ public interface TrackingStatusService {
     /**
      * Save a trackingStatus.
      *
-     * @param trackingStatus the entity to save
+     * @param trackingStatusDTO the entity to save
      * @return the persisted entity
      */
-    TrackingStatus save(TrackingStatus trackingStatus);
+    TrackingStatusDTO save(TrackingStatusDTO trackingStatusDTO);
 
     /**
      * Get all the trackingStatuses.
      *
      * @return the list of entities
      */
-    List<TrackingStatus> findAll();
+    List<TrackingStatusDTO> findAll();
 
 
     /**
@@ -32,7 +32,7 @@ public interface TrackingStatusService {
      * @param id the id of the entity
      * @return the entity
      */
-    Optional<TrackingStatus> findOne(Long id);
+    Optional<TrackingStatusDTO> findOne(Long id);
 
     /**
      * Delete the "id" trackingStatus.
@@ -48,5 +48,5 @@ public interface TrackingStatusService {
      * 
      * @return the list of entities
      */
-    List<TrackingStatus> search(String query);
+    List<TrackingStatusDTO> search(String query);
 }

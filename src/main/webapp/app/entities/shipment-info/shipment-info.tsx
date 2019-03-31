@@ -90,7 +90,8 @@ export class ShipmentInfo extends React.Component<IShipmentInfoProps, IShipmentI
         <h2 id="shipment-info-heading">
           <Translate contentKey="cargotrackerApp.shipmentInfo.home.title">Shipment Infos</Translate>
           <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-            <FontAwesomeIcon icon="plus" />&nbsp;
+            <FontAwesomeIcon icon="plus" />
+            &nbsp;
             <Translate contentKey="cargotrackerApp.shipmentInfo.home.createLabel">Create new Shipment Info</Translate>
           </Link>
         </h2>
@@ -243,44 +244,44 @@ export class ShipmentInfo extends React.Component<IShipmentInfoProps, IShipmentI
                   <td>{shipmentInfo.receivedBy}</td>
                   <td>{shipmentInfo.relationShip}</td>
                   <td>
-                    {shipmentInfo.carrierDetails ? (
-                      <Link to={`carrier-details/${shipmentInfo.carrierDetails.id}`}>{shipmentInfo.carrierDetails.id}</Link>
+                    {shipmentInfo.carrierDetailsId ? (
+                      <Link to={`carrier-details/${shipmentInfo.carrierDetailsId}`}>{shipmentInfo.carrierDetailsId}</Link>
                     ) : (
                       ''
                     )}
                   </td>
                   <td>
-                    {shipmentInfo.shipmentType ? (
-                      <Link to={`shipment-type/${shipmentInfo.shipmentType.id}`}>{shipmentInfo.shipmentType.id}</Link>
+                    {shipmentInfo.shipmentTypeId ? (
+                      <Link to={`shipment-type/${shipmentInfo.shipmentTypeId}`}>{shipmentInfo.shipmentTypeId}</Link>
                     ) : (
                       ''
                     )}
                   </td>
                   <td>
-                    {shipmentInfo.shipmentMode ? (
-                      <Link to={`shipment-mode/${shipmentInfo.shipmentMode.id}`}>{shipmentInfo.shipmentMode.id}</Link>
+                    {shipmentInfo.shipmentModeId ? (
+                      <Link to={`shipment-mode/${shipmentInfo.shipmentModeId}`}>{shipmentInfo.shipmentModeId}</Link>
                     ) : (
                       ''
                     )}
                   </td>
                   <td>
-                    {shipmentInfo.paymentMode ? (
-                      <Link to={`payment-mode/${shipmentInfo.paymentMode.id}`}>{shipmentInfo.paymentMode.id}</Link>
+                    {shipmentInfo.paymentModeId ? (
+                      <Link to={`payment-mode/${shipmentInfo.paymentModeId}`}>{shipmentInfo.paymentModeId}</Link>
                     ) : (
                       ''
                     )}
                   </td>
                   <td>
-                    {shipmentInfo.trackingStatus ? (
-                      <Link to={`tracking-status/${shipmentInfo.trackingStatus.id}`}>{shipmentInfo.trackingStatus.id}</Link>
+                    {shipmentInfo.trackingStatusId ? (
+                      <Link to={`tracking-status/${shipmentInfo.trackingStatusId}`}>{shipmentInfo.trackingStatusId}</Link>
                     ) : (
                       ''
                     )}
                   </td>
-                  <td>{shipmentInfo.vendor ? <Link to={`vendor/${shipmentInfo.vendor.id}`}>{shipmentInfo.vendor.id}</Link> : ''}</td>
-                  <td>{shipmentInfo.origin ? <Link to={`state/${shipmentInfo.origin.id}`}>{shipmentInfo.origin.id}</Link> : ''}</td>
+                  <td>{shipmentInfo.vendorId ? <Link to={`vendor/${shipmentInfo.vendorId}`}>{shipmentInfo.vendorId}</Link> : ''}</td>
+                  <td>{shipmentInfo.originId ? <Link to={`state/${shipmentInfo.originId}`}>{shipmentInfo.originId}</Link> : ''}</td>
                   <td>
-                    {shipmentInfo.destination ? <Link to={`state/${shipmentInfo.destination.id}`}>{shipmentInfo.destination.id}</Link> : ''}
+                    {shipmentInfo.destinationId ? <Link to={`state/${shipmentInfo.destinationId}`}>{shipmentInfo.destinationId}</Link> : ''}
                   </td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">

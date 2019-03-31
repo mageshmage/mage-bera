@@ -4,12 +4,15 @@ import com.cargotracker.service.ShipmentInfoPODService;
 import com.cargotracker.domain.ShipmentInfoPOD;
 import com.cargotracker.repository.ShipmentInfoPODRepository;
 import com.cargotracker.repository.search.ShipmentInfoPODSearchRepository;
+import com.cargotracker.service.dto.ShipmentInfoPODDTO;
+import com.cargotracker.service.mapper.ShipmentInfoPODMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,24 +31,29 @@ public class ShipmentInfoPODServiceImpl implements ShipmentInfoPODService {
 
     private final ShipmentInfoPODRepository shipmentInfoPODRepository;
 
+    private final ShipmentInfoPODMapper shipmentInfoPODMapper;
+
     private final ShipmentInfoPODSearchRepository shipmentInfoPODSearchRepository;
 
-    public ShipmentInfoPODServiceImpl(ShipmentInfoPODRepository shipmentInfoPODRepository, ShipmentInfoPODSearchRepository shipmentInfoPODSearchRepository) {
+    public ShipmentInfoPODServiceImpl(ShipmentInfoPODRepository shipmentInfoPODRepository, ShipmentInfoPODMapper shipmentInfoPODMapper, ShipmentInfoPODSearchRepository shipmentInfoPODSearchRepository) {
         this.shipmentInfoPODRepository = shipmentInfoPODRepository;
+        this.shipmentInfoPODMapper = shipmentInfoPODMapper;
         this.shipmentInfoPODSearchRepository = shipmentInfoPODSearchRepository;
     }
 
     /**
      * Save a shipmentInfoPOD.
      *
-     * @param shipmentInfoPOD the entity to save
+     * @param shipmentInfoPODDTO the entity to save
      * @return the persisted entity
      */
     @Override
-    public ShipmentInfoPOD save(ShipmentInfoPOD shipmentInfoPOD) {
-        log.debug("Request to save ShipmentInfoPOD : {}", shipmentInfoPOD);
-        ShipmentInfoPOD result = shipmentInfoPODRepository.save(shipmentInfoPOD);
-        shipmentInfoPODSearchRepository.save(result);
+    public ShipmentInfoPODDTO save(ShipmentInfoPODDTO shipmentInfoPODDTO) {
+        log.debug("Request to save ShipmentInfoPOD : {}", shipmentInfoPODDTO);
+        ShipmentInfoPOD shipmentInfoPOD = shipmentInfoPODMapper.toEntity(shipmentInfoPODDTO);
+        shipmentInfoPOD = shipmentInfoPODRepository.save(shipmentInfoPOD);
+        ShipmentInfoPODDTO result = shipmentInfoPODMapper.toDto(shipmentInfoPOD);
+        shipmentInfoPODSearchRepository.save(shipmentInfoPOD);
         return result;
     }
 
@@ -56,9 +64,11 @@ public class ShipmentInfoPODServiceImpl implements ShipmentInfoPODService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ShipmentInfoPOD> findAll() {
+    public List<ShipmentInfoPODDTO> findAll() {
         log.debug("Request to get all ShipmentInfoPODS");
-        return shipmentInfoPODRepository.findAll();
+        return shipmentInfoPODRepository.findAll().stream()
+            .map(shipmentInfoPODMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
 
@@ -70,9 +80,10 @@ public class ShipmentInfoPODServiceImpl implements ShipmentInfoPODService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Optional<ShipmentInfoPOD> findOne(Long id) {
+    public Optional<ShipmentInfoPODDTO> findOne(Long id) {
         log.debug("Request to get ShipmentInfoPOD : {}", id);
-        return shipmentInfoPODRepository.findById(id);
+        return shipmentInfoPODRepository.findById(id)
+            .map(shipmentInfoPODMapper::toDto);
     }
 
     /**
@@ -95,10 +106,11 @@ public class ShipmentInfoPODServiceImpl implements ShipmentInfoPODService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<ShipmentInfoPOD> search(String query) {
+    public List<ShipmentInfoPODDTO> search(String query) {
         log.debug("Request to search ShipmentInfoPODS for query {}", query);
         return StreamSupport
             .stream(shipmentInfoPODSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .map(shipmentInfoPODMapper::toDto)
             .collect(Collectors.toList());
     }
 }

@@ -1,6 +1,6 @@
 package com.cargotracker.service;
 
-import com.cargotracker.domain.Vendor;
+import com.cargotracker.service.dto.VendorDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,17 +13,17 @@ public interface VendorService {
     /**
      * Save a vendor.
      *
-     * @param vendor the entity to save
+     * @param vendorDTO the entity to save
      * @return the persisted entity
      */
-    Vendor save(Vendor vendor);
+    VendorDTO save(VendorDTO vendorDTO);
 
     /**
      * Get all the vendors.
      *
      * @return the list of entities
      */
-    List<Vendor> findAll();
+    List<VendorDTO> findAll();
 
 
     /**
@@ -32,7 +32,7 @@ public interface VendorService {
      * @param id the id of the entity
      * @return the entity
      */
-    Optional<Vendor> findOne(Long id);
+    Optional<VendorDTO> findOne(Long id);
 
     /**
      * Delete the "id" vendor.
@@ -48,5 +48,5 @@ public interface VendorService {
      * 
      * @return the list of entities
      */
-    List<Vendor> search(String query);
+    List<VendorDTO> search(String query);
 }

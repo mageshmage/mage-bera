@@ -6,6 +6,8 @@ import com.cargotracker.domain.ShipmentInfoPOD;
 import com.cargotracker.repository.ShipmentInfoPODRepository;
 import com.cargotracker.repository.search.ShipmentInfoPODSearchRepository;
 import com.cargotracker.service.ShipmentInfoPODService;
+import com.cargotracker.service.dto.ShipmentInfoPODDTO;
+import com.cargotracker.service.mapper.ShipmentInfoPODMapper;
 import com.cargotracker.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -56,6 +58,9 @@ public class ShipmentInfoPODResourceIntTest {
 
     @Autowired
     private ShipmentInfoPODRepository shipmentInfoPODRepository;
+
+    @Autowired
+    private ShipmentInfoPODMapper shipmentInfoPODMapper;
 
     @Autowired
     private ShipmentInfoPODService shipmentInfoPODService;
@@ -124,9 +129,10 @@ public class ShipmentInfoPODResourceIntTest {
         int databaseSizeBeforeCreate = shipmentInfoPODRepository.findAll().size();
 
         // Create the ShipmentInfoPOD
+        ShipmentInfoPODDTO shipmentInfoPODDTO = shipmentInfoPODMapper.toDto(shipmentInfoPOD);
         restShipmentInfoPODMockMvc.perform(post("/api/shipment-info-pods")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentInfoPOD)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentInfoPODDTO)))
             .andExpect(status().isCreated());
 
         // Validate the ShipmentInfoPOD in the database
@@ -148,11 +154,12 @@ public class ShipmentInfoPODResourceIntTest {
 
         // Create the ShipmentInfoPOD with an existing ID
         shipmentInfoPOD.setId(1L);
+        ShipmentInfoPODDTO shipmentInfoPODDTO = shipmentInfoPODMapper.toDto(shipmentInfoPOD);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restShipmentInfoPODMockMvc.perform(post("/api/shipment-info-pods")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentInfoPOD)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentInfoPODDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the ShipmentInfoPOD in the database
@@ -207,9 +214,7 @@ public class ShipmentInfoPODResourceIntTest {
     @Transactional
     public void updateShipmentInfoPOD() throws Exception {
         // Initialize the database
-        shipmentInfoPODService.save(shipmentInfoPOD);
-        // As the test used the service layer, reset the Elasticsearch mock repository
-        reset(mockShipmentInfoPODSearchRepository);
+        shipmentInfoPODRepository.saveAndFlush(shipmentInfoPOD);
 
         int databaseSizeBeforeUpdate = shipmentInfoPODRepository.findAll().size();
 
@@ -221,10 +226,11 @@ public class ShipmentInfoPODResourceIntTest {
             .pod(UPDATED_POD)
             .podContentType(UPDATED_POD_CONTENT_TYPE)
             .comments(UPDATED_COMMENTS);
+        ShipmentInfoPODDTO shipmentInfoPODDTO = shipmentInfoPODMapper.toDto(updatedShipmentInfoPOD);
 
         restShipmentInfoPODMockMvc.perform(put("/api/shipment-info-pods")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedShipmentInfoPOD)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentInfoPODDTO)))
             .andExpect(status().isOk());
 
         // Validate the ShipmentInfoPOD in the database
@@ -245,11 +251,12 @@ public class ShipmentInfoPODResourceIntTest {
         int databaseSizeBeforeUpdate = shipmentInfoPODRepository.findAll().size();
 
         // Create the ShipmentInfoPOD
+        ShipmentInfoPODDTO shipmentInfoPODDTO = shipmentInfoPODMapper.toDto(shipmentInfoPOD);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restShipmentInfoPODMockMvc.perform(put("/api/shipment-info-pods")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentInfoPOD)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentInfoPODDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the ShipmentInfoPOD in the database
@@ -264,7 +271,7 @@ public class ShipmentInfoPODResourceIntTest {
     @Transactional
     public void deleteShipmentInfoPOD() throws Exception {
         // Initialize the database
-        shipmentInfoPODService.save(shipmentInfoPOD);
+        shipmentInfoPODRepository.saveAndFlush(shipmentInfoPOD);
 
         int databaseSizeBeforeDelete = shipmentInfoPODRepository.findAll().size();
 
@@ -285,7 +292,7 @@ public class ShipmentInfoPODResourceIntTest {
     @Transactional
     public void searchShipmentInfoPOD() throws Exception {
         // Initialize the database
-        shipmentInfoPODService.save(shipmentInfoPOD);
+        shipmentInfoPODRepository.saveAndFlush(shipmentInfoPOD);
         when(mockShipmentInfoPODSearchRepository.search(queryStringQuery("id:" + shipmentInfoPOD.getId())))
             .thenReturn(Collections.singletonList(shipmentInfoPOD));
         // Search the shipmentInfoPOD
@@ -311,5 +318,28 @@ public class ShipmentInfoPODResourceIntTest {
         assertThat(shipmentInfoPOD1).isNotEqualTo(shipmentInfoPOD2);
         shipmentInfoPOD1.setId(null);
         assertThat(shipmentInfoPOD1).isNotEqualTo(shipmentInfoPOD2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(ShipmentInfoPODDTO.class);
+        ShipmentInfoPODDTO shipmentInfoPODDTO1 = new ShipmentInfoPODDTO();
+        shipmentInfoPODDTO1.setId(1L);
+        ShipmentInfoPODDTO shipmentInfoPODDTO2 = new ShipmentInfoPODDTO();
+        assertThat(shipmentInfoPODDTO1).isNotEqualTo(shipmentInfoPODDTO2);
+        shipmentInfoPODDTO2.setId(shipmentInfoPODDTO1.getId());
+        assertThat(shipmentInfoPODDTO1).isEqualTo(shipmentInfoPODDTO2);
+        shipmentInfoPODDTO2.setId(2L);
+        assertThat(shipmentInfoPODDTO1).isNotEqualTo(shipmentInfoPODDTO2);
+        shipmentInfoPODDTO1.setId(null);
+        assertThat(shipmentInfoPODDTO1).isNotEqualTo(shipmentInfoPODDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(shipmentInfoPODMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(shipmentInfoPODMapper.fromId(null)).isNull();
     }
 }

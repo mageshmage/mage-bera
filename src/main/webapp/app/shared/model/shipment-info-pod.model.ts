@@ -1,11 +1,9 @@
-import { IShipmentInfo } from 'app/shared/model/shipment-info.model';
-
 export interface IShipmentInfoPOD {
   id?: number;
   podContentType?: string;
   pod?: any;
   comments?: string;
-  shipmentInfo?: IShipmentInfo;
+  shipmentInfoId?: number;
 }
 
 export const defaultValue: Readonly<IShipmentInfoPOD> = {};

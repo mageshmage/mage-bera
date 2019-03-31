@@ -1,8 +1,8 @@
 package com.cargotracker.web.rest;
-import com.cargotracker.domain.CarrierDetails;
 import com.cargotracker.service.CarrierDetailsService;
 import com.cargotracker.web.rest.errors.BadRequestAlertException;
 import com.cargotracker.web.rest.util.HeaderUtil;
+import com.cargotracker.service.dto.CarrierDetailsDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,17 +39,17 @@ public class CarrierDetailsResource {
     /**
      * POST  /carrier-details : Create a new carrierDetails.
      *
-     * @param carrierDetails the carrierDetails to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new carrierDetails, or with status 400 (Bad Request) if the carrierDetails has already an ID
+     * @param carrierDetailsDTO the carrierDetailsDTO to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new carrierDetailsDTO, or with status 400 (Bad Request) if the carrierDetails has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/carrier-details")
-    public ResponseEntity<CarrierDetails> createCarrierDetails(@Valid @RequestBody CarrierDetails carrierDetails) throws URISyntaxException {
-        log.debug("REST request to save CarrierDetails : {}", carrierDetails);
-        if (carrierDetails.getId() != null) {
+    public ResponseEntity<CarrierDetailsDTO> createCarrierDetails(@Valid @RequestBody CarrierDetailsDTO carrierDetailsDTO) throws URISyntaxException {
+        log.debug("REST request to save CarrierDetails : {}", carrierDetailsDTO);
+        if (carrierDetailsDTO.getId() != null) {
             throw new BadRequestAlertException("A new carrierDetails cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        CarrierDetails result = carrierDetailsService.save(carrierDetails);
+        CarrierDetailsDTO result = carrierDetailsService.save(carrierDetailsDTO);
         return ResponseEntity.created(new URI("/api/carrier-details/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -58,21 +58,21 @@ public class CarrierDetailsResource {
     /**
      * PUT  /carrier-details : Updates an existing carrierDetails.
      *
-     * @param carrierDetails the carrierDetails to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated carrierDetails,
-     * or with status 400 (Bad Request) if the carrierDetails is not valid,
-     * or with status 500 (Internal Server Error) if the carrierDetails couldn't be updated
+     * @param carrierDetailsDTO the carrierDetailsDTO to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated carrierDetailsDTO,
+     * or with status 400 (Bad Request) if the carrierDetailsDTO is not valid,
+     * or with status 500 (Internal Server Error) if the carrierDetailsDTO couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/carrier-details")
-    public ResponseEntity<CarrierDetails> updateCarrierDetails(@Valid @RequestBody CarrierDetails carrierDetails) throws URISyntaxException {
-        log.debug("REST request to update CarrierDetails : {}", carrierDetails);
-        if (carrierDetails.getId() == null) {
+    public ResponseEntity<CarrierDetailsDTO> updateCarrierDetails(@Valid @RequestBody CarrierDetailsDTO carrierDetailsDTO) throws URISyntaxException {
+        log.debug("REST request to update CarrierDetails : {}", carrierDetailsDTO);
+        if (carrierDetailsDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        CarrierDetails result = carrierDetailsService.save(carrierDetails);
+        CarrierDetailsDTO result = carrierDetailsService.save(carrierDetailsDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, carrierDetails.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, carrierDetailsDTO.getId().toString()))
             .body(result);
     }
 
@@ -82,7 +82,7 @@ public class CarrierDetailsResource {
      * @return the ResponseEntity with status 200 (OK) and the list of carrierDetails in body
      */
     @GetMapping("/carrier-details")
-    public List<CarrierDetails> getAllCarrierDetails() {
+    public List<CarrierDetailsDTO> getAllCarrierDetails() {
         log.debug("REST request to get all CarrierDetails");
         return carrierDetailsService.findAll();
     }
@@ -90,20 +90,20 @@ public class CarrierDetailsResource {
     /**
      * GET  /carrier-details/:id : get the "id" carrierDetails.
      *
-     * @param id the id of the carrierDetails to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the carrierDetails, or with status 404 (Not Found)
+     * @param id the id of the carrierDetailsDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the carrierDetailsDTO, or with status 404 (Not Found)
      */
     @GetMapping("/carrier-details/{id}")
-    public ResponseEntity<CarrierDetails> getCarrierDetails(@PathVariable Long id) {
+    public ResponseEntity<CarrierDetailsDTO> getCarrierDetails(@PathVariable Long id) {
         log.debug("REST request to get CarrierDetails : {}", id);
-        Optional<CarrierDetails> carrierDetails = carrierDetailsService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(carrierDetails);
+        Optional<CarrierDetailsDTO> carrierDetailsDTO = carrierDetailsService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(carrierDetailsDTO);
     }
 
     /**
      * DELETE  /carrier-details/:id : delete the "id" carrierDetails.
      *
-     * @param id the id of the carrierDetails to delete
+     * @param id the id of the carrierDetailsDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/carrier-details/{id}")
@@ -121,7 +121,7 @@ public class CarrierDetailsResource {
      * @return the result of the search
      */
     @GetMapping("/_search/carrier-details")
-    public List<CarrierDetails> searchCarrierDetails(@RequestParam String query) {
+    public List<CarrierDetailsDTO> searchCarrierDetails(@RequestParam String query) {
         log.debug("REST request to search CarrierDetails for query {}", query);
         return carrierDetailsService.search(query);
     }

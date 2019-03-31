@@ -1,8 +1,8 @@
 package com.cargotracker.web.rest;
-import com.cargotracker.domain.ShipmentType;
 import com.cargotracker.service.ShipmentTypeService;
 import com.cargotracker.web.rest.errors.BadRequestAlertException;
 import com.cargotracker.web.rest.util.HeaderUtil;
+import com.cargotracker.service.dto.ShipmentTypeDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,17 +39,17 @@ public class ShipmentTypeResource {
     /**
      * POST  /shipment-types : Create a new shipmentType.
      *
-     * @param shipmentType the shipmentType to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new shipmentType, or with status 400 (Bad Request) if the shipmentType has already an ID
+     * @param shipmentTypeDTO the shipmentTypeDTO to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new shipmentTypeDTO, or with status 400 (Bad Request) if the shipmentType has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/shipment-types")
-    public ResponseEntity<ShipmentType> createShipmentType(@Valid @RequestBody ShipmentType shipmentType) throws URISyntaxException {
-        log.debug("REST request to save ShipmentType : {}", shipmentType);
-        if (shipmentType.getId() != null) {
+    public ResponseEntity<ShipmentTypeDTO> createShipmentType(@Valid @RequestBody ShipmentTypeDTO shipmentTypeDTO) throws URISyntaxException {
+        log.debug("REST request to save ShipmentType : {}", shipmentTypeDTO);
+        if (shipmentTypeDTO.getId() != null) {
             throw new BadRequestAlertException("A new shipmentType cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ShipmentType result = shipmentTypeService.save(shipmentType);
+        ShipmentTypeDTO result = shipmentTypeService.save(shipmentTypeDTO);
         return ResponseEntity.created(new URI("/api/shipment-types/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -58,21 +58,21 @@ public class ShipmentTypeResource {
     /**
      * PUT  /shipment-types : Updates an existing shipmentType.
      *
-     * @param shipmentType the shipmentType to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated shipmentType,
-     * or with status 400 (Bad Request) if the shipmentType is not valid,
-     * or with status 500 (Internal Server Error) if the shipmentType couldn't be updated
+     * @param shipmentTypeDTO the shipmentTypeDTO to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated shipmentTypeDTO,
+     * or with status 400 (Bad Request) if the shipmentTypeDTO is not valid,
+     * or with status 500 (Internal Server Error) if the shipmentTypeDTO couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/shipment-types")
-    public ResponseEntity<ShipmentType> updateShipmentType(@Valid @RequestBody ShipmentType shipmentType) throws URISyntaxException {
-        log.debug("REST request to update ShipmentType : {}", shipmentType);
-        if (shipmentType.getId() == null) {
+    public ResponseEntity<ShipmentTypeDTO> updateShipmentType(@Valid @RequestBody ShipmentTypeDTO shipmentTypeDTO) throws URISyntaxException {
+        log.debug("REST request to update ShipmentType : {}", shipmentTypeDTO);
+        if (shipmentTypeDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        ShipmentType result = shipmentTypeService.save(shipmentType);
+        ShipmentTypeDTO result = shipmentTypeService.save(shipmentTypeDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, shipmentType.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, shipmentTypeDTO.getId().toString()))
             .body(result);
     }
 
@@ -82,7 +82,7 @@ public class ShipmentTypeResource {
      * @return the ResponseEntity with status 200 (OK) and the list of shipmentTypes in body
      */
     @GetMapping("/shipment-types")
-    public List<ShipmentType> getAllShipmentTypes() {
+    public List<ShipmentTypeDTO> getAllShipmentTypes() {
         log.debug("REST request to get all ShipmentTypes");
         return shipmentTypeService.findAll();
     }
@@ -90,20 +90,20 @@ public class ShipmentTypeResource {
     /**
      * GET  /shipment-types/:id : get the "id" shipmentType.
      *
-     * @param id the id of the shipmentType to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the shipmentType, or with status 404 (Not Found)
+     * @param id the id of the shipmentTypeDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the shipmentTypeDTO, or with status 404 (Not Found)
      */
     @GetMapping("/shipment-types/{id}")
-    public ResponseEntity<ShipmentType> getShipmentType(@PathVariable Long id) {
+    public ResponseEntity<ShipmentTypeDTO> getShipmentType(@PathVariable Long id) {
         log.debug("REST request to get ShipmentType : {}", id);
-        Optional<ShipmentType> shipmentType = shipmentTypeService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(shipmentType);
+        Optional<ShipmentTypeDTO> shipmentTypeDTO = shipmentTypeService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(shipmentTypeDTO);
     }
 
     /**
      * DELETE  /shipment-types/:id : delete the "id" shipmentType.
      *
-     * @param id the id of the shipmentType to delete
+     * @param id the id of the shipmentTypeDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/shipment-types/{id}")
@@ -121,7 +121,7 @@ public class ShipmentTypeResource {
      * @return the result of the search
      */
     @GetMapping("/_search/shipment-types")
-    public List<ShipmentType> searchShipmentTypes(@RequestParam String query) {
+    public List<ShipmentTypeDTO> searchShipmentTypes(@RequestParam String query) {
         log.debug("REST request to search ShipmentTypes for query {}", query);
         return shipmentTypeService.search(query);
     }

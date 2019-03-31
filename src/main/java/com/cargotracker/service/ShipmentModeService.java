@@ -1,6 +1,6 @@
 package com.cargotracker.service;
 
-import com.cargotracker.domain.ShipmentMode;
+import com.cargotracker.service.dto.ShipmentModeDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,17 +13,17 @@ public interface ShipmentModeService {
     /**
      * Save a shipmentMode.
      *
-     * @param shipmentMode the entity to save
+     * @param shipmentModeDTO the entity to save
      * @return the persisted entity
      */
-    ShipmentMode save(ShipmentMode shipmentMode);
+    ShipmentModeDTO save(ShipmentModeDTO shipmentModeDTO);
 
     /**
      * Get all the shipmentModes.
      *
      * @return the list of entities
      */
-    List<ShipmentMode> findAll();
+    List<ShipmentModeDTO> findAll();
 
 
     /**
@@ -32,7 +32,7 @@ public interface ShipmentModeService {
      * @param id the id of the entity
      * @return the entity
      */
-    Optional<ShipmentMode> findOne(Long id);
+    Optional<ShipmentModeDTO> findOne(Long id);
 
     /**
      * Delete the "id" shipmentMode.
@@ -48,5 +48,5 @@ public interface ShipmentModeService {
      * 
      * @return the list of entities
      */
-    List<ShipmentMode> search(String query);
+    List<ShipmentModeDTO> search(String query);
 }

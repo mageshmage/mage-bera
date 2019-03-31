@@ -1,8 +1,8 @@
 package com.cargotracker.web.rest;
-import com.cargotracker.domain.State;
 import com.cargotracker.service.StateService;
 import com.cargotracker.web.rest.errors.BadRequestAlertException;
 import com.cargotracker.web.rest.util.HeaderUtil;
+import com.cargotracker.service.dto.StateDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -38,17 +38,17 @@ public class StateResource {
     /**
      * POST  /states : Create a new state.
      *
-     * @param state the state to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new state, or with status 400 (Bad Request) if the state has already an ID
+     * @param stateDTO the stateDTO to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new stateDTO, or with status 400 (Bad Request) if the state has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/states")
-    public ResponseEntity<State> createState(@RequestBody State state) throws URISyntaxException {
-        log.debug("REST request to save State : {}", state);
-        if (state.getId() != null) {
+    public ResponseEntity<StateDTO> createState(@RequestBody StateDTO stateDTO) throws URISyntaxException {
+        log.debug("REST request to save State : {}", stateDTO);
+        if (stateDTO.getId() != null) {
             throw new BadRequestAlertException("A new state cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        State result = stateService.save(state);
+        StateDTO result = stateService.save(stateDTO);
         return ResponseEntity.created(new URI("/api/states/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -57,21 +57,21 @@ public class StateResource {
     /**
      * PUT  /states : Updates an existing state.
      *
-     * @param state the state to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated state,
-     * or with status 400 (Bad Request) if the state is not valid,
-     * or with status 500 (Internal Server Error) if the state couldn't be updated
+     * @param stateDTO the stateDTO to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated stateDTO,
+     * or with status 400 (Bad Request) if the stateDTO is not valid,
+     * or with status 500 (Internal Server Error) if the stateDTO couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/states")
-    public ResponseEntity<State> updateState(@RequestBody State state) throws URISyntaxException {
-        log.debug("REST request to update State : {}", state);
-        if (state.getId() == null) {
+    public ResponseEntity<StateDTO> updateState(@RequestBody StateDTO stateDTO) throws URISyntaxException {
+        log.debug("REST request to update State : {}", stateDTO);
+        if (stateDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        State result = stateService.save(state);
+        StateDTO result = stateService.save(stateDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, state.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, stateDTO.getId().toString()))
             .body(result);
     }
 
@@ -81,7 +81,7 @@ public class StateResource {
      * @return the ResponseEntity with status 200 (OK) and the list of states in body
      */
     @GetMapping("/states")
-    public List<State> getAllStates() {
+    public List<StateDTO> getAllStates() {
         log.debug("REST request to get all States");
         return stateService.findAll();
     }
@@ -89,20 +89,20 @@ public class StateResource {
     /**
      * GET  /states/:id : get the "id" state.
      *
-     * @param id the id of the state to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the state, or with status 404 (Not Found)
+     * @param id the id of the stateDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the stateDTO, or with status 404 (Not Found)
      */
     @GetMapping("/states/{id}")
-    public ResponseEntity<State> getState(@PathVariable Long id) {
+    public ResponseEntity<StateDTO> getState(@PathVariable Long id) {
         log.debug("REST request to get State : {}", id);
-        Optional<State> state = stateService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(state);
+        Optional<StateDTO> stateDTO = stateService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(stateDTO);
     }
 
     /**
      * DELETE  /states/:id : delete the "id" state.
      *
-     * @param id the id of the state to delete
+     * @param id the id of the stateDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/states/{id}")
@@ -120,7 +120,7 @@ public class StateResource {
      * @return the result of the search
      */
     @GetMapping("/_search/states")
-    public List<State> searchStates(@RequestParam String query) {
+    public List<StateDTO> searchStates(@RequestParam String query) {
         log.debug("REST request to search States for query {}", query);
         return stateService.search(query);
     }

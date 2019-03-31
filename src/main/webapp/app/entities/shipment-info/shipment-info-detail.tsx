@@ -133,42 +133,43 @@ export class ShipmentInfoDetail extends React.Component<IShipmentInfoDetailProps
             <dt>
               <Translate contentKey="cargotrackerApp.shipmentInfo.carrierDetails">Carrier Details</Translate>
             </dt>
-            <dd>{shipmentInfoEntity.carrierDetails ? shipmentInfoEntity.carrierDetails.id : ''}</dd>
+            <dd>{shipmentInfoEntity.carrierDetailsId ? shipmentInfoEntity.carrierDetailsId : ''}</dd>
             <dt>
               <Translate contentKey="cargotrackerApp.shipmentInfo.shipmentType">Shipment Type</Translate>
             </dt>
-            <dd>{shipmentInfoEntity.shipmentType ? shipmentInfoEntity.shipmentType.id : ''}</dd>
+            <dd>{shipmentInfoEntity.shipmentTypeId ? shipmentInfoEntity.shipmentTypeId : ''}</dd>
             <dt>
               <Translate contentKey="cargotrackerApp.shipmentInfo.shipmentMode">Shipment Mode</Translate>
             </dt>
-            <dd>{shipmentInfoEntity.shipmentMode ? shipmentInfoEntity.shipmentMode.id : ''}</dd>
+            <dd>{shipmentInfoEntity.shipmentModeId ? shipmentInfoEntity.shipmentModeId : ''}</dd>
             <dt>
               <Translate contentKey="cargotrackerApp.shipmentInfo.paymentMode">Payment Mode</Translate>
             </dt>
-            <dd>{shipmentInfoEntity.paymentMode ? shipmentInfoEntity.paymentMode.id : ''}</dd>
+            <dd>{shipmentInfoEntity.paymentModeId ? shipmentInfoEntity.paymentModeId : ''}</dd>
             <dt>
               <Translate contentKey="cargotrackerApp.shipmentInfo.trackingStatus">Tracking Status</Translate>
             </dt>
-            <dd>{shipmentInfoEntity.trackingStatus ? shipmentInfoEntity.trackingStatus.id : ''}</dd>
+            <dd>{shipmentInfoEntity.trackingStatusId ? shipmentInfoEntity.trackingStatusId : ''}</dd>
             <dt>
               <Translate contentKey="cargotrackerApp.shipmentInfo.vendor">Vendor</Translate>
             </dt>
-            <dd>{shipmentInfoEntity.vendor ? shipmentInfoEntity.vendor.id : ''}</dd>
+            <dd>{shipmentInfoEntity.vendorId ? shipmentInfoEntity.vendorId : ''}</dd>
             <dt>
               <Translate contentKey="cargotrackerApp.shipmentInfo.origin">Origin</Translate>
             </dt>
-            <dd>{shipmentInfoEntity.origin ? shipmentInfoEntity.origin.id : ''}</dd>
+            <dd>{shipmentInfoEntity.originId ? shipmentInfoEntity.originId : ''}</dd>
             <dt>
               <Translate contentKey="cargotrackerApp.shipmentInfo.destination">Destination</Translate>
             </dt>
-            <dd>{shipmentInfoEntity.destination ? shipmentInfoEntity.destination.id : ''}</dd>
+            <dd>{shipmentInfoEntity.destinationId ? shipmentInfoEntity.destinationId : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/shipment-info" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}
             <span className="d-none d-md-inline">
               <Translate contentKey="entity.action.back">Back</Translate>
             </span>
-          </Button>&nbsp;
+          </Button>
+          &nbsp;
           <Button tag={Link} to={`/entity/shipment-info/${shipmentInfoEntity.id}/edit`} replace color="primary">
             <FontAwesomeIcon icon="pencil-alt" />{' '}
             <span className="d-none d-md-inline">

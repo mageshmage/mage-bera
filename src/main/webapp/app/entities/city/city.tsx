@@ -49,7 +49,8 @@ export class City extends React.Component<ICityProps, ICityState> {
         <h2 id="city-heading">
           <Translate contentKey="cargotrackerApp.city.home.title">Cities</Translate>
           <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-            <FontAwesomeIcon icon="plus" />&nbsp;
+            <FontAwesomeIcon icon="plus" />
+            &nbsp;
             <Translate contentKey="cargotrackerApp.city.home.createLabel">Create new City</Translate>
           </Link>
         </h2>
@@ -105,7 +106,7 @@ export class City extends React.Component<ICityProps, ICityState> {
                   </td>
                   <td>{city.cityCode}</td>
                   <td>{city.cityName}</td>
-                  <td>{city.state ? <Link to={`state/${city.state.id}`}>{city.state.id}</Link> : ''}</td>
+                  <td>{city.stateId ? <Link to={`state/${city.stateId}`}>{city.stateId}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${city.id}`} color="info" size="sm">

@@ -1,6 +1,6 @@
 package com.cargotracker.service;
 
-import com.cargotracker.domain.ShipmentTracking;
+import com.cargotracker.service.dto.ShipmentTrackingDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,10 +15,10 @@ public interface ShipmentTrackingService {
     /**
      * Save a shipmentTracking.
      *
-     * @param shipmentTracking the entity to save
+     * @param shipmentTrackingDTO the entity to save
      * @return the persisted entity
      */
-    ShipmentTracking save(ShipmentTracking shipmentTracking);
+    ShipmentTrackingDTO save(ShipmentTrackingDTO shipmentTrackingDTO);
 
     /**
      * Get all the shipmentTrackings.
@@ -26,7 +26,7 @@ public interface ShipmentTrackingService {
      * @param pageable the pagination information
      * @return the list of entities
      */
-    Page<ShipmentTracking> findAll(Pageable pageable);
+    Page<ShipmentTrackingDTO> findAll(Pageable pageable);
 
 
     /**
@@ -35,7 +35,7 @@ public interface ShipmentTrackingService {
      * @param id the id of the entity
      * @return the entity
      */
-    Optional<ShipmentTracking> findOne(Long id);
+    Optional<ShipmentTrackingDTO> findOne(Long id);
 
     /**
      * Delete the "id" shipmentTracking.
@@ -52,5 +52,5 @@ public interface ShipmentTrackingService {
      * @param pageable the pagination information
      * @return the list of entities
      */
-    Page<ShipmentTracking> search(String query, Pageable pageable);
+    Page<ShipmentTrackingDTO> search(String query, Pageable pageable);
 }

@@ -4,6 +4,8 @@ import com.cargotracker.service.ShipmentInfoService;
 import com.cargotracker.domain.ShipmentInfo;
 import com.cargotracker.repository.ShipmentInfoRepository;
 import com.cargotracker.repository.search.ShipmentInfoSearchRepository;
+import com.cargotracker.service.dto.ShipmentInfoDTO;
+import com.cargotracker.service.mapper.ShipmentInfoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,24 +29,29 @@ public class ShipmentInfoServiceImpl implements ShipmentInfoService {
 
     private final ShipmentInfoRepository shipmentInfoRepository;
 
+    private final ShipmentInfoMapper shipmentInfoMapper;
+
     private final ShipmentInfoSearchRepository shipmentInfoSearchRepository;
 
-    public ShipmentInfoServiceImpl(ShipmentInfoRepository shipmentInfoRepository, ShipmentInfoSearchRepository shipmentInfoSearchRepository) {
+    public ShipmentInfoServiceImpl(ShipmentInfoRepository shipmentInfoRepository, ShipmentInfoMapper shipmentInfoMapper, ShipmentInfoSearchRepository shipmentInfoSearchRepository) {
         this.shipmentInfoRepository = shipmentInfoRepository;
+        this.shipmentInfoMapper = shipmentInfoMapper;
         this.shipmentInfoSearchRepository = shipmentInfoSearchRepository;
     }
 
     /**
      * Save a shipmentInfo.
      *
-     * @param shipmentInfo the entity to save
+     * @param shipmentInfoDTO the entity to save
      * @return the persisted entity
      */
     @Override
-    public ShipmentInfo save(ShipmentInfo shipmentInfo) {
-        log.debug("Request to save ShipmentInfo : {}", shipmentInfo);
-        ShipmentInfo result = shipmentInfoRepository.save(shipmentInfo);
-        shipmentInfoSearchRepository.save(result);
+    public ShipmentInfoDTO save(ShipmentInfoDTO shipmentInfoDTO) {
+        log.debug("Request to save ShipmentInfo : {}", shipmentInfoDTO);
+        ShipmentInfo shipmentInfo = shipmentInfoMapper.toEntity(shipmentInfoDTO);
+        shipmentInfo = shipmentInfoRepository.save(shipmentInfo);
+        ShipmentInfoDTO result = shipmentInfoMapper.toDto(shipmentInfo);
+        shipmentInfoSearchRepository.save(shipmentInfo);
         return result;
     }
 
@@ -56,9 +63,10 @@ public class ShipmentInfoServiceImpl implements ShipmentInfoService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<ShipmentInfo> findAll(Pageable pageable) {
+    public Page<ShipmentInfoDTO> findAll(Pageable pageable) {
         log.debug("Request to get all ShipmentInfos");
-        return shipmentInfoRepository.findAll(pageable);
+        return shipmentInfoRepository.findAll(pageable)
+            .map(shipmentInfoMapper::toDto);
     }
 
 
@@ -70,9 +78,10 @@ public class ShipmentInfoServiceImpl implements ShipmentInfoService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Optional<ShipmentInfo> findOne(Long id) {
+    public Optional<ShipmentInfoDTO> findOne(Long id) {
         log.debug("Request to get ShipmentInfo : {}", id);
-        return shipmentInfoRepository.findById(id);
+        return shipmentInfoRepository.findById(id)
+            .map(shipmentInfoMapper::toDto);
     }
 
     /**
@@ -96,7 +105,9 @@ public class ShipmentInfoServiceImpl implements ShipmentInfoService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<ShipmentInfo> search(String query, Pageable pageable) {
+    public Page<ShipmentInfoDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of ShipmentInfos for query {}", query);
-        return shipmentInfoSearchRepository.search(queryStringQuery(query), pageable);    }
+        return shipmentInfoSearchRepository.search(queryStringQuery(query), pageable)
+            .map(shipmentInfoMapper::toDto);
+    }
 }

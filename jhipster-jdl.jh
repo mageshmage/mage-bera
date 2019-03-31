@@ -1,0 +1,175 @@
+entity Vendor {
+	vendorname String required,
+    firstName String required,
+    lastName String required,
+    mobileNo String required,
+    address String required,
+    pan String required,
+    gstIn String required,
+    isActive Boolean required
+}
+
+enum ShiperReceiverType {
+    CONSIGNOR, CONSIGNEE
+}
+
+entity ShiperReceiverInfo {
+	type ShiperReceiverType required,
+	name String required,
+    phoneNo String required,
+    address String required,
+    city String,
+    pincode String required,
+    emailId String
+}
+
+entity ShipmentType {
+	value String required,
+    desc String
+}
+
+relationship ManyToOne {
+	ShipmentType{vendor} to Vendor,
+}
+
+entity ShipmentMode {
+	value String required,
+    desc String
+}
+
+relationship ManyToOne {
+	ShipmentMode{vendor} to Vendor,
+}
+
+entity PaymentMode {
+	value String required,
+    desc String
+}
+
+relationship ManyToOne {
+	PaymentMode{vendor} to Vendor,
+}
+
+entity CarrierDetails {
+	value String required,
+    desc String
+}
+
+relationship ManyToOne {
+	CarrierDetails{vendor} to Vendor,
+}
+
+entity TrackingStatus {
+	value String required,
+    desc String
+}
+
+relationship ManyToOne {
+	TrackingStatus{vendor} to Vendor,
+}
+
+entity ShipmentInfo {
+	consignmentNo String required,
+    bookingDate ZonedDateTime required,
+    expectedDeliveryDate ZonedDateTime required,
+    actualWeight BigDecimal,
+    volumetricWeight BigDecimal,
+    length BigDecimal,
+    width BigDecimal,
+    height BigDecimal,
+    quantity Long,
+    totalFright BigDecimal,
+    packageDesciption String,
+    isThirdParty Boolean required,
+    carrierRefNo String,
+    deliveredDate ZonedDateTime,
+    receivedBy String,
+    relationShip String
+}
+
+entity ShipmentTracking {
+	trackingDate ZonedDateTime required,
+    place String required,
+    status String required
+}
+
+relationship OneToMany {
+	ShipmentInfo{shipmentTrackings} to ShipmentTracking
+}
+
+relationship OneToOne {
+	ShipmentInfo{carrierDetails} to CarrierDetails
+}
+
+relationship OneToOne {
+	ShipmentInfo{shipmentType} to ShipmentType
+}
+
+relationship OneToOne {
+	ShipmentInfo{shipmentMode} to ShipmentMode
+}
+
+relationship OneToOne {
+	ShipmentInfo{paymentMode} to PaymentMode
+}
+
+relationship OneToOne {
+	ShipmentInfo{trackingStatus} to TrackingStatus
+}
+
+entity ShipmentInfoPOD {
+	pod Blob,
+    comments String
+}
+
+relationship OneToMany {
+	ShipmentInfo{shipmentInfoPODs} to ShipmentInfoPOD,
+}
+
+relationship OneToOne {
+	ShipmentInfo{vendor} to Vendor
+}
+
+relationship OneToMany {
+	ShipmentInfo{shipperReceiverInfos} to ShiperReceiverInfo,
+}
+
+entity City {
+	cityCode String,
+    cityName String
+}
+
+entity State {
+	stateCode String,
+    stateName String
+}
+
+entity Country {
+	countryCode String,
+    countryName String
+}
+
+relationship OneToMany {
+	State{cities} to City
+}
+
+relationship OneToMany {
+	Country{states} to State
+}
+
+relationship OneToOne {
+	ShipmentInfo{origin} to State
+}
+
+relationship OneToOne {
+	ShipmentInfo{destination} to State
+}
+
+// Set pagination options
+paginate ShipmentInfo, ShiperReceiverInfo, ShipmentTracking with pagination
+
+// Use Data Transfert Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl

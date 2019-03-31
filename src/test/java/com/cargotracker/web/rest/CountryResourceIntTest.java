@@ -6,6 +6,8 @@ import com.cargotracker.domain.Country;
 import com.cargotracker.repository.CountryRepository;
 import com.cargotracker.repository.search.CountrySearchRepository;
 import com.cargotracker.service.CountryService;
+import com.cargotracker.service.dto.CountryDTO;
+import com.cargotracker.service.mapper.CountryMapper;
 import com.cargotracker.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -53,6 +55,9 @@ public class CountryResourceIntTest {
 
     @Autowired
     private CountryRepository countryRepository;
+
+    @Autowired
+    private CountryMapper countryMapper;
 
     @Autowired
     private CountryService countryService;
@@ -120,9 +125,10 @@ public class CountryResourceIntTest {
         int databaseSizeBeforeCreate = countryRepository.findAll().size();
 
         // Create the Country
+        CountryDTO countryDTO = countryMapper.toDto(country);
         restCountryMockMvc.perform(post("/api/countries")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(country)))
+            .content(TestUtil.convertObjectToJsonBytes(countryDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Country in the database
@@ -143,11 +149,12 @@ public class CountryResourceIntTest {
 
         // Create the Country with an existing ID
         country.setId(1L);
+        CountryDTO countryDTO = countryMapper.toDto(country);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restCountryMockMvc.perform(post("/api/countries")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(country)))
+            .content(TestUtil.convertObjectToJsonBytes(countryDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Country in the database
@@ -200,9 +207,7 @@ public class CountryResourceIntTest {
     @Transactional
     public void updateCountry() throws Exception {
         // Initialize the database
-        countryService.save(country);
-        // As the test used the service layer, reset the Elasticsearch mock repository
-        reset(mockCountrySearchRepository);
+        countryRepository.saveAndFlush(country);
 
         int databaseSizeBeforeUpdate = countryRepository.findAll().size();
 
@@ -213,10 +218,11 @@ public class CountryResourceIntTest {
         updatedCountry
             .countryCode(UPDATED_COUNTRY_CODE)
             .countryName(UPDATED_COUNTRY_NAME);
+        CountryDTO countryDTO = countryMapper.toDto(updatedCountry);
 
         restCountryMockMvc.perform(put("/api/countries")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedCountry)))
+            .content(TestUtil.convertObjectToJsonBytes(countryDTO)))
             .andExpect(status().isOk());
 
         // Validate the Country in the database
@@ -236,11 +242,12 @@ public class CountryResourceIntTest {
         int databaseSizeBeforeUpdate = countryRepository.findAll().size();
 
         // Create the Country
+        CountryDTO countryDTO = countryMapper.toDto(country);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restCountryMockMvc.perform(put("/api/countries")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(country)))
+            .content(TestUtil.convertObjectToJsonBytes(countryDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Country in the database
@@ -255,7 +262,7 @@ public class CountryResourceIntTest {
     @Transactional
     public void deleteCountry() throws Exception {
         // Initialize the database
-        countryService.save(country);
+        countryRepository.saveAndFlush(country);
 
         int databaseSizeBeforeDelete = countryRepository.findAll().size();
 
@@ -276,7 +283,7 @@ public class CountryResourceIntTest {
     @Transactional
     public void searchCountry() throws Exception {
         // Initialize the database
-        countryService.save(country);
+        countryRepository.saveAndFlush(country);
         when(mockCountrySearchRepository.search(queryStringQuery("id:" + country.getId())))
             .thenReturn(Collections.singletonList(country));
         // Search the country
@@ -301,5 +308,28 @@ public class CountryResourceIntTest {
         assertThat(country1).isNotEqualTo(country2);
         country1.setId(null);
         assertThat(country1).isNotEqualTo(country2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(CountryDTO.class);
+        CountryDTO countryDTO1 = new CountryDTO();
+        countryDTO1.setId(1L);
+        CountryDTO countryDTO2 = new CountryDTO();
+        assertThat(countryDTO1).isNotEqualTo(countryDTO2);
+        countryDTO2.setId(countryDTO1.getId());
+        assertThat(countryDTO1).isEqualTo(countryDTO2);
+        countryDTO2.setId(2L);
+        assertThat(countryDTO1).isNotEqualTo(countryDTO2);
+        countryDTO1.setId(null);
+        assertThat(countryDTO1).isNotEqualTo(countryDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(countryMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(countryMapper.fromId(null)).isNull();
     }
 }

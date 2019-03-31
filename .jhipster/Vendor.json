@@ -61,7 +61,7 @@
     "relationships": [],
     "changelogDate": "20190330143948",
     "entityTableName": "vendor",
-    "dto": "no",
+    "dto": "mapstruct",
     "pagination": "no",
     "service": "serviceImpl",
     "jpaMetamodelFiltering": false,

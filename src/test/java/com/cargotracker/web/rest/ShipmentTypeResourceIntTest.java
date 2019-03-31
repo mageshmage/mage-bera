@@ -6,6 +6,8 @@ import com.cargotracker.domain.ShipmentType;
 import com.cargotracker.repository.ShipmentTypeRepository;
 import com.cargotracker.repository.search.ShipmentTypeSearchRepository;
 import com.cargotracker.service.ShipmentTypeService;
+import com.cargotracker.service.dto.ShipmentTypeDTO;
+import com.cargotracker.service.mapper.ShipmentTypeMapper;
 import com.cargotracker.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -53,6 +55,9 @@ public class ShipmentTypeResourceIntTest {
 
     @Autowired
     private ShipmentTypeRepository shipmentTypeRepository;
+
+    @Autowired
+    private ShipmentTypeMapper shipmentTypeMapper;
 
     @Autowired
     private ShipmentTypeService shipmentTypeService;
@@ -120,9 +125,10 @@ public class ShipmentTypeResourceIntTest {
         int databaseSizeBeforeCreate = shipmentTypeRepository.findAll().size();
 
         // Create the ShipmentType
+        ShipmentTypeDTO shipmentTypeDTO = shipmentTypeMapper.toDto(shipmentType);
         restShipmentTypeMockMvc.perform(post("/api/shipment-types")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentType)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentTypeDTO)))
             .andExpect(status().isCreated());
 
         // Validate the ShipmentType in the database
@@ -143,11 +149,12 @@ public class ShipmentTypeResourceIntTest {
 
         // Create the ShipmentType with an existing ID
         shipmentType.setId(1L);
+        ShipmentTypeDTO shipmentTypeDTO = shipmentTypeMapper.toDto(shipmentType);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restShipmentTypeMockMvc.perform(post("/api/shipment-types")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentType)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentTypeDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the ShipmentType in the database
@@ -166,10 +173,11 @@ public class ShipmentTypeResourceIntTest {
         shipmentType.setValue(null);
 
         // Create the ShipmentType, which fails.
+        ShipmentTypeDTO shipmentTypeDTO = shipmentTypeMapper.toDto(shipmentType);
 
         restShipmentTypeMockMvc.perform(post("/api/shipment-types")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentType)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentTypeDTO)))
             .andExpect(status().isBadRequest());
 
         List<ShipmentType> shipmentTypeList = shipmentTypeRepository.findAll();
@@ -218,9 +226,7 @@ public class ShipmentTypeResourceIntTest {
     @Transactional
     public void updateShipmentType() throws Exception {
         // Initialize the database
-        shipmentTypeService.save(shipmentType);
-        // As the test used the service layer, reset the Elasticsearch mock repository
-        reset(mockShipmentTypeSearchRepository);
+        shipmentTypeRepository.saveAndFlush(shipmentType);
 
         int databaseSizeBeforeUpdate = shipmentTypeRepository.findAll().size();
 
@@ -231,10 +237,11 @@ public class ShipmentTypeResourceIntTest {
         updatedShipmentType
             .value(UPDATED_VALUE)
             .desc(UPDATED_DESC);
+        ShipmentTypeDTO shipmentTypeDTO = shipmentTypeMapper.toDto(updatedShipmentType);
 
         restShipmentTypeMockMvc.perform(put("/api/shipment-types")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedShipmentType)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentTypeDTO)))
             .andExpect(status().isOk());
 
         // Validate the ShipmentType in the database
@@ -254,11 +261,12 @@ public class ShipmentTypeResourceIntTest {
         int databaseSizeBeforeUpdate = shipmentTypeRepository.findAll().size();
 
         // Create the ShipmentType
+        ShipmentTypeDTO shipmentTypeDTO = shipmentTypeMapper.toDto(shipmentType);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restShipmentTypeMockMvc.perform(put("/api/shipment-types")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentType)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentTypeDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the ShipmentType in the database
@@ -273,7 +281,7 @@ public class ShipmentTypeResourceIntTest {
     @Transactional
     public void deleteShipmentType() throws Exception {
         // Initialize the database
-        shipmentTypeService.save(shipmentType);
+        shipmentTypeRepository.saveAndFlush(shipmentType);
 
         int databaseSizeBeforeDelete = shipmentTypeRepository.findAll().size();
 
@@ -294,7 +302,7 @@ public class ShipmentTypeResourceIntTest {
     @Transactional
     public void searchShipmentType() throws Exception {
         // Initialize the database
-        shipmentTypeService.save(shipmentType);
+        shipmentTypeRepository.saveAndFlush(shipmentType);
         when(mockShipmentTypeSearchRepository.search(queryStringQuery("id:" + shipmentType.getId())))
             .thenReturn(Collections.singletonList(shipmentType));
         // Search the shipmentType
@@ -319,5 +327,28 @@ public class ShipmentTypeResourceIntTest {
         assertThat(shipmentType1).isNotEqualTo(shipmentType2);
         shipmentType1.setId(null);
         assertThat(shipmentType1).isNotEqualTo(shipmentType2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(ShipmentTypeDTO.class);
+        ShipmentTypeDTO shipmentTypeDTO1 = new ShipmentTypeDTO();
+        shipmentTypeDTO1.setId(1L);
+        ShipmentTypeDTO shipmentTypeDTO2 = new ShipmentTypeDTO();
+        assertThat(shipmentTypeDTO1).isNotEqualTo(shipmentTypeDTO2);
+        shipmentTypeDTO2.setId(shipmentTypeDTO1.getId());
+        assertThat(shipmentTypeDTO1).isEqualTo(shipmentTypeDTO2);
+        shipmentTypeDTO2.setId(2L);
+        assertThat(shipmentTypeDTO1).isNotEqualTo(shipmentTypeDTO2);
+        shipmentTypeDTO1.setId(null);
+        assertThat(shipmentTypeDTO1).isNotEqualTo(shipmentTypeDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(shipmentTypeMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(shipmentTypeMapper.fromId(null)).isNull();
     }
 }

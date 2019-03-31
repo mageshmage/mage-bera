@@ -6,6 +6,8 @@ import com.cargotracker.domain.ShipmentMode;
 import com.cargotracker.repository.ShipmentModeRepository;
 import com.cargotracker.repository.search.ShipmentModeSearchRepository;
 import com.cargotracker.service.ShipmentModeService;
+import com.cargotracker.service.dto.ShipmentModeDTO;
+import com.cargotracker.service.mapper.ShipmentModeMapper;
 import com.cargotracker.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -53,6 +55,9 @@ public class ShipmentModeResourceIntTest {
 
     @Autowired
     private ShipmentModeRepository shipmentModeRepository;
+
+    @Autowired
+    private ShipmentModeMapper shipmentModeMapper;
 
     @Autowired
     private ShipmentModeService shipmentModeService;
@@ -120,9 +125,10 @@ public class ShipmentModeResourceIntTest {
         int databaseSizeBeforeCreate = shipmentModeRepository.findAll().size();
 
         // Create the ShipmentMode
+        ShipmentModeDTO shipmentModeDTO = shipmentModeMapper.toDto(shipmentMode);
         restShipmentModeMockMvc.perform(post("/api/shipment-modes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentMode)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentModeDTO)))
             .andExpect(status().isCreated());
 
         // Validate the ShipmentMode in the database
@@ -143,11 +149,12 @@ public class ShipmentModeResourceIntTest {
 
         // Create the ShipmentMode with an existing ID
         shipmentMode.setId(1L);
+        ShipmentModeDTO shipmentModeDTO = shipmentModeMapper.toDto(shipmentMode);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restShipmentModeMockMvc.perform(post("/api/shipment-modes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentMode)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentModeDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the ShipmentMode in the database
@@ -166,10 +173,11 @@ public class ShipmentModeResourceIntTest {
         shipmentMode.setValue(null);
 
         // Create the ShipmentMode, which fails.
+        ShipmentModeDTO shipmentModeDTO = shipmentModeMapper.toDto(shipmentMode);
 
         restShipmentModeMockMvc.perform(post("/api/shipment-modes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentMode)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentModeDTO)))
             .andExpect(status().isBadRequest());
 
         List<ShipmentMode> shipmentModeList = shipmentModeRepository.findAll();
@@ -218,9 +226,7 @@ public class ShipmentModeResourceIntTest {
     @Transactional
     public void updateShipmentMode() throws Exception {
         // Initialize the database
-        shipmentModeService.save(shipmentMode);
-        // As the test used the service layer, reset the Elasticsearch mock repository
-        reset(mockShipmentModeSearchRepository);
+        shipmentModeRepository.saveAndFlush(shipmentMode);
 
         int databaseSizeBeforeUpdate = shipmentModeRepository.findAll().size();
 
@@ -231,10 +237,11 @@ public class ShipmentModeResourceIntTest {
         updatedShipmentMode
             .value(UPDATED_VALUE)
             .desc(UPDATED_DESC);
+        ShipmentModeDTO shipmentModeDTO = shipmentModeMapper.toDto(updatedShipmentMode);
 
         restShipmentModeMockMvc.perform(put("/api/shipment-modes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedShipmentMode)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentModeDTO)))
             .andExpect(status().isOk());
 
         // Validate the ShipmentMode in the database
@@ -254,11 +261,12 @@ public class ShipmentModeResourceIntTest {
         int databaseSizeBeforeUpdate = shipmentModeRepository.findAll().size();
 
         // Create the ShipmentMode
+        ShipmentModeDTO shipmentModeDTO = shipmentModeMapper.toDto(shipmentMode);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restShipmentModeMockMvc.perform(put("/api/shipment-modes")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentMode)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentModeDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the ShipmentMode in the database
@@ -273,7 +281,7 @@ public class ShipmentModeResourceIntTest {
     @Transactional
     public void deleteShipmentMode() throws Exception {
         // Initialize the database
-        shipmentModeService.save(shipmentMode);
+        shipmentModeRepository.saveAndFlush(shipmentMode);
 
         int databaseSizeBeforeDelete = shipmentModeRepository.findAll().size();
 
@@ -294,7 +302,7 @@ public class ShipmentModeResourceIntTest {
     @Transactional
     public void searchShipmentMode() throws Exception {
         // Initialize the database
-        shipmentModeService.save(shipmentMode);
+        shipmentModeRepository.saveAndFlush(shipmentMode);
         when(mockShipmentModeSearchRepository.search(queryStringQuery("id:" + shipmentMode.getId())))
             .thenReturn(Collections.singletonList(shipmentMode));
         // Search the shipmentMode
@@ -319,5 +327,28 @@ public class ShipmentModeResourceIntTest {
         assertThat(shipmentMode1).isNotEqualTo(shipmentMode2);
         shipmentMode1.setId(null);
         assertThat(shipmentMode1).isNotEqualTo(shipmentMode2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(ShipmentModeDTO.class);
+        ShipmentModeDTO shipmentModeDTO1 = new ShipmentModeDTO();
+        shipmentModeDTO1.setId(1L);
+        ShipmentModeDTO shipmentModeDTO2 = new ShipmentModeDTO();
+        assertThat(shipmentModeDTO1).isNotEqualTo(shipmentModeDTO2);
+        shipmentModeDTO2.setId(shipmentModeDTO1.getId());
+        assertThat(shipmentModeDTO1).isEqualTo(shipmentModeDTO2);
+        shipmentModeDTO2.setId(2L);
+        assertThat(shipmentModeDTO1).isNotEqualTo(shipmentModeDTO2);
+        shipmentModeDTO1.setId(null);
+        assertThat(shipmentModeDTO1).isNotEqualTo(shipmentModeDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(shipmentModeMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(shipmentModeMapper.fromId(null)).isNull();
     }
 }

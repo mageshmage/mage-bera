@@ -4,12 +4,15 @@ import com.cargotracker.service.PaymentModeService;
 import com.cargotracker.domain.PaymentMode;
 import com.cargotracker.repository.PaymentModeRepository;
 import com.cargotracker.repository.search.PaymentModeSearchRepository;
+import com.cargotracker.service.dto.PaymentModeDTO;
+import com.cargotracker.service.mapper.PaymentModeMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,24 +31,29 @@ public class PaymentModeServiceImpl implements PaymentModeService {
 
     private final PaymentModeRepository paymentModeRepository;
 
+    private final PaymentModeMapper paymentModeMapper;
+
     private final PaymentModeSearchRepository paymentModeSearchRepository;
 
-    public PaymentModeServiceImpl(PaymentModeRepository paymentModeRepository, PaymentModeSearchRepository paymentModeSearchRepository) {
+    public PaymentModeServiceImpl(PaymentModeRepository paymentModeRepository, PaymentModeMapper paymentModeMapper, PaymentModeSearchRepository paymentModeSearchRepository) {
         this.paymentModeRepository = paymentModeRepository;
+        this.paymentModeMapper = paymentModeMapper;
         this.paymentModeSearchRepository = paymentModeSearchRepository;
     }
 
     /**
      * Save a paymentMode.
      *
-     * @param paymentMode the entity to save
+     * @param paymentModeDTO the entity to save
      * @return the persisted entity
      */
     @Override
-    public PaymentMode save(PaymentMode paymentMode) {
-        log.debug("Request to save PaymentMode : {}", paymentMode);
-        PaymentMode result = paymentModeRepository.save(paymentMode);
-        paymentModeSearchRepository.save(result);
+    public PaymentModeDTO save(PaymentModeDTO paymentModeDTO) {
+        log.debug("Request to save PaymentMode : {}", paymentModeDTO);
+        PaymentMode paymentMode = paymentModeMapper.toEntity(paymentModeDTO);
+        paymentMode = paymentModeRepository.save(paymentMode);
+        PaymentModeDTO result = paymentModeMapper.toDto(paymentMode);
+        paymentModeSearchRepository.save(paymentMode);
         return result;
     }
 
@@ -56,9 +64,11 @@ public class PaymentModeServiceImpl implements PaymentModeService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<PaymentMode> findAll() {
+    public List<PaymentModeDTO> findAll() {
         log.debug("Request to get all PaymentModes");
-        return paymentModeRepository.findAll();
+        return paymentModeRepository.findAll().stream()
+            .map(paymentModeMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
 
@@ -70,9 +80,10 @@ public class PaymentModeServiceImpl implements PaymentModeService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Optional<PaymentMode> findOne(Long id) {
+    public Optional<PaymentModeDTO> findOne(Long id) {
         log.debug("Request to get PaymentMode : {}", id);
-        return paymentModeRepository.findById(id);
+        return paymentModeRepository.findById(id)
+            .map(paymentModeMapper::toDto);
     }
 
     /**
@@ -95,10 +106,11 @@ public class PaymentModeServiceImpl implements PaymentModeService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<PaymentMode> search(String query) {
+    public List<PaymentModeDTO> search(String query) {
         log.debug("Request to search PaymentModes for query {}", query);
         return StreamSupport
             .stream(paymentModeSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .map(paymentModeMapper::toDto)
             .collect(Collectors.toList());
     }
 }

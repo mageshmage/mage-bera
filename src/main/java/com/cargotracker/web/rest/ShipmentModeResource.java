@@ -1,8 +1,8 @@
 package com.cargotracker.web.rest;
-import com.cargotracker.domain.ShipmentMode;
 import com.cargotracker.service.ShipmentModeService;
 import com.cargotracker.web.rest.errors.BadRequestAlertException;
 import com.cargotracker.web.rest.util.HeaderUtil;
+import com.cargotracker.service.dto.ShipmentModeDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,17 +39,17 @@ public class ShipmentModeResource {
     /**
      * POST  /shipment-modes : Create a new shipmentMode.
      *
-     * @param shipmentMode the shipmentMode to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new shipmentMode, or with status 400 (Bad Request) if the shipmentMode has already an ID
+     * @param shipmentModeDTO the shipmentModeDTO to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new shipmentModeDTO, or with status 400 (Bad Request) if the shipmentMode has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/shipment-modes")
-    public ResponseEntity<ShipmentMode> createShipmentMode(@Valid @RequestBody ShipmentMode shipmentMode) throws URISyntaxException {
-        log.debug("REST request to save ShipmentMode : {}", shipmentMode);
-        if (shipmentMode.getId() != null) {
+    public ResponseEntity<ShipmentModeDTO> createShipmentMode(@Valid @RequestBody ShipmentModeDTO shipmentModeDTO) throws URISyntaxException {
+        log.debug("REST request to save ShipmentMode : {}", shipmentModeDTO);
+        if (shipmentModeDTO.getId() != null) {
             throw new BadRequestAlertException("A new shipmentMode cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ShipmentMode result = shipmentModeService.save(shipmentMode);
+        ShipmentModeDTO result = shipmentModeService.save(shipmentModeDTO);
         return ResponseEntity.created(new URI("/api/shipment-modes/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -58,21 +58,21 @@ public class ShipmentModeResource {
     /**
      * PUT  /shipment-modes : Updates an existing shipmentMode.
      *
-     * @param shipmentMode the shipmentMode to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated shipmentMode,
-     * or with status 400 (Bad Request) if the shipmentMode is not valid,
-     * or with status 500 (Internal Server Error) if the shipmentMode couldn't be updated
+     * @param shipmentModeDTO the shipmentModeDTO to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated shipmentModeDTO,
+     * or with status 400 (Bad Request) if the shipmentModeDTO is not valid,
+     * or with status 500 (Internal Server Error) if the shipmentModeDTO couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/shipment-modes")
-    public ResponseEntity<ShipmentMode> updateShipmentMode(@Valid @RequestBody ShipmentMode shipmentMode) throws URISyntaxException {
-        log.debug("REST request to update ShipmentMode : {}", shipmentMode);
-        if (shipmentMode.getId() == null) {
+    public ResponseEntity<ShipmentModeDTO> updateShipmentMode(@Valid @RequestBody ShipmentModeDTO shipmentModeDTO) throws URISyntaxException {
+        log.debug("REST request to update ShipmentMode : {}", shipmentModeDTO);
+        if (shipmentModeDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        ShipmentMode result = shipmentModeService.save(shipmentMode);
+        ShipmentModeDTO result = shipmentModeService.save(shipmentModeDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, shipmentMode.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, shipmentModeDTO.getId().toString()))
             .body(result);
     }
 
@@ -82,7 +82,7 @@ public class ShipmentModeResource {
      * @return the ResponseEntity with status 200 (OK) and the list of shipmentModes in body
      */
     @GetMapping("/shipment-modes")
-    public List<ShipmentMode> getAllShipmentModes() {
+    public List<ShipmentModeDTO> getAllShipmentModes() {
         log.debug("REST request to get all ShipmentModes");
         return shipmentModeService.findAll();
     }
@@ -90,20 +90,20 @@ public class ShipmentModeResource {
     /**
      * GET  /shipment-modes/:id : get the "id" shipmentMode.
      *
-     * @param id the id of the shipmentMode to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the shipmentMode, or with status 404 (Not Found)
+     * @param id the id of the shipmentModeDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the shipmentModeDTO, or with status 404 (Not Found)
      */
     @GetMapping("/shipment-modes/{id}")
-    public ResponseEntity<ShipmentMode> getShipmentMode(@PathVariable Long id) {
+    public ResponseEntity<ShipmentModeDTO> getShipmentMode(@PathVariable Long id) {
         log.debug("REST request to get ShipmentMode : {}", id);
-        Optional<ShipmentMode> shipmentMode = shipmentModeService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(shipmentMode);
+        Optional<ShipmentModeDTO> shipmentModeDTO = shipmentModeService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(shipmentModeDTO);
     }
 
     /**
      * DELETE  /shipment-modes/:id : delete the "id" shipmentMode.
      *
-     * @param id the id of the shipmentMode to delete
+     * @param id the id of the shipmentModeDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/shipment-modes/{id}")
@@ -121,7 +121,7 @@ public class ShipmentModeResource {
      * @return the result of the search
      */
     @GetMapping("/_search/shipment-modes")
-    public List<ShipmentMode> searchShipmentModes(@RequestParam String query) {
+    public List<ShipmentModeDTO> searchShipmentModes(@RequestParam String query) {
         log.debug("REST request to search ShipmentModes for query {}", query);
         return shipmentModeService.search(query);
     }

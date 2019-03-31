@@ -43,14 +43,15 @@ export class StateDetail extends React.Component<IStateDetailProps> {
             <dt>
               <Translate contentKey="cargotrackerApp.state.country">Country</Translate>
             </dt>
-            <dd>{stateEntity.country ? stateEntity.country.id : ''}</dd>
+            <dd>{stateEntity.countryId ? stateEntity.countryId : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/state" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}
             <span className="d-none d-md-inline">
               <Translate contentKey="entity.action.back">Back</Translate>
             </span>
-          </Button>&nbsp;
+          </Button>
+          &nbsp;
           <Button tag={Link} to={`/entity/state/${stateEntity.id}/edit`} replace color="primary">
             <FontAwesomeIcon icon="pencil-alt" />{' '}
             <span className="d-none d-md-inline">

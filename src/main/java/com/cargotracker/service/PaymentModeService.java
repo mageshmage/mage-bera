@@ -1,6 +1,6 @@
 package com.cargotracker.service;
 
-import com.cargotracker.domain.PaymentMode;
+import com.cargotracker.service.dto.PaymentModeDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,17 +13,17 @@ public interface PaymentModeService {
     /**
      * Save a paymentMode.
      *
-     * @param paymentMode the entity to save
+     * @param paymentModeDTO the entity to save
      * @return the persisted entity
      */
-    PaymentMode save(PaymentMode paymentMode);
+    PaymentModeDTO save(PaymentModeDTO paymentModeDTO);
 
     /**
      * Get all the paymentModes.
      *
      * @return the list of entities
      */
-    List<PaymentMode> findAll();
+    List<PaymentModeDTO> findAll();
 
 
     /**
@@ -32,7 +32,7 @@ public interface PaymentModeService {
      * @param id the id of the entity
      * @return the entity
      */
-    Optional<PaymentMode> findOne(Long id);
+    Optional<PaymentModeDTO> findOne(Long id);
 
     /**
      * Delete the "id" paymentMode.
@@ -48,5 +48,5 @@ public interface PaymentModeService {
      * 
      * @return the list of entities
      */
-    List<PaymentMode> search(String query);
+    List<PaymentModeDTO> search(String query);
 }

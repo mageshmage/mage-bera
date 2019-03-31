@@ -1,9 +1,9 @@
 package com.cargotracker.web.rest;
-import com.cargotracker.domain.ShipmentInfo;
 import com.cargotracker.service.ShipmentInfoService;
 import com.cargotracker.web.rest.errors.BadRequestAlertException;
 import com.cargotracker.web.rest.util.HeaderUtil;
 import com.cargotracker.web.rest.util.PaginationUtil;
+import com.cargotracker.service.dto.ShipmentInfoDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -44,17 +44,17 @@ public class ShipmentInfoResource {
     /**
      * POST  /shipment-infos : Create a new shipmentInfo.
      *
-     * @param shipmentInfo the shipmentInfo to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new shipmentInfo, or with status 400 (Bad Request) if the shipmentInfo has already an ID
+     * @param shipmentInfoDTO the shipmentInfoDTO to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new shipmentInfoDTO, or with status 400 (Bad Request) if the shipmentInfo has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/shipment-infos")
-    public ResponseEntity<ShipmentInfo> createShipmentInfo(@Valid @RequestBody ShipmentInfo shipmentInfo) throws URISyntaxException {
-        log.debug("REST request to save ShipmentInfo : {}", shipmentInfo);
-        if (shipmentInfo.getId() != null) {
+    public ResponseEntity<ShipmentInfoDTO> createShipmentInfo(@Valid @RequestBody ShipmentInfoDTO shipmentInfoDTO) throws URISyntaxException {
+        log.debug("REST request to save ShipmentInfo : {}", shipmentInfoDTO);
+        if (shipmentInfoDTO.getId() != null) {
             throw new BadRequestAlertException("A new shipmentInfo cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ShipmentInfo result = shipmentInfoService.save(shipmentInfo);
+        ShipmentInfoDTO result = shipmentInfoService.save(shipmentInfoDTO);
         return ResponseEntity.created(new URI("/api/shipment-infos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -63,21 +63,21 @@ public class ShipmentInfoResource {
     /**
      * PUT  /shipment-infos : Updates an existing shipmentInfo.
      *
-     * @param shipmentInfo the shipmentInfo to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated shipmentInfo,
-     * or with status 400 (Bad Request) if the shipmentInfo is not valid,
-     * or with status 500 (Internal Server Error) if the shipmentInfo couldn't be updated
+     * @param shipmentInfoDTO the shipmentInfoDTO to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated shipmentInfoDTO,
+     * or with status 400 (Bad Request) if the shipmentInfoDTO is not valid,
+     * or with status 500 (Internal Server Error) if the shipmentInfoDTO couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/shipment-infos")
-    public ResponseEntity<ShipmentInfo> updateShipmentInfo(@Valid @RequestBody ShipmentInfo shipmentInfo) throws URISyntaxException {
-        log.debug("REST request to update ShipmentInfo : {}", shipmentInfo);
-        if (shipmentInfo.getId() == null) {
+    public ResponseEntity<ShipmentInfoDTO> updateShipmentInfo(@Valid @RequestBody ShipmentInfoDTO shipmentInfoDTO) throws URISyntaxException {
+        log.debug("REST request to update ShipmentInfo : {}", shipmentInfoDTO);
+        if (shipmentInfoDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        ShipmentInfo result = shipmentInfoService.save(shipmentInfo);
+        ShipmentInfoDTO result = shipmentInfoService.save(shipmentInfoDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, shipmentInfo.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, shipmentInfoDTO.getId().toString()))
             .body(result);
     }
 
@@ -88,9 +88,9 @@ public class ShipmentInfoResource {
      * @return the ResponseEntity with status 200 (OK) and the list of shipmentInfos in body
      */
     @GetMapping("/shipment-infos")
-    public ResponseEntity<List<ShipmentInfo>> getAllShipmentInfos(Pageable pageable) {
+    public ResponseEntity<List<ShipmentInfoDTO>> getAllShipmentInfos(Pageable pageable) {
         log.debug("REST request to get a page of ShipmentInfos");
-        Page<ShipmentInfo> page = shipmentInfoService.findAll(pageable);
+        Page<ShipmentInfoDTO> page = shipmentInfoService.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/shipment-infos");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
@@ -98,20 +98,20 @@ public class ShipmentInfoResource {
     /**
      * GET  /shipment-infos/:id : get the "id" shipmentInfo.
      *
-     * @param id the id of the shipmentInfo to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the shipmentInfo, or with status 404 (Not Found)
+     * @param id the id of the shipmentInfoDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the shipmentInfoDTO, or with status 404 (Not Found)
      */
     @GetMapping("/shipment-infos/{id}")
-    public ResponseEntity<ShipmentInfo> getShipmentInfo(@PathVariable Long id) {
+    public ResponseEntity<ShipmentInfoDTO> getShipmentInfo(@PathVariable Long id) {
         log.debug("REST request to get ShipmentInfo : {}", id);
-        Optional<ShipmentInfo> shipmentInfo = shipmentInfoService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(shipmentInfo);
+        Optional<ShipmentInfoDTO> shipmentInfoDTO = shipmentInfoService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(shipmentInfoDTO);
     }
 
     /**
      * DELETE  /shipment-infos/:id : delete the "id" shipmentInfo.
      *
-     * @param id the id of the shipmentInfo to delete
+     * @param id the id of the shipmentInfoDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/shipment-infos/{id}")
@@ -130,9 +130,9 @@ public class ShipmentInfoResource {
      * @return the result of the search
      */
     @GetMapping("/_search/shipment-infos")
-    public ResponseEntity<List<ShipmentInfo>> searchShipmentInfos(@RequestParam String query, Pageable pageable) {
+    public ResponseEntity<List<ShipmentInfoDTO>> searchShipmentInfos(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of ShipmentInfos for query {}", query);
-        Page<ShipmentInfo> page = shipmentInfoService.search(query, pageable);
+        Page<ShipmentInfoDTO> page = shipmentInfoService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/shipment-infos");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }

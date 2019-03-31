@@ -4,6 +4,8 @@ import com.cargotracker.service.ShiperReceiverInfoService;
 import com.cargotracker.domain.ShiperReceiverInfo;
 import com.cargotracker.repository.ShiperReceiverInfoRepository;
 import com.cargotracker.repository.search.ShiperReceiverInfoSearchRepository;
+import com.cargotracker.service.dto.ShiperReceiverInfoDTO;
+import com.cargotracker.service.mapper.ShiperReceiverInfoMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,24 +29,29 @@ public class ShiperReceiverInfoServiceImpl implements ShiperReceiverInfoService 
 
     private final ShiperReceiverInfoRepository shiperReceiverInfoRepository;
 
+    private final ShiperReceiverInfoMapper shiperReceiverInfoMapper;
+
     private final ShiperReceiverInfoSearchRepository shiperReceiverInfoSearchRepository;
 
-    public ShiperReceiverInfoServiceImpl(ShiperReceiverInfoRepository shiperReceiverInfoRepository, ShiperReceiverInfoSearchRepository shiperReceiverInfoSearchRepository) {
+    public ShiperReceiverInfoServiceImpl(ShiperReceiverInfoRepository shiperReceiverInfoRepository, ShiperReceiverInfoMapper shiperReceiverInfoMapper, ShiperReceiverInfoSearchRepository shiperReceiverInfoSearchRepository) {
         this.shiperReceiverInfoRepository = shiperReceiverInfoRepository;
+        this.shiperReceiverInfoMapper = shiperReceiverInfoMapper;
         this.shiperReceiverInfoSearchRepository = shiperReceiverInfoSearchRepository;
     }
 
     /**
      * Save a shiperReceiverInfo.
      *
-     * @param shiperReceiverInfo the entity to save
+     * @param shiperReceiverInfoDTO the entity to save
      * @return the persisted entity
      */
     @Override
-    public ShiperReceiverInfo save(ShiperReceiverInfo shiperReceiverInfo) {
-        log.debug("Request to save ShiperReceiverInfo : {}", shiperReceiverInfo);
-        ShiperReceiverInfo result = shiperReceiverInfoRepository.save(shiperReceiverInfo);
-        shiperReceiverInfoSearchRepository.save(result);
+    public ShiperReceiverInfoDTO save(ShiperReceiverInfoDTO shiperReceiverInfoDTO) {
+        log.debug("Request to save ShiperReceiverInfo : {}", shiperReceiverInfoDTO);
+        ShiperReceiverInfo shiperReceiverInfo = shiperReceiverInfoMapper.toEntity(shiperReceiverInfoDTO);
+        shiperReceiverInfo = shiperReceiverInfoRepository.save(shiperReceiverInfo);
+        ShiperReceiverInfoDTO result = shiperReceiverInfoMapper.toDto(shiperReceiverInfo);
+        shiperReceiverInfoSearchRepository.save(shiperReceiverInfo);
         return result;
     }
 
@@ -56,9 +63,10 @@ public class ShiperReceiverInfoServiceImpl implements ShiperReceiverInfoService 
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<ShiperReceiverInfo> findAll(Pageable pageable) {
+    public Page<ShiperReceiverInfoDTO> findAll(Pageable pageable) {
         log.debug("Request to get all ShiperReceiverInfos");
-        return shiperReceiverInfoRepository.findAll(pageable);
+        return shiperReceiverInfoRepository.findAll(pageable)
+            .map(shiperReceiverInfoMapper::toDto);
     }
 
 
@@ -70,9 +78,10 @@ public class ShiperReceiverInfoServiceImpl implements ShiperReceiverInfoService 
      */
     @Override
     @Transactional(readOnly = true)
-    public Optional<ShiperReceiverInfo> findOne(Long id) {
+    public Optional<ShiperReceiverInfoDTO> findOne(Long id) {
         log.debug("Request to get ShiperReceiverInfo : {}", id);
-        return shiperReceiverInfoRepository.findById(id);
+        return shiperReceiverInfoRepository.findById(id)
+            .map(shiperReceiverInfoMapper::toDto);
     }
 
     /**
@@ -96,7 +105,9 @@ public class ShiperReceiverInfoServiceImpl implements ShiperReceiverInfoService 
      */
     @Override
     @Transactional(readOnly = true)
-    public Page<ShiperReceiverInfo> search(String query, Pageable pageable) {
+    public Page<ShiperReceiverInfoDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of ShiperReceiverInfos for query {}", query);
-        return shiperReceiverInfoSearchRepository.search(queryStringQuery(query), pageable);    }
+        return shiperReceiverInfoSearchRepository.search(queryStringQuery(query), pageable)
+            .map(shiperReceiverInfoMapper::toDto);
+    }
 }

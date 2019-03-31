@@ -1,6 +1,6 @@
 package com.cargotracker.service;
 
-import com.cargotracker.domain.CarrierDetails;
+import com.cargotracker.service.dto.CarrierDetailsDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,17 +13,17 @@ public interface CarrierDetailsService {
     /**
      * Save a carrierDetails.
      *
-     * @param carrierDetails the entity to save
+     * @param carrierDetailsDTO the entity to save
      * @return the persisted entity
      */
-    CarrierDetails save(CarrierDetails carrierDetails);
+    CarrierDetailsDTO save(CarrierDetailsDTO carrierDetailsDTO);
 
     /**
      * Get all the carrierDetails.
      *
      * @return the list of entities
      */
-    List<CarrierDetails> findAll();
+    List<CarrierDetailsDTO> findAll();
 
 
     /**
@@ -32,7 +32,7 @@ public interface CarrierDetailsService {
      * @param id the id of the entity
      * @return the entity
      */
-    Optional<CarrierDetails> findOne(Long id);
+    Optional<CarrierDetailsDTO> findOne(Long id);
 
     /**
      * Delete the "id" carrierDetails.
@@ -48,5 +48,5 @@ public interface CarrierDetailsService {
      * 
      * @return the list of entities
      */
-    List<CarrierDetails> search(String query);
+    List<CarrierDetailsDTO> search(String query);
 }

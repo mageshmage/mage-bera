@@ -118,7 +118,7 @@ export class CarrierDetailsUpdate extends React.Component<ICarrierDetailsUpdateP
                   <Label for="vendor.id">
                     <Translate contentKey="cargotrackerApp.carrierDetails.vendor">Vendor</Translate>
                   </Label>
-                  <AvInput id="carrier-details-vendor" type="select" className="form-control" name="vendor.id">
+                  <AvInput id="carrier-details-vendor" type="select" className="form-control" name="vendorId">
                     <option value="" key="0" />
                     {vendors
                       ? vendors.map(otherEntity => (
@@ -130,14 +130,16 @@ export class CarrierDetailsUpdate extends React.Component<ICarrierDetailsUpdateP
                   </AvInput>
                 </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/carrier-details" replace color="info">
-                  <FontAwesomeIcon icon="arrow-left" />&nbsp;
+                  <FontAwesomeIcon icon="arrow-left" />
+                  &nbsp;
                   <span className="d-none d-md-inline">
                     <Translate contentKey="entity.action.back">Back</Translate>
                   </span>
                 </Button>
                 &nbsp;
                 <Button color="primary" id="save-entity" type="submit" disabled={updating}>
-                  <FontAwesomeIcon icon="save" />&nbsp;
+                  <FontAwesomeIcon icon="save" />
+                  &nbsp;
                   <Translate contentKey="entity.action.save">Save</Translate>
                 </Button>
               </AvForm>

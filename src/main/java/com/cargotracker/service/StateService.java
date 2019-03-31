@@ -1,6 +1,6 @@
 package com.cargotracker.service;
 
-import com.cargotracker.domain.State;
+import com.cargotracker.service.dto.StateDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,17 +13,17 @@ public interface StateService {
     /**
      * Save a state.
      *
-     * @param state the entity to save
+     * @param stateDTO the entity to save
      * @return the persisted entity
      */
-    State save(State state);
+    StateDTO save(StateDTO stateDTO);
 
     /**
      * Get all the states.
      *
      * @return the list of entities
      */
-    List<State> findAll();
+    List<StateDTO> findAll();
 
 
     /**
@@ -32,7 +32,7 @@ public interface StateService {
      * @param id the id of the entity
      * @return the entity
      */
-    Optional<State> findOne(Long id);
+    Optional<StateDTO> findOne(Long id);
 
     /**
      * Delete the "id" state.
@@ -48,5 +48,5 @@ public interface StateService {
      * 
      * @return the list of entities
      */
-    List<State> search(String query);
+    List<StateDTO> search(String query);
 }

@@ -6,6 +6,8 @@ import com.cargotracker.domain.ShiperReceiverInfo;
 import com.cargotracker.repository.ShiperReceiverInfoRepository;
 import com.cargotracker.repository.search.ShiperReceiverInfoSearchRepository;
 import com.cargotracker.service.ShiperReceiverInfoService;
+import com.cargotracker.service.dto.ShiperReceiverInfoDTO;
+import com.cargotracker.service.mapper.ShiperReceiverInfoMapper;
 import com.cargotracker.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -71,6 +73,9 @@ public class ShiperReceiverInfoResourceIntTest {
 
     @Autowired
     private ShiperReceiverInfoRepository shiperReceiverInfoRepository;
+
+    @Autowired
+    private ShiperReceiverInfoMapper shiperReceiverInfoMapper;
 
     @Autowired
     private ShiperReceiverInfoService shiperReceiverInfoService;
@@ -143,9 +148,10 @@ public class ShiperReceiverInfoResourceIntTest {
         int databaseSizeBeforeCreate = shiperReceiverInfoRepository.findAll().size();
 
         // Create the ShiperReceiverInfo
+        ShiperReceiverInfoDTO shiperReceiverInfoDTO = shiperReceiverInfoMapper.toDto(shiperReceiverInfo);
         restShiperReceiverInfoMockMvc.perform(post("/api/shiper-receiver-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shiperReceiverInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(shiperReceiverInfoDTO)))
             .andExpect(status().isCreated());
 
         // Validate the ShiperReceiverInfo in the database
@@ -171,11 +177,12 @@ public class ShiperReceiverInfoResourceIntTest {
 
         // Create the ShiperReceiverInfo with an existing ID
         shiperReceiverInfo.setId(1L);
+        ShiperReceiverInfoDTO shiperReceiverInfoDTO = shiperReceiverInfoMapper.toDto(shiperReceiverInfo);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restShiperReceiverInfoMockMvc.perform(post("/api/shiper-receiver-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shiperReceiverInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(shiperReceiverInfoDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the ShiperReceiverInfo in the database
@@ -194,10 +201,11 @@ public class ShiperReceiverInfoResourceIntTest {
         shiperReceiverInfo.setType(null);
 
         // Create the ShiperReceiverInfo, which fails.
+        ShiperReceiverInfoDTO shiperReceiverInfoDTO = shiperReceiverInfoMapper.toDto(shiperReceiverInfo);
 
         restShiperReceiverInfoMockMvc.perform(post("/api/shiper-receiver-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shiperReceiverInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(shiperReceiverInfoDTO)))
             .andExpect(status().isBadRequest());
 
         List<ShiperReceiverInfo> shiperReceiverInfoList = shiperReceiverInfoRepository.findAll();
@@ -212,10 +220,11 @@ public class ShiperReceiverInfoResourceIntTest {
         shiperReceiverInfo.setName(null);
 
         // Create the ShiperReceiverInfo, which fails.
+        ShiperReceiverInfoDTO shiperReceiverInfoDTO = shiperReceiverInfoMapper.toDto(shiperReceiverInfo);
 
         restShiperReceiverInfoMockMvc.perform(post("/api/shiper-receiver-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shiperReceiverInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(shiperReceiverInfoDTO)))
             .andExpect(status().isBadRequest());
 
         List<ShiperReceiverInfo> shiperReceiverInfoList = shiperReceiverInfoRepository.findAll();
@@ -230,10 +239,11 @@ public class ShiperReceiverInfoResourceIntTest {
         shiperReceiverInfo.setPhoneNo(null);
 
         // Create the ShiperReceiverInfo, which fails.
+        ShiperReceiverInfoDTO shiperReceiverInfoDTO = shiperReceiverInfoMapper.toDto(shiperReceiverInfo);
 
         restShiperReceiverInfoMockMvc.perform(post("/api/shiper-receiver-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shiperReceiverInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(shiperReceiverInfoDTO)))
             .andExpect(status().isBadRequest());
 
         List<ShiperReceiverInfo> shiperReceiverInfoList = shiperReceiverInfoRepository.findAll();
@@ -248,10 +258,11 @@ public class ShiperReceiverInfoResourceIntTest {
         shiperReceiverInfo.setAddress(null);
 
         // Create the ShiperReceiverInfo, which fails.
+        ShiperReceiverInfoDTO shiperReceiverInfoDTO = shiperReceiverInfoMapper.toDto(shiperReceiverInfo);
 
         restShiperReceiverInfoMockMvc.perform(post("/api/shiper-receiver-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shiperReceiverInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(shiperReceiverInfoDTO)))
             .andExpect(status().isBadRequest());
 
         List<ShiperReceiverInfo> shiperReceiverInfoList = shiperReceiverInfoRepository.findAll();
@@ -266,10 +277,11 @@ public class ShiperReceiverInfoResourceIntTest {
         shiperReceiverInfo.setPincode(null);
 
         // Create the ShiperReceiverInfo, which fails.
+        ShiperReceiverInfoDTO shiperReceiverInfoDTO = shiperReceiverInfoMapper.toDto(shiperReceiverInfo);
 
         restShiperReceiverInfoMockMvc.perform(post("/api/shiper-receiver-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shiperReceiverInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(shiperReceiverInfoDTO)))
             .andExpect(status().isBadRequest());
 
         List<ShiperReceiverInfo> shiperReceiverInfoList = shiperReceiverInfoRepository.findAll();
@@ -328,9 +340,7 @@ public class ShiperReceiverInfoResourceIntTest {
     @Transactional
     public void updateShiperReceiverInfo() throws Exception {
         // Initialize the database
-        shiperReceiverInfoService.save(shiperReceiverInfo);
-        // As the test used the service layer, reset the Elasticsearch mock repository
-        reset(mockShiperReceiverInfoSearchRepository);
+        shiperReceiverInfoRepository.saveAndFlush(shiperReceiverInfo);
 
         int databaseSizeBeforeUpdate = shiperReceiverInfoRepository.findAll().size();
 
@@ -346,10 +356,11 @@ public class ShiperReceiverInfoResourceIntTest {
             .city(UPDATED_CITY)
             .pincode(UPDATED_PINCODE)
             .emailId(UPDATED_EMAIL_ID);
+        ShiperReceiverInfoDTO shiperReceiverInfoDTO = shiperReceiverInfoMapper.toDto(updatedShiperReceiverInfo);
 
         restShiperReceiverInfoMockMvc.perform(put("/api/shiper-receiver-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedShiperReceiverInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(shiperReceiverInfoDTO)))
             .andExpect(status().isOk());
 
         // Validate the ShiperReceiverInfo in the database
@@ -374,11 +385,12 @@ public class ShiperReceiverInfoResourceIntTest {
         int databaseSizeBeforeUpdate = shiperReceiverInfoRepository.findAll().size();
 
         // Create the ShiperReceiverInfo
+        ShiperReceiverInfoDTO shiperReceiverInfoDTO = shiperReceiverInfoMapper.toDto(shiperReceiverInfo);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restShiperReceiverInfoMockMvc.perform(put("/api/shiper-receiver-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shiperReceiverInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(shiperReceiverInfoDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the ShiperReceiverInfo in the database
@@ -393,7 +405,7 @@ public class ShiperReceiverInfoResourceIntTest {
     @Transactional
     public void deleteShiperReceiverInfo() throws Exception {
         // Initialize the database
-        shiperReceiverInfoService.save(shiperReceiverInfo);
+        shiperReceiverInfoRepository.saveAndFlush(shiperReceiverInfo);
 
         int databaseSizeBeforeDelete = shiperReceiverInfoRepository.findAll().size();
 
@@ -414,7 +426,7 @@ public class ShiperReceiverInfoResourceIntTest {
     @Transactional
     public void searchShiperReceiverInfo() throws Exception {
         // Initialize the database
-        shiperReceiverInfoService.save(shiperReceiverInfo);
+        shiperReceiverInfoRepository.saveAndFlush(shiperReceiverInfo);
         when(mockShiperReceiverInfoSearchRepository.search(queryStringQuery("id:" + shiperReceiverInfo.getId()), PageRequest.of(0, 20)))
             .thenReturn(new PageImpl<>(Collections.singletonList(shiperReceiverInfo), PageRequest.of(0, 1), 1));
         // Search the shiperReceiverInfo
@@ -444,5 +456,28 @@ public class ShiperReceiverInfoResourceIntTest {
         assertThat(shiperReceiverInfo1).isNotEqualTo(shiperReceiverInfo2);
         shiperReceiverInfo1.setId(null);
         assertThat(shiperReceiverInfo1).isNotEqualTo(shiperReceiverInfo2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(ShiperReceiverInfoDTO.class);
+        ShiperReceiverInfoDTO shiperReceiverInfoDTO1 = new ShiperReceiverInfoDTO();
+        shiperReceiverInfoDTO1.setId(1L);
+        ShiperReceiverInfoDTO shiperReceiverInfoDTO2 = new ShiperReceiverInfoDTO();
+        assertThat(shiperReceiverInfoDTO1).isNotEqualTo(shiperReceiverInfoDTO2);
+        shiperReceiverInfoDTO2.setId(shiperReceiverInfoDTO1.getId());
+        assertThat(shiperReceiverInfoDTO1).isEqualTo(shiperReceiverInfoDTO2);
+        shiperReceiverInfoDTO2.setId(2L);
+        assertThat(shiperReceiverInfoDTO1).isNotEqualTo(shiperReceiverInfoDTO2);
+        shiperReceiverInfoDTO1.setId(null);
+        assertThat(shiperReceiverInfoDTO1).isNotEqualTo(shiperReceiverInfoDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(shiperReceiverInfoMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(shiperReceiverInfoMapper.fromId(null)).isNull();
     }
 }

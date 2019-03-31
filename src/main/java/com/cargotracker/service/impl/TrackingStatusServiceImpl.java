@@ -4,12 +4,15 @@ import com.cargotracker.service.TrackingStatusService;
 import com.cargotracker.domain.TrackingStatus;
 import com.cargotracker.repository.TrackingStatusRepository;
 import com.cargotracker.repository.search.TrackingStatusSearchRepository;
+import com.cargotracker.service.dto.TrackingStatusDTO;
+import com.cargotracker.service.mapper.TrackingStatusMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,24 +31,29 @@ public class TrackingStatusServiceImpl implements TrackingStatusService {
 
     private final TrackingStatusRepository trackingStatusRepository;
 
+    private final TrackingStatusMapper trackingStatusMapper;
+
     private final TrackingStatusSearchRepository trackingStatusSearchRepository;
 
-    public TrackingStatusServiceImpl(TrackingStatusRepository trackingStatusRepository, TrackingStatusSearchRepository trackingStatusSearchRepository) {
+    public TrackingStatusServiceImpl(TrackingStatusRepository trackingStatusRepository, TrackingStatusMapper trackingStatusMapper, TrackingStatusSearchRepository trackingStatusSearchRepository) {
         this.trackingStatusRepository = trackingStatusRepository;
+        this.trackingStatusMapper = trackingStatusMapper;
         this.trackingStatusSearchRepository = trackingStatusSearchRepository;
     }
 
     /**
      * Save a trackingStatus.
      *
-     * @param trackingStatus the entity to save
+     * @param trackingStatusDTO the entity to save
      * @return the persisted entity
      */
     @Override
-    public TrackingStatus save(TrackingStatus trackingStatus) {
-        log.debug("Request to save TrackingStatus : {}", trackingStatus);
-        TrackingStatus result = trackingStatusRepository.save(trackingStatus);
-        trackingStatusSearchRepository.save(result);
+    public TrackingStatusDTO save(TrackingStatusDTO trackingStatusDTO) {
+        log.debug("Request to save TrackingStatus : {}", trackingStatusDTO);
+        TrackingStatus trackingStatus = trackingStatusMapper.toEntity(trackingStatusDTO);
+        trackingStatus = trackingStatusRepository.save(trackingStatus);
+        TrackingStatusDTO result = trackingStatusMapper.toDto(trackingStatus);
+        trackingStatusSearchRepository.save(trackingStatus);
         return result;
     }
 
@@ -56,9 +64,11 @@ public class TrackingStatusServiceImpl implements TrackingStatusService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<TrackingStatus> findAll() {
+    public List<TrackingStatusDTO> findAll() {
         log.debug("Request to get all TrackingStatuses");
-        return trackingStatusRepository.findAll();
+        return trackingStatusRepository.findAll().stream()
+            .map(trackingStatusMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
 
@@ -70,9 +80,10 @@ public class TrackingStatusServiceImpl implements TrackingStatusService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Optional<TrackingStatus> findOne(Long id) {
+    public Optional<TrackingStatusDTO> findOne(Long id) {
         log.debug("Request to get TrackingStatus : {}", id);
-        return trackingStatusRepository.findById(id);
+        return trackingStatusRepository.findById(id)
+            .map(trackingStatusMapper::toDto);
     }
 
     /**
@@ -95,10 +106,11 @@ public class TrackingStatusServiceImpl implements TrackingStatusService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<TrackingStatus> search(String query) {
+    public List<TrackingStatusDTO> search(String query) {
         log.debug("Request to search TrackingStatuses for query {}", query);
         return StreamSupport
             .stream(trackingStatusSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .map(trackingStatusMapper::toDto)
             .collect(Collectors.toList());
     }
 }

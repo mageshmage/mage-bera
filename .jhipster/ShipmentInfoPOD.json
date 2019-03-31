@@ -21,7 +21,7 @@
     ],
     "changelogDate": "20190330143957",
     "entityTableName": "shipment_info_pod",
-    "dto": "no",
+    "dto": "mapstruct",
     "pagination": "no",
     "service": "serviceImpl",
     "jpaMetamodelFiltering": false,

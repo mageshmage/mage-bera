@@ -4,12 +4,15 @@ import com.cargotracker.service.StateService;
 import com.cargotracker.domain.State;
 import com.cargotracker.repository.StateRepository;
 import com.cargotracker.repository.search.StateSearchRepository;
+import com.cargotracker.service.dto.StateDTO;
+import com.cargotracker.service.mapper.StateMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,24 +31,29 @@ public class StateServiceImpl implements StateService {
 
     private final StateRepository stateRepository;
 
+    private final StateMapper stateMapper;
+
     private final StateSearchRepository stateSearchRepository;
 
-    public StateServiceImpl(StateRepository stateRepository, StateSearchRepository stateSearchRepository) {
+    public StateServiceImpl(StateRepository stateRepository, StateMapper stateMapper, StateSearchRepository stateSearchRepository) {
         this.stateRepository = stateRepository;
+        this.stateMapper = stateMapper;
         this.stateSearchRepository = stateSearchRepository;
     }
 
     /**
      * Save a state.
      *
-     * @param state the entity to save
+     * @param stateDTO the entity to save
      * @return the persisted entity
      */
     @Override
-    public State save(State state) {
-        log.debug("Request to save State : {}", state);
-        State result = stateRepository.save(state);
-        stateSearchRepository.save(result);
+    public StateDTO save(StateDTO stateDTO) {
+        log.debug("Request to save State : {}", stateDTO);
+        State state = stateMapper.toEntity(stateDTO);
+        state = stateRepository.save(state);
+        StateDTO result = stateMapper.toDto(state);
+        stateSearchRepository.save(state);
         return result;
     }
 
@@ -56,9 +64,11 @@ public class StateServiceImpl implements StateService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<State> findAll() {
+    public List<StateDTO> findAll() {
         log.debug("Request to get all States");
-        return stateRepository.findAll();
+        return stateRepository.findAll().stream()
+            .map(stateMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
     }
 
 
@@ -70,9 +80,10 @@ public class StateServiceImpl implements StateService {
      */
     @Override
     @Transactional(readOnly = true)
-    public Optional<State> findOne(Long id) {
+    public Optional<StateDTO> findOne(Long id) {
         log.debug("Request to get State : {}", id);
-        return stateRepository.findById(id);
+        return stateRepository.findById(id)
+            .map(stateMapper::toDto);
     }
 
     /**
@@ -95,10 +106,11 @@ public class StateServiceImpl implements StateService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<State> search(String query) {
+    public List<StateDTO> search(String query) {
         log.debug("Request to search States for query {}", query);
         return StreamSupport
             .stream(stateSearchRepository.search(queryStringQuery(query)).spliterator(), false)
+            .map(stateMapper::toDto)
             .collect(Collectors.toList());
     }
 }

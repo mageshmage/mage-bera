@@ -1,8 +1,8 @@
 package com.cargotracker.web.rest;
-import com.cargotracker.domain.TrackingStatus;
 import com.cargotracker.service.TrackingStatusService;
 import com.cargotracker.web.rest.errors.BadRequestAlertException;
 import com.cargotracker.web.rest.util.HeaderUtil;
+import com.cargotracker.service.dto.TrackingStatusDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,17 +39,17 @@ public class TrackingStatusResource {
     /**
      * POST  /tracking-statuses : Create a new trackingStatus.
      *
-     * @param trackingStatus the trackingStatus to create
-     * @return the ResponseEntity with status 201 (Created) and with body the new trackingStatus, or with status 400 (Bad Request) if the trackingStatus has already an ID
+     * @param trackingStatusDTO the trackingStatusDTO to create
+     * @return the ResponseEntity with status 201 (Created) and with body the new trackingStatusDTO, or with status 400 (Bad Request) if the trackingStatus has already an ID
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PostMapping("/tracking-statuses")
-    public ResponseEntity<TrackingStatus> createTrackingStatus(@Valid @RequestBody TrackingStatus trackingStatus) throws URISyntaxException {
-        log.debug("REST request to save TrackingStatus : {}", trackingStatus);
-        if (trackingStatus.getId() != null) {
+    public ResponseEntity<TrackingStatusDTO> createTrackingStatus(@Valid @RequestBody TrackingStatusDTO trackingStatusDTO) throws URISyntaxException {
+        log.debug("REST request to save TrackingStatus : {}", trackingStatusDTO);
+        if (trackingStatusDTO.getId() != null) {
             throw new BadRequestAlertException("A new trackingStatus cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        TrackingStatus result = trackingStatusService.save(trackingStatus);
+        TrackingStatusDTO result = trackingStatusService.save(trackingStatusDTO);
         return ResponseEntity.created(new URI("/api/tracking-statuses/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
@@ -58,21 +58,21 @@ public class TrackingStatusResource {
     /**
      * PUT  /tracking-statuses : Updates an existing trackingStatus.
      *
-     * @param trackingStatus the trackingStatus to update
-     * @return the ResponseEntity with status 200 (OK) and with body the updated trackingStatus,
-     * or with status 400 (Bad Request) if the trackingStatus is not valid,
-     * or with status 500 (Internal Server Error) if the trackingStatus couldn't be updated
+     * @param trackingStatusDTO the trackingStatusDTO to update
+     * @return the ResponseEntity with status 200 (OK) and with body the updated trackingStatusDTO,
+     * or with status 400 (Bad Request) if the trackingStatusDTO is not valid,
+     * or with status 500 (Internal Server Error) if the trackingStatusDTO couldn't be updated
      * @throws URISyntaxException if the Location URI syntax is incorrect
      */
     @PutMapping("/tracking-statuses")
-    public ResponseEntity<TrackingStatus> updateTrackingStatus(@Valid @RequestBody TrackingStatus trackingStatus) throws URISyntaxException {
-        log.debug("REST request to update TrackingStatus : {}", trackingStatus);
-        if (trackingStatus.getId() == null) {
+    public ResponseEntity<TrackingStatusDTO> updateTrackingStatus(@Valid @RequestBody TrackingStatusDTO trackingStatusDTO) throws URISyntaxException {
+        log.debug("REST request to update TrackingStatus : {}", trackingStatusDTO);
+        if (trackingStatusDTO.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
-        TrackingStatus result = trackingStatusService.save(trackingStatus);
+        TrackingStatusDTO result = trackingStatusService.save(trackingStatusDTO);
         return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, trackingStatus.getId().toString()))
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, trackingStatusDTO.getId().toString()))
             .body(result);
     }
 
@@ -82,7 +82,7 @@ public class TrackingStatusResource {
      * @return the ResponseEntity with status 200 (OK) and the list of trackingStatuses in body
      */
     @GetMapping("/tracking-statuses")
-    public List<TrackingStatus> getAllTrackingStatuses() {
+    public List<TrackingStatusDTO> getAllTrackingStatuses() {
         log.debug("REST request to get all TrackingStatuses");
         return trackingStatusService.findAll();
     }
@@ -90,20 +90,20 @@ public class TrackingStatusResource {
     /**
      * GET  /tracking-statuses/:id : get the "id" trackingStatus.
      *
-     * @param id the id of the trackingStatus to retrieve
-     * @return the ResponseEntity with status 200 (OK) and with body the trackingStatus, or with status 404 (Not Found)
+     * @param id the id of the trackingStatusDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the trackingStatusDTO, or with status 404 (Not Found)
      */
     @GetMapping("/tracking-statuses/{id}")
-    public ResponseEntity<TrackingStatus> getTrackingStatus(@PathVariable Long id) {
+    public ResponseEntity<TrackingStatusDTO> getTrackingStatus(@PathVariable Long id) {
         log.debug("REST request to get TrackingStatus : {}", id);
-        Optional<TrackingStatus> trackingStatus = trackingStatusService.findOne(id);
-        return ResponseUtil.wrapOrNotFound(trackingStatus);
+        Optional<TrackingStatusDTO> trackingStatusDTO = trackingStatusService.findOne(id);
+        return ResponseUtil.wrapOrNotFound(trackingStatusDTO);
     }
 
     /**
      * DELETE  /tracking-statuses/:id : delete the "id" trackingStatus.
      *
-     * @param id the id of the trackingStatus to delete
+     * @param id the id of the trackingStatusDTO to delete
      * @return the ResponseEntity with status 200 (OK)
      */
     @DeleteMapping("/tracking-statuses/{id}")
@@ -121,7 +121,7 @@ public class TrackingStatusResource {
      * @return the result of the search
      */
     @GetMapping("/_search/tracking-statuses")
-    public List<TrackingStatus> searchTrackingStatuses(@RequestParam String query) {
+    public List<TrackingStatusDTO> searchTrackingStatuses(@RequestParam String query) {
         log.debug("REST request to search TrackingStatuses for query {}", query);
         return trackingStatusService.search(query);
     }

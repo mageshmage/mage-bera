@@ -6,6 +6,8 @@ import com.cargotracker.domain.TrackingStatus;
 import com.cargotracker.repository.TrackingStatusRepository;
 import com.cargotracker.repository.search.TrackingStatusSearchRepository;
 import com.cargotracker.service.TrackingStatusService;
+import com.cargotracker.service.dto.TrackingStatusDTO;
+import com.cargotracker.service.mapper.TrackingStatusMapper;
 import com.cargotracker.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -53,6 +55,9 @@ public class TrackingStatusResourceIntTest {
 
     @Autowired
     private TrackingStatusRepository trackingStatusRepository;
+
+    @Autowired
+    private TrackingStatusMapper trackingStatusMapper;
 
     @Autowired
     private TrackingStatusService trackingStatusService;
@@ -120,9 +125,10 @@ public class TrackingStatusResourceIntTest {
         int databaseSizeBeforeCreate = trackingStatusRepository.findAll().size();
 
         // Create the TrackingStatus
+        TrackingStatusDTO trackingStatusDTO = trackingStatusMapper.toDto(trackingStatus);
         restTrackingStatusMockMvc.perform(post("/api/tracking-statuses")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(trackingStatus)))
+            .content(TestUtil.convertObjectToJsonBytes(trackingStatusDTO)))
             .andExpect(status().isCreated());
 
         // Validate the TrackingStatus in the database
@@ -143,11 +149,12 @@ public class TrackingStatusResourceIntTest {
 
         // Create the TrackingStatus with an existing ID
         trackingStatus.setId(1L);
+        TrackingStatusDTO trackingStatusDTO = trackingStatusMapper.toDto(trackingStatus);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restTrackingStatusMockMvc.perform(post("/api/tracking-statuses")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(trackingStatus)))
+            .content(TestUtil.convertObjectToJsonBytes(trackingStatusDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the TrackingStatus in the database
@@ -166,10 +173,11 @@ public class TrackingStatusResourceIntTest {
         trackingStatus.setValue(null);
 
         // Create the TrackingStatus, which fails.
+        TrackingStatusDTO trackingStatusDTO = trackingStatusMapper.toDto(trackingStatus);
 
         restTrackingStatusMockMvc.perform(post("/api/tracking-statuses")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(trackingStatus)))
+            .content(TestUtil.convertObjectToJsonBytes(trackingStatusDTO)))
             .andExpect(status().isBadRequest());
 
         List<TrackingStatus> trackingStatusList = trackingStatusRepository.findAll();
@@ -218,9 +226,7 @@ public class TrackingStatusResourceIntTest {
     @Transactional
     public void updateTrackingStatus() throws Exception {
         // Initialize the database
-        trackingStatusService.save(trackingStatus);
-        // As the test used the service layer, reset the Elasticsearch mock repository
-        reset(mockTrackingStatusSearchRepository);
+        trackingStatusRepository.saveAndFlush(trackingStatus);
 
         int databaseSizeBeforeUpdate = trackingStatusRepository.findAll().size();
 
@@ -231,10 +237,11 @@ public class TrackingStatusResourceIntTest {
         updatedTrackingStatus
             .value(UPDATED_VALUE)
             .desc(UPDATED_DESC);
+        TrackingStatusDTO trackingStatusDTO = trackingStatusMapper.toDto(updatedTrackingStatus);
 
         restTrackingStatusMockMvc.perform(put("/api/tracking-statuses")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedTrackingStatus)))
+            .content(TestUtil.convertObjectToJsonBytes(trackingStatusDTO)))
             .andExpect(status().isOk());
 
         // Validate the TrackingStatus in the database
@@ -254,11 +261,12 @@ public class TrackingStatusResourceIntTest {
         int databaseSizeBeforeUpdate = trackingStatusRepository.findAll().size();
 
         // Create the TrackingStatus
+        TrackingStatusDTO trackingStatusDTO = trackingStatusMapper.toDto(trackingStatus);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restTrackingStatusMockMvc.perform(put("/api/tracking-statuses")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(trackingStatus)))
+            .content(TestUtil.convertObjectToJsonBytes(trackingStatusDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the TrackingStatus in the database
@@ -273,7 +281,7 @@ public class TrackingStatusResourceIntTest {
     @Transactional
     public void deleteTrackingStatus() throws Exception {
         // Initialize the database
-        trackingStatusService.save(trackingStatus);
+        trackingStatusRepository.saveAndFlush(trackingStatus);
 
         int databaseSizeBeforeDelete = trackingStatusRepository.findAll().size();
 
@@ -294,7 +302,7 @@ public class TrackingStatusResourceIntTest {
     @Transactional
     public void searchTrackingStatus() throws Exception {
         // Initialize the database
-        trackingStatusService.save(trackingStatus);
+        trackingStatusRepository.saveAndFlush(trackingStatus);
         when(mockTrackingStatusSearchRepository.search(queryStringQuery("id:" + trackingStatus.getId())))
             .thenReturn(Collections.singletonList(trackingStatus));
         // Search the trackingStatus
@@ -319,5 +327,28 @@ public class TrackingStatusResourceIntTest {
         assertThat(trackingStatus1).isNotEqualTo(trackingStatus2);
         trackingStatus1.setId(null);
         assertThat(trackingStatus1).isNotEqualTo(trackingStatus2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(TrackingStatusDTO.class);
+        TrackingStatusDTO trackingStatusDTO1 = new TrackingStatusDTO();
+        trackingStatusDTO1.setId(1L);
+        TrackingStatusDTO trackingStatusDTO2 = new TrackingStatusDTO();
+        assertThat(trackingStatusDTO1).isNotEqualTo(trackingStatusDTO2);
+        trackingStatusDTO2.setId(trackingStatusDTO1.getId());
+        assertThat(trackingStatusDTO1).isEqualTo(trackingStatusDTO2);
+        trackingStatusDTO2.setId(2L);
+        assertThat(trackingStatusDTO1).isNotEqualTo(trackingStatusDTO2);
+        trackingStatusDTO1.setId(null);
+        assertThat(trackingStatusDTO1).isNotEqualTo(trackingStatusDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(trackingStatusMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(trackingStatusMapper.fromId(null)).isNull();
     }
 }

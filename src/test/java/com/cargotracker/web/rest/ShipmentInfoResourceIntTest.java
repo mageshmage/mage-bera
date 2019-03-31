@@ -6,6 +6,8 @@ import com.cargotracker.domain.ShipmentInfo;
 import com.cargotracker.repository.ShipmentInfoRepository;
 import com.cargotracker.repository.search.ShipmentInfoSearchRepository;
 import com.cargotracker.service.ShipmentInfoService;
+import com.cargotracker.service.dto.ShipmentInfoDTO;
+import com.cargotracker.service.mapper.ShipmentInfoMapper;
 import com.cargotracker.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -105,6 +107,9 @@ public class ShipmentInfoResourceIntTest {
     private ShipmentInfoRepository shipmentInfoRepository;
 
     @Autowired
+    private ShipmentInfoMapper shipmentInfoMapper;
+
+    @Autowired
     private ShipmentInfoService shipmentInfoService;
 
     /**
@@ -184,9 +189,10 @@ public class ShipmentInfoResourceIntTest {
         int databaseSizeBeforeCreate = shipmentInfoRepository.findAll().size();
 
         // Create the ShipmentInfo
+        ShipmentInfoDTO shipmentInfoDTO = shipmentInfoMapper.toDto(shipmentInfo);
         restShipmentInfoMockMvc.perform(post("/api/shipment-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentInfoDTO)))
             .andExpect(status().isCreated());
 
         // Validate the ShipmentInfo in the database
@@ -221,11 +227,12 @@ public class ShipmentInfoResourceIntTest {
 
         // Create the ShipmentInfo with an existing ID
         shipmentInfo.setId(1L);
+        ShipmentInfoDTO shipmentInfoDTO = shipmentInfoMapper.toDto(shipmentInfo);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restShipmentInfoMockMvc.perform(post("/api/shipment-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentInfoDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the ShipmentInfo in the database
@@ -244,10 +251,11 @@ public class ShipmentInfoResourceIntTest {
         shipmentInfo.setConsignmentNo(null);
 
         // Create the ShipmentInfo, which fails.
+        ShipmentInfoDTO shipmentInfoDTO = shipmentInfoMapper.toDto(shipmentInfo);
 
         restShipmentInfoMockMvc.perform(post("/api/shipment-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentInfoDTO)))
             .andExpect(status().isBadRequest());
 
         List<ShipmentInfo> shipmentInfoList = shipmentInfoRepository.findAll();
@@ -262,10 +270,11 @@ public class ShipmentInfoResourceIntTest {
         shipmentInfo.setBookingDate(null);
 
         // Create the ShipmentInfo, which fails.
+        ShipmentInfoDTO shipmentInfoDTO = shipmentInfoMapper.toDto(shipmentInfo);
 
         restShipmentInfoMockMvc.perform(post("/api/shipment-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentInfoDTO)))
             .andExpect(status().isBadRequest());
 
         List<ShipmentInfo> shipmentInfoList = shipmentInfoRepository.findAll();
@@ -280,10 +289,11 @@ public class ShipmentInfoResourceIntTest {
         shipmentInfo.setExpectedDeliveryDate(null);
 
         // Create the ShipmentInfo, which fails.
+        ShipmentInfoDTO shipmentInfoDTO = shipmentInfoMapper.toDto(shipmentInfo);
 
         restShipmentInfoMockMvc.perform(post("/api/shipment-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentInfoDTO)))
             .andExpect(status().isBadRequest());
 
         List<ShipmentInfo> shipmentInfoList = shipmentInfoRepository.findAll();
@@ -298,10 +308,11 @@ public class ShipmentInfoResourceIntTest {
         shipmentInfo.setIsThirdParty(null);
 
         // Create the ShipmentInfo, which fails.
+        ShipmentInfoDTO shipmentInfoDTO = shipmentInfoMapper.toDto(shipmentInfo);
 
         restShipmentInfoMockMvc.perform(post("/api/shipment-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentInfoDTO)))
             .andExpect(status().isBadRequest());
 
         List<ShipmentInfo> shipmentInfoList = shipmentInfoRepository.findAll();
@@ -378,9 +389,7 @@ public class ShipmentInfoResourceIntTest {
     @Transactional
     public void updateShipmentInfo() throws Exception {
         // Initialize the database
-        shipmentInfoService.save(shipmentInfo);
-        // As the test used the service layer, reset the Elasticsearch mock repository
-        reset(mockShipmentInfoSearchRepository);
+        shipmentInfoRepository.saveAndFlush(shipmentInfo);
 
         int databaseSizeBeforeUpdate = shipmentInfoRepository.findAll().size();
 
@@ -405,10 +414,11 @@ public class ShipmentInfoResourceIntTest {
             .deliveredDate(UPDATED_DELIVERED_DATE)
             .receivedBy(UPDATED_RECEIVED_BY)
             .relationShip(UPDATED_RELATION_SHIP);
+        ShipmentInfoDTO shipmentInfoDTO = shipmentInfoMapper.toDto(updatedShipmentInfo);
 
         restShipmentInfoMockMvc.perform(put("/api/shipment-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedShipmentInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentInfoDTO)))
             .andExpect(status().isOk());
 
         // Validate the ShipmentInfo in the database
@@ -442,11 +452,12 @@ public class ShipmentInfoResourceIntTest {
         int databaseSizeBeforeUpdate = shipmentInfoRepository.findAll().size();
 
         // Create the ShipmentInfo
+        ShipmentInfoDTO shipmentInfoDTO = shipmentInfoMapper.toDto(shipmentInfo);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restShipmentInfoMockMvc.perform(put("/api/shipment-infos")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(shipmentInfo)))
+            .content(TestUtil.convertObjectToJsonBytes(shipmentInfoDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the ShipmentInfo in the database
@@ -461,7 +472,7 @@ public class ShipmentInfoResourceIntTest {
     @Transactional
     public void deleteShipmentInfo() throws Exception {
         // Initialize the database
-        shipmentInfoService.save(shipmentInfo);
+        shipmentInfoRepository.saveAndFlush(shipmentInfo);
 
         int databaseSizeBeforeDelete = shipmentInfoRepository.findAll().size();
 
@@ -482,7 +493,7 @@ public class ShipmentInfoResourceIntTest {
     @Transactional
     public void searchShipmentInfo() throws Exception {
         // Initialize the database
-        shipmentInfoService.save(shipmentInfo);
+        shipmentInfoRepository.saveAndFlush(shipmentInfo);
         when(mockShipmentInfoSearchRepository.search(queryStringQuery("id:" + shipmentInfo.getId()), PageRequest.of(0, 20)))
             .thenReturn(new PageImpl<>(Collections.singletonList(shipmentInfo), PageRequest.of(0, 1), 1));
         // Search the shipmentInfo
@@ -521,5 +532,28 @@ public class ShipmentInfoResourceIntTest {
         assertThat(shipmentInfo1).isNotEqualTo(shipmentInfo2);
         shipmentInfo1.setId(null);
         assertThat(shipmentInfo1).isNotEqualTo(shipmentInfo2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(ShipmentInfoDTO.class);
+        ShipmentInfoDTO shipmentInfoDTO1 = new ShipmentInfoDTO();
+        shipmentInfoDTO1.setId(1L);
+        ShipmentInfoDTO shipmentInfoDTO2 = new ShipmentInfoDTO();
+        assertThat(shipmentInfoDTO1).isNotEqualTo(shipmentInfoDTO2);
+        shipmentInfoDTO2.setId(shipmentInfoDTO1.getId());
+        assertThat(shipmentInfoDTO1).isEqualTo(shipmentInfoDTO2);
+        shipmentInfoDTO2.setId(2L);
+        assertThat(shipmentInfoDTO1).isNotEqualTo(shipmentInfoDTO2);
+        shipmentInfoDTO1.setId(null);
+        assertThat(shipmentInfoDTO1).isNotEqualTo(shipmentInfoDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(shipmentInfoMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(shipmentInfoMapper.fromId(null)).isNull();
     }
 }

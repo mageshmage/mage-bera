@@ -276,7 +276,7 @@ export class ShipmentInfoUpdate extends React.Component<IShipmentInfoUpdateProps
                   <Label for="carrierDetails.id">
                     <Translate contentKey="cargotrackerApp.shipmentInfo.carrierDetails">Carrier Details</Translate>
                   </Label>
-                  <AvInput id="shipment-info-carrierDetails" type="select" className="form-control" name="carrierDetails.id">
+                  <AvInput id="shipment-info-carrierDetails" type="select" className="form-control" name="carrierDetailsId">
                     <option value="" key="0" />
                     {carrierDetails
                       ? carrierDetails.map(otherEntity => (
@@ -291,7 +291,7 @@ export class ShipmentInfoUpdate extends React.Component<IShipmentInfoUpdateProps
                   <Label for="shipmentType.id">
                     <Translate contentKey="cargotrackerApp.shipmentInfo.shipmentType">Shipment Type</Translate>
                   </Label>
-                  <AvInput id="shipment-info-shipmentType" type="select" className="form-control" name="shipmentType.id">
+                  <AvInput id="shipment-info-shipmentType" type="select" className="form-control" name="shipmentTypeId">
                     <option value="" key="0" />
                     {shipmentTypes
                       ? shipmentTypes.map(otherEntity => (
@@ -306,7 +306,7 @@ export class ShipmentInfoUpdate extends React.Component<IShipmentInfoUpdateProps
                   <Label for="shipmentMode.id">
                     <Translate contentKey="cargotrackerApp.shipmentInfo.shipmentMode">Shipment Mode</Translate>
                   </Label>
-                  <AvInput id="shipment-info-shipmentMode" type="select" className="form-control" name="shipmentMode.id">
+                  <AvInput id="shipment-info-shipmentMode" type="select" className="form-control" name="shipmentModeId">
                     <option value="" key="0" />
                     {shipmentModes
                       ? shipmentModes.map(otherEntity => (
@@ -321,7 +321,7 @@ export class ShipmentInfoUpdate extends React.Component<IShipmentInfoUpdateProps
                   <Label for="paymentMode.id">
                     <Translate contentKey="cargotrackerApp.shipmentInfo.paymentMode">Payment Mode</Translate>
                   </Label>
-                  <AvInput id="shipment-info-paymentMode" type="select" className="form-control" name="paymentMode.id">
+                  <AvInput id="shipment-info-paymentMode" type="select" className="form-control" name="paymentModeId">
                     <option value="" key="0" />
                     {paymentModes
                       ? paymentModes.map(otherEntity => (
@@ -336,7 +336,7 @@ export class ShipmentInfoUpdate extends React.Component<IShipmentInfoUpdateProps
                   <Label for="trackingStatus.id">
                     <Translate contentKey="cargotrackerApp.shipmentInfo.trackingStatus">Tracking Status</Translate>
                   </Label>
-                  <AvInput id="shipment-info-trackingStatus" type="select" className="form-control" name="trackingStatus.id">
+                  <AvInput id="shipment-info-trackingStatus" type="select" className="form-control" name="trackingStatusId">
                     <option value="" key="0" />
                     {trackingStatuses
                       ? trackingStatuses.map(otherEntity => (
@@ -351,7 +351,7 @@ export class ShipmentInfoUpdate extends React.Component<IShipmentInfoUpdateProps
                   <Label for="vendor.id">
                     <Translate contentKey="cargotrackerApp.shipmentInfo.vendor">Vendor</Translate>
                   </Label>
-                  <AvInput id="shipment-info-vendor" type="select" className="form-control" name="vendor.id">
+                  <AvInput id="shipment-info-vendor" type="select" className="form-control" name="vendorId">
                     <option value="" key="0" />
                     {vendors
                       ? vendors.map(otherEntity => (
@@ -366,7 +366,7 @@ export class ShipmentInfoUpdate extends React.Component<IShipmentInfoUpdateProps
                   <Label for="origin.id">
                     <Translate contentKey="cargotrackerApp.shipmentInfo.origin">Origin</Translate>
                   </Label>
-                  <AvInput id="shipment-info-origin" type="select" className="form-control" name="origin.id">
+                  <AvInput id="shipment-info-origin" type="select" className="form-control" name="originId">
                     <option value="" key="0" />
                     {states
                       ? states.map(otherEntity => (
@@ -381,7 +381,7 @@ export class ShipmentInfoUpdate extends React.Component<IShipmentInfoUpdateProps
                   <Label for="destination.id">
                     <Translate contentKey="cargotrackerApp.shipmentInfo.destination">Destination</Translate>
                   </Label>
-                  <AvInput id="shipment-info-destination" type="select" className="form-control" name="destination.id">
+                  <AvInput id="shipment-info-destination" type="select" className="form-control" name="destinationId">
                     <option value="" key="0" />
                     {states
                       ? states.map(otherEntity => (
@@ -393,14 +393,16 @@ export class ShipmentInfoUpdate extends React.Component<IShipmentInfoUpdateProps
                   </AvInput>
                 </AvGroup>
                 <Button tag={Link} id="cancel-save" to="/entity/shipment-info" replace color="info">
-                  <FontAwesomeIcon icon="arrow-left" />&nbsp;
+                  <FontAwesomeIcon icon="arrow-left" />
+                  &nbsp;
                   <span className="d-none d-md-inline">
                     <Translate contentKey="entity.action.back">Back</Translate>
                   </span>
                 </Button>
                 &nbsp;
                 <Button color="primary" id="save-entity" type="submit" disabled={updating}>
-                  <FontAwesomeIcon icon="save" />&nbsp;
+                  <FontAwesomeIcon icon="save" />
+                  &nbsp;
                   <Translate contentKey="entity.action.save">Save</Translate>
                 </Button>
               </AvForm>

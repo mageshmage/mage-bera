@@ -6,6 +6,8 @@ import com.cargotracker.domain.Vendor;
 import com.cargotracker.repository.VendorRepository;
 import com.cargotracker.repository.search.VendorSearchRepository;
 import com.cargotracker.service.VendorService;
+import com.cargotracker.service.dto.VendorDTO;
+import com.cargotracker.service.mapper.VendorMapper;
 import com.cargotracker.web.rest.errors.ExceptionTranslator;
 
 import org.junit.Before;
@@ -71,6 +73,9 @@ public class VendorResourceIntTest {
 
     @Autowired
     private VendorRepository vendorRepository;
+
+    @Autowired
+    private VendorMapper vendorMapper;
 
     @Autowired
     private VendorService vendorService;
@@ -144,9 +149,10 @@ public class VendorResourceIntTest {
         int databaseSizeBeforeCreate = vendorRepository.findAll().size();
 
         // Create the Vendor
+        VendorDTO vendorDTO = vendorMapper.toDto(vendor);
         restVendorMockMvc.perform(post("/api/vendors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(vendor)))
+            .content(TestUtil.convertObjectToJsonBytes(vendorDTO)))
             .andExpect(status().isCreated());
 
         // Validate the Vendor in the database
@@ -173,11 +179,12 @@ public class VendorResourceIntTest {
 
         // Create the Vendor with an existing ID
         vendor.setId(1L);
+        VendorDTO vendorDTO = vendorMapper.toDto(vendor);
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restVendorMockMvc.perform(post("/api/vendors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(vendor)))
+            .content(TestUtil.convertObjectToJsonBytes(vendorDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Vendor in the database
@@ -196,10 +203,11 @@ public class VendorResourceIntTest {
         vendor.setVendorname(null);
 
         // Create the Vendor, which fails.
+        VendorDTO vendorDTO = vendorMapper.toDto(vendor);
 
         restVendorMockMvc.perform(post("/api/vendors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(vendor)))
+            .content(TestUtil.convertObjectToJsonBytes(vendorDTO)))
             .andExpect(status().isBadRequest());
 
         List<Vendor> vendorList = vendorRepository.findAll();
@@ -214,10 +222,11 @@ public class VendorResourceIntTest {
         vendor.setFirstName(null);
 
         // Create the Vendor, which fails.
+        VendorDTO vendorDTO = vendorMapper.toDto(vendor);
 
         restVendorMockMvc.perform(post("/api/vendors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(vendor)))
+            .content(TestUtil.convertObjectToJsonBytes(vendorDTO)))
             .andExpect(status().isBadRequest());
 
         List<Vendor> vendorList = vendorRepository.findAll();
@@ -232,10 +241,11 @@ public class VendorResourceIntTest {
         vendor.setLastName(null);
 
         // Create the Vendor, which fails.
+        VendorDTO vendorDTO = vendorMapper.toDto(vendor);
 
         restVendorMockMvc.perform(post("/api/vendors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(vendor)))
+            .content(TestUtil.convertObjectToJsonBytes(vendorDTO)))
             .andExpect(status().isBadRequest());
 
         List<Vendor> vendorList = vendorRepository.findAll();
@@ -250,10 +260,11 @@ public class VendorResourceIntTest {
         vendor.setMobileNo(null);
 
         // Create the Vendor, which fails.
+        VendorDTO vendorDTO = vendorMapper.toDto(vendor);
 
         restVendorMockMvc.perform(post("/api/vendors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(vendor)))
+            .content(TestUtil.convertObjectToJsonBytes(vendorDTO)))
             .andExpect(status().isBadRequest());
 
         List<Vendor> vendorList = vendorRepository.findAll();
@@ -268,10 +279,11 @@ public class VendorResourceIntTest {
         vendor.setAddress(null);
 
         // Create the Vendor, which fails.
+        VendorDTO vendorDTO = vendorMapper.toDto(vendor);
 
         restVendorMockMvc.perform(post("/api/vendors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(vendor)))
+            .content(TestUtil.convertObjectToJsonBytes(vendorDTO)))
             .andExpect(status().isBadRequest());
 
         List<Vendor> vendorList = vendorRepository.findAll();
@@ -286,10 +298,11 @@ public class VendorResourceIntTest {
         vendor.setPan(null);
 
         // Create the Vendor, which fails.
+        VendorDTO vendorDTO = vendorMapper.toDto(vendor);
 
         restVendorMockMvc.perform(post("/api/vendors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(vendor)))
+            .content(TestUtil.convertObjectToJsonBytes(vendorDTO)))
             .andExpect(status().isBadRequest());
 
         List<Vendor> vendorList = vendorRepository.findAll();
@@ -304,10 +317,11 @@ public class VendorResourceIntTest {
         vendor.setGstIn(null);
 
         // Create the Vendor, which fails.
+        VendorDTO vendorDTO = vendorMapper.toDto(vendor);
 
         restVendorMockMvc.perform(post("/api/vendors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(vendor)))
+            .content(TestUtil.convertObjectToJsonBytes(vendorDTO)))
             .andExpect(status().isBadRequest());
 
         List<Vendor> vendorList = vendorRepository.findAll();
@@ -322,10 +336,11 @@ public class VendorResourceIntTest {
         vendor.setIsActive(null);
 
         // Create the Vendor, which fails.
+        VendorDTO vendorDTO = vendorMapper.toDto(vendor);
 
         restVendorMockMvc.perform(post("/api/vendors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(vendor)))
+            .content(TestUtil.convertObjectToJsonBytes(vendorDTO)))
             .andExpect(status().isBadRequest());
 
         List<Vendor> vendorList = vendorRepository.findAll();
@@ -386,9 +401,7 @@ public class VendorResourceIntTest {
     @Transactional
     public void updateVendor() throws Exception {
         // Initialize the database
-        vendorService.save(vendor);
-        // As the test used the service layer, reset the Elasticsearch mock repository
-        reset(mockVendorSearchRepository);
+        vendorRepository.saveAndFlush(vendor);
 
         int databaseSizeBeforeUpdate = vendorRepository.findAll().size();
 
@@ -405,10 +418,11 @@ public class VendorResourceIntTest {
             .pan(UPDATED_PAN)
             .gstIn(UPDATED_GST_IN)
             .isActive(UPDATED_IS_ACTIVE);
+        VendorDTO vendorDTO = vendorMapper.toDto(updatedVendor);
 
         restVendorMockMvc.perform(put("/api/vendors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(updatedVendor)))
+            .content(TestUtil.convertObjectToJsonBytes(vendorDTO)))
             .andExpect(status().isOk());
 
         // Validate the Vendor in the database
@@ -434,11 +448,12 @@ public class VendorResourceIntTest {
         int databaseSizeBeforeUpdate = vendorRepository.findAll().size();
 
         // Create the Vendor
+        VendorDTO vendorDTO = vendorMapper.toDto(vendor);
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restVendorMockMvc.perform(put("/api/vendors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(vendor)))
+            .content(TestUtil.convertObjectToJsonBytes(vendorDTO)))
             .andExpect(status().isBadRequest());
 
         // Validate the Vendor in the database
@@ -453,7 +468,7 @@ public class VendorResourceIntTest {
     @Transactional
     public void deleteVendor() throws Exception {
         // Initialize the database
-        vendorService.save(vendor);
+        vendorRepository.saveAndFlush(vendor);
 
         int databaseSizeBeforeDelete = vendorRepository.findAll().size();
 
@@ -474,7 +489,7 @@ public class VendorResourceIntTest {
     @Transactional
     public void searchVendor() throws Exception {
         // Initialize the database
-        vendorService.save(vendor);
+        vendorRepository.saveAndFlush(vendor);
         when(mockVendorSearchRepository.search(queryStringQuery("id:" + vendor.getId())))
             .thenReturn(Collections.singletonList(vendor));
         // Search the vendor
@@ -505,5 +520,28 @@ public class VendorResourceIntTest {
         assertThat(vendor1).isNotEqualTo(vendor2);
         vendor1.setId(null);
         assertThat(vendor1).isNotEqualTo(vendor2);
+    }
+
+    @Test
+    @Transactional
+    public void dtoEqualsVerifier() throws Exception {
+        TestUtil.equalsVerifier(VendorDTO.class);
+        VendorDTO vendorDTO1 = new VendorDTO();
+        vendorDTO1.setId(1L);
+        VendorDTO vendorDTO2 = new VendorDTO();
+        assertThat(vendorDTO1).isNotEqualTo(vendorDTO2);
+        vendorDTO2.setId(vendorDTO1.getId());
+        assertThat(vendorDTO1).isEqualTo(vendorDTO2);
+        vendorDTO2.setId(2L);
+        assertThat(vendorDTO1).isNotEqualTo(vendorDTO2);
+        vendorDTO1.setId(null);
+        assertThat(vendorDTO1).isNotEqualTo(vendorDTO2);
+    }
+
+    @Test
+    @Transactional
+    public void testEntityFromId() {
+        assertThat(vendorMapper.fromId(42L).getId()).isEqualTo(42);
+        assertThat(vendorMapper.fromId(null)).isNull();
     }
 }

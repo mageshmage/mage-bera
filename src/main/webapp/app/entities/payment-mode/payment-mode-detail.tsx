@@ -43,14 +43,15 @@ export class PaymentModeDetail extends React.Component<IPaymentModeDetailProps> 
             <dt>
               <Translate contentKey="cargotrackerApp.paymentMode.vendor">Vendor</Translate>
             </dt>
-            <dd>{paymentModeEntity.vendor ? paymentModeEntity.vendor.id : ''}</dd>
+            <dd>{paymentModeEntity.vendorId ? paymentModeEntity.vendorId : ''}</dd>
           </dl>
           <Button tag={Link} to="/entity/payment-mode" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}
             <span className="d-none d-md-inline">
               <Translate contentKey="entity.action.back">Back</Translate>
             </span>
-          </Button>&nbsp;
+          </Button>
+          &nbsp;
           <Button tag={Link} to={`/entity/payment-mode/${paymentModeEntity.id}/edit`} replace color="primary">
             <FontAwesomeIcon icon="pencil-alt" />{' '}
             <span className="d-none d-md-inline">
