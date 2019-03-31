@@ -2,6 +2,8 @@ package com.cargotracker.web.rest;
 
 import com.cargotracker.config.Constants;
 import com.cargotracker.domain.User;
+import com.cargotracker.domain.UserExtra;
+import com.cargotracker.repository.UserExtraRepository;
 import com.cargotracker.repository.UserRepository;
 import com.cargotracker.repository.search.UserSearchRepository;
 import com.cargotracker.security.AuthoritiesConstants;
@@ -71,13 +73,17 @@ public class UserResource {
     private final MailService mailService;
 
     private final UserSearchRepository userSearchRepository;
+    
+    private final UserExtraRepository userExtraRepository;
 
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService, UserSearchRepository userSearchRepository) {
+    public UserResource(UserService userService, UserRepository userRepository, MailService mailService, UserSearchRepository userSearchRepository,
+    		UserExtraRepository userExtraRepository) {
 
         this.userService = userService;
         this.userRepository = userRepository;
         this.mailService = mailService;
         this.userSearchRepository = userSearchRepository;
+        this.userExtraRepository = userExtraRepository;
     }
 
     /**
@@ -148,8 +154,26 @@ public class UserResource {
     @GetMapping("/users")
     public ResponseEntity<List<UserDTO>> getAllUsers(Pageable pageable) {
         final Page<UserDTO> page = userService.getAllManagedUsers(pageable);
+        
+        List<UserDTO> userDTOList = page.getContent();
+        
+		for (UserDTO userDTO : userDTOList) {
+			User user = userRepository.findById(userDTO.getId()).get();
+			if (user.getId() != null) {
+				Long userExtraId = userExtraRepository.findExtraUserByUserId(user.getId());
+				if (userExtraId != null) {
+					UserExtra userExtra = userExtraRepository.findById(userExtraId).get();
+					// UserExtra userExtra = userExtraRepository.findOneByUser(user).get();
+					if (userExtra != null) {
+						userDTO.setVendorId(userExtra.getVendor().getId());
+						userDTO.setVendorname(userExtra.getVendor().getVendorname());
+					}
+				}
+			}
+		}
+        
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/users");
-        return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
+        return new ResponseEntity<>(userDTOList, headers, HttpStatus.OK);
     }
 
     /**

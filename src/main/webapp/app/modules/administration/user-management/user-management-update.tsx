@@ -5,7 +5,7 @@ import { Button, Label, Row, Col } from 'reactstrap';
 import { AvForm, AvGroup, AvInput, AvField, AvFeedback } from 'availity-reactstrap-validation';
 import { Translate, translate, ICrudGetAction, ICrudGetAllAction, ICrudPutAction } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { getEntities as getVendors } from 'app/entities/vendor/vendor.reducer';
 import { locales, languages } from 'app/config/translation';
 import { getUser, getRoles, updateUser, createUser, reset } from './user-management.reducer';
 import { IRootState } from 'app/shared/reducers';
@@ -28,6 +28,7 @@ export class UserManagementUpdate extends React.Component<IUserManagementUpdateP
       this.props.getUser(this.props.match.params.login);
     }
     this.props.getRoles();
+    this.props.getVendors();
   }
 
   componentWillUnmount() {
@@ -49,7 +50,7 @@ export class UserManagementUpdate extends React.Component<IUserManagementUpdateP
 
   render() {
     const isInvalid = false;
-    const { user, loading, updating, roles } = this.props;
+    const { user, loading, updating, roles, vendors } = this.props;
     return (
       <div>
         <Row className="justify-content-center">
@@ -193,15 +194,32 @@ export class UserManagementUpdate extends React.Component<IUserManagementUpdateP
                     ))}
                   </AvInput>
                 </AvGroup>
+                <AvGroup>
+                  <Label for="vendor.id">
+                    <Translate contentKey="cargotrackerApp.shipmentType.vendor">Vendor</Translate>
+                  </Label>
+                  <AvInput id="shipment-type-vendor" type="select" className="form-control" name="vendorId">
+                    <option value="" key="0" />
+                    {vendors
+                      ? vendors.map(otherEntity => (
+                          <option value={otherEntity.id} key={otherEntity.id}>
+                            {otherEntity.vendorname}
+                          </option>
+                        ))
+                      : null}
+                  </AvInput>
+                </AvGroup>
                 <Button tag={Link} to="/admin/user-management" replace color="info">
-                  <FontAwesomeIcon icon="arrow-left" />&nbsp;
+                  <FontAwesomeIcon icon="arrow-left" />
+                  &nbsp;
                   <span className="d-none d-md-inline">
                     <Translate contentKey="entity.action.back">Back</Translate>
                   </span>
                 </Button>
                 &nbsp;
                 <Button color="primary" type="submit" disabled={isInvalid || updating}>
-                  <FontAwesomeIcon icon="save" />&nbsp;
+                  <FontAwesomeIcon icon="save" />
+                  &nbsp;
                   <Translate contentKey="entity.action.save">Save</Translate>
                 </Button>
               </AvForm>
@@ -216,11 +234,12 @@ export class UserManagementUpdate extends React.Component<IUserManagementUpdateP
 const mapStateToProps = (storeState: IRootState) => ({
   user: storeState.userManagement.user,
   roles: storeState.userManagement.authorities,
+  vendors: storeState.vendor.entities,
   loading: storeState.userManagement.loading,
   updating: storeState.userManagement.updating
 });
 
-const mapDispatchToProps = { getUser, getRoles, updateUser, createUser, reset };
+const mapDispatchToProps = { getUser, getRoles, updateUser, createUser, reset, getVendors };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

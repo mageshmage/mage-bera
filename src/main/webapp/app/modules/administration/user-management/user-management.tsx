@@ -104,6 +104,9 @@ export class UserManagement extends React.Component<IUserManagementProps, IPagin
                 <Translate contentKey="userManagement.lastModifiedDate">Last Modified Date</Translate>
                 <FontAwesomeIcon icon="sort" />
               </th>
+              <th>
+                <Translate contentKey="userManagement.vendor">Vendor</Translate>
+              </th>
               <th />
             </tr>
           </thead>
@@ -145,6 +148,7 @@ export class UserManagement extends React.Component<IUserManagementProps, IPagin
                 <td>
                   <TextFormat value={user.lastModifiedDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
                 </td>
+                <td>{user.vendorname}</td>
                 <td className="text-right">
                   <div className="btn-group flex-btn-group-container">
                     <Button tag={Link} to={`${match.url}/${user.login}`} color="info" size="sm">

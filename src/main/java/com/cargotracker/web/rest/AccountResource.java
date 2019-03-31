@@ -2,6 +2,8 @@ package com.cargotracker.web.rest;
 
 
 import com.cargotracker.domain.User;
+import com.cargotracker.domain.UserExtra;
+import com.cargotracker.repository.UserExtraRepository;
 import com.cargotracker.repository.UserRepository;
 import com.cargotracker.security.SecurityUtils;
 import com.cargotracker.service.MailService;
@@ -32,14 +34,17 @@ public class AccountResource {
     private final Logger log = LoggerFactory.getLogger(AccountResource.class);
 
     private final UserRepository userRepository;
+    
+    private final UserExtraRepository userExtraRepository;
 
     private final UserService userService;
 
     private final MailService mailService;
 
-    public AccountResource(UserRepository userRepository, UserService userService, MailService mailService) {
+    public AccountResource(UserRepository userRepository, UserExtraRepository userExtraRepository, UserService userService, MailService mailService) {
 
         this.userRepository = userRepository;
+        this.userExtraRepository = userExtraRepository;
         this.userService = userService;
         this.mailService = mailService;
     }
@@ -96,9 +101,23 @@ public class AccountResource {
      */
     @GetMapping("/account")
     public UserDTO getAccount() {
-        return userService.getUserWithAuthorities()
-            .map(UserDTO::new)
-            .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
+    	UserDTO userDTO = userService.getUserWithAuthorities()
+        .map(UserDTO::new)
+        .orElseThrow(() -> new InternalServerErrorException("User could not be found"));
+    	
+    	User user = userRepository.findById(userDTO.getId()).get();
+		if (user.getId() != null) {
+			Long userExtraId = userExtraRepository.findExtraUserByUserId(user.getId());
+			if (userExtraId != null) {
+				UserExtra userExtra = userExtraRepository.findById(userExtraId).get();
+				// UserExtra userExtra = userExtraRepository.findOneByUser(user).get();
+				if (userExtra != null) {
+					userDTO.setVendorId(userExtra.getVendor().getId());
+					userDTO.setVendorname(userExtra.getVendor().getVendorname());
+				}
+			}
+		}
+        return userDTO;
     }
 
     /**

@@ -41,13 +41,13 @@ export class Home extends React.Component<IHomeProp> {
                 </Link>
               </Alert>
 
-              <Alert color="warning">
+              {/*<Alert color="warning">
                 <Translate contentKey="global.messages.info.register.noaccount">You do not have an account yet?</Translate>
                 &nbsp;
                 <Link to="/register" className="alert-link">
                   <Translate contentKey="global.messages.info.register.link">Register a new account</Translate>
                 </Link>
-              </Alert>
+              </Alert>*/}
             </div>
           )}
         </Col>

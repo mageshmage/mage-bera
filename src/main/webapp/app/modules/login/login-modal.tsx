@@ -67,14 +67,14 @@ class LoginModal extends React.Component<ILoginModalProps> {
                 <Translate contentKey="login.password.forgot">Did you forget your password?</Translate>
               </Link>
             </Alert>
-            <Alert color="warning">
+            {/*<Alert color="warning">
               <span>
                 <Translate contentKey="global.messages.info.register.noaccount">You don't have an account yet?</Translate>
               </span>{' '}
               <Link to="/register">
                 <Translate contentKey="global.messages.info.register.link">Register a new account</Translate>
               </Link>
-            </Alert>
+                </Alert>*/}
           </ModalBody>
           <ModalFooter>
             <Button color="secondary" onClick={handleClose} tabIndex="1">
