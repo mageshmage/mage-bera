@@ -123,7 +123,7 @@ export class TrackingStatusUpdate extends React.Component<ITrackingStatusUpdateP
                     {vendors
                       ? vendors.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
+                            {otherEntity.vendorname}
                           </option>
                         ))
                       : null}

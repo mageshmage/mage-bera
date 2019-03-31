@@ -19,6 +19,15 @@ public interface ShipmentInfoMapper extends EntityMapper<ShipmentInfoDTO, Shipme
     @Mapping(source = "vendor.id", target = "vendorId")
     @Mapping(source = "origin.id", target = "originId")
     @Mapping(source = "destination.id", target = "destinationId")
+    
+    @Mapping(source = "carrierDetails.value", target = "carrierDetailsValue")
+    @Mapping(source = "shipmentType.value", target = "shipmentTypeValue")
+    @Mapping(source = "shipmentMode.value", target = "shipmentModeValue")
+    @Mapping(source = "paymentMode.value", target = "paymentModeValue")
+    @Mapping(source = "trackingStatus.value", target = "trackingStatusValue")
+    @Mapping(source = "vendor.vendorname", target = "vendorname")
+    @Mapping(source = "origin.stateName", target = "originValue")
+    @Mapping(source = "destination.stateName", target = "destinationValue")
     ShipmentInfoDTO toDto(ShipmentInfo shipmentInfo);
 
     @Mapping(source = "carrierDetailsId", target = "carrierDetails")

@@ -3,6 +3,7 @@ export interface ICity {
   cityCode?: string;
   cityName?: string;
   stateId?: number;
+  stateName?: string;
 }
 
 export const defaultValue: Readonly<ICity> = {};

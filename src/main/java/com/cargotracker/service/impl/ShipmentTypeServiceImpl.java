@@ -54,6 +54,7 @@ public class ShipmentTypeServiceImpl implements ShipmentTypeService {
         shipmentType = shipmentTypeRepository.save(shipmentType);
         ShipmentTypeDTO result = shipmentTypeMapper.toDto(shipmentType);
         shipmentTypeSearchRepository.save(shipmentType);
+        result.setVendorname(shipmentType.getVendor().getVendorname());
         return result;
     }
 

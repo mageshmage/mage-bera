@@ -54,6 +54,7 @@ public class StateServiceImpl implements StateService {
         state = stateRepository.save(state);
         StateDTO result = stateMapper.toDto(state);
         stateSearchRepository.save(state);
+        result.setCountryName(state.getCountry().getCountryName());
         return result;
     }
 

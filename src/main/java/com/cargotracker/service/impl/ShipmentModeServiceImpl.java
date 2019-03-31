@@ -54,6 +54,7 @@ public class ShipmentModeServiceImpl implements ShipmentModeService {
         shipmentMode = shipmentModeRepository.save(shipmentMode);
         ShipmentModeDTO result = shipmentModeMapper.toDto(shipmentMode);
         shipmentModeSearchRepository.save(shipmentMode);
+        result.setVendorname(shipmentMode.getVendor().getVendorname());
         return result;
     }
 

@@ -18,20 +18,20 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { IRootState } from 'app/shared/reducers';
-import { getSearchEntities, getEntities } from './shipment-info.reducer';
+import { getSearchEntities, getEntities } from './shipment-information.reducer';
 import { IShipmentInfo } from 'app/shared/model/shipment-info.model';
 // tslint:disable-next-line:no-unused-variable
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
 import { ITEMS_PER_PAGE } from 'app/shared/util/pagination.constants';
 
-export interface IShipmentInfoProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
+export interface IShipmentInformationProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 
-export interface IShipmentInfoState extends IPaginationBaseState {
+export interface IShipmentInformationState extends IPaginationBaseState {
   search: string;
 }
 
-export class ShipmentInfo extends React.Component<IShipmentInfoProps, IShipmentInfoState> {
-  state: IShipmentInfoState = {
+export class ShipmentInformation extends React.Component<IShipmentInformationProps, IShipmentInformationState> {
+  state: IShipmentInformationState = {
     search: '',
     ...getSortState(this.props.location, ITEMS_PER_PAGE)
   };
@@ -343,4 +343,4 @@ type DispatchProps = typeof mapDispatchToProps;
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ShipmentInfo);
+)(ShipmentInformation);

@@ -106,7 +106,7 @@ export class PaymentMode extends React.Component<IPaymentModeProps, IPaymentMode
                   </td>
                   <td>{paymentMode.value}</td>
                   <td>{paymentMode.desc}</td>
-                  <td>{paymentMode.vendorId ? <Link to={`vendor/${paymentMode.vendorId}`}>{paymentMode.vendorId}</Link> : ''}</td>
+                  <td>{paymentMode.vendorId ? <Link to={`vendor/${paymentMode.vendorId}`}>{paymentMode.vendorname}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${paymentMode.id}`} color="info" size="sm">

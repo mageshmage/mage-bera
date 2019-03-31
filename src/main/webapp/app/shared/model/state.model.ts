@@ -6,6 +6,7 @@ export interface IState {
   stateName?: string;
   cities?: ICity[];
   countryId?: number;
+  countryName?: string;
 }
 
 export const defaultValue: Readonly<IState> = {};

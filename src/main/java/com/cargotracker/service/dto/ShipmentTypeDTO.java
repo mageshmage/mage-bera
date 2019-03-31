@@ -1,4 +1,5 @@
 package com.cargotracker.service.dto;
+
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -8,76 +9,87 @@ import java.util.Objects;
  */
 public class ShipmentTypeDTO implements Serializable {
 
-    private Long id;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    @NotNull
-    private String value;
+	private Long id;
 
-    private String desc;
+	@NotNull
+	private String value;
 
+	private String desc;
 
-    private Long vendorId;
+	private Long vendorId;
 
-    public Long getId() {
-        return id;
-    }
+	private String vendorname;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getValue() {
-        return value;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setValue(String value) {
-        this.value = value;
-    }
+	public String getValue() {
+		return value;
+	}
 
-    public String getDesc() {
-        return desc;
-    }
+	public void setValue(String value) {
+		this.value = value;
+	}
 
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
+	public String getDesc() {
+		return desc;
+	}
 
-    public Long getVendorId() {
-        return vendorId;
-    }
+	public void setDesc(String desc) {
+		this.desc = desc;
+	}
 
-    public void setVendorId(Long vendorId) {
-        this.vendorId = vendorId;
-    }
+	public Long getVendorId() {
+		return vendorId;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+	public void setVendorId(Long vendorId) {
+		this.vendorId = vendorId;
+	}
 
-        ShipmentTypeDTO shipmentTypeDTO = (ShipmentTypeDTO) o;
-        if (shipmentTypeDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), shipmentTypeDTO.getId());
-    }
+	public String getVendorname() {
+		return vendorname;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(getId());
-    }
+	public void setVendorname(String vendorname) {
+		this.vendorname = vendorname;
+	}
 
-    @Override
-    public String toString() {
-        return "ShipmentTypeDTO{" +
-            "id=" + getId() +
-            ", value='" + getValue() + "'" +
-            ", desc='" + getDesc() + "'" +
-            ", vendor=" + getVendorId() +
-            "}";
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		ShipmentTypeDTO shipmentTypeDTO = (ShipmentTypeDTO) o;
+		if (shipmentTypeDTO.getId() == null || getId() == null) {
+			return false;
+		}
+		return Objects.equals(getId(), shipmentTypeDTO.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(getId());
+	}
+
+	@Override
+	public String toString() {
+		return "ShipmentTypeDTO [id=" + id + ", value=" + value + ", desc=" + desc + ", vendorId=" + vendorId
+				+ ", vendorname=" + vendorname + "]";
+	}
+
 }

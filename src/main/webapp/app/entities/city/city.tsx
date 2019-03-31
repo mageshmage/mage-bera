@@ -106,7 +106,7 @@ export class City extends React.Component<ICityProps, ICityState> {
                   </td>
                   <td>{city.cityCode}</td>
                   <td>{city.cityName}</td>
-                  <td>{city.stateId ? <Link to={`state/${city.stateId}`}>{city.stateId}</Link> : ''}</td>
+                  <td>{city.stateId ? <Link to={`state/${city.stateId}`}>{city.stateName}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${city.id}`} color="info" size="sm">

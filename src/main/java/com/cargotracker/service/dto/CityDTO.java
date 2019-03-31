@@ -1,4 +1,5 @@
 package com.cargotracker.service.dto;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -7,75 +8,85 @@ import java.util.Objects;
  */
 public class CityDTO implements Serializable {
 
-    private Long id;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    private String cityCode;
+	private Long id;
 
-    private String cityName;
+	private String cityCode;
 
+	private String cityName;
 
-    private Long stateId;
+	private Long stateId;
 
-    public Long getId() {
-        return id;
-    }
+	private String stateName;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getCityCode() {
-        return cityCode;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setCityCode(String cityCode) {
-        this.cityCode = cityCode;
-    }
+	public String getCityCode() {
+		return cityCode;
+	}
 
-    public String getCityName() {
-        return cityName;
-    }
+	public void setCityCode(String cityCode) {
+		this.cityCode = cityCode;
+	}
 
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
-    }
+	public String getCityName() {
+		return cityName;
+	}
 
-    public Long getStateId() {
-        return stateId;
-    }
+	public void setCityName(String cityName) {
+		this.cityName = cityName;
+	}
 
-    public void setStateId(Long stateId) {
-        this.stateId = stateId;
-    }
+	public Long getStateId() {
+		return stateId;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+	public void setStateId(Long stateId) {
+		this.stateId = stateId;
+	}
 
-        CityDTO cityDTO = (CityDTO) o;
-        if (cityDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), cityDTO.getId());
-    }
+	public String getStateName() {
+		return stateName;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(getId());
-    }
+	public void setStateName(String stateName) {
+		this.stateName = stateName;
+	}
 
-    @Override
-    public String toString() {
-        return "CityDTO{" +
-            "id=" + getId() +
-            ", cityCode='" + getCityCode() + "'" +
-            ", cityName='" + getCityName() + "'" +
-            ", state=" + getStateId() +
-            "}";
-    }
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		CityDTO cityDTO = (CityDTO) o;
+		if (cityDTO.getId() == null || getId() == null) {
+			return false;
+		}
+		return Objects.equals(getId(), cityDTO.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(getId());
+	}
+
+	@Override
+	public String toString() {
+		return "CityDTO{" + "id=" + getId() + ", cityCode='" + getCityCode() + "'" + ", cityName='" + getCityName()
+				+ "'" + ", state=" + getStateId() + "}";
+	}
 }

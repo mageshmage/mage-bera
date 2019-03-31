@@ -1,11 +1,16 @@
 {
   "global": {
-    "title": "Cargotracker",
-    "browsehappy":
-      "आपण <strong>कालबाह्य</strong> ब्राउझर वापरत आहात. आपला अनुभव सुधारण्यासाठी आपला <a href=\"http://browsehappy.com/?locale=mr\">ब्राउझर श्रेणीसुधारित करा</a>",
+    "title": "Cargo Tracker",
+    "browsehappy": "आपण <strong>कालबाह्य</strong> ब्राउझर वापरत आहात. आपला अनुभव सुधारण्यासाठी आपला <a href=\"http://browsehappy.com/?locale=mr\">ब्राउझर श्रेणीसुधारित करा</a>",
     "menu": {
       "home": "होम",
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
+      "shipment": {
+        "main": "Shipment",
+        "information": "Shipment Information",
+        "tracking": "Shipment Tracking",
+        "uploadpod": "Upload POD"
+      },
       "entities": {
         "main": "एंटिटीज़",
         "vendor": "Vendor",
@@ -64,8 +69,7 @@
         "authenticated": {
           "prefix": "आपण ",
           "link": "साइन इन",
-          "suffix":
-            " करू इच्छित असल्यास, तुम्ही मुलभूत खाती प्रयत्न करू शकता:<br/>- प्रशासक (लॉग इन=\"admin\" आणि पासवर्ड=\"admin\") <br/>- वापरकर्ता (लॉग इन=\"user\" आणि पासवर्ड=\"user\")."
+          "suffix": " करू इच्छित असल्यास, तुम्ही मुलभूत खाती प्रयत्न करू शकता:<br/>- प्रशासक (लॉग इन=\"admin\" आणि पासवर्ड=\"admin\") <br/>- वापरकर्ता (लॉग इन=\"user\" आणि पासवर्ड=\"user\")."
         },
         "register": {
           "noaccount": "आपण खाते नाही?",

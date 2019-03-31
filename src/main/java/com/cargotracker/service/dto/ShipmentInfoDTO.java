@@ -1,4 +1,5 @@
 package com.cargotracker.service.dto;
+
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -10,310 +11,378 @@ import java.util.Objects;
  */
 public class ShipmentInfoDTO implements Serializable {
 
-    private Long id;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    @NotNull
-    private String consignmentNo;
+	private Long id;
 
-    @NotNull
-    private ZonedDateTime bookingDate;
+	@NotNull
+	private String consignmentNo;
 
-    @NotNull
-    private ZonedDateTime expectedDeliveryDate;
+	@NotNull
+	private ZonedDateTime bookingDate;
 
-    private BigDecimal actualWeight;
+	@NotNull
+	private ZonedDateTime expectedDeliveryDate;
 
-    private BigDecimal volumetricWeight;
+	private BigDecimal actualWeight;
 
-    private BigDecimal length;
+	private BigDecimal volumetricWeight;
 
-    private BigDecimal width;
+	private BigDecimal length;
 
-    private BigDecimal height;
+	private BigDecimal width;
 
-    private Long quantity;
+	private BigDecimal height;
 
-    private BigDecimal totalFright;
+	private Long quantity;
 
-    private String packageDesciption;
+	private BigDecimal totalFright;
 
-    @NotNull
-    private Boolean isThirdParty;
+	private String packageDesciption;
 
-    private String carrierRefNo;
+	@NotNull
+	private Boolean isThirdParty;
 
-    private ZonedDateTime deliveredDate;
+	private String carrierRefNo;
 
-    private String receivedBy;
+	private ZonedDateTime deliveredDate;
 
-    private String relationShip;
+	private String receivedBy;
 
+	private String relationShip;
 
-    private Long carrierDetailsId;
+	private Long carrierDetailsId;
 
-    private Long shipmentTypeId;
+	private String carrierDetailsValue;
 
-    private Long shipmentModeId;
+	private Long shipmentTypeId;
 
-    private Long paymentModeId;
+	private String shipmentTypeValue;
 
-    private Long trackingStatusId;
+	private Long shipmentModeId;
 
-    private Long vendorId;
+	private String shipmentModeValue;
 
-    private Long originId;
+	private Long paymentModeId;
 
-    private Long destinationId;
+	private String paymentModeValue;
 
-    public Long getId() {
-        return id;
-    }
+	private Long trackingStatusId;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	private String trackingStatusValue;
 
-    public String getConsignmentNo() {
-        return consignmentNo;
-    }
+	private Long vendorId;
 
-    public void setConsignmentNo(String consignmentNo) {
-        this.consignmentNo = consignmentNo;
-    }
+	private String vendorname;
 
-    public ZonedDateTime getBookingDate() {
-        return bookingDate;
-    }
+	private Long originId;
 
-    public void setBookingDate(ZonedDateTime bookingDate) {
-        this.bookingDate = bookingDate;
-    }
+	private String originValue;
 
-    public ZonedDateTime getExpectedDeliveryDate() {
-        return expectedDeliveryDate;
-    }
+	private Long destinationId;
 
-    public void setExpectedDeliveryDate(ZonedDateTime expectedDeliveryDate) {
-        this.expectedDeliveryDate = expectedDeliveryDate;
-    }
+	private String destinationValue;
 
-    public BigDecimal getActualWeight() {
-        return actualWeight;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setActualWeight(BigDecimal actualWeight) {
-        this.actualWeight = actualWeight;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public BigDecimal getVolumetricWeight() {
-        return volumetricWeight;
-    }
+	public String getConsignmentNo() {
+		return consignmentNo;
+	}
 
-    public void setVolumetricWeight(BigDecimal volumetricWeight) {
-        this.volumetricWeight = volumetricWeight;
-    }
-
-    public BigDecimal getLength() {
-        return length;
-    }
-
-    public void setLength(BigDecimal length) {
-        this.length = length;
-    }
-
-    public BigDecimal getWidth() {
-        return width;
-    }
-
-    public void setWidth(BigDecimal width) {
-        this.width = width;
-    }
-
-    public BigDecimal getHeight() {
-        return height;
-    }
-
-    public void setHeight(BigDecimal height) {
-        this.height = height;
-    }
-
-    public Long getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
-    }
-
-    public BigDecimal getTotalFright() {
-        return totalFright;
-    }
-
-    public void setTotalFright(BigDecimal totalFright) {
-        this.totalFright = totalFright;
-    }
-
-    public String getPackageDesciption() {
-        return packageDesciption;
-    }
-
-    public void setPackageDesciption(String packageDesciption) {
-        this.packageDesciption = packageDesciption;
-    }
-
-    public Boolean isIsThirdParty() {
-        return isThirdParty;
-    }
-
-    public void setIsThirdParty(Boolean isThirdParty) {
-        this.isThirdParty = isThirdParty;
-    }
-
-    public String getCarrierRefNo() {
-        return carrierRefNo;
-    }
-
-    public void setCarrierRefNo(String carrierRefNo) {
-        this.carrierRefNo = carrierRefNo;
-    }
-
-    public ZonedDateTime getDeliveredDate() {
-        return deliveredDate;
-    }
-
-    public void setDeliveredDate(ZonedDateTime deliveredDate) {
-        this.deliveredDate = deliveredDate;
-    }
-
-    public String getReceivedBy() {
-        return receivedBy;
-    }
-
-    public void setReceivedBy(String receivedBy) {
-        this.receivedBy = receivedBy;
-    }
-
-    public String getRelationShip() {
-        return relationShip;
-    }
-
-    public void setRelationShip(String relationShip) {
-        this.relationShip = relationShip;
-    }
-
-    public Long getCarrierDetailsId() {
-        return carrierDetailsId;
-    }
-
-    public void setCarrierDetailsId(Long carrierDetailsId) {
-        this.carrierDetailsId = carrierDetailsId;
-    }
-
-    public Long getShipmentTypeId() {
-        return shipmentTypeId;
-    }
-
-    public void setShipmentTypeId(Long shipmentTypeId) {
-        this.shipmentTypeId = shipmentTypeId;
-    }
-
-    public Long getShipmentModeId() {
-        return shipmentModeId;
-    }
-
-    public void setShipmentModeId(Long shipmentModeId) {
-        this.shipmentModeId = shipmentModeId;
-    }
-
-    public Long getPaymentModeId() {
-        return paymentModeId;
-    }
-
-    public void setPaymentModeId(Long paymentModeId) {
-        this.paymentModeId = paymentModeId;
-    }
-
-    public Long getTrackingStatusId() {
-        return trackingStatusId;
-    }
-
-    public void setTrackingStatusId(Long trackingStatusId) {
-        this.trackingStatusId = trackingStatusId;
-    }
-
-    public Long getVendorId() {
-        return vendorId;
-    }
-
-    public void setVendorId(Long vendorId) {
-        this.vendorId = vendorId;
-    }
-
-    public Long getOriginId() {
-        return originId;
-    }
-
-    public void setOriginId(Long stateId) {
-        this.originId = stateId;
-    }
-
-    public Long getDestinationId() {
-        return destinationId;
-    }
-
-    public void setDestinationId(Long stateId) {
-        this.destinationId = stateId;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-
-        ShipmentInfoDTO shipmentInfoDTO = (ShipmentInfoDTO) o;
-        if (shipmentInfoDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), shipmentInfoDTO.getId());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(getId());
-    }
-
-    @Override
-    public String toString() {
-        return "ShipmentInfoDTO{" +
-            "id=" + getId() +
-            ", consignmentNo='" + getConsignmentNo() + "'" +
-            ", bookingDate='" + getBookingDate() + "'" +
-            ", expectedDeliveryDate='" + getExpectedDeliveryDate() + "'" +
-            ", actualWeight=" + getActualWeight() +
-            ", volumetricWeight=" + getVolumetricWeight() +
-            ", length=" + getLength() +
-            ", width=" + getWidth() +
-            ", height=" + getHeight() +
-            ", quantity=" + getQuantity() +
-            ", totalFright=" + getTotalFright() +
-            ", packageDesciption='" + getPackageDesciption() + "'" +
-            ", isThirdParty='" + isIsThirdParty() + "'" +
-            ", carrierRefNo='" + getCarrierRefNo() + "'" +
-            ", deliveredDate='" + getDeliveredDate() + "'" +
-            ", receivedBy='" + getReceivedBy() + "'" +
-            ", relationShip='" + getRelationShip() + "'" +
-            ", carrierDetails=" + getCarrierDetailsId() +
-            ", shipmentType=" + getShipmentTypeId() +
-            ", shipmentMode=" + getShipmentModeId() +
-            ", paymentMode=" + getPaymentModeId() +
-            ", trackingStatus=" + getTrackingStatusId() +
-            ", vendor=" + getVendorId() +
-            ", origin=" + getOriginId() +
-            ", destination=" + getDestinationId() +
-            "}";
-    }
+	public void setConsignmentNo(String consignmentNo) {
+		this.consignmentNo = consignmentNo;
+	}
+
+	public ZonedDateTime getBookingDate() {
+		return bookingDate;
+	}
+
+	public void setBookingDate(ZonedDateTime bookingDate) {
+		this.bookingDate = bookingDate;
+	}
+
+	public ZonedDateTime getExpectedDeliveryDate() {
+		return expectedDeliveryDate;
+	}
+
+	public void setExpectedDeliveryDate(ZonedDateTime expectedDeliveryDate) {
+		this.expectedDeliveryDate = expectedDeliveryDate;
+	}
+
+	public BigDecimal getActualWeight() {
+		return actualWeight;
+	}
+
+	public void setActualWeight(BigDecimal actualWeight) {
+		this.actualWeight = actualWeight;
+	}
+
+	public BigDecimal getVolumetricWeight() {
+		return volumetricWeight;
+	}
+
+	public void setVolumetricWeight(BigDecimal volumetricWeight) {
+		this.volumetricWeight = volumetricWeight;
+	}
+
+	public BigDecimal getLength() {
+		return length;
+	}
+
+	public void setLength(BigDecimal length) {
+		this.length = length;
+	}
+
+	public BigDecimal getWidth() {
+		return width;
+	}
+
+	public void setWidth(BigDecimal width) {
+		this.width = width;
+	}
+
+	public BigDecimal getHeight() {
+		return height;
+	}
+
+	public void setHeight(BigDecimal height) {
+		this.height = height;
+	}
+
+	public Long getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Long quantity) {
+		this.quantity = quantity;
+	}
+
+	public BigDecimal getTotalFright() {
+		return totalFright;
+	}
+
+	public void setTotalFright(BigDecimal totalFright) {
+		this.totalFright = totalFright;
+	}
+
+	public String getPackageDesciption() {
+		return packageDesciption;
+	}
+
+	public void setPackageDesciption(String packageDesciption) {
+		this.packageDesciption = packageDesciption;
+	}
+
+	public Boolean isIsThirdParty() {
+		return isThirdParty;
+	}
+
+	public void setIsThirdParty(Boolean isThirdParty) {
+		this.isThirdParty = isThirdParty;
+	}
+
+	public String getCarrierRefNo() {
+		return carrierRefNo;
+	}
+
+	public void setCarrierRefNo(String carrierRefNo) {
+		this.carrierRefNo = carrierRefNo;
+	}
+
+	public ZonedDateTime getDeliveredDate() {
+		return deliveredDate;
+	}
+
+	public void setDeliveredDate(ZonedDateTime deliveredDate) {
+		this.deliveredDate = deliveredDate;
+	}
+
+	public String getReceivedBy() {
+		return receivedBy;
+	}
+
+	public void setReceivedBy(String receivedBy) {
+		this.receivedBy = receivedBy;
+	}
+
+	public String getRelationShip() {
+		return relationShip;
+	}
+
+	public void setRelationShip(String relationShip) {
+		this.relationShip = relationShip;
+	}
+
+	public Long getCarrierDetailsId() {
+		return carrierDetailsId;
+	}
+
+	public void setCarrierDetailsId(Long carrierDetailsId) {
+		this.carrierDetailsId = carrierDetailsId;
+	}
+
+	public Long getShipmentTypeId() {
+		return shipmentTypeId;
+	}
+
+	public void setShipmentTypeId(Long shipmentTypeId) {
+		this.shipmentTypeId = shipmentTypeId;
+	}
+
+	public Long getShipmentModeId() {
+		return shipmentModeId;
+	}
+
+	public void setShipmentModeId(Long shipmentModeId) {
+		this.shipmentModeId = shipmentModeId;
+	}
+
+	public Long getPaymentModeId() {
+		return paymentModeId;
+	}
+
+	public void setPaymentModeId(Long paymentModeId) {
+		this.paymentModeId = paymentModeId;
+	}
+
+	public Long getTrackingStatusId() {
+		return trackingStatusId;
+	}
+
+	public void setTrackingStatusId(Long trackingStatusId) {
+		this.trackingStatusId = trackingStatusId;
+	}
+
+	public Long getVendorId() {
+		return vendorId;
+	}
+
+	public void setVendorId(Long vendorId) {
+		this.vendorId = vendorId;
+	}
+
+	public Long getOriginId() {
+		return originId;
+	}
+
+	public void setOriginId(Long stateId) {
+		this.originId = stateId;
+	}
+
+	public Long getDestinationId() {
+		return destinationId;
+	}
+
+	public void setDestinationId(Long stateId) {
+		this.destinationId = stateId;
+	}
+
+	public String getCarrierDetailsValue() {
+		return carrierDetailsValue;
+	}
+
+	public void setCarrierDetailsValue(String carrierDetailsValue) {
+		this.carrierDetailsValue = carrierDetailsValue;
+	}
+
+	public String getShipmentTypeValue() {
+		return shipmentTypeValue;
+	}
+
+	public void setShipmentTypeValue(String shipmentTypeValue) {
+		this.shipmentTypeValue = shipmentTypeValue;
+	}
+
+	public String getShipmentModeValue() {
+		return shipmentModeValue;
+	}
+
+	public void setShipmentModeValue(String shipmentModeValue) {
+		this.shipmentModeValue = shipmentModeValue;
+	}
+
+	public String getPaymentModeValue() {
+		return paymentModeValue;
+	}
+
+	public void setPaymentModeValue(String paymentModeValue) {
+		this.paymentModeValue = paymentModeValue;
+	}
+
+	public String getTrackingStatusValue() {
+		return trackingStatusValue;
+	}
+
+	public void setTrackingStatusValue(String trackingStatusValue) {
+		this.trackingStatusValue = trackingStatusValue;
+	}
+
+	public String getVendorname() {
+		return vendorname;
+	}
+
+	public void setVendorname(String vendorname) {
+		this.vendorname = vendorname;
+	}
+
+	public String getOriginValue() {
+		return originValue;
+	}
+
+	public void setOriginValue(String originValue) {
+		this.originValue = originValue;
+	}
+
+	public String getDestinationValue() {
+		return destinationValue;
+	}
+
+	public void setDestinationValue(String destinationValue) {
+		this.destinationValue = destinationValue;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		ShipmentInfoDTO shipmentInfoDTO = (ShipmentInfoDTO) o;
+		if (shipmentInfoDTO.getId() == null || getId() == null) {
+			return false;
+		}
+		return Objects.equals(getId(), shipmentInfoDTO.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(getId());
+	}
+
+	@Override
+	public String toString() {
+		return "ShipmentInfoDTO{" + "id=" + getId() + ", consignmentNo='" + getConsignmentNo() + "'" + ", bookingDate='"
+				+ getBookingDate() + "'" + ", expectedDeliveryDate='" + getExpectedDeliveryDate() + "'"
+				+ ", actualWeight=" + getActualWeight() + ", volumetricWeight=" + getVolumetricWeight() + ", length="
+				+ getLength() + ", width=" + getWidth() + ", height=" + getHeight() + ", quantity=" + getQuantity()
+				+ ", totalFright=" + getTotalFright() + ", packageDesciption='" + getPackageDesciption() + "'"
+				+ ", isThirdParty='" + isIsThirdParty() + "'" + ", carrierRefNo='" + getCarrierRefNo() + "'"
+				+ ", deliveredDate='" + getDeliveredDate() + "'" + ", receivedBy='" + getReceivedBy() + "'"
+				+ ", relationShip='" + getRelationShip() + "'" + ", carrierDetails=" + getCarrierDetailsId()
+				+ ", shipmentType=" + getShipmentTypeId() + ", shipmentMode=" + getShipmentModeId() + ", paymentMode="
+				+ getPaymentModeId() + ", trackingStatus=" + getTrackingStatusId() + ", vendor=" + getVendorId()
+				+ ", origin=" + getOriginId() + ", destination=" + getDestinationId() + "}";
+	}
 }

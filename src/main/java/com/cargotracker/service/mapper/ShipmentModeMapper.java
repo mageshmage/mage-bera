@@ -8,21 +8,22 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity ShipmentMode and its DTO ShipmentModeDTO.
  */
-@Mapper(componentModel = "spring", uses = {VendorMapper.class})
+@Mapper(componentModel = "spring", uses = { VendorMapper.class })
 public interface ShipmentModeMapper extends EntityMapper<ShipmentModeDTO, ShipmentMode> {
 
-    @Mapping(source = "vendor.id", target = "vendorId")
-    ShipmentModeDTO toDto(ShipmentMode shipmentMode);
+	@Mappings({ @Mapping(source = "vendor.id", target = "vendorId"),
+			@Mapping(source = "vendor.vendorname", target = "vendorname") })
+	ShipmentModeDTO toDto(ShipmentMode shipmentMode);
 
-    @Mapping(source = "vendorId", target = "vendor")
-    ShipmentMode toEntity(ShipmentModeDTO shipmentModeDTO);
+	@Mapping(source = "vendorId", target = "vendor")
+	ShipmentMode toEntity(ShipmentModeDTO shipmentModeDTO);
 
-    default ShipmentMode fromId(Long id) {
-        if (id == null) {
-            return null;
-        }
-        ShipmentMode shipmentMode = new ShipmentMode();
-        shipmentMode.setId(id);
-        return shipmentMode;
-    }
+	default ShipmentMode fromId(Long id) {
+		if (id == null) {
+			return null;
+		}
+		ShipmentMode shipmentMode = new ShipmentMode();
+		shipmentMode.setId(id);
+		return shipmentMode;
+	}
 }

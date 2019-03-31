@@ -54,6 +54,7 @@ public class PaymentModeServiceImpl implements PaymentModeService {
         paymentMode = paymentModeRepository.save(paymentMode);
         PaymentModeDTO result = paymentModeMapper.toDto(paymentMode);
         paymentModeSearchRepository.save(paymentMode);
+        result.setVendorname(paymentMode.getVendor().getVendorname());
         return result;
     }
 

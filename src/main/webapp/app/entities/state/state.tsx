@@ -106,7 +106,7 @@ export class State extends React.Component<IStateProps, IStateState> {
                   </td>
                   <td>{state.stateCode}</td>
                   <td>{state.stateName}</td>
-                  <td>{state.countryId ? <Link to={`country/${state.countryId}`}>{state.countryId}</Link> : ''}</td>
+                  <td>{state.countryId ? <Link to={`country/${state.countryId}`}>{state.countryName}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${state.id}`} color="info" size="sm">

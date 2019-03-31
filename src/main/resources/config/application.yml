@@ -117,7 +117,7 @@ jhipster:
         #allow-credentials: true
         #max-age: 1800
     mail:
-        from: cargotracker@localhost
+        from: magesh2522@gmail.com
     swagger:
         default-include-pattern: /api/.*
         title: cargotracker API

@@ -106,7 +106,9 @@ export class TrackingStatus extends React.Component<ITrackingStatusProps, ITrack
                   </td>
                   <td>{trackingStatus.value}</td>
                   <td>{trackingStatus.desc}</td>
-                  <td>{trackingStatus.vendorId ? <Link to={`vendor/${trackingStatus.vendorId}`}>{trackingStatus.vendorId}</Link> : ''}</td>
+                  <td>
+                    {trackingStatus.vendorId ? <Link to={`vendor/${trackingStatus.vendorId}`}>{trackingStatus.vendorname}</Link> : ''}
+                  </td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${trackingStatus.id}`} color="info" size="sm">

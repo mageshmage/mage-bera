@@ -8,21 +8,22 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity PaymentMode and its DTO PaymentModeDTO.
  */
-@Mapper(componentModel = "spring", uses = {VendorMapper.class})
+@Mapper(componentModel = "spring", uses = { VendorMapper.class })
 public interface PaymentModeMapper extends EntityMapper<PaymentModeDTO, PaymentMode> {
 
-    @Mapping(source = "vendor.id", target = "vendorId")
-    PaymentModeDTO toDto(PaymentMode paymentMode);
+	@Mappings({ @Mapping(source = "vendor.id", target = "vendorId"),
+			@Mapping(source = "vendor.vendorname", target = "vendorname") })
+	PaymentModeDTO toDto(PaymentMode paymentMode);
 
-    @Mapping(source = "vendorId", target = "vendor")
-    PaymentMode toEntity(PaymentModeDTO paymentModeDTO);
+	@Mapping(source = "vendorId", target = "vendor")
+	PaymentMode toEntity(PaymentModeDTO paymentModeDTO);
 
-    default PaymentMode fromId(Long id) {
-        if (id == null) {
-            return null;
-        }
-        PaymentMode paymentMode = new PaymentMode();
-        paymentMode.setId(id);
-        return paymentMode;
-    }
+	default PaymentMode fromId(Long id) {
+		if (id == null) {
+			return null;
+		}
+		PaymentMode paymentMode = new PaymentMode();
+		paymentMode.setId(id);
+		return paymentMode;
+	}
 }

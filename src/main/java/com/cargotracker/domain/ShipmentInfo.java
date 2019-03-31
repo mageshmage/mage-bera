@@ -84,35 +84,35 @@ public class ShipmentInfo implements Serializable {
     private String relationShip;
 
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn()
     private CarrierDetails carrierDetails;
 
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn()
     private ShipmentType shipmentType;
 
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn()
     private ShipmentMode shipmentMode;
 
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn()
     private PaymentMode paymentMode;
 
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn()
     private TrackingStatus trackingStatus;
 
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn()
     private Vendor vendor;
 
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn()
     private State origin;
 
     @OneToOne
-    @JoinColumn(unique = true)
+    @JoinColumn()
     private State destination;
 
     @OneToMany(mappedBy = "shipmentInfo")

@@ -106,7 +106,7 @@ export class ShipmentType extends React.Component<IShipmentTypeProps, IShipmentT
                   </td>
                   <td>{shipmentType.value}</td>
                   <td>{shipmentType.desc}</td>
-                  <td>{shipmentType.vendorId ? <Link to={`vendor/${shipmentType.vendorId}`}>{shipmentType.vendorId}</Link> : ''}</td>
+                  <td>{shipmentType.vendorId ? <Link to={`vendor/${shipmentType.vendorId}`}>{shipmentType.vendorname}</Link> : ''}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${shipmentType.id}`} color="info" size="sm">

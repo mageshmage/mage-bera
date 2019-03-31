@@ -52,6 +52,14 @@ public class ShipmentInfoServiceImpl implements ShipmentInfoService {
         shipmentInfo = shipmentInfoRepository.save(shipmentInfo);
         ShipmentInfoDTO result = shipmentInfoMapper.toDto(shipmentInfo);
         shipmentInfoSearchRepository.save(shipmentInfo);
+        result.setCarrierDetailsValue(shipmentInfo.getCarrierDetails().getValue());
+        result.setShipmentTypeValue(shipmentInfo.getShipmentType().getValue());
+        result.setShipmentModeValue(shipmentInfo.getShipmentMode().getValue());
+        result.setPaymentModeValue(shipmentInfo.getPaymentMode().getValue());
+        result.setTrackingStatusValue(shipmentInfo.getTrackingStatus().getValue());
+        result.setVendorname(shipmentInfo.getVendor().getVendorname());
+        result.setOriginValue(shipmentInfo.getOrigin().getStateName());
+        result.setDestinationValue(shipmentInfo.getOrigin().getStateName());
         return result;
     }
 

@@ -54,6 +54,7 @@ public class TrackingStatusServiceImpl implements TrackingStatusService {
         trackingStatus = trackingStatusRepository.save(trackingStatus);
         TrackingStatusDTO result = trackingStatusMapper.toDto(trackingStatus);
         trackingStatusSearchRepository.save(trackingStatus);
+        result.setVendorname(trackingStatus.getVendor().getVendorname());
         return result;
     }
 

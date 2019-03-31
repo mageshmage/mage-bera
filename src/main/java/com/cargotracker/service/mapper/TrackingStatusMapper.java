@@ -8,21 +8,22 @@ import org.mapstruct.*;
 /**
  * Mapper for the entity TrackingStatus and its DTO TrackingStatusDTO.
  */
-@Mapper(componentModel = "spring", uses = {VendorMapper.class})
+@Mapper(componentModel = "spring", uses = { VendorMapper.class })
 public interface TrackingStatusMapper extends EntityMapper<TrackingStatusDTO, TrackingStatus> {
 
-    @Mapping(source = "vendor.id", target = "vendorId")
-    TrackingStatusDTO toDto(TrackingStatus trackingStatus);
+	@Mappings({ @Mapping(source = "vendor.id", target = "vendorId"),
+			@Mapping(source = "vendor.vendorname", target = "vendorname") })
+	TrackingStatusDTO toDto(TrackingStatus trackingStatus);
 
-    @Mapping(source = "vendorId", target = "vendor")
-    TrackingStatus toEntity(TrackingStatusDTO trackingStatusDTO);
+	@Mapping(source = "vendorId", target = "vendor")
+	TrackingStatus toEntity(TrackingStatusDTO trackingStatusDTO);
 
-    default TrackingStatus fromId(Long id) {
-        if (id == null) {
-            return null;
-        }
-        TrackingStatus trackingStatus = new TrackingStatus();
-        trackingStatus.setId(id);
-        return trackingStatus;
-    }
+	default TrackingStatus fromId(Long id) {
+		if (id == null) {
+			return null;
+		}
+		TrackingStatus trackingStatus = new TrackingStatus();
+		trackingStatus.setId(id);
+		return trackingStatus;
+	}
 }

@@ -22,15 +22,15 @@ import { IVendor } from 'app/shared/model/vendor.model';
 import { getEntities as getVendors } from 'app/entities/vendor/vendor.reducer';
 import { IState } from 'app/shared/model/state.model';
 import { getEntities as getStates } from 'app/entities/state/state.reducer';
-import { getEntity, updateEntity, createEntity, reset } from './shipment-info.reducer';
+import { getEntity, updateEntity, createEntity, reset } from './shipment-information.reducer';
 import { IShipmentInfo } from 'app/shared/model/shipment-info.model';
 // tslint:disable-next-line:no-unused-variable
 import { convertDateTimeFromServer, convertDateTimeToServer } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
 
-export interface IShipmentInfoUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
+export interface IShipmentInformationUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
-export interface IShipmentInfoUpdateState {
+export interface IShipmentInformationUpdateState {
   isNew: boolean;
   carrierDetailsId: string;
   shipmentTypeId: string;
@@ -42,7 +42,7 @@ export interface IShipmentInfoUpdateState {
   destinationId: string;
 }
 
-export class ShipmentInfoUpdate extends React.Component<IShipmentInfoUpdateProps, IShipmentInfoUpdateState> {
+export class ShipmentInformationUpdate extends React.Component<IShipmentInformationUpdateProps, IShipmentInformationUpdateState> {
   constructor(props) {
     super(props);
     this.state = {
@@ -448,4 +448,4 @@ type DispatchProps = typeof mapDispatchToProps;
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(ShipmentInfoUpdate);
+)(ShipmentInformationUpdate);

@@ -123,7 +123,7 @@ export class CarrierDetailsUpdate extends React.Component<ICarrierDetailsUpdateP
                     {vendors
                       ? vendors.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
+                            {otherEntity.vendorname}
                           </option>
                         ))
                       : null}

@@ -123,7 +123,7 @@ export class ShipmentTypeUpdate extends React.Component<IShipmentTypeUpdateProps
                     {vendors
                       ? vendors.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
+                            {otherEntity.vendorname}
                           </option>
                         ))
                       : null}

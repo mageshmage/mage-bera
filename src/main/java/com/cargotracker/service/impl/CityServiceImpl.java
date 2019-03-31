@@ -54,6 +54,7 @@ public class CityServiceImpl implements CityService {
         city = cityRepository.save(city);
         CityDTO result = cityMapper.toDto(city);
         citySearchRepository.save(city);
+        result.setStateName(city.getState().getStateName());
         return result;
     }
 

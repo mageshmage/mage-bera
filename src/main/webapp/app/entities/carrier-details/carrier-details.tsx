@@ -106,7 +106,9 @@ export class CarrierDetails extends React.Component<ICarrierDetailsProps, ICarri
                   </td>
                   <td>{carrierDetails.value}</td>
                   <td>{carrierDetails.desc}</td>
-                  <td>{carrierDetails.vendorId ? <Link to={`vendor/${carrierDetails.vendorId}`}>{carrierDetails.vendorId}</Link> : ''}</td>
+                  <td>
+                    {carrierDetails.vendorId ? <Link to={`vendor/${carrierDetails.vendorId}`}>{carrierDetails.vendorname}</Link> : ''}
+                  </td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${carrierDetails.id}`} color="info" size="sm">

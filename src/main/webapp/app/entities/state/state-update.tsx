@@ -116,7 +116,7 @@ export class StateUpdate extends React.Component<IStateUpdateProps, IStateUpdate
                     {countries
                       ? countries.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
+                            {otherEntity.countryName}
                           </option>
                         ))
                       : null}

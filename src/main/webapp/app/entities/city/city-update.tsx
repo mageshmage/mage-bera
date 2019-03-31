@@ -116,7 +116,7 @@ export class CityUpdate extends React.Component<ICityUpdateProps, ICityUpdateSta
                     {states
                       ? states.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
-                            {otherEntity.id}
+                            {otherEntity.stateName}
                           </option>
                         ))
                       : null}

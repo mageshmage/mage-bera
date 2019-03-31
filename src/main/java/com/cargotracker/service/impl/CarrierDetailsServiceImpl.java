@@ -54,6 +54,7 @@ public class CarrierDetailsServiceImpl implements CarrierDetailsService {
         carrierDetails = carrierDetailsRepository.save(carrierDetails);
         CarrierDetailsDTO result = carrierDetailsMapper.toDto(carrierDetails);
         carrierDetailsSearchRepository.save(carrierDetails);
+        result.setVendorname(carrierDetails.getVendor().getVendorname());
         return result;
     }
 
