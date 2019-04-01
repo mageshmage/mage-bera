@@ -17,8 +17,15 @@ import { hasAnyAuthority } from 'app/shared/auth/private-route';
 import ErrorBoundary from 'app/shared/error/error-boundary';
 import { AUTHORITIES } from 'app/config/constants';
 import AppRoutes from 'app/routes';
+import { AppContainer } from 'react-hot-loader';
+import { Provider } from 'react-redux';
 
-export interface IAppProps extends StateProps, DispatchProps {}
+export interface IAppInputProps {
+  store: any;
+  devTools: any;
+}
+
+export interface IAppProps extends IAppInputProps, StateProps, DispatchProps {}
 
 export class App extends React.Component<IAppProps> {
   componentDidMount() {
@@ -29,34 +36,44 @@ export class App extends React.Component<IAppProps> {
   render() {
     const paddingTop = '60px';
     return (
-      <Router>
-        <div className="app-container" style={{ paddingTop }}>
-          <ToastContainer
-            position={toast.POSITION.TOP_LEFT as ToastPosition}
-            className="toastify-container"
-            toastClassName="toastify-toast"
-          />
-          <ErrorBoundary>
-            <Header
-              isAuthenticated={this.props.isAuthenticated}
-              isAdmin={this.props.isAdmin}
-              currentLocale={this.props.currentLocale}
-              onLocaleChange={this.props.setLocale}
-              ribbonEnv={this.props.ribbonEnv}
-              isInProduction={this.props.isInProduction}
-              isSwaggerEnabled={this.props.isSwaggerEnabled}
-            />
-          </ErrorBoundary>
-          <div className="container-fluid view-container" id="app-view-container">
-            <Card className="jh-card">
-              <ErrorBoundary>
-                <AppRoutes />
-              </ErrorBoundary>
-            </Card>
-            <Footer />
-          </div>
-        </div>
-      </Router>
+      <ErrorBoundary>
+        <AppContainer>
+          <Provider store={this.props.store}>
+            <div>
+              {/* If this slows down the app in dev disable it and enable when required  */}
+              {this.props.devTools}
+              <Router>
+                <div className="app-container" style={{ paddingTop }}>
+                  <ToastContainer
+                    position={toast.POSITION.TOP_LEFT as ToastPosition}
+                    className="toastify-container"
+                    toastClassName="toastify-toast"
+                  />
+                  <ErrorBoundary>
+                    <Header
+                      isAuthenticated={this.props.isAuthenticated}
+                      isAdmin={this.props.isAdmin}
+                      currentLocale={this.props.currentLocale}
+                      onLocaleChange={this.props.setLocale}
+                      ribbonEnv={this.props.ribbonEnv}
+                      isInProduction={this.props.isInProduction}
+                      isSwaggerEnabled={this.props.isSwaggerEnabled}
+                    />
+                  </ErrorBoundary>
+                  <div className="container-fluid view-container" id="app-view-container">
+                    <Card className="jh-card">
+                      <ErrorBoundary>
+                        <AppRoutes />
+                      </ErrorBoundary>
+                    </Card>
+                    <Footer />
+                  </div>
+                </div>
+              </Router>
+            </div>
+          </Provider>
+        </AppContainer>
+      </ErrorBoundary>
     );
   }
 }

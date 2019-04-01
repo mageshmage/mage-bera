@@ -12,6 +12,11 @@ import { clearAuthentication } from './shared/reducers/authentication';
 import ErrorBoundary from './shared/error/error-boundary';
 import AppComponent from './app';
 import { loadIcons } from './config/icon-loader';
+import { Switch } from 'react-router-dom';
+import { HashRouter as Router } from 'react-router-dom';
+import LandingPage from 'app/portal/LandingPage/LandingPage';
+import ProfilePage from 'app/portal/ProfilePage/ProfilePage';
+import { Route, Redirect, RouteProps } from 'react-router-dom';
 
 const devTools = process.env.NODE_ENV === 'development' ? <DevTools /> : null;
 
@@ -27,17 +32,13 @@ const rootEl = document.getElementById('root');
 
 const render = Component =>
   ReactDOM.render(
-    <ErrorBoundary>
-      <AppContainer>
-        <Provider store={store}>
-          <div>
-            {/* If this slows down the app in dev disable it and enable when required  */}
-            {devTools}
-            <Component />
-          </div>
-        </Provider>
-      </AppContainer>
-    </ErrorBoundary>,
+    <Router>
+      <Switch>
+        <Route path="/landing-page" component={LandingPage} />
+        <Route path="/profile-page" component={ProfilePage} />
+        <Route path="/" component={() => <Component store={store} devTools={devTools} />} />
+      </Switch>
+    </Router>,
     rootEl
   );
 

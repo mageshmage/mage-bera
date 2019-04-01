@@ -52,6 +52,16 @@ module.exports = options => ({
   module: {
     rules: [
       {
+        test: /\.js|jsx$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        options: {
+          plugins: ['transform-class-properties',
+          '@babel/plugin-transform-runtime'],
+          presets: ['@babel/preset-env']
+        }
+      },
+      {
         test: /\.tsx?$/,
         use: getTsLoaderRule(options.env),
         include: [utils.root('./src/main/webapp/app')],
