@@ -3,7 +3,7 @@ import React from "react";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 // @material-ui/icons
-import Chat from "@material-ui/icons/Chat";
+import { Chat, Home, LocalShipping, DirectionsRailway, Flight }  from "@material-ui/icons";
 import VerifiedUser from "@material-ui/icons/VerifiedUser";
 import Fingerprint from "@material-ui/icons/Fingerprint";
 // core components
@@ -20,41 +20,50 @@ class ProductSection extends React.Component {
       <div className={classes.section}>
         <GridContainer justify="center">
           <GridItem xs={12} sm={12} md={8}>
-            <h2 className={classes.title}>Let's talk product</h2>
-            <h5 className={classes.description}>
+            <h2 className={classes.title}>At Your Service</h2>
+            {/*<h5 className={classes.description}>
               This is the paragraph where you can write more details about your
               product. Keep you user engaged by providing meaningful
               information. Remember that by this time, the user is curious,
               otherwise he wouldn't scroll to get here. Add a button if you want
               the user to see more.
-            </h5>
+            </h5>*/}
           </GridItem>
         </GridContainer>
         <div>
           <GridContainer>
-            <GridItem xs={12} sm={12} md={4}>
+            <GridItem xs={12} sm={12} md={3}>
               <InfoArea
-                title="Free Chat"
-                description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
-                icon={Chat}
-                iconColor="info"
+                title="Door To Door"
+                description="Door to Door delivery is the most common and convenient way of shipment for the customer"
+                icon={Home}
+                iconColor="danger"
                 vertical
               />
             </GridItem>
-            <GridItem xs={12} sm={12} md={4}>
+            <GridItem xs={12} sm={12} md={3}>
               <InfoArea
-                title="Verified Users"
-                description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
-                icon={VerifiedUser}
-                iconColor="success"
+                title="Ground Cargo"
+                description="With our own fleet vehicles, we provide an efficient, competitive and professional transport service via road transportation."
+                icon={LocalShipping}
+                iconColor="danger"
                 vertical
               />
             </GridItem>
-            <GridItem xs={12} sm={12} md={4}>
+            <GridItem xs={12} sm={12} md={3}>
               <InfoArea
-                title="Fingerprint"
-                description="Divide details about your product or agency work into parts. Write a few lines about each one. A paragraph describing a feature will be enough."
-                icon={Fingerprint}
+                title="Train Cargo"
+                description="Excellent quality, easy to use and reasonable price are just few to mention features of our highlighted train freight services."
+                icon={DirectionsRailway}
+                iconColor="danger"
+                vertical
+              />
+            </GridItem>
+            <GridItem xs={12} sm={12} md={3}>
+              <InfoArea
+                title="Air Cargo"
+                description="We are known for efficient and reliable air-freight forwarding services throughout the globe, with the years of experience and trust of our clients and customers."
+                icon={Flight}
                 iconColor="danger"
                 vertical
               />

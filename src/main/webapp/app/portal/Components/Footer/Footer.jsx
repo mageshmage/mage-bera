@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 // nodejs library that concatenates classes
 import classNames from "classnames";
 import { List, ListItem, withStyles } from "@material-ui/core";
+import { Link } from "react-router-dom";
 
 // @material-ui/icons
 import Favorite from "@material-ui/icons/Favorite";
@@ -28,16 +29,16 @@ function Footer({ ...props }) {
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/"
+                href=""
                 className={classes.block}
                 target="_blank"
               >
-                Creative Tim
+                Cargo Tracker
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/presentation"
+                href=""
                 className={classes.block}
                 target="_blank"
               >
@@ -46,7 +47,7 @@ function Footer({ ...props }) {
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="http://blog.creative-tim.com/"
+                href=""
                 className={classes.block}
                 target="_blank"
               >
@@ -55,7 +56,7 @@ function Footer({ ...props }) {
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a
-                href="https://www.creative-tim.com/license"
+                href=""
                 className={classes.block}
                 target="_blank"
               >
@@ -67,14 +68,9 @@ function Footer({ ...props }) {
         <div className={classes.right}>
           &copy; {1900 + new Date().getYear()} , made with{" "}
           <Favorite className={classes.icon} /> by{" "}
-          <a
-            href="https://www.creative-tim.com"
-            className={aClasses}
-            target="_blank"
-          >
-            Creative Tim
-          </a>{" "}
-          for a better web.
+          <Link to="/profile-page" className={aClasses}>
+            Cargo Tracker
+            </Link>
         </div>
       </div>
     </footer>

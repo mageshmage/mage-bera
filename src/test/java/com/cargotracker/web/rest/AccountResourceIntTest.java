@@ -5,6 +5,7 @@ import com.cargotracker.config.Constants;
 import com.cargotracker.domain.Authority;
 import com.cargotracker.domain.User;
 import com.cargotracker.repository.AuthorityRepository;
+import com.cargotracker.repository.UserExtraRepository;
 import com.cargotracker.repository.UserRepository;
 import com.cargotracker.security.AuthoritiesConstants;
 import com.cargotracker.service.MailService;
@@ -53,6 +54,8 @@ public class AccountResourceIntTest {
 
     @Autowired
     private UserRepository userRepository;
+    
+    private UserExtraRepository userExtraRepository;
 
     @Autowired
     private AuthorityRepository authorityRepository;
@@ -84,10 +87,10 @@ public class AccountResourceIntTest {
         MockitoAnnotations.initMocks(this);
         doNothing().when(mockMailService).sendActivationEmail(any());
         AccountResource accountResource =
-            new AccountResource(userRepository, userService, mockMailService);
+            new AccountResource(userRepository, userExtraRepository, userService, mockMailService);
 
         AccountResource accountUserMockResource =
-            new AccountResource(userRepository, mockUserService, mockMailService);
+            new AccountResource(userRepository, userExtraRepository, mockUserService, mockMailService);
         this.restMvc = MockMvcBuilders.standaloneSetup(accountResource)
             .setMessageConverters(httpMessageConverters)
             .setControllerAdvice(exceptionTranslator)

@@ -6,6 +6,9 @@ const landingPageStyle = {
     color: "#FFFFFF",
     ...container
   },
+  titleAlign: {
+    textAlign: "center"
+  },
   title: {
     ...title,
     display: "inline-block",

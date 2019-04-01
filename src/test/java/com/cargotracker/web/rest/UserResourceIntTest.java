@@ -3,6 +3,7 @@ package com.cargotracker.web.rest;
 import com.cargotracker.CargotrackerApp;
 import com.cargotracker.domain.Authority;
 import com.cargotracker.domain.User;
+import com.cargotracker.repository.UserExtraRepository;
 import com.cargotracker.repository.UserRepository;
 import com.cargotracker.repository.search.UserSearchRepository;
 import com.cargotracker.security.AuthoritiesConstants;
@@ -79,6 +80,9 @@ public class UserResourceIntTest {
      */
     @Autowired
     private UserSearchRepository mockUserSearchRepository;
+    
+    @Autowired
+    private UserExtraRepository mockUserExtraRepository;
 
     @Autowired
     private MailService mailService;
@@ -112,7 +116,7 @@ public class UserResourceIntTest {
     public void setup() {
         cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE).clear();
         cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE).clear();
-        UserResource userResource = new UserResource(userService, userRepository, mailService, mockUserSearchRepository);
+        UserResource userResource = new UserResource(userService, userRepository, mailService, mockUserSearchRepository, mockUserExtraRepository);
 
         this.restUserMockMvc = MockMvcBuilders.standaloneSetup(userResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
