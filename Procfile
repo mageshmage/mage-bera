@@ -1,1 +1,1 @@
-mvnw package -Pprod -DskipTests
+mvnw package  -Pprod -DskipTests
