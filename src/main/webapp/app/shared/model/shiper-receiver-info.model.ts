@@ -16,3 +16,11 @@ export interface IShiperReceiverInfo {
 }
 
 export const defaultValue: Readonly<IShiperReceiverInfo> = {};
+
+export const defaultValueShipper: Readonly<IShiperReceiverInfo> = {
+  type: ShiperReceiverType.CONSIGNOR
+};
+
+export const defaultValueReceiver: Readonly<IShiperReceiverInfo> = {
+  type: ShiperReceiverType.CONSIGNOR
+};

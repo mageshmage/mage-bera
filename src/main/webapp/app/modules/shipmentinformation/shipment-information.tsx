@@ -95,7 +95,7 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
             <Translate contentKey="cargotrackerApp.shipmentInfo.home.createLabel">Create new Shipment Info</Translate>
           </Link>
         </h2>
-        <Row>
+        {/*<Row>
           <Col sm="12">
             <AvForm onSubmit={this.search}>
               <AvGroup>
@@ -117,7 +117,7 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
               </AvGroup>
             </AvForm>
           </Col>
-        </Row>
+        </Row>*/}
         <div className="table-responsive">
           <Table responsive>
             <thead>
@@ -136,52 +136,12 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
                   <Translate contentKey="cargotrackerApp.shipmentInfo.expectedDeliveryDate">Expected Delivery Date</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={this.sort('actualWeight')}>
-                  <Translate contentKey="cargotrackerApp.shipmentInfo.actualWeight">Actual Weight</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={this.sort('volumetricWeight')}>
-                  <Translate contentKey="cargotrackerApp.shipmentInfo.volumetricWeight">Volumetric Weight</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={this.sort('length')}>
-                  <Translate contentKey="cargotrackerApp.shipmentInfo.length">Length</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={this.sort('width')}>
-                  <Translate contentKey="cargotrackerApp.shipmentInfo.width">Width</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={this.sort('height')}>
-                  <Translate contentKey="cargotrackerApp.shipmentInfo.height">Height</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={this.sort('quantity')}>
-                  <Translate contentKey="cargotrackerApp.shipmentInfo.quantity">Quantity</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={this.sort('totalFright')}>
-                  <Translate contentKey="cargotrackerApp.shipmentInfo.totalFright">Total Fright</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={this.sort('packageDesciption')}>
-                  <Translate contentKey="cargotrackerApp.shipmentInfo.packageDesciption">Package Desciption</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={this.sort('isThirdParty')}>
-                  <Translate contentKey="cargotrackerApp.shipmentInfo.isThirdParty">Is Third Party</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={this.sort('carrierRefNo')}>
-                  <Translate contentKey="cargotrackerApp.shipmentInfo.carrierRefNo">Carrier Ref No</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
-                </th>
+
                 <th className="hand" onClick={this.sort('deliveredDate')}>
                   <Translate contentKey="cargotrackerApp.shipmentInfo.deliveredDate">Delivered Date</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={this.sort('receivedBy')}>
-                  <Translate contentKey="cargotrackerApp.shipmentInfo.receivedBy">Received By</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
-                <th className="hand" onClick={this.sort('relationShip')}>
-                  <Translate contentKey="cargotrackerApp.shipmentInfo.relationShip">Relation Ship</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
-                </th>
+
                 <th>
                   <Translate contentKey="cargotrackerApp.shipmentInfo.carrierDetails">Carrier Details</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
@@ -194,9 +154,7 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
                   <Translate contentKey="cargotrackerApp.shipmentInfo.shipmentMode">Shipment Mode</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
                 </th>
-                <th>
-                  <Translate contentKey="cargotrackerApp.shipmentInfo.paymentMode">Payment Mode</Translate> <FontAwesomeIcon icon="sort" />
-                </th>
+
                 <th>
                   <Translate contentKey="cargotrackerApp.shipmentInfo.trackingStatus">Tracking Status</Translate>{' '}
                   <FontAwesomeIcon icon="sort" />
@@ -228,65 +186,18 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
                   <td>
                     <TextFormat type="date" value={shipmentInfo.expectedDeliveryDate} format={APP_DATE_FORMAT} />
                   </td>
-                  <td>{shipmentInfo.actualWeight}</td>
-                  <td>{shipmentInfo.volumetricWeight}</td>
-                  <td>{shipmentInfo.length}</td>
-                  <td>{shipmentInfo.width}</td>
-                  <td>{shipmentInfo.height}</td>
-                  <td>{shipmentInfo.quantity}</td>
-                  <td>{shipmentInfo.totalFright}</td>
-                  <td>{shipmentInfo.packageDesciption}</td>
-                  <td>{shipmentInfo.isThirdParty ? 'true' : 'false'}</td>
-                  <td>{shipmentInfo.carrierRefNo}</td>
                   <td>
                     <TextFormat type="date" value={shipmentInfo.deliveredDate} format={APP_DATE_FORMAT} />
                   </td>
-                  <td>{shipmentInfo.receivedBy}</td>
-                  <td>{shipmentInfo.relationShip}</td>
-                  <td>
-                    {shipmentInfo.carrierDetailsId ? (
-                      <Link to={`carrier-details/${shipmentInfo.carrierDetailsId}`}>{shipmentInfo.carrierDetailsValue}</Link>
-                    ) : (
-                      ''
-                    )}
-                  </td>
-                  <td>
-                    {shipmentInfo.shipmentTypeId ? (
-                      <Link to={`shipment-type/${shipmentInfo.shipmentTypeId}`}>{shipmentInfo.shipmentTypeValue}</Link>
-                    ) : (
-                      ''
-                    )}
-                  </td>
-                  <td>
-                    {shipmentInfo.shipmentModeId ? (
-                      <Link to={`shipment-mode/${shipmentInfo.shipmentModeId}`}>{shipmentInfo.shipmentModeValue}</Link>
-                    ) : (
-                      ''
-                    )}
-                  </td>
-                  <td>
-                    {shipmentInfo.paymentModeId ? (
-                      <Link to={`payment-mode/${shipmentInfo.paymentModeId}`}>{shipmentInfo.paymentModeValue}</Link>
-                    ) : (
-                      ''
-                    )}
-                  </td>
-                  <td>
-                    {shipmentInfo.trackingStatusId ? (
-                      <Link to={`tracking-status/${shipmentInfo.trackingStatusId}`}>{shipmentInfo.trackingStatusValue}</Link>
-                    ) : (
-                      ''
-                    )}
-                  </td>
-                  <td>{shipmentInfo.vendorId ? <Link to={`vendor/${shipmentInfo.vendorId}`}>{shipmentInfo.vendorname}</Link> : ''}</td>
-                  <td>{shipmentInfo.originId ? <Link to={`state/${shipmentInfo.originId}`}>{shipmentInfo.originValue}</Link> : ''}</td>
-                  <td>
-                    {shipmentInfo.destinationId ? (
-                      <Link to={`state/${shipmentInfo.destinationId}`}>{shipmentInfo.destinationValue}</Link>
-                    ) : (
-                      ''
-                    )}
-                  </td>
+
+                  <td>{shipmentInfo.carrierDetailsValue}</td>
+                  <td>{shipmentInfo.shipmentTypeValue}</td>
+                  <td>{shipmentInfo.shipmentModeValue}</td>
+
+                  <td>{shipmentInfo.trackingStatusValue}</td>
+                  <td>{shipmentInfo.vendorname}</td>
+                  <td>{shipmentInfo.originValue}</td>
+                  <td>{shipmentInfo.destinationValue}</td>
                   <td className="text-right">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`${match.url}/${shipmentInfo.id}`} color="info" size="sm">
@@ -327,9 +238,9 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
   }
 }
 
-const mapStateToProps = ({ shipmentInfo }: IRootState) => ({
-  shipmentInfoList: shipmentInfo.entities,
-  totalItems: shipmentInfo.totalItems
+const mapStateToProps = ({ shipmentInformation }: IRootState) => ({
+  shipmentInfoList: shipmentInformation.entities,
+  totalItems: shipmentInformation.totalItems
 });
 
 const mapDispatchToProps = {

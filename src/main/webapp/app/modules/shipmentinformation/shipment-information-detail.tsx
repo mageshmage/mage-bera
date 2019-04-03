@@ -163,14 +163,14 @@ export class ShipmentInformationDetail extends React.Component<IShipmentInformat
             </dt>
             <dd>{shipmentInfoEntity.destinationId ? shipmentInfoEntity.destinationId : ''}</dd>
           </dl>
-          <Button tag={Link} to="/entity/shipment-info" replace color="info">
+          <Button tag={Link} to="/shipment-information" replace color="info">
             <FontAwesomeIcon icon="arrow-left" />{' '}
             <span className="d-none d-md-inline">
               <Translate contentKey="entity.action.back">Back</Translate>
             </span>
           </Button>
           &nbsp;
-          <Button tag={Link} to={`/entity/shipment-info/${shipmentInfoEntity.id}/edit`} replace color="primary">
+          <Button tag={Link} to={`/shipment-information/${shipmentInfoEntity.id}/edit`} replace color="primary">
             <FontAwesomeIcon icon="pencil-alt" />{' '}
             <span className="d-none d-md-inline">
               <Translate contentKey="entity.action.edit">Edit</Translate>
@@ -182,8 +182,8 @@ export class ShipmentInformationDetail extends React.Component<IShipmentInformat
   }
 }
 
-const mapStateToProps = ({ shipmentInfo }: IRootState) => ({
-  shipmentInfoEntity: shipmentInfo.entity
+const mapStateToProps = ({ shipmentInformation }: IRootState) => ({
+  shipmentInfoEntity: shipmentInformation.entity
 });
 
 const mapDispatchToProps = { getEntity };

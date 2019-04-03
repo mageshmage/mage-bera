@@ -11,6 +11,7 @@ import Logout from 'app/modules/login/logout';
 import Home from 'app/modules/home/home';
 //import Entities from 'app/entities';
 import PrivateRoute from 'app/shared/auth/private-route';
+import AuthenticateRoute from 'app/shared/auth/authenticate-route';
 import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 import { AUTHORITIES } from 'app/config/constants';
 import ShipmentInformation from 'app/modules/shipmentinformation';
@@ -45,7 +46,7 @@ const Routes = () => (
       <PrivateRoute path="/admin" component={Admin} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />
       <PrivateRoute path="/account" component={Account} hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER]} />
       <PrivateRoute path="/entity" component={Entities} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />
-      <PrivateRoute path="/shipment-information" component={ShipmentInformation} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />
+      <AuthenticateRoute path="/shipment-information" component={ShipmentInformation} />
       <ErrorBoundaryRoute path="/" component={Home} />
     </Switch>
   </div>
