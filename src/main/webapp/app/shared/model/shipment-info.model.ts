@@ -1,7 +1,7 @@
 import { Moment } from 'moment';
 import { IShipmentTracking } from 'app/shared/model/shipment-tracking.model';
 import { IShipmentInfoPOD } from 'app/shared/model/shipment-info-pod.model';
-import { IShiperReceiverInfo } from 'app/shared/model/shiper-receiver-info.model';
+import { IShiperReceiverInfo, defaultValueShipper, defaultValueReceiver } from 'app/shared/model/shiper-receiver-info.model';
 
 export interface IShipmentInfo {
   id?: number;
@@ -40,8 +40,12 @@ export interface IShipmentInfo {
   shipmentTrackings?: IShipmentTracking[];
   shipmentInfoPODs?: IShipmentInfoPOD[];
   shipperReceiverInfos?: IShiperReceiverInfo[];
+  shipperInfo?: IShiperReceiverInfo;
+  receiverInfo?: IShiperReceiverInfo;
 }
 
 export const defaultValue: Readonly<IShipmentInfo> = {
-  isThirdParty: false
+  isThirdParty: false,
+  shipperInfo: defaultValueShipper,
+  receiverInfo: defaultValueReceiver
 };

@@ -66,7 +66,7 @@ import country, {
   CountryState
 } from 'app/entities/country/country.reducer';
 // prettier-ignore
-import shipmentInfomation, {
+import shipmentInformation, {
   ShipmentInformationState
 } from 'app/modules/shipmentinformation/shipment-information.reducer';
 // prettier-ignore
@@ -96,7 +96,7 @@ export interface IRootState {
   readonly city: CityState;
   readonly state: StateState;
   readonly country: CountryState;
-  readonly shipmentInfomation: ShipmentInformationState;
+  readonly shipmentInformation: ShipmentInformationState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -125,7 +125,7 @@ const rootReducer = combineReducers<IRootState>({
   city,
   state,
   country,
-  shipmentInfomation,
+  shipmentInformation,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });

@@ -5,6 +5,8 @@
         "title": "Shipment Infos",
         "createLabel": "Create a new Shipment Info",
         "createOrEditLabel": "Create or edit a Shipment Info",
+        "create": "Create a new Shipment Information",
+        "edit": "Edit a Shipment Information",
         "search": "Search for Shipment Info"
       },
       "created": "A new Shipment Info is created with identifier {{ param }}",

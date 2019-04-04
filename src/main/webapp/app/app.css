@@ -230,4 +230,53 @@ ui bootstrap tweaks
   white-space: nowrap;
 }
 
+.cargotracker-mandate-field {
+  font-family: verdana, arial;
+  font-size: 10px;
+  color: #ff0000;
+  font-weight: normal;
+}
+
+.cargotracker-label {
+  font-family: verdana, arial;
+  font-size: 11px;
+  color: rgb(0, 0, 0);
+  font-weight: normal;
+  background-color: rgb(255, 255, 255);
+  height: 20px;
+  padding-left: 1px;
+  padding-top: 4px;
+  vertical-align: top;
+}
+
+.form-control {
+  height: calc(1.8rem + 2px);
+  font-size: 13px;
+  border: 1px solid #07588c;
+}
+
+.cargotracker-header {
+  font-family: verdana, arial;
+  font-size: 11px;
+  color: rgb(255, 255, 255);
+  background-color: rgb(7, 88, 140);
+  font-weight: bold;
+  height: 20px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: rgb(0, 0, 0);
+  border-image: initial;
+}
+
+.cargotracker-textalign-center {
+  text-align: center;
+}
+
+.card-body {
+  padding: 0.5rem;
+}
+.form-group {
+  margin-bottom: 0.5rem;
+}
+
 /* jhipster-needle-css-add-main JHipster will add new css style */

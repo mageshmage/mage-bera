@@ -55,8 +55,8 @@ export class ShipmentInformationDeleteDialog extends React.Component<IShipmentIn
   }
 }
 
-const mapStateToProps = ({ shipmentInfo }: IRootState) => ({
-  shipmentInfoEntity: shipmentInfo.entity
+const mapStateToProps = ({ shipmentInformation }: IRootState) => ({
+  shipmentInfoEntity: shipmentInformation.entity
 });
 
 const mapDispatchToProps = { getEntity, deleteEntity };

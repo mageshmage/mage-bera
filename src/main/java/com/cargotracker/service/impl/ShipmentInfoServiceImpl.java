@@ -53,15 +53,15 @@ public class ShipmentInfoServiceImpl implements ShipmentInfoService {
         ShipmentInfo shipmentInfo = shipmentInfoMapper.toEntity(shipmentInfoDTO);
         shipmentInfo = shipmentInfoRepository.save(shipmentInfo);
         ShipmentInfoDTO result = shipmentInfoMapper.toDto(shipmentInfo);
-        //shipmentInfoSearchRepository.save(shipmentInfo);
-        result.setCarrierDetailsValue(shipmentInfo.getCarrierDetails().getValue());
-        result.setShipmentTypeValue(shipmentInfo.getShipmentType().getValue());
-        result.setShipmentModeValue(shipmentInfo.getShipmentMode().getValue());
-        result.setPaymentModeValue(shipmentInfo.getPaymentMode().getValue());
-        result.setTrackingStatusValue(shipmentInfo.getTrackingStatus().getValue());
-        result.setVendorname(shipmentInfo.getVendor().getVendorname());
-        result.setOriginValue(shipmentInfo.getOrigin().getStateName());
-        result.setDestinationValue(shipmentInfo.getOrigin().getStateName());
+        
+        result.setCarrierDetailsValue(shipmentInfo.getCarrierDetails() != null ? shipmentInfo.getCarrierDetails().getValue() : null);
+        result.setShipmentTypeValue(shipmentInfo.getShipmentType() != null ? shipmentInfo.getShipmentType().getValue() : null);
+        result.setShipmentModeValue(shipmentInfo.getShipmentMode() != null ? shipmentInfo.getShipmentMode().getValue() : null);
+        result.setPaymentModeValue(shipmentInfo.getPaymentMode() != null ? shipmentInfo.getPaymentMode().getValue() : null);
+        result.setTrackingStatusValue(shipmentInfo.getTrackingStatus() != null ? shipmentInfo.getTrackingStatus().getValue() : null);
+        result.setVendorname(shipmentInfo.getVendor() != null ? shipmentInfo.getVendor().getVendorname() : null);
+        result.setOriginValue(shipmentInfo.getOrigin() != null ? shipmentInfo.getOrigin().getStateName() : null);
+        result.setDestinationValue(shipmentInfo.getOrigin() != null ? shipmentInfo.getOrigin().getStateName() : null);
         return result;
     }
 
