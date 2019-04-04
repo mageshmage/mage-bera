@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing ShipmentInfo.
@@ -129,12 +129,12 @@ public class ShipmentInfoResource {
      * @param pageable the pagination information
      * @return the result of the search
      */
-    @GetMapping("/_search/shipment-infos")
+    /*@GetMapping("/_search/shipment-infos")
     public ResponseEntity<List<ShipmentInfoDTO>> searchShipmentInfos(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of ShipmentInfos for query {}", query);
         Page<ShipmentInfoDTO> page = shipmentInfoService.search(query, pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/_search/shipment-infos");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
-    }
+    }*/
 
 }

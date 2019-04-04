@@ -48,5 +48,5 @@ public interface CityService {
      * 
      * @return the list of entities
      */
-    List<CityDTO> search(String query);
+    //List<CityDTO> search(String query);
 }

@@ -48,5 +48,5 @@ public interface CarrierDetailsService {
      * 
      * @return the list of entities
      */
-    List<CarrierDetailsDTO> search(String query);
+    //List<CarrierDetailsDTO> search(String query);
 }

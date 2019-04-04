@@ -48,5 +48,5 @@ public interface ShipmentModeService {
      * 
      * @return the list of entities
      */
-    List<ShipmentModeDTO> search(String query);
+    //List<ShipmentModeDTO> search(String query);
 }

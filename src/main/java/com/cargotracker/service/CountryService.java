@@ -48,5 +48,5 @@ public interface CountryService {
      * 
      * @return the list of entities
      */
-    List<CountryDTO> search(String query);
+    //List<CountryDTO> search(String query);
 }

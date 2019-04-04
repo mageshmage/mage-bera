@@ -3,7 +3,7 @@ package com.cargotracker.service.impl;
 import com.cargotracker.service.TrackingStatusService;
 import com.cargotracker.domain.TrackingStatus;
 import com.cargotracker.repository.TrackingStatusRepository;
-import com.cargotracker.repository.search.TrackingStatusSearchRepository;
+//import com.cargotracker.repository.search.TrackingStatusSearchRepository;
 import com.cargotracker.service.dto.TrackingStatusDTO;
 import com.cargotracker.service.mapper.TrackingStatusMapper;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing TrackingStatus.
@@ -33,12 +33,14 @@ public class TrackingStatusServiceImpl implements TrackingStatusService {
 
     private final TrackingStatusMapper trackingStatusMapper;
 
-    private final TrackingStatusSearchRepository trackingStatusSearchRepository;
+    //private final TrackingStatusSearchRepository trackingStatusSearchRepository;
 
-    public TrackingStatusServiceImpl(TrackingStatusRepository trackingStatusRepository, TrackingStatusMapper trackingStatusMapper, TrackingStatusSearchRepository trackingStatusSearchRepository) {
+    public TrackingStatusServiceImpl(TrackingStatusRepository trackingStatusRepository, TrackingStatusMapper trackingStatusMapper
+    		//, TrackingStatusSearchRepository trackingStatusSearchRepository
+    		) {
         this.trackingStatusRepository = trackingStatusRepository;
         this.trackingStatusMapper = trackingStatusMapper;
-        this.trackingStatusSearchRepository = trackingStatusSearchRepository;
+        //this.trackingStatusSearchRepository = trackingStatusSearchRepository;
     }
 
     /**
@@ -53,7 +55,7 @@ public class TrackingStatusServiceImpl implements TrackingStatusService {
         TrackingStatus trackingStatus = trackingStatusMapper.toEntity(trackingStatusDTO);
         trackingStatus = trackingStatusRepository.save(trackingStatus);
         TrackingStatusDTO result = trackingStatusMapper.toDto(trackingStatus);
-        trackingStatusSearchRepository.save(trackingStatus);
+        //trackingStatusSearchRepository.save(trackingStatus);
         result.setVendorname(trackingStatus.getVendor().getVendorname());
         return result;
     }
@@ -96,7 +98,7 @@ public class TrackingStatusServiceImpl implements TrackingStatusService {
     public void delete(Long id) {
         log.debug("Request to delete TrackingStatus : {}", id);
         trackingStatusRepository.deleteById(id);
-        trackingStatusSearchRepository.deleteById(id);
+        //trackingStatusSearchRepository.deleteById(id);
     }
 
     /**
@@ -105,7 +107,7 @@ public class TrackingStatusServiceImpl implements TrackingStatusService {
      * @param query the query of the search
      * @return the list of entities
      */
-    @Override
+    /*@Override
     @Transactional(readOnly = true)
     public List<TrackingStatusDTO> search(String query) {
         log.debug("Request to search TrackingStatuses for query {}", query);
@@ -113,5 +115,5 @@ public class TrackingStatusServiceImpl implements TrackingStatusService {
             .stream(trackingStatusSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .map(trackingStatusMapper::toDto)
             .collect(Collectors.toList());
-    }
+    }*/
 }

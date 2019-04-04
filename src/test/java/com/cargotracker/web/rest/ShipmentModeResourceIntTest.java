@@ -4,7 +4,7 @@ import com.cargotracker.CargotrackerApp;
 
 import com.cargotracker.domain.ShipmentMode;
 import com.cargotracker.repository.ShipmentModeRepository;
-import com.cargotracker.repository.search.ShipmentModeSearchRepository;
+//import com.cargotracker.repository.search.ShipmentModeSearchRepository;
 import com.cargotracker.service.ShipmentModeService;
 import com.cargotracker.service.dto.ShipmentModeDTO;
 import com.cargotracker.service.mapper.ShipmentModeMapper;
@@ -32,7 +32,7 @@ import java.util.List;
 
 import static com.cargotracker.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+//import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -67,8 +67,8 @@ public class ShipmentModeResourceIntTest {
      *
      * @see com.cargotracker.repository.search.ShipmentModeSearchRepositoryMockConfiguration
      */
-    @Autowired
-    private ShipmentModeSearchRepository mockShipmentModeSearchRepository;
+    //@Autowired
+    //private ShipmentModeSearchRepository mockShipmentModeSearchRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -139,7 +139,7 @@ public class ShipmentModeResourceIntTest {
         assertThat(testShipmentMode.getDesc()).isEqualTo(DEFAULT_DESC);
 
         // Validate the ShipmentMode in Elasticsearch
-        verify(mockShipmentModeSearchRepository, times(1)).save(testShipmentMode);
+        //verify(mockShipmentModeSearchRepository, times(1)).save(testShipmentMode);
     }
 
     @Test
@@ -162,7 +162,7 @@ public class ShipmentModeResourceIntTest {
         assertThat(shipmentModeList).hasSize(databaseSizeBeforeCreate);
 
         // Validate the ShipmentMode in Elasticsearch
-        verify(mockShipmentModeSearchRepository, times(0)).save(shipmentMode);
+        //verify(mockShipmentModeSearchRepository, times(0)).save(shipmentMode);
     }
 
     @Test
@@ -252,7 +252,7 @@ public class ShipmentModeResourceIntTest {
         assertThat(testShipmentMode.getDesc()).isEqualTo(UPDATED_DESC);
 
         // Validate the ShipmentMode in Elasticsearch
-        verify(mockShipmentModeSearchRepository, times(1)).save(testShipmentMode);
+        //verify(mockShipmentModeSearchRepository, times(1)).save(testShipmentMode);
     }
 
     @Test
@@ -274,7 +274,7 @@ public class ShipmentModeResourceIntTest {
         assertThat(shipmentModeList).hasSize(databaseSizeBeforeUpdate);
 
         // Validate the ShipmentMode in Elasticsearch
-        verify(mockShipmentModeSearchRepository, times(0)).save(shipmentMode);
+        //verify(mockShipmentModeSearchRepository, times(0)).save(shipmentMode);
     }
 
     @Test
@@ -295,10 +295,10 @@ public class ShipmentModeResourceIntTest {
         assertThat(shipmentModeList).hasSize(databaseSizeBeforeDelete - 1);
 
         // Validate the ShipmentMode in Elasticsearch
-        verify(mockShipmentModeSearchRepository, times(1)).deleteById(shipmentMode.getId());
+        //verify(mockShipmentModeSearchRepository, times(1)).deleteById(shipmentMode.getId());
     }
 
-    @Test
+    /*@Test
     @Transactional
     public void searchShipmentMode() throws Exception {
         // Initialize the database
@@ -312,7 +312,7 @@ public class ShipmentModeResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(shipmentMode.getId().intValue())))
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)))
             .andExpect(jsonPath("$.[*].desc").value(hasItem(DEFAULT_DESC)));
-    }
+    }*/
 
     @Test
     @Transactional

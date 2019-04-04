@@ -3,7 +3,7 @@ package com.cargotracker.service.impl;
 import com.cargotracker.service.ShipmentTrackingService;
 import com.cargotracker.domain.ShipmentTracking;
 import com.cargotracker.repository.ShipmentTrackingRepository;
-import com.cargotracker.repository.search.ShipmentTrackingSearchRepository;
+//import com.cargotracker.repository.search.ShipmentTrackingSearchRepository;
 import com.cargotracker.service.dto.ShipmentTrackingDTO;
 import com.cargotracker.service.mapper.ShipmentTrackingMapper;
 import org.slf4j.Logger;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing ShipmentTracking.
@@ -31,12 +31,14 @@ public class ShipmentTrackingServiceImpl implements ShipmentTrackingService {
 
     private final ShipmentTrackingMapper shipmentTrackingMapper;
 
-    private final ShipmentTrackingSearchRepository shipmentTrackingSearchRepository;
+    //private final ShipmentTrackingSearchRepository shipmentTrackingSearchRepository;
 
-    public ShipmentTrackingServiceImpl(ShipmentTrackingRepository shipmentTrackingRepository, ShipmentTrackingMapper shipmentTrackingMapper, ShipmentTrackingSearchRepository shipmentTrackingSearchRepository) {
+    public ShipmentTrackingServiceImpl(ShipmentTrackingRepository shipmentTrackingRepository, ShipmentTrackingMapper shipmentTrackingMapper
+    		//, ShipmentTrackingSearchRepository shipmentTrackingSearchRepository
+    		) {
         this.shipmentTrackingRepository = shipmentTrackingRepository;
         this.shipmentTrackingMapper = shipmentTrackingMapper;
-        this.shipmentTrackingSearchRepository = shipmentTrackingSearchRepository;
+        //this.shipmentTrackingSearchRepository = shipmentTrackingSearchRepository;
     }
 
     /**
@@ -51,7 +53,7 @@ public class ShipmentTrackingServiceImpl implements ShipmentTrackingService {
         ShipmentTracking shipmentTracking = shipmentTrackingMapper.toEntity(shipmentTrackingDTO);
         shipmentTracking = shipmentTrackingRepository.save(shipmentTracking);
         ShipmentTrackingDTO result = shipmentTrackingMapper.toDto(shipmentTracking);
-        shipmentTrackingSearchRepository.save(shipmentTracking);
+        //shipmentTrackingSearchRepository.save(shipmentTracking);
         return result;
     }
 
@@ -93,7 +95,7 @@ public class ShipmentTrackingServiceImpl implements ShipmentTrackingService {
     public void delete(Long id) {
         log.debug("Request to delete ShipmentTracking : {}", id);
         shipmentTrackingRepository.deleteById(id);
-        shipmentTrackingSearchRepository.deleteById(id);
+        //shipmentTrackingSearchRepository.deleteById(id);
     }
 
     /**
@@ -103,11 +105,11 @@ public class ShipmentTrackingServiceImpl implements ShipmentTrackingService {
      * @param pageable the pagination information
      * @return the list of entities
      */
-    @Override
+    /*@Override
     @Transactional(readOnly = true)
     public Page<ShipmentTrackingDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of ShipmentTrackings for query {}", query);
         return shipmentTrackingSearchRepository.search(queryStringQuery(query), pageable)
             .map(shipmentTrackingMapper::toDto);
-    }
+    }*/
 }

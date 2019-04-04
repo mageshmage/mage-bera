@@ -48,5 +48,5 @@ public interface ShipmentTypeService {
      * 
      * @return the list of entities
      */
-    List<ShipmentTypeDTO> search(String query);
+    //List<ShipmentTypeDTO> search(String query);
 }

@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing City.
@@ -119,10 +119,10 @@ public class CityResource {
      * @param query the query of the city search
      * @return the result of the search
      */
-    @GetMapping("/_search/cities")
+    /*@GetMapping("/_search/cities")
     public List<CityDTO> searchCities(@RequestParam String query) {
         log.debug("REST request to search Cities for query {}", query);
         return cityService.search(query);
-    }
+    }*/
 
 }

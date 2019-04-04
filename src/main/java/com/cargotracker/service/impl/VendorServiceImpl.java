@@ -3,7 +3,7 @@ package com.cargotracker.service.impl;
 import com.cargotracker.service.VendorService;
 import com.cargotracker.domain.Vendor;
 import com.cargotracker.repository.VendorRepository;
-import com.cargotracker.repository.search.VendorSearchRepository;
+//import com.cargotracker.repository.search.VendorSearchRepository;
 import com.cargotracker.service.dto.VendorDTO;
 import com.cargotracker.service.mapper.VendorMapper;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing Vendor.
@@ -33,12 +33,14 @@ public class VendorServiceImpl implements VendorService {
 
     private final VendorMapper vendorMapper;
 
-    private final VendorSearchRepository vendorSearchRepository;
+    //private final VendorSearchRepository vendorSearchRepository;
 
-    public VendorServiceImpl(VendorRepository vendorRepository, VendorMapper vendorMapper, VendorSearchRepository vendorSearchRepository) {
+    public VendorServiceImpl(VendorRepository vendorRepository, VendorMapper vendorMapper
+    		//, VendorSearchRepository vendorSearchRepository
+    		) {
         this.vendorRepository = vendorRepository;
         this.vendorMapper = vendorMapper;
-        this.vendorSearchRepository = vendorSearchRepository;
+        //this.vendorSearchRepository = vendorSearchRepository;
     }
 
     /**
@@ -53,7 +55,7 @@ public class VendorServiceImpl implements VendorService {
         Vendor vendor = vendorMapper.toEntity(vendorDTO);
         vendor = vendorRepository.save(vendor);
         VendorDTO result = vendorMapper.toDto(vendor);
-        vendorSearchRepository.save(vendor);
+        //vendorSearchRepository.save(vendor);
         return result;
     }
 
@@ -95,7 +97,7 @@ public class VendorServiceImpl implements VendorService {
     public void delete(Long id) {
         log.debug("Request to delete Vendor : {}", id);
         vendorRepository.deleteById(id);
-        vendorSearchRepository.deleteById(id);
+        //vendorSearchRepository.deleteById(id);
     }
 
     /**
@@ -104,7 +106,7 @@ public class VendorServiceImpl implements VendorService {
      * @param query the query of the search
      * @return the list of entities
      */
-    @Override
+    /*@Override
     @Transactional(readOnly = true)
     public List<VendorDTO> search(String query) {
         log.debug("Request to search Vendors for query {}", query);
@@ -112,5 +114,5 @@ public class VendorServiceImpl implements VendorService {
             .stream(vendorSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .map(vendorMapper::toDto)
             .collect(Collectors.toList());
-    }
+    }*/
 }

@@ -48,5 +48,5 @@ public interface PaymentModeService {
      * 
      * @return the list of entities
      */
-    List<PaymentModeDTO> search(String query);
+    //List<PaymentModeDTO> search(String query);
 }

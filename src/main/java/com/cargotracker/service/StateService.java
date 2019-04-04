@@ -48,5 +48,5 @@ public interface StateService {
      * 
      * @return the list of entities
      */
-    List<StateDTO> search(String query);
+    //List<StateDTO> search(String query);
 }

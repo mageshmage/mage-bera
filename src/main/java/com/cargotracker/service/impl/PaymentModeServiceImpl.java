@@ -3,7 +3,7 @@ package com.cargotracker.service.impl;
 import com.cargotracker.service.PaymentModeService;
 import com.cargotracker.domain.PaymentMode;
 import com.cargotracker.repository.PaymentModeRepository;
-import com.cargotracker.repository.search.PaymentModeSearchRepository;
+//import com.cargotracker.repository.search.PaymentModeSearchRepository;
 import com.cargotracker.service.dto.PaymentModeDTO;
 import com.cargotracker.service.mapper.PaymentModeMapper;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing PaymentMode.
@@ -33,12 +33,14 @@ public class PaymentModeServiceImpl implements PaymentModeService {
 
     private final PaymentModeMapper paymentModeMapper;
 
-    private final PaymentModeSearchRepository paymentModeSearchRepository;
+    //private final PaymentModeSearchRepository paymentModeSearchRepository;
 
-    public PaymentModeServiceImpl(PaymentModeRepository paymentModeRepository, PaymentModeMapper paymentModeMapper, PaymentModeSearchRepository paymentModeSearchRepository) {
+    public PaymentModeServiceImpl(PaymentModeRepository paymentModeRepository, PaymentModeMapper paymentModeMapper
+    		//, PaymentModeSearchRepository paymentModeSearchRepository
+    		) {
         this.paymentModeRepository = paymentModeRepository;
         this.paymentModeMapper = paymentModeMapper;
-        this.paymentModeSearchRepository = paymentModeSearchRepository;
+        //this.paymentModeSearchRepository = paymentModeSearchRepository;
     }
 
     /**
@@ -53,7 +55,7 @@ public class PaymentModeServiceImpl implements PaymentModeService {
         PaymentMode paymentMode = paymentModeMapper.toEntity(paymentModeDTO);
         paymentMode = paymentModeRepository.save(paymentMode);
         PaymentModeDTO result = paymentModeMapper.toDto(paymentMode);
-        paymentModeSearchRepository.save(paymentMode);
+        //paymentModeSearchRepository.save(paymentMode);
         result.setVendorname(paymentMode.getVendor().getVendorname());
         return result;
     }
@@ -96,7 +98,7 @@ public class PaymentModeServiceImpl implements PaymentModeService {
     public void delete(Long id) {
         log.debug("Request to delete PaymentMode : {}", id);
         paymentModeRepository.deleteById(id);
-        paymentModeSearchRepository.deleteById(id);
+        //paymentModeSearchRepository.deleteById(id);
     }
 
     /**
@@ -105,7 +107,7 @@ public class PaymentModeServiceImpl implements PaymentModeService {
      * @param query the query of the search
      * @return the list of entities
      */
-    @Override
+    /*@Override
     @Transactional(readOnly = true)
     public List<PaymentModeDTO> search(String query) {
         log.debug("Request to search PaymentModes for query {}", query);
@@ -113,5 +115,5 @@ public class PaymentModeServiceImpl implements PaymentModeService {
             .stream(paymentModeSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .map(paymentModeMapper::toDto)
             .collect(Collectors.toList());
-    }
+    }*/
 }

@@ -48,5 +48,5 @@ public interface VendorService {
      * 
      * @return the list of entities
      */
-    List<VendorDTO> search(String query);
+    //List<VendorDTO> search(String query);
 }

@@ -4,7 +4,7 @@ import com.cargotracker.CargotrackerApp;
 
 import com.cargotracker.domain.ShiperReceiverInfo;
 import com.cargotracker.repository.ShiperReceiverInfoRepository;
-import com.cargotracker.repository.search.ShiperReceiverInfoSearchRepository;
+//import com.cargotracker.repository.search.ShiperReceiverInfoSearchRepository;
 import com.cargotracker.service.ShiperReceiverInfoService;
 import com.cargotracker.service.dto.ShiperReceiverInfoDTO;
 import com.cargotracker.service.mapper.ShiperReceiverInfoMapper;
@@ -34,7 +34,7 @@ import java.util.List;
 
 import static com.cargotracker.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+//import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -85,8 +85,8 @@ public class ShiperReceiverInfoResourceIntTest {
      *
      * @see com.cargotracker.repository.search.ShiperReceiverInfoSearchRepositoryMockConfiguration
      */
-    @Autowired
-    private ShiperReceiverInfoSearchRepository mockShiperReceiverInfoSearchRepository;
+    //@Autowired
+    //private ShiperReceiverInfoSearchRepository mockShiperReceiverInfoSearchRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -167,7 +167,7 @@ public class ShiperReceiverInfoResourceIntTest {
         assertThat(testShiperReceiverInfo.getEmailId()).isEqualTo(DEFAULT_EMAIL_ID);
 
         // Validate the ShiperReceiverInfo in Elasticsearch
-        verify(mockShiperReceiverInfoSearchRepository, times(1)).save(testShiperReceiverInfo);
+        //verify(mockShiperReceiverInfoSearchRepository, times(1)).save(testShiperReceiverInfo);
     }
 
     @Test
@@ -190,7 +190,7 @@ public class ShiperReceiverInfoResourceIntTest {
         assertThat(shiperReceiverInfoList).hasSize(databaseSizeBeforeCreate);
 
         // Validate the ShiperReceiverInfo in Elasticsearch
-        verify(mockShiperReceiverInfoSearchRepository, times(0)).save(shiperReceiverInfo);
+        //verify(mockShiperReceiverInfoSearchRepository, times(0)).save(shiperReceiverInfo);
     }
 
     @Test
@@ -376,7 +376,7 @@ public class ShiperReceiverInfoResourceIntTest {
         assertThat(testShiperReceiverInfo.getEmailId()).isEqualTo(UPDATED_EMAIL_ID);
 
         // Validate the ShiperReceiverInfo in Elasticsearch
-        verify(mockShiperReceiverInfoSearchRepository, times(1)).save(testShiperReceiverInfo);
+        //verify(mockShiperReceiverInfoSearchRepository, times(1)).save(testShiperReceiverInfo);
     }
 
     @Test
@@ -398,7 +398,7 @@ public class ShiperReceiverInfoResourceIntTest {
         assertThat(shiperReceiverInfoList).hasSize(databaseSizeBeforeUpdate);
 
         // Validate the ShiperReceiverInfo in Elasticsearch
-        verify(mockShiperReceiverInfoSearchRepository, times(0)).save(shiperReceiverInfo);
+        //verify(mockShiperReceiverInfoSearchRepository, times(0)).save(shiperReceiverInfo);
     }
 
     @Test
@@ -419,10 +419,10 @@ public class ShiperReceiverInfoResourceIntTest {
         assertThat(shiperReceiverInfoList).hasSize(databaseSizeBeforeDelete - 1);
 
         // Validate the ShiperReceiverInfo in Elasticsearch
-        verify(mockShiperReceiverInfoSearchRepository, times(1)).deleteById(shiperReceiverInfo.getId());
+        //verify(mockShiperReceiverInfoSearchRepository, times(1)).deleteById(shiperReceiverInfo.getId());
     }
 
-    @Test
+    /*@Test
     @Transactional
     public void searchShiperReceiverInfo() throws Exception {
         // Initialize the database
@@ -441,7 +441,7 @@ public class ShiperReceiverInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].city").value(hasItem(DEFAULT_CITY)))
             .andExpect(jsonPath("$.[*].pincode").value(hasItem(DEFAULT_PINCODE)))
             .andExpect(jsonPath("$.[*].emailId").value(hasItem(DEFAULT_EMAIL_ID)));
-    }
+    }*/
 
     @Test
     @Transactional

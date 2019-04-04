@@ -52,5 +52,5 @@ public interface ShipmentInfoService {
      * @param pageable the pagination information
      * @return the list of entities
      */
-    Page<ShipmentInfoDTO> search(String query, Pageable pageable);
+    //Page<ShipmentInfoDTO> search(String query, Pageable pageable);
 }

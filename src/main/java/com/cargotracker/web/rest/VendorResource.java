@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Vendor.
@@ -120,10 +120,10 @@ public class VendorResource {
      * @param query the query of the vendor search
      * @return the result of the search
      */
-    @GetMapping("/_search/vendors")
+    /*@GetMapping("/_search/vendors")
     public List<VendorDTO> searchVendors(@RequestParam String query) {
         log.debug("REST request to search Vendors for query {}", query);
         return vendorService.search(query);
-    }
+    }*/
 
 }

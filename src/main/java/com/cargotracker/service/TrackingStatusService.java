@@ -48,5 +48,5 @@ public interface TrackingStatusService {
      * 
      * @return the list of entities
      */
-    List<TrackingStatusDTO> search(String query);
+    //List<TrackingStatusDTO> search(String query);
 }

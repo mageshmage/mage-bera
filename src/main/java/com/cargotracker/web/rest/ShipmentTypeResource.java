@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing ShipmentType.
@@ -120,10 +120,10 @@ public class ShipmentTypeResource {
      * @param query the query of the shipmentType search
      * @return the result of the search
      */
-    @GetMapping("/_search/shipment-types")
+    /*@GetMapping("/_search/shipment-types")
     public List<ShipmentTypeDTO> searchShipmentTypes(@RequestParam String query) {
         log.debug("REST request to search ShipmentTypes for query {}", query);
         return shipmentTypeService.search(query);
-    }
+    }*/
 
 }

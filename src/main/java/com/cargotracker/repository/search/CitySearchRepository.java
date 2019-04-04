@@ -1,10 +1,12 @@
 package com.cargotracker.repository.search;
 
 import com.cargotracker.domain.City;
-import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+//import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 
 /**
  * Spring Data Elasticsearch repository for the City entity.
  */
-public interface CitySearchRepository extends ElasticsearchRepository<City, Long> {
+public interface CitySearchRepository 
+//extends ElasticsearchRepository<City, Long> 
+{
 }

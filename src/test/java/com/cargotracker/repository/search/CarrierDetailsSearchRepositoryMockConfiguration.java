@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class CarrierDetailsSearchRepositoryMockConfiguration {
 
-    @MockBean
-    private CarrierDetailsSearchRepository mockCarrierDetailsSearchRepository;
+    //@MockBean
+    //private CarrierDetailsSearchRepository mockCarrierDetailsSearchRepository;
 
 }

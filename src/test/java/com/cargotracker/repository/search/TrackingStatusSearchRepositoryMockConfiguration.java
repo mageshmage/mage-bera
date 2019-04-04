@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TrackingStatusSearchRepositoryMockConfiguration {
 
-    @MockBean
-    private TrackingStatusSearchRepository mockTrackingStatusSearchRepository;
+    //@MockBean
+    //private TrackingStatusSearchRepository mockTrackingStatusSearchRepository;
 
 }

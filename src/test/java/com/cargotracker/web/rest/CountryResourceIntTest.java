@@ -4,7 +4,7 @@ import com.cargotracker.CargotrackerApp;
 
 import com.cargotracker.domain.Country;
 import com.cargotracker.repository.CountryRepository;
-import com.cargotracker.repository.search.CountrySearchRepository;
+//import com.cargotracker.repository.search.CountrySearchRepository;
 import com.cargotracker.service.CountryService;
 import com.cargotracker.service.dto.CountryDTO;
 import com.cargotracker.service.mapper.CountryMapper;
@@ -32,7 +32,7 @@ import java.util.List;
 
 import static com.cargotracker.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+//import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -67,8 +67,8 @@ public class CountryResourceIntTest {
      *
      * @see com.cargotracker.repository.search.CountrySearchRepositoryMockConfiguration
      */
-    @Autowired
-    private CountrySearchRepository mockCountrySearchRepository;
+    //@Autowired
+    //private CountrySearchRepository mockCountrySearchRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -139,7 +139,7 @@ public class CountryResourceIntTest {
         assertThat(testCountry.getCountryName()).isEqualTo(DEFAULT_COUNTRY_NAME);
 
         // Validate the Country in Elasticsearch
-        verify(mockCountrySearchRepository, times(1)).save(testCountry);
+        //verify(mockCountrySearchRepository, times(1)).save(testCountry);
     }
 
     @Test
@@ -162,7 +162,7 @@ public class CountryResourceIntTest {
         assertThat(countryList).hasSize(databaseSizeBeforeCreate);
 
         // Validate the Country in Elasticsearch
-        verify(mockCountrySearchRepository, times(0)).save(country);
+        //verify(mockCountrySearchRepository, times(0)).save(country);
     }
 
     @Test
@@ -233,7 +233,7 @@ public class CountryResourceIntTest {
         assertThat(testCountry.getCountryName()).isEqualTo(UPDATED_COUNTRY_NAME);
 
         // Validate the Country in Elasticsearch
-        verify(mockCountrySearchRepository, times(1)).save(testCountry);
+        //verify(mockCountrySearchRepository, times(1)).save(testCountry);
     }
 
     @Test
@@ -255,7 +255,7 @@ public class CountryResourceIntTest {
         assertThat(countryList).hasSize(databaseSizeBeforeUpdate);
 
         // Validate the Country in Elasticsearch
-        verify(mockCountrySearchRepository, times(0)).save(country);
+        //verify(mockCountrySearchRepository, times(0)).save(country);
     }
 
     @Test
@@ -276,10 +276,10 @@ public class CountryResourceIntTest {
         assertThat(countryList).hasSize(databaseSizeBeforeDelete - 1);
 
         // Validate the Country in Elasticsearch
-        verify(mockCountrySearchRepository, times(1)).deleteById(country.getId());
+        //verify(mockCountrySearchRepository, times(1)).deleteById(country.getId());
     }
 
-    @Test
+    /*@Test
     @Transactional
     public void searchCountry() throws Exception {
         // Initialize the database
@@ -293,7 +293,7 @@ public class CountryResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(country.getId().intValue())))
             .andExpect(jsonPath("$.[*].countryCode").value(hasItem(DEFAULT_COUNTRY_CODE)))
             .andExpect(jsonPath("$.[*].countryName").value(hasItem(DEFAULT_COUNTRY_NAME)));
-    }
+    }*/
 
     @Test
     @Transactional

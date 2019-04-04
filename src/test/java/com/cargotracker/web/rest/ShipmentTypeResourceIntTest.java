@@ -4,7 +4,7 @@ import com.cargotracker.CargotrackerApp;
 
 import com.cargotracker.domain.ShipmentType;
 import com.cargotracker.repository.ShipmentTypeRepository;
-import com.cargotracker.repository.search.ShipmentTypeSearchRepository;
+//import com.cargotracker.repository.search.ShipmentTypeSearchRepository;
 import com.cargotracker.service.ShipmentTypeService;
 import com.cargotracker.service.dto.ShipmentTypeDTO;
 import com.cargotracker.service.mapper.ShipmentTypeMapper;
@@ -32,7 +32,7 @@ import java.util.List;
 
 import static com.cargotracker.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+//import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -67,8 +67,8 @@ public class ShipmentTypeResourceIntTest {
      *
      * @see com.cargotracker.repository.search.ShipmentTypeSearchRepositoryMockConfiguration
      */
-    @Autowired
-    private ShipmentTypeSearchRepository mockShipmentTypeSearchRepository;
+    //@Autowired
+    //private ShipmentTypeSearchRepository mockShipmentTypeSearchRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -139,7 +139,7 @@ public class ShipmentTypeResourceIntTest {
         assertThat(testShipmentType.getDesc()).isEqualTo(DEFAULT_DESC);
 
         // Validate the ShipmentType in Elasticsearch
-        verify(mockShipmentTypeSearchRepository, times(1)).save(testShipmentType);
+        //verify(mockShipmentTypeSearchRepository, times(1)).save(testShipmentType);
     }
 
     @Test
@@ -162,7 +162,7 @@ public class ShipmentTypeResourceIntTest {
         assertThat(shipmentTypeList).hasSize(databaseSizeBeforeCreate);
 
         // Validate the ShipmentType in Elasticsearch
-        verify(mockShipmentTypeSearchRepository, times(0)).save(shipmentType);
+        //verify(mockShipmentTypeSearchRepository, times(0)).save(shipmentType);
     }
 
     @Test
@@ -252,7 +252,7 @@ public class ShipmentTypeResourceIntTest {
         assertThat(testShipmentType.getDesc()).isEqualTo(UPDATED_DESC);
 
         // Validate the ShipmentType in Elasticsearch
-        verify(mockShipmentTypeSearchRepository, times(1)).save(testShipmentType);
+        //verify(mockShipmentTypeSearchRepository, times(1)).save(testShipmentType);
     }
 
     @Test
@@ -274,7 +274,7 @@ public class ShipmentTypeResourceIntTest {
         assertThat(shipmentTypeList).hasSize(databaseSizeBeforeUpdate);
 
         // Validate the ShipmentType in Elasticsearch
-        verify(mockShipmentTypeSearchRepository, times(0)).save(shipmentType);
+        //verify(mockShipmentTypeSearchRepository, times(0)).save(shipmentType);
     }
 
     @Test
@@ -295,10 +295,10 @@ public class ShipmentTypeResourceIntTest {
         assertThat(shipmentTypeList).hasSize(databaseSizeBeforeDelete - 1);
 
         // Validate the ShipmentType in Elasticsearch
-        verify(mockShipmentTypeSearchRepository, times(1)).deleteById(shipmentType.getId());
+        //verify(mockShipmentTypeSearchRepository, times(1)).deleteById(shipmentType.getId());
     }
 
-    @Test
+    /*@Test
     @Transactional
     public void searchShipmentType() throws Exception {
         // Initialize the database
@@ -312,7 +312,7 @@ public class ShipmentTypeResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(shipmentType.getId().intValue())))
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)))
             .andExpect(jsonPath("$.[*].desc").value(hasItem(DEFAULT_DESC)));
-    }
+    }*/
 
     @Test
     @Transactional

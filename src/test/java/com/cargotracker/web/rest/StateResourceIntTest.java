@@ -4,7 +4,7 @@ import com.cargotracker.CargotrackerApp;
 
 import com.cargotracker.domain.State;
 import com.cargotracker.repository.StateRepository;
-import com.cargotracker.repository.search.StateSearchRepository;
+//import com.cargotracker.repository.search.StateSearchRepository;
 import com.cargotracker.service.StateService;
 import com.cargotracker.service.dto.StateDTO;
 import com.cargotracker.service.mapper.StateMapper;
@@ -32,7 +32,7 @@ import java.util.List;
 
 import static com.cargotracker.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+//import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -67,8 +67,8 @@ public class StateResourceIntTest {
      *
      * @see com.cargotracker.repository.search.StateSearchRepositoryMockConfiguration
      */
-    @Autowired
-    private StateSearchRepository mockStateSearchRepository;
+    //@Autowired
+    //private StateSearchRepository mockStateSearchRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -139,7 +139,7 @@ public class StateResourceIntTest {
         assertThat(testState.getStateName()).isEqualTo(DEFAULT_STATE_NAME);
 
         // Validate the State in Elasticsearch
-        verify(mockStateSearchRepository, times(1)).save(testState);
+        //verify(mockStateSearchRepository, times(1)).save(testState);
     }
 
     @Test
@@ -162,7 +162,7 @@ public class StateResourceIntTest {
         assertThat(stateList).hasSize(databaseSizeBeforeCreate);
 
         // Validate the State in Elasticsearch
-        verify(mockStateSearchRepository, times(0)).save(state);
+        //verify(mockStateSearchRepository, times(0)).save(state);
     }
 
     @Test
@@ -233,7 +233,7 @@ public class StateResourceIntTest {
         assertThat(testState.getStateName()).isEqualTo(UPDATED_STATE_NAME);
 
         // Validate the State in Elasticsearch
-        verify(mockStateSearchRepository, times(1)).save(testState);
+        //verify(mockStateSearchRepository, times(1)).save(testState);
     }
 
     @Test
@@ -255,7 +255,7 @@ public class StateResourceIntTest {
         assertThat(stateList).hasSize(databaseSizeBeforeUpdate);
 
         // Validate the State in Elasticsearch
-        verify(mockStateSearchRepository, times(0)).save(state);
+        //verify(mockStateSearchRepository, times(0)).save(state);
     }
 
     @Test
@@ -276,10 +276,10 @@ public class StateResourceIntTest {
         assertThat(stateList).hasSize(databaseSizeBeforeDelete - 1);
 
         // Validate the State in Elasticsearch
-        verify(mockStateSearchRepository, times(1)).deleteById(state.getId());
+        //verify(mockStateSearchRepository, times(1)).deleteById(state.getId());
     }
 
-    @Test
+    /*@Test
     @Transactional
     public void searchState() throws Exception {
         // Initialize the database
@@ -293,7 +293,7 @@ public class StateResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(state.getId().intValue())))
             .andExpect(jsonPath("$.[*].stateCode").value(hasItem(DEFAULT_STATE_CODE)))
             .andExpect(jsonPath("$.[*].stateName").value(hasItem(DEFAULT_STATE_NAME)));
-    }
+    }*/
 
     @Test
     @Transactional

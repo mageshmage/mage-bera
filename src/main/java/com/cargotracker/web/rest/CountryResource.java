@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing Country.
@@ -119,10 +119,10 @@ public class CountryResource {
      * @param query the query of the country search
      * @return the result of the search
      */
-    @GetMapping("/_search/countries")
+    /*@GetMapping("/_search/countries")
     public List<CountryDTO> searchCountries(@RequestParam String query) {
         log.debug("REST request to search Countries for query {}", query);
         return countryService.search(query);
-    }
+    }*/
 
 }

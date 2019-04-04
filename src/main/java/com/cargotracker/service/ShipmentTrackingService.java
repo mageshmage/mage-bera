@@ -52,5 +52,5 @@ public interface ShipmentTrackingService {
      * @param pageable the pagination information
      * @return the list of entities
      */
-    Page<ShipmentTrackingDTO> search(String query, Pageable pageable);
+    //Page<ShipmentTrackingDTO> search(String query, Pageable pageable);
 }

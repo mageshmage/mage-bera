@@ -48,5 +48,5 @@ public interface ShipmentInfoPODService {
      * 
      * @return the list of entities
      */
-    List<ShipmentInfoPODDTO> search(String query);
+    //List<ShipmentInfoPODDTO> search(String query);
 }

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class StateSearchRepositoryMockConfiguration {
 
-    @MockBean
-    private StateSearchRepository mockStateSearchRepository;
+    //@MockBean
+    //private StateSearchRepository mockStateSearchRepository;
 
 }

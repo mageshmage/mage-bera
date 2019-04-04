@@ -4,7 +4,7 @@ import com.cargotracker.CargotrackerApp;
 
 import com.cargotracker.domain.ShipmentTracking;
 import com.cargotracker.repository.ShipmentTrackingRepository;
-import com.cargotracker.repository.search.ShipmentTrackingSearchRepository;
+//import com.cargotracker.repository.search.ShipmentTrackingSearchRepository;
 import com.cargotracker.service.ShipmentTrackingService;
 import com.cargotracker.service.dto.ShipmentTrackingDTO;
 import com.cargotracker.service.mapper.ShipmentTrackingMapper;
@@ -39,7 +39,7 @@ import java.util.List;
 import static com.cargotracker.web.rest.TestUtil.sameInstant;
 import static com.cargotracker.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+//import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -77,8 +77,8 @@ public class ShipmentTrackingResourceIntTest {
      *
      * @see com.cargotracker.repository.search.ShipmentTrackingSearchRepositoryMockConfiguration
      */
-    @Autowired
-    private ShipmentTrackingSearchRepository mockShipmentTrackingSearchRepository;
+    //@Autowired
+    //private ShipmentTrackingSearchRepository mockShipmentTrackingSearchRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -151,7 +151,7 @@ public class ShipmentTrackingResourceIntTest {
         assertThat(testShipmentTracking.getStatus()).isEqualTo(DEFAULT_STATUS);
 
         // Validate the ShipmentTracking in Elasticsearch
-        verify(mockShipmentTrackingSearchRepository, times(1)).save(testShipmentTracking);
+        //verify(mockShipmentTrackingSearchRepository, times(1)).save(testShipmentTracking);
     }
 
     @Test
@@ -174,7 +174,7 @@ public class ShipmentTrackingResourceIntTest {
         assertThat(shipmentTrackingList).hasSize(databaseSizeBeforeCreate);
 
         // Validate the ShipmentTracking in Elasticsearch
-        verify(mockShipmentTrackingSearchRepository, times(0)).save(shipmentTracking);
+        //verify(mockShipmentTrackingSearchRepository, times(0)).save(shipmentTracking);
     }
 
     @Test
@@ -306,7 +306,7 @@ public class ShipmentTrackingResourceIntTest {
         assertThat(testShipmentTracking.getStatus()).isEqualTo(UPDATED_STATUS);
 
         // Validate the ShipmentTracking in Elasticsearch
-        verify(mockShipmentTrackingSearchRepository, times(1)).save(testShipmentTracking);
+        //verify(mockShipmentTrackingSearchRepository, times(1)).save(testShipmentTracking);
     }
 
     @Test
@@ -328,7 +328,7 @@ public class ShipmentTrackingResourceIntTest {
         assertThat(shipmentTrackingList).hasSize(databaseSizeBeforeUpdate);
 
         // Validate the ShipmentTracking in Elasticsearch
-        verify(mockShipmentTrackingSearchRepository, times(0)).save(shipmentTracking);
+        //verify(mockShipmentTrackingSearchRepository, times(0)).save(shipmentTracking);
     }
 
     @Test
@@ -349,10 +349,10 @@ public class ShipmentTrackingResourceIntTest {
         assertThat(shipmentTrackingList).hasSize(databaseSizeBeforeDelete - 1);
 
         // Validate the ShipmentTracking in Elasticsearch
-        verify(mockShipmentTrackingSearchRepository, times(1)).deleteById(shipmentTracking.getId());
+        //verify(mockShipmentTrackingSearchRepository, times(1)).deleteById(shipmentTracking.getId());
     }
 
-    @Test
+    /*@Test
     @Transactional
     public void searchShipmentTracking() throws Exception {
         // Initialize the database
@@ -367,7 +367,7 @@ public class ShipmentTrackingResourceIntTest {
             .andExpect(jsonPath("$.[*].trackingDate").value(hasItem(sameInstant(DEFAULT_TRACKING_DATE))))
             .andExpect(jsonPath("$.[*].place").value(hasItem(DEFAULT_PLACE)))
             .andExpect(jsonPath("$.[*].status").value(hasItem(DEFAULT_STATUS)));
-    }
+    }*/
 
     @Test
     @Transactional

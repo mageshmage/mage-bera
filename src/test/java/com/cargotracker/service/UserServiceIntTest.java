@@ -3,7 +3,7 @@ package com.cargotracker.service;
 import com.cargotracker.CargotrackerApp;
 import com.cargotracker.config.Constants;
 import com.cargotracker.domain.User;
-import com.cargotracker.repository.search.UserSearchRepository;
+//import com.cargotracker.repository.search.UserSearchRepository;
 import com.cargotracker.repository.UserRepository;
 import com.cargotracker.service.dto.UserDTO;
 import com.cargotracker.service.util.RandomUtil;
@@ -54,8 +54,8 @@ public class UserServiceIntTest {
      *
      * @see com.cargotracker.repository.search.UserSearchRepositoryMockConfiguration
      */
-    @Autowired
-    private UserSearchRepository mockUserSearchRepository;
+    //@Autowired
+    //private UserSearchRepository mockUserSearchRepository;
 
     @Autowired
     private AuditingHandler auditingHandler;
@@ -171,7 +171,7 @@ public class UserServiceIntTest {
         assertThat(users).isEmpty();
 
         // Verify Elasticsearch mock
-        verify(mockUserSearchRepository, times(1)).delete(user);
+        //verify(mockUserSearchRepository, times(1)).delete(user);
     }
 
     @Test
@@ -203,7 +203,7 @@ public class UserServiceIntTest {
         assertThat(userRepository.findOneByLogin("johndoe")).isNotPresent();
 
         // Verify Elasticsearch mock
-        verify(mockUserSearchRepository, times(1)).delete(user);
+        //verify(mockUserSearchRepository, times(1)).delete(user);
     }
 
 }

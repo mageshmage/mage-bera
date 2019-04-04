@@ -4,7 +4,7 @@ import com.cargotracker.CargotrackerApp;
 
 import com.cargotracker.domain.TrackingStatus;
 import com.cargotracker.repository.TrackingStatusRepository;
-import com.cargotracker.repository.search.TrackingStatusSearchRepository;
+//import com.cargotracker.repository.search.TrackingStatusSearchRepository;
 import com.cargotracker.service.TrackingStatusService;
 import com.cargotracker.service.dto.TrackingStatusDTO;
 import com.cargotracker.service.mapper.TrackingStatusMapper;
@@ -32,7 +32,7 @@ import java.util.List;
 
 import static com.cargotracker.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+//import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -67,8 +67,8 @@ public class TrackingStatusResourceIntTest {
      *
      * @see com.cargotracker.repository.search.TrackingStatusSearchRepositoryMockConfiguration
      */
-    @Autowired
-    private TrackingStatusSearchRepository mockTrackingStatusSearchRepository;
+    //@Autowired
+    //private TrackingStatusSearchRepository mockTrackingStatusSearchRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -139,7 +139,7 @@ public class TrackingStatusResourceIntTest {
         assertThat(testTrackingStatus.getDesc()).isEqualTo(DEFAULT_DESC);
 
         // Validate the TrackingStatus in Elasticsearch
-        verify(mockTrackingStatusSearchRepository, times(1)).save(testTrackingStatus);
+        //verify(mockTrackingStatusSearchRepository, times(1)).save(testTrackingStatus);
     }
 
     @Test
@@ -162,7 +162,7 @@ public class TrackingStatusResourceIntTest {
         assertThat(trackingStatusList).hasSize(databaseSizeBeforeCreate);
 
         // Validate the TrackingStatus in Elasticsearch
-        verify(mockTrackingStatusSearchRepository, times(0)).save(trackingStatus);
+        //verify(mockTrackingStatusSearchRepository, times(0)).save(trackingStatus);
     }
 
     @Test
@@ -252,7 +252,7 @@ public class TrackingStatusResourceIntTest {
         assertThat(testTrackingStatus.getDesc()).isEqualTo(UPDATED_DESC);
 
         // Validate the TrackingStatus in Elasticsearch
-        verify(mockTrackingStatusSearchRepository, times(1)).save(testTrackingStatus);
+        //verify(mockTrackingStatusSearchRepository, times(1)).save(testTrackingStatus);
     }
 
     @Test
@@ -274,7 +274,7 @@ public class TrackingStatusResourceIntTest {
         assertThat(trackingStatusList).hasSize(databaseSizeBeforeUpdate);
 
         // Validate the TrackingStatus in Elasticsearch
-        verify(mockTrackingStatusSearchRepository, times(0)).save(trackingStatus);
+        //verify(mockTrackingStatusSearchRepository, times(0)).save(trackingStatus);
     }
 
     @Test
@@ -295,10 +295,10 @@ public class TrackingStatusResourceIntTest {
         assertThat(trackingStatusList).hasSize(databaseSizeBeforeDelete - 1);
 
         // Validate the TrackingStatus in Elasticsearch
-        verify(mockTrackingStatusSearchRepository, times(1)).deleteById(trackingStatus.getId());
+        //verify(mockTrackingStatusSearchRepository, times(1)).deleteById(trackingStatus.getId());
     }
 
-    @Test
+    /*@Test
     @Transactional
     public void searchTrackingStatus() throws Exception {
         // Initialize the database
@@ -312,7 +312,7 @@ public class TrackingStatusResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(trackingStatus.getId().intValue())))
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)))
             .andExpect(jsonPath("$.[*].desc").value(hasItem(DEFAULT_DESC)));
-    }
+    }*/
 
     @Test
     @Transactional

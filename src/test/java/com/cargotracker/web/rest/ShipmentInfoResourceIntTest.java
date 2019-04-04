@@ -4,7 +4,7 @@ import com.cargotracker.CargotrackerApp;
 
 import com.cargotracker.domain.ShipmentInfo;
 import com.cargotracker.repository.ShipmentInfoRepository;
-import com.cargotracker.repository.search.ShipmentInfoSearchRepository;
+//import com.cargotracker.repository.search.ShipmentInfoSearchRepository;
 import com.cargotracker.service.ShipmentInfoService;
 import com.cargotracker.service.dto.ShipmentInfoDTO;
 import com.cargotracker.service.mapper.ShipmentInfoMapper;
@@ -40,7 +40,7 @@ import java.util.List;
 import static com.cargotracker.web.rest.TestUtil.sameInstant;
 import static com.cargotracker.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+//import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -117,8 +117,8 @@ public class ShipmentInfoResourceIntTest {
      *
      * @see com.cargotracker.repository.search.ShipmentInfoSearchRepositoryMockConfiguration
      */
-    @Autowired
-    private ShipmentInfoSearchRepository mockShipmentInfoSearchRepository;
+    //@Autowired
+    //private ShipmentInfoSearchRepository mockShipmentInfoSearchRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -217,7 +217,7 @@ public class ShipmentInfoResourceIntTest {
         assertThat(testShipmentInfo.getRelationShip()).isEqualTo(DEFAULT_RELATION_SHIP);
 
         // Validate the ShipmentInfo in Elasticsearch
-        verify(mockShipmentInfoSearchRepository, times(1)).save(testShipmentInfo);
+        //verify(mockShipmentInfoSearchRepository, times(1)).save(testShipmentInfo);
     }
 
     @Test
@@ -240,7 +240,7 @@ public class ShipmentInfoResourceIntTest {
         assertThat(shipmentInfoList).hasSize(databaseSizeBeforeCreate);
 
         // Validate the ShipmentInfo in Elasticsearch
-        verify(mockShipmentInfoSearchRepository, times(0)).save(shipmentInfo);
+        //verify(mockShipmentInfoSearchRepository, times(0)).save(shipmentInfo);
     }
 
     @Test
@@ -443,7 +443,7 @@ public class ShipmentInfoResourceIntTest {
         assertThat(testShipmentInfo.getRelationShip()).isEqualTo(UPDATED_RELATION_SHIP);
 
         // Validate the ShipmentInfo in Elasticsearch
-        verify(mockShipmentInfoSearchRepository, times(1)).save(testShipmentInfo);
+        //verify(mockShipmentInfoSearchRepository, times(1)).save(testShipmentInfo);
     }
 
     @Test
@@ -465,7 +465,7 @@ public class ShipmentInfoResourceIntTest {
         assertThat(shipmentInfoList).hasSize(databaseSizeBeforeUpdate);
 
         // Validate the ShipmentInfo in Elasticsearch
-        verify(mockShipmentInfoSearchRepository, times(0)).save(shipmentInfo);
+        //verify(mockShipmentInfoSearchRepository, times(0)).save(shipmentInfo);
     }
 
     @Test
@@ -486,10 +486,10 @@ public class ShipmentInfoResourceIntTest {
         assertThat(shipmentInfoList).hasSize(databaseSizeBeforeDelete - 1);
 
         // Validate the ShipmentInfo in Elasticsearch
-        verify(mockShipmentInfoSearchRepository, times(1)).deleteById(shipmentInfo.getId());
+        //verify(mockShipmentInfoSearchRepository, times(1)).deleteById(shipmentInfo.getId());
     }
 
-    @Test
+    /*@Test
     @Transactional
     public void searchShipmentInfo() throws Exception {
         // Initialize the database
@@ -517,7 +517,7 @@ public class ShipmentInfoResourceIntTest {
             .andExpect(jsonPath("$.[*].deliveredDate").value(hasItem(sameInstant(DEFAULT_DELIVERED_DATE))))
             .andExpect(jsonPath("$.[*].receivedBy").value(hasItem(DEFAULT_RECEIVED_BY)))
             .andExpect(jsonPath("$.[*].relationShip").value(hasItem(DEFAULT_RELATION_SHIP)));
-    }
+    }*/
 
     @Test
     @Transactional

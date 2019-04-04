@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ShipmentModeSearchRepositoryMockConfiguration {
 
-    @MockBean
-    private ShipmentModeSearchRepository mockShipmentModeSearchRepository;
+    //@MockBean
+    //private ShipmentModeSearchRepository mockShipmentModeSearchRepository;
 
 }

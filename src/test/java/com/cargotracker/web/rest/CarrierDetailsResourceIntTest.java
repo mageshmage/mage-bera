@@ -4,7 +4,7 @@ import com.cargotracker.CargotrackerApp;
 
 import com.cargotracker.domain.CarrierDetails;
 import com.cargotracker.repository.CarrierDetailsRepository;
-import com.cargotracker.repository.search.CarrierDetailsSearchRepository;
+//import com.cargotracker.repository.search.CarrierDetailsSearchRepository;
 import com.cargotracker.service.CarrierDetailsService;
 import com.cargotracker.service.dto.CarrierDetailsDTO;
 import com.cargotracker.service.mapper.CarrierDetailsMapper;
@@ -32,7 +32,7 @@ import java.util.List;
 
 import static com.cargotracker.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+//import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -67,8 +67,8 @@ public class CarrierDetailsResourceIntTest {
      *
      * @see com.cargotracker.repository.search.CarrierDetailsSearchRepositoryMockConfiguration
      */
-    @Autowired
-    private CarrierDetailsSearchRepository mockCarrierDetailsSearchRepository;
+    //@Autowired
+    //private CarrierDetailsSearchRepository mockCarrierDetailsSearchRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -139,7 +139,7 @@ public class CarrierDetailsResourceIntTest {
         assertThat(testCarrierDetails.getDesc()).isEqualTo(DEFAULT_DESC);
 
         // Validate the CarrierDetails in Elasticsearch
-        verify(mockCarrierDetailsSearchRepository, times(1)).save(testCarrierDetails);
+        //verify(mockCarrierDetailsSearchRepository, times(1)).save(testCarrierDetails);
     }
 
     @Test
@@ -162,7 +162,7 @@ public class CarrierDetailsResourceIntTest {
         assertThat(carrierDetailsList).hasSize(databaseSizeBeforeCreate);
 
         // Validate the CarrierDetails in Elasticsearch
-        verify(mockCarrierDetailsSearchRepository, times(0)).save(carrierDetails);
+        //verify(mockCarrierDetailsSearchRepository, times(0)).save(carrierDetails);
     }
 
     @Test
@@ -252,7 +252,7 @@ public class CarrierDetailsResourceIntTest {
         assertThat(testCarrierDetails.getDesc()).isEqualTo(UPDATED_DESC);
 
         // Validate the CarrierDetails in Elasticsearch
-        verify(mockCarrierDetailsSearchRepository, times(1)).save(testCarrierDetails);
+        //verify(mockCarrierDetailsSearchRepository, times(1)).save(testCarrierDetails);
     }
 
     @Test
@@ -274,7 +274,7 @@ public class CarrierDetailsResourceIntTest {
         assertThat(carrierDetailsList).hasSize(databaseSizeBeforeUpdate);
 
         // Validate the CarrierDetails in Elasticsearch
-        verify(mockCarrierDetailsSearchRepository, times(0)).save(carrierDetails);
+        //verify(mockCarrierDetailsSearchRepository, times(0)).save(carrierDetails);
     }
 
     @Test
@@ -295,10 +295,10 @@ public class CarrierDetailsResourceIntTest {
         assertThat(carrierDetailsList).hasSize(databaseSizeBeforeDelete - 1);
 
         // Validate the CarrierDetails in Elasticsearch
-        verify(mockCarrierDetailsSearchRepository, times(1)).deleteById(carrierDetails.getId());
+        //verify(mockCarrierDetailsSearchRepository, times(1)).deleteById(carrierDetails.getId());
     }
 
-    @Test
+    /*@Test
     @Transactional
     public void searchCarrierDetails() throws Exception {
         // Initialize the database
@@ -312,7 +312,7 @@ public class CarrierDetailsResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(carrierDetails.getId().intValue())))
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)))
             .andExpect(jsonPath("$.[*].desc").value(hasItem(DEFAULT_DESC)));
-    }
+    }*/
 
     @Test
     @Transactional

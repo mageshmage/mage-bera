@@ -4,7 +4,7 @@ import com.cargotracker.CargotrackerApp;
 
 import com.cargotracker.domain.Vendor;
 import com.cargotracker.repository.VendorRepository;
-import com.cargotracker.repository.search.VendorSearchRepository;
+//import com.cargotracker.repository.search.VendorSearchRepository;
 import com.cargotracker.service.VendorService;
 import com.cargotracker.service.dto.VendorDTO;
 import com.cargotracker.service.mapper.VendorMapper;
@@ -32,7 +32,7 @@ import java.util.List;
 
 import static com.cargotracker.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+//import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -85,8 +85,8 @@ public class VendorResourceIntTest {
      *
      * @see com.cargotracker.repository.search.VendorSearchRepositoryMockConfiguration
      */
-    @Autowired
-    private VendorSearchRepository mockVendorSearchRepository;
+    //@Autowired
+    //private VendorSearchRepository mockVendorSearchRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -169,7 +169,7 @@ public class VendorResourceIntTest {
         assertThat(testVendor.isIsActive()).isEqualTo(DEFAULT_IS_ACTIVE);
 
         // Validate the Vendor in Elasticsearch
-        verify(mockVendorSearchRepository, times(1)).save(testVendor);
+        //verify(mockVendorSearchRepository, times(1)).save(testVendor);
     }
 
     @Test
@@ -192,7 +192,7 @@ public class VendorResourceIntTest {
         assertThat(vendorList).hasSize(databaseSizeBeforeCreate);
 
         // Validate the Vendor in Elasticsearch
-        verify(mockVendorSearchRepository, times(0)).save(vendor);
+        //verify(mockVendorSearchRepository, times(0)).save(vendor);
     }
 
     @Test
@@ -439,7 +439,7 @@ public class VendorResourceIntTest {
         assertThat(testVendor.isIsActive()).isEqualTo(UPDATED_IS_ACTIVE);
 
         // Validate the Vendor in Elasticsearch
-        verify(mockVendorSearchRepository, times(1)).save(testVendor);
+        //verify(mockVendorSearchRepository, times(1)).save(testVendor);
     }
 
     @Test
@@ -461,7 +461,7 @@ public class VendorResourceIntTest {
         assertThat(vendorList).hasSize(databaseSizeBeforeUpdate);
 
         // Validate the Vendor in Elasticsearch
-        verify(mockVendorSearchRepository, times(0)).save(vendor);
+        //verify(mockVendorSearchRepository, times(0)).save(vendor);
     }
 
     @Test
@@ -482,10 +482,10 @@ public class VendorResourceIntTest {
         assertThat(vendorList).hasSize(databaseSizeBeforeDelete - 1);
 
         // Validate the Vendor in Elasticsearch
-        verify(mockVendorSearchRepository, times(1)).deleteById(vendor.getId());
+        //verify(mockVendorSearchRepository, times(1)).deleteById(vendor.getId());
     }
 
-    @Test
+    /*@Test
     @Transactional
     public void searchVendor() throws Exception {
         // Initialize the database
@@ -505,7 +505,7 @@ public class VendorResourceIntTest {
             .andExpect(jsonPath("$.[*].pan").value(hasItem(DEFAULT_PAN)))
             .andExpect(jsonPath("$.[*].gstIn").value(hasItem(DEFAULT_GST_IN)))
             .andExpect(jsonPath("$.[*].isActive").value(hasItem(DEFAULT_IS_ACTIVE.booleanValue())));
-    }
+    }*/
 
     @Test
     @Transactional

@@ -1,4 +1,4 @@
-package com.cargotracker.config;
+/*package com.cargotracker.config;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -69,4 +69,13 @@ public class ElasticsearchConfiguration {
         }
     }
 
+}
+*/
+
+package com.cargotracker.config;
+
+import org.springframework.context.annotation.Configuration;
+
+@Configuration
+public class ElasticsearchConfiguration {
 }

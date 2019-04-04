@@ -3,7 +3,7 @@ package com.cargotracker.service.impl;
 import com.cargotracker.service.ShipmentTypeService;
 import com.cargotracker.domain.ShipmentType;
 import com.cargotracker.repository.ShipmentTypeRepository;
-import com.cargotracker.repository.search.ShipmentTypeSearchRepository;
+//import com.cargotracker.repository.search.ShipmentTypeSearchRepository;
 import com.cargotracker.service.dto.ShipmentTypeDTO;
 import com.cargotracker.service.mapper.ShipmentTypeMapper;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing ShipmentType.
@@ -33,12 +33,14 @@ public class ShipmentTypeServiceImpl implements ShipmentTypeService {
 
     private final ShipmentTypeMapper shipmentTypeMapper;
 
-    private final ShipmentTypeSearchRepository shipmentTypeSearchRepository;
+    //private final ShipmentTypeSearchRepository shipmentTypeSearchRepository;
 
-    public ShipmentTypeServiceImpl(ShipmentTypeRepository shipmentTypeRepository, ShipmentTypeMapper shipmentTypeMapper, ShipmentTypeSearchRepository shipmentTypeSearchRepository) {
+    public ShipmentTypeServiceImpl(ShipmentTypeRepository shipmentTypeRepository, ShipmentTypeMapper shipmentTypeMapper
+    		//, ShipmentTypeSearchRepository shipmentTypeSearchRepository
+    		) {
         this.shipmentTypeRepository = shipmentTypeRepository;
         this.shipmentTypeMapper = shipmentTypeMapper;
-        this.shipmentTypeSearchRepository = shipmentTypeSearchRepository;
+        //this.shipmentTypeSearchRepository = shipmentTypeSearchRepository;
     }
 
     /**
@@ -53,7 +55,7 @@ public class ShipmentTypeServiceImpl implements ShipmentTypeService {
         ShipmentType shipmentType = shipmentTypeMapper.toEntity(shipmentTypeDTO);
         shipmentType = shipmentTypeRepository.save(shipmentType);
         ShipmentTypeDTO result = shipmentTypeMapper.toDto(shipmentType);
-        shipmentTypeSearchRepository.save(shipmentType);
+        //shipmentTypeSearchRepository.save(shipmentType);
         result.setVendorname(shipmentType.getVendor().getVendorname());
         return result;
     }
@@ -96,7 +98,7 @@ public class ShipmentTypeServiceImpl implements ShipmentTypeService {
     public void delete(Long id) {
         log.debug("Request to delete ShipmentType : {}", id);
         shipmentTypeRepository.deleteById(id);
-        shipmentTypeSearchRepository.deleteById(id);
+        //shipmentTypeSearchRepository.deleteById(id);
     }
 
     /**
@@ -105,7 +107,7 @@ public class ShipmentTypeServiceImpl implements ShipmentTypeService {
      * @param query the query of the search
      * @return the list of entities
      */
-    @Override
+    /*@Override
     @Transactional(readOnly = true)
     public List<ShipmentTypeDTO> search(String query) {
         log.debug("Request to search ShipmentTypes for query {}", query);
@@ -113,5 +115,5 @@ public class ShipmentTypeServiceImpl implements ShipmentTypeService {
             .stream(shipmentTypeSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .map(shipmentTypeMapper::toDto)
             .collect(Collectors.toList());
-    }
+    }*/
 }

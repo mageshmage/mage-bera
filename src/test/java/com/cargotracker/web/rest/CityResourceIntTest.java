@@ -4,7 +4,7 @@ import com.cargotracker.CargotrackerApp;
 
 import com.cargotracker.domain.City;
 import com.cargotracker.repository.CityRepository;
-import com.cargotracker.repository.search.CitySearchRepository;
+//import com.cargotracker.repository.search.CitySearchRepository;
 import com.cargotracker.service.CityService;
 import com.cargotracker.service.dto.CityDTO;
 import com.cargotracker.service.mapper.CityMapper;
@@ -32,7 +32,7 @@ import java.util.List;
 
 import static com.cargotracker.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+//import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -67,8 +67,8 @@ public class CityResourceIntTest {
      *
      * @see com.cargotracker.repository.search.CitySearchRepositoryMockConfiguration
      */
-    @Autowired
-    private CitySearchRepository mockCitySearchRepository;
+    //@Autowired
+    //private CitySearchRepository mockCitySearchRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -139,7 +139,7 @@ public class CityResourceIntTest {
         assertThat(testCity.getCityName()).isEqualTo(DEFAULT_CITY_NAME);
 
         // Validate the City in Elasticsearch
-        verify(mockCitySearchRepository, times(1)).save(testCity);
+        //verify(mockCitySearchRepository, times(1)).save(testCity);
     }
 
     @Test
@@ -162,7 +162,7 @@ public class CityResourceIntTest {
         assertThat(cityList).hasSize(databaseSizeBeforeCreate);
 
         // Validate the City in Elasticsearch
-        verify(mockCitySearchRepository, times(0)).save(city);
+        //verify(mockCitySearchRepository, times(0)).save(city);
     }
 
     @Test
@@ -233,7 +233,7 @@ public class CityResourceIntTest {
         assertThat(testCity.getCityName()).isEqualTo(UPDATED_CITY_NAME);
 
         // Validate the City in Elasticsearch
-        verify(mockCitySearchRepository, times(1)).save(testCity);
+        //verify(mockCitySearchRepository, times(1)).save(testCity);
     }
 
     @Test
@@ -255,7 +255,7 @@ public class CityResourceIntTest {
         assertThat(cityList).hasSize(databaseSizeBeforeUpdate);
 
         // Validate the City in Elasticsearch
-        verify(mockCitySearchRepository, times(0)).save(city);
+        //verify(mockCitySearchRepository, times(0)).save(city);
     }
 
     @Test
@@ -276,10 +276,10 @@ public class CityResourceIntTest {
         assertThat(cityList).hasSize(databaseSizeBeforeDelete - 1);
 
         // Validate the City in Elasticsearch
-        verify(mockCitySearchRepository, times(1)).deleteById(city.getId());
+        //verify(mockCitySearchRepository, times(1)).deleteById(city.getId());
     }
 
-    @Test
+    /*@Test
     @Transactional
     public void searchCity() throws Exception {
         // Initialize the database
@@ -293,7 +293,7 @@ public class CityResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(city.getId().intValue())))
             .andExpect(jsonPath("$.[*].cityCode").value(hasItem(DEFAULT_CITY_CODE)))
             .andExpect(jsonPath("$.[*].cityName").value(hasItem(DEFAULT_CITY_NAME)));
-    }
+    }*/
 
     @Test
     @Transactional

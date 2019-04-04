@@ -3,7 +3,7 @@ package com.cargotracker.service.impl;
 import com.cargotracker.service.ShipmentModeService;
 import com.cargotracker.domain.ShipmentMode;
 import com.cargotracker.repository.ShipmentModeRepository;
-import com.cargotracker.repository.search.ShipmentModeSearchRepository;
+//import com.cargotracker.repository.search.ShipmentModeSearchRepository;
 import com.cargotracker.service.dto.ShipmentModeDTO;
 import com.cargotracker.service.mapper.ShipmentModeMapper;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing ShipmentMode.
@@ -33,12 +33,14 @@ public class ShipmentModeServiceImpl implements ShipmentModeService {
 
     private final ShipmentModeMapper shipmentModeMapper;
 
-    private final ShipmentModeSearchRepository shipmentModeSearchRepository;
+    //private final ShipmentModeSearchRepository shipmentModeSearchRepository;
 
-    public ShipmentModeServiceImpl(ShipmentModeRepository shipmentModeRepository, ShipmentModeMapper shipmentModeMapper, ShipmentModeSearchRepository shipmentModeSearchRepository) {
+    public ShipmentModeServiceImpl(ShipmentModeRepository shipmentModeRepository, ShipmentModeMapper shipmentModeMapper
+    		//, ShipmentModeSearchRepository shipmentModeSearchRepository
+    		) {
         this.shipmentModeRepository = shipmentModeRepository;
         this.shipmentModeMapper = shipmentModeMapper;
-        this.shipmentModeSearchRepository = shipmentModeSearchRepository;
+        //this.shipmentModeSearchRepository = shipmentModeSearchRepository;
     }
 
     /**
@@ -53,7 +55,7 @@ public class ShipmentModeServiceImpl implements ShipmentModeService {
         ShipmentMode shipmentMode = shipmentModeMapper.toEntity(shipmentModeDTO);
         shipmentMode = shipmentModeRepository.save(shipmentMode);
         ShipmentModeDTO result = shipmentModeMapper.toDto(shipmentMode);
-        shipmentModeSearchRepository.save(shipmentMode);
+        //shipmentModeSearchRepository.save(shipmentMode);
         result.setVendorname(shipmentMode.getVendor().getVendorname());
         return result;
     }
@@ -96,7 +98,7 @@ public class ShipmentModeServiceImpl implements ShipmentModeService {
     public void delete(Long id) {
         log.debug("Request to delete ShipmentMode : {}", id);
         shipmentModeRepository.deleteById(id);
-        shipmentModeSearchRepository.deleteById(id);
+        //shipmentModeSearchRepository.deleteById(id);
     }
 
     /**
@@ -105,7 +107,7 @@ public class ShipmentModeServiceImpl implements ShipmentModeService {
      * @param query the query of the search
      * @return the list of entities
      */
-    @Override
+    /*@Override
     @Transactional(readOnly = true)
     public List<ShipmentModeDTO> search(String query) {
         log.debug("Request to search ShipmentModes for query {}", query);
@@ -113,5 +115,5 @@ public class ShipmentModeServiceImpl implements ShipmentModeService {
             .stream(shipmentModeSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .map(shipmentModeMapper::toDto)
             .collect(Collectors.toList());
-    }
+    }*/
 }

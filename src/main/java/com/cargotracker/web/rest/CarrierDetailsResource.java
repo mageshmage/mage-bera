@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing CarrierDetails.
@@ -120,10 +120,10 @@ public class CarrierDetailsResource {
      * @param query the query of the carrierDetails search
      * @return the result of the search
      */
-    @GetMapping("/_search/carrier-details")
+    /*@GetMapping("/_search/carrier-details")
     public List<CarrierDetailsDTO> searchCarrierDetails(@RequestParam String query) {
         log.debug("REST request to search CarrierDetails for query {}", query);
         return carrierDetailsService.search(query);
-    }
+    }*/
 
 }

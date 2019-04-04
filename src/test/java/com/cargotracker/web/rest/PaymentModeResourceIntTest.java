@@ -4,7 +4,7 @@ import com.cargotracker.CargotrackerApp;
 
 import com.cargotracker.domain.PaymentMode;
 import com.cargotracker.repository.PaymentModeRepository;
-import com.cargotracker.repository.search.PaymentModeSearchRepository;
+//import com.cargotracker.repository.search.PaymentModeSearchRepository;
 import com.cargotracker.service.PaymentModeService;
 import com.cargotracker.service.dto.PaymentModeDTO;
 import com.cargotracker.service.mapper.PaymentModeMapper;
@@ -32,7 +32,7 @@ import java.util.List;
 
 import static com.cargotracker.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+//import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -67,8 +67,8 @@ public class PaymentModeResourceIntTest {
      *
      * @see com.cargotracker.repository.search.PaymentModeSearchRepositoryMockConfiguration
      */
-    @Autowired
-    private PaymentModeSearchRepository mockPaymentModeSearchRepository;
+    //@Autowired
+    //private PaymentModeSearchRepository mockPaymentModeSearchRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -139,7 +139,7 @@ public class PaymentModeResourceIntTest {
         assertThat(testPaymentMode.getDesc()).isEqualTo(DEFAULT_DESC);
 
         // Validate the PaymentMode in Elasticsearch
-        verify(mockPaymentModeSearchRepository, times(1)).save(testPaymentMode);
+        //verify(mockPaymentModeSearchRepository, times(1)).save(testPaymentMode);
     }
 
     @Test
@@ -162,7 +162,7 @@ public class PaymentModeResourceIntTest {
         assertThat(paymentModeList).hasSize(databaseSizeBeforeCreate);
 
         // Validate the PaymentMode in Elasticsearch
-        verify(mockPaymentModeSearchRepository, times(0)).save(paymentMode);
+        //verify(mockPaymentModeSearchRepository, times(0)).save(paymentMode);
     }
 
     @Test
@@ -252,7 +252,7 @@ public class PaymentModeResourceIntTest {
         assertThat(testPaymentMode.getDesc()).isEqualTo(UPDATED_DESC);
 
         // Validate the PaymentMode in Elasticsearch
-        verify(mockPaymentModeSearchRepository, times(1)).save(testPaymentMode);
+        //verify(mockPaymentModeSearchRepository, times(1)).save(testPaymentMode);
     }
 
     @Test
@@ -274,7 +274,7 @@ public class PaymentModeResourceIntTest {
         assertThat(paymentModeList).hasSize(databaseSizeBeforeUpdate);
 
         // Validate the PaymentMode in Elasticsearch
-        verify(mockPaymentModeSearchRepository, times(0)).save(paymentMode);
+        //verify(mockPaymentModeSearchRepository, times(0)).save(paymentMode);
     }
 
     @Test
@@ -295,10 +295,10 @@ public class PaymentModeResourceIntTest {
         assertThat(paymentModeList).hasSize(databaseSizeBeforeDelete - 1);
 
         // Validate the PaymentMode in Elasticsearch
-        verify(mockPaymentModeSearchRepository, times(1)).deleteById(paymentMode.getId());
+        //verify(mockPaymentModeSearchRepository, times(1)).deleteById(paymentMode.getId());
     }
 
-    @Test
+    /*@Test
     @Transactional
     public void searchPaymentMode() throws Exception {
         // Initialize the database
@@ -312,7 +312,7 @@ public class PaymentModeResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(paymentMode.getId().intValue())))
             .andExpect(jsonPath("$.[*].value").value(hasItem(DEFAULT_VALUE)))
             .andExpect(jsonPath("$.[*].desc").value(hasItem(DEFAULT_DESC)));
-    }
+    }*/
 
     @Test
     @Transactional

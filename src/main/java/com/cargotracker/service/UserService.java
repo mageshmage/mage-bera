@@ -9,7 +9,7 @@ import com.cargotracker.repository.AuthorityRepository;
 import com.cargotracker.repository.UserExtraRepository;
 import com.cargotracker.repository.UserRepository;
 import com.cargotracker.repository.VendorRepository;
-import com.cargotracker.repository.search.UserSearchRepository;
+//import com.cargotracker.repository.search.UserSearchRepository;
 import com.cargotracker.security.AuthoritiesConstants;
 import com.cargotracker.security.SecurityUtils;
 import com.cargotracker.service.dto.UserDTO;
@@ -44,7 +44,7 @@ public class UserService {
 
 	private final PasswordEncoder passwordEncoder;
 
-	private final UserSearchRepository userSearchRepository;
+	//private final UserSearchRepository userSearchRepository;
 
 	private final AuthorityRepository authorityRepository;
 
@@ -55,11 +55,12 @@ public class UserService {
 	private final CacheManager cacheManager;
 
 	public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
-			UserSearchRepository userSearchRepository, AuthorityRepository authorityRepository,
+			//UserSearchRepository userSearchRepository,
+			AuthorityRepository authorityRepository,
 			VendorRepository vendorRepository, UserExtraRepository userExtraRepository, CacheManager cacheManager) {
 		this.userRepository = userRepository;
 		this.passwordEncoder = passwordEncoder;
-		this.userSearchRepository = userSearchRepository;
+		//this.userSearchRepository = userSearchRepository;
 		this.authorityRepository = authorityRepository;
 		this.vendorRepository = vendorRepository;
 		this.userExtraRepository =userExtraRepository;
@@ -72,7 +73,7 @@ public class UserService {
 			// activate given user for the registration key.
 			user.setActivated(true);
 			user.setActivationKey(null);
-			userSearchRepository.save(user);
+			//userSearchRepository.save(user);
 			this.clearUserCaches(user);
 			log.debug("Activated user: {}", user);
 			return user;
@@ -131,7 +132,7 @@ public class UserService {
 		authorityRepository.findById(AuthoritiesConstants.USER).ifPresent(authorities::add);
 		newUser.setAuthorities(authorities);
 		userRepository.save(newUser);
-		userSearchRepository.save(newUser);
+		//userSearchRepository.save(newUser);
 		this.clearUserCaches(newUser);
 		log.debug("Created Information for User: {}", newUser);
 		return newUser;
@@ -175,7 +176,7 @@ public class UserService {
 		userExtra.setUser(user);
 		userExtraRepository.save(userExtra);
 		userRepository.save(user);
-		userSearchRepository.save(user);
+		//userSearchRepository.save(user);
 		this.clearUserCaches(user);
 		log.debug("Created Information for User: {}", user);
 		return user;
@@ -203,7 +204,7 @@ public class UserService {
 			user.setEmail(email.toLowerCase());
 			user.setLangKey(langKey);
 			user.setImageUrl(imageUrl);
-			userSearchRepository.save(user);
+			//userSearchRepository.save(user);
 			this.clearUserCaches(user);
 			log.debug("Changed Information for User: {}", user);
 		});
@@ -255,7 +256,7 @@ public class UserService {
 					managedAuthorities.clear();
 					userDTO.getAuthorities().stream().map(authorityRepository::findById).filter(Optional::isPresent)
 							.map(Optional::get).forEach(managedAuthorities::add);
-					userSearchRepository.save(user);
+					//userSearchRepository.save(user);
 					this.clearUserCaches(user);
 					log.debug("Changed Information for User: {}", user);
 					return user;
@@ -265,7 +266,7 @@ public class UserService {
 	public void deleteUser(String login) {
 		userRepository.findOneByLogin(login).ifPresent(user -> {
 			userRepository.delete(user);
-			userSearchRepository.delete(user);
+			//userSearchRepository.delete(user);
 			this.clearUserCaches(user);
 			log.debug("Deleted User: {}", user);
 		});
@@ -315,7 +316,7 @@ public class UserService {
 				.forEach(user -> {
 					log.debug("Deleting not activated user {}", user.getLogin());
 					userRepository.delete(user);
-					userSearchRepository.delete(user);
+					//userSearchRepository.delete(user);
 					this.clearUserCaches(user);
 				});
 	}

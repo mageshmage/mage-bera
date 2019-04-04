@@ -253,12 +253,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-        </dependency>
+        </dependency>-->
         <!-- Spring Data Jest dependencies for Elasticsearch -->
-        <dependency>
+        <!--<dependency>
             <groupId>com.github.vanroy</groupId>
             <artifactId>spring-boot-starter-data-jest</artifactId>
             <exclusions>
@@ -267,7 +267,7 @@
                     <artifactId>commons-logging</artifactId>
                 </exclusion>
             </exclusions>
-        </dependency>
+        </dependency>-->
         <!-- log4j needed to create embedded elasticsearch instance -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
@@ -350,6 +350,14 @@
         <dependency>
             <groupId>io.dropwizard.metrics</groupId>
             <artifactId>metrics-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-localconfig-connector</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-heroku-connector</artifactId>
         </dependency>
         <!-- jhipster-needle-maven-add-dependency -->
     </dependencies>
@@ -762,7 +770,7 @@
             </dependencies>
             <build>
                 <plugins>
-                    <plugin>
+                    <!--<plugin>
                         <groupId>com.github.eirslett</groupId>
                         <artifactId>frontend-maven-plugin</artifactId>
                         <executions>
@@ -794,7 +802,7 @@
                                 </configuration>
                             </execution>
                         </executions>
-                    </plugin>
+                    </plugin>-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
@@ -869,7 +877,7 @@
             </dependencies>
             <build>
                 <plugins>
-                    <plugin>
+                    <!--<plugin>
                         <artifactId>maven-clean-plugin</artifactId>
                         <configuration>
                             <filesets>
@@ -878,7 +886,7 @@
                                 </fileset>
                             </filesets>
                         </configuration>
-                    </plugin>
+                    </plugin>-->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-war-plugin</artifactId>
@@ -910,7 +918,7 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <plugin>
+                    <!--<plugin>
                         <groupId>com.github.eirslett</groupId>
                         <artifactId>frontend-maven-plugin</artifactId>
                         <executions>
@@ -956,7 +964,7 @@
                                 </configuration>
                             </execution>
                         </executions>
-                    </plugin>
+                    </plugin>-->
                     <plugin>
                         <groupId>pl.project13.maven</groupId>
                         <artifactId>git-commit-id-plugin</artifactId>
@@ -1117,6 +1125,59 @@
                         </plugin>
                     </plugins>
                 </pluginManagement>
+            </build>
+        </profile>
+        <profile>
+            <id>heroku</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.liquibase</groupId>
+                        <artifactId>liquibase-maven-plugin</artifactId>
+                        <configuration combine.self="override">
+                            <changeLogFile>src/main/resources/config/liquibase/master.xml</changeLogFile>
+                            <diffChangeLogFile>src/main/resources/config/liquibase/changelog/${maven.build.timestamp}_changelog.xml</diffChangeLogFile>
+                            <driver></driver>
+                            <url>${env.JDBC_DATABASE_URL}</url>
+                            <defaultSchemaName></defaultSchemaName>
+                            <username>${env.JDBC_DATABASE_USERNAME}</username>
+                            <password>${env.JDBC_DATABASE_PASSWORD}</password>
+                            <referenceUrl>hibernate:spring:com.cargotracker.domain?dialect=org.hibernate.dialect.MySQL5InnoDBDialect&amp;hibernate.physical_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy&amp;hibernate.implicit_naming_strategy=org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy</referenceUrl>
+                            <verbose>true</verbose>
+                            <logging>debug</logging>
+                            <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
+                        </configuration>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-clean-plugin</artifactId>
+                        <version>${maven-clean-plugin.version}</version>
+                        <executions>
+                            <execution>
+                                <id>clean-artifacts</id>
+                                <phase>install</phase>
+                                <goals>
+                                    <goal>clean</goal>
+                                </goals>
+                                <configuration>
+                                    <excludeDefaultDirectories>true</excludeDefaultDirectories>
+                                    <filesets>
+                                        <fileset>
+                                            <directory>target</directory>
+                                            <excludes>
+                                                <exclude>*.war</exclude>
+                                            </excludes>
+                                            <followSymlinks>false</followSymlinks>
+                                        </fileset>
+                                        <fileset>
+                                            <directory>node_modules</directory>
+                                            <followSymlinks>false</followSymlinks>
+                                        </fileset>
+                                    </filesets>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
             </build>
         </profile>
         <!-- jhipster-needle-maven-add-profile -->

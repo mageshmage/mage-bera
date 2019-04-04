@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing PaymentMode.
@@ -120,10 +120,10 @@ public class PaymentModeResource {
      * @param query the query of the paymentMode search
      * @return the result of the search
      */
-    @GetMapping("/_search/payment-modes")
+    /*@GetMapping("/_search/payment-modes")
     public List<PaymentModeDTO> searchPaymentModes(@RequestParam String query) {
         log.debug("REST request to search PaymentModes for query {}", query);
         return paymentModeService.search(query);
-    }
+    }*/
 
 }

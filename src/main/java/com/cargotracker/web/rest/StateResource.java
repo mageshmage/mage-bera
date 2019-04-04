@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing State.
@@ -119,10 +119,10 @@ public class StateResource {
      * @param query the query of the state search
      * @return the result of the search
      */
-    @GetMapping("/_search/states")
+    /*@GetMapping("/_search/states")
     public List<StateDTO> searchStates(@RequestParam String query) {
         log.debug("REST request to search States for query {}", query);
         return stateService.search(query);
-    }
+    }*/
 
 }

@@ -3,7 +3,7 @@ package com.cargotracker.service.impl;
 import com.cargotracker.service.ShipmentInfoService;
 import com.cargotracker.domain.ShipmentInfo;
 import com.cargotracker.repository.ShipmentInfoRepository;
-import com.cargotracker.repository.search.ShipmentInfoSearchRepository;
+//import com.cargotracker.repository.search.ShipmentInfoSearchRepository;
 import com.cargotracker.service.dto.ShipmentInfoDTO;
 import com.cargotracker.service.mapper.ShipmentInfoMapper;
 import org.slf4j.Logger;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing ShipmentInfo.
@@ -31,12 +31,14 @@ public class ShipmentInfoServiceImpl implements ShipmentInfoService {
 
     private final ShipmentInfoMapper shipmentInfoMapper;
 
-    private final ShipmentInfoSearchRepository shipmentInfoSearchRepository;
+    //private final ShipmentInfoSearchRepository shipmentInfoSearchRepository;
 
-    public ShipmentInfoServiceImpl(ShipmentInfoRepository shipmentInfoRepository, ShipmentInfoMapper shipmentInfoMapper, ShipmentInfoSearchRepository shipmentInfoSearchRepository) {
+    public ShipmentInfoServiceImpl(ShipmentInfoRepository shipmentInfoRepository, ShipmentInfoMapper shipmentInfoMapper
+    		//, ShipmentInfoSearchRepository shipmentInfoSearchRepository
+    		) {
         this.shipmentInfoRepository = shipmentInfoRepository;
         this.shipmentInfoMapper = shipmentInfoMapper;
-        this.shipmentInfoSearchRepository = shipmentInfoSearchRepository;
+        //this.shipmentInfoSearchRepository = shipmentInfoSearchRepository;
     }
 
     /**
@@ -51,7 +53,7 @@ public class ShipmentInfoServiceImpl implements ShipmentInfoService {
         ShipmentInfo shipmentInfo = shipmentInfoMapper.toEntity(shipmentInfoDTO);
         shipmentInfo = shipmentInfoRepository.save(shipmentInfo);
         ShipmentInfoDTO result = shipmentInfoMapper.toDto(shipmentInfo);
-        shipmentInfoSearchRepository.save(shipmentInfo);
+        //shipmentInfoSearchRepository.save(shipmentInfo);
         result.setCarrierDetailsValue(shipmentInfo.getCarrierDetails().getValue());
         result.setShipmentTypeValue(shipmentInfo.getShipmentType().getValue());
         result.setShipmentModeValue(shipmentInfo.getShipmentMode().getValue());
@@ -101,7 +103,7 @@ public class ShipmentInfoServiceImpl implements ShipmentInfoService {
     public void delete(Long id) {
         log.debug("Request to delete ShipmentInfo : {}", id);
         shipmentInfoRepository.deleteById(id);
-        shipmentInfoSearchRepository.deleteById(id);
+        //shipmentInfoSearchRepository.deleteById(id);
     }
 
     /**
@@ -111,11 +113,11 @@ public class ShipmentInfoServiceImpl implements ShipmentInfoService {
      * @param pageable the pagination information
      * @return the list of entities
      */
-    @Override
+    /*@Override
     @Transactional(readOnly = true)
     public Page<ShipmentInfoDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of ShipmentInfos for query {}", query);
         return shipmentInfoSearchRepository.search(queryStringQuery(query), pageable)
             .map(shipmentInfoMapper::toDto);
-    }
+    }*/
 }

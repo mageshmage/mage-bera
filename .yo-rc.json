@@ -21,23 +21,18 @@
     "buildTool": "maven",
     "useSass": false,
     "clientPackageManager": "npm",
-    "testFrameworks": [
-      "protractor"
-    ],
+    "testFrameworks": ["protractor"],
     "enableTranslation": true,
     "nativeLanguage": "en",
-    "languages": [
-      "en",
-      "hi",
-      "mr",
-      "ta"
-    ],
+    "languages": ["en", "hi", "mr", "ta"],
     "clientFramework": "react",
     "jhiPrefix": "jhi",
     "jhipsterVersion": "5.8.2",
     "jwtSecretKey": "NTEwMmU3MjY5MjRiM2QwNmI5YTU4Y2IwODgxZTYyNWIzNTI3Y2U0ZGRkY2I4NTdiMDI3YjQ1YWJmODljMDg5MDFkMzMxNzIxNGRlNGU0ZTM1MzM5N2Y0MWQ3NzVhZGViNTBmNjNkZWEzZWE0MTMzODAyMGEyNTQzOWQ1NTRjMGY=",
     "entitySuffix": "",
     "dtoSuffix": "DTO",
-    "otherModules": []
+    "otherModules": [],
+    "herokuAppName": "cargo-tracker",
+    "herokuDeployType": "jar"
   }
 }

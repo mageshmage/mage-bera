@@ -5,7 +5,7 @@ import com.cargotracker.domain.User;
 import com.cargotracker.domain.UserExtra;
 import com.cargotracker.repository.UserExtraRepository;
 import com.cargotracker.repository.UserRepository;
-import com.cargotracker.repository.search.UserSearchRepository;
+//import com.cargotracker.repository.search.UserSearchRepository;
 import com.cargotracker.security.AuthoritiesConstants;
 import com.cargotracker.service.MailService;
 import com.cargotracker.service.UserService;
@@ -34,7 +34,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing users.
@@ -72,17 +72,18 @@ public class UserResource {
 
     private final MailService mailService;
 
-    private final UserSearchRepository userSearchRepository;
+    //private final UserSearchRepository userSearchRepository;
     
     private final UserExtraRepository userExtraRepository;
 
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService, UserSearchRepository userSearchRepository,
+    public UserResource(UserService userService, UserRepository userRepository, MailService mailService, 
+    		//UserSearchRepository userSearchRepository,
     		UserExtraRepository userExtraRepository) {
 
         this.userService = userService;
         this.userRepository = userRepository;
         this.mailService = mailService;
-        this.userSearchRepository = userSearchRepository;
+        //this.userSearchRepository = userSearchRepository;
         this.userExtraRepository = userExtraRepository;
     }
 
@@ -220,10 +221,10 @@ public class UserResource {
      * @param query the query to search
      * @return the result of the search
      */
-    @GetMapping("/_search/users/{query}")
+    /*@GetMapping("/_search/users/{query}")
     public List<User> search(@PathVariable String query) {
         return StreamSupport
             .stream(userSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .collect(Collectors.toList());
-    }
+    }*/
 }

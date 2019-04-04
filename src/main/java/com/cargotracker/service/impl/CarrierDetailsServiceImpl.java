@@ -3,7 +3,7 @@ package com.cargotracker.service.impl;
 import com.cargotracker.service.CarrierDetailsService;
 import com.cargotracker.domain.CarrierDetails;
 import com.cargotracker.repository.CarrierDetailsRepository;
-import com.cargotracker.repository.search.CarrierDetailsSearchRepository;
+//import com.cargotracker.repository.search.CarrierDetailsSearchRepository;
 import com.cargotracker.service.dto.CarrierDetailsDTO;
 import com.cargotracker.service.mapper.CarrierDetailsMapper;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing CarrierDetails.
@@ -33,12 +33,14 @@ public class CarrierDetailsServiceImpl implements CarrierDetailsService {
 
     private final CarrierDetailsMapper carrierDetailsMapper;
 
-    private final CarrierDetailsSearchRepository carrierDetailsSearchRepository;
+    //private final CarrierDetailsSearchRepository carrierDetailsSearchRepository;
 
-    public CarrierDetailsServiceImpl(CarrierDetailsRepository carrierDetailsRepository, CarrierDetailsMapper carrierDetailsMapper, CarrierDetailsSearchRepository carrierDetailsSearchRepository) {
+    public CarrierDetailsServiceImpl(CarrierDetailsRepository carrierDetailsRepository, CarrierDetailsMapper carrierDetailsMapper
+    		//, CarrierDetailsSearchRepository carrierDetailsSearchRepository
+    		) {
         this.carrierDetailsRepository = carrierDetailsRepository;
         this.carrierDetailsMapper = carrierDetailsMapper;
-        this.carrierDetailsSearchRepository = carrierDetailsSearchRepository;
+        //this.carrierDetailsSearchRepository = carrierDetailsSearchRepository;
     }
 
     /**
@@ -53,7 +55,7 @@ public class CarrierDetailsServiceImpl implements CarrierDetailsService {
         CarrierDetails carrierDetails = carrierDetailsMapper.toEntity(carrierDetailsDTO);
         carrierDetails = carrierDetailsRepository.save(carrierDetails);
         CarrierDetailsDTO result = carrierDetailsMapper.toDto(carrierDetails);
-        carrierDetailsSearchRepository.save(carrierDetails);
+        //carrierDetailsSearchRepository.save(carrierDetails);
         result.setVendorname(carrierDetails.getVendor().getVendorname());
         return result;
     }
@@ -96,7 +98,7 @@ public class CarrierDetailsServiceImpl implements CarrierDetailsService {
     public void delete(Long id) {
         log.debug("Request to delete CarrierDetails : {}", id);
         carrierDetailsRepository.deleteById(id);
-        carrierDetailsSearchRepository.deleteById(id);
+        //carrierDetailsSearchRepository.deleteById(id);
     }
 
     /**
@@ -105,7 +107,7 @@ public class CarrierDetailsServiceImpl implements CarrierDetailsService {
      * @param query the query of the search
      * @return the list of entities
      */
-    @Override
+    /*@Override
     @Transactional(readOnly = true)
     public List<CarrierDetailsDTO> search(String query) {
         log.debug("Request to search CarrierDetails for query {}", query);
@@ -113,5 +115,5 @@ public class CarrierDetailsServiceImpl implements CarrierDetailsService {
             .stream(carrierDetailsSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .map(carrierDetailsMapper::toDto)
             .collect(Collectors.toList());
-    }
+    }*/
 }

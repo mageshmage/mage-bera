@@ -3,7 +3,7 @@ package com.cargotracker.service.impl;
 import com.cargotracker.service.ShiperReceiverInfoService;
 import com.cargotracker.domain.ShiperReceiverInfo;
 import com.cargotracker.repository.ShiperReceiverInfoRepository;
-import com.cargotracker.repository.search.ShiperReceiverInfoSearchRepository;
+//import com.cargotracker.repository.search.ShiperReceiverInfoSearchRepository;
 import com.cargotracker.service.dto.ShiperReceiverInfoDTO;
 import com.cargotracker.service.mapper.ShiperReceiverInfoMapper;
 import org.slf4j.Logger;
@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing ShiperReceiverInfo.
@@ -31,12 +31,14 @@ public class ShiperReceiverInfoServiceImpl implements ShiperReceiverInfoService 
 
     private final ShiperReceiverInfoMapper shiperReceiverInfoMapper;
 
-    private final ShiperReceiverInfoSearchRepository shiperReceiverInfoSearchRepository;
+    //private final ShiperReceiverInfoSearchRepository shiperReceiverInfoSearchRepository;
 
-    public ShiperReceiverInfoServiceImpl(ShiperReceiverInfoRepository shiperReceiverInfoRepository, ShiperReceiverInfoMapper shiperReceiverInfoMapper, ShiperReceiverInfoSearchRepository shiperReceiverInfoSearchRepository) {
+    public ShiperReceiverInfoServiceImpl(ShiperReceiverInfoRepository shiperReceiverInfoRepository, ShiperReceiverInfoMapper shiperReceiverInfoMapper
+    		//, ShiperReceiverInfoSearchRepository shiperReceiverInfoSearchRepository
+    		) {
         this.shiperReceiverInfoRepository = shiperReceiverInfoRepository;
         this.shiperReceiverInfoMapper = shiperReceiverInfoMapper;
-        this.shiperReceiverInfoSearchRepository = shiperReceiverInfoSearchRepository;
+        //this.shiperReceiverInfoSearchRepository = shiperReceiverInfoSearchRepository;
     }
 
     /**
@@ -51,7 +53,7 @@ public class ShiperReceiverInfoServiceImpl implements ShiperReceiverInfoService 
         ShiperReceiverInfo shiperReceiverInfo = shiperReceiverInfoMapper.toEntity(shiperReceiverInfoDTO);
         shiperReceiverInfo = shiperReceiverInfoRepository.save(shiperReceiverInfo);
         ShiperReceiverInfoDTO result = shiperReceiverInfoMapper.toDto(shiperReceiverInfo);
-        shiperReceiverInfoSearchRepository.save(shiperReceiverInfo);
+        //shiperReceiverInfoSearchRepository.save(shiperReceiverInfo);
         return result;
     }
 
@@ -93,7 +95,7 @@ public class ShiperReceiverInfoServiceImpl implements ShiperReceiverInfoService 
     public void delete(Long id) {
         log.debug("Request to delete ShiperReceiverInfo : {}", id);
         shiperReceiverInfoRepository.deleteById(id);
-        shiperReceiverInfoSearchRepository.deleteById(id);
+        //shiperReceiverInfoSearchRepository.deleteById(id);
     }
 
     /**
@@ -103,11 +105,11 @@ public class ShiperReceiverInfoServiceImpl implements ShiperReceiverInfoService 
      * @param pageable the pagination information
      * @return the list of entities
      */
-    @Override
+    /*@Override
     @Transactional(readOnly = true)
     public Page<ShiperReceiverInfoDTO> search(String query, Pageable pageable) {
         log.debug("Request to search for a page of ShiperReceiverInfos for query {}", query);
         return shiperReceiverInfoSearchRepository.search(queryStringQuery(query), pageable)
             .map(shiperReceiverInfoMapper::toDto);
-    }
+    }*/
 }

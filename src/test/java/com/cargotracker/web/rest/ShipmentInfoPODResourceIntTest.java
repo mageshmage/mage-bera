@@ -4,7 +4,7 @@ import com.cargotracker.CargotrackerApp;
 
 import com.cargotracker.domain.ShipmentInfoPOD;
 import com.cargotracker.repository.ShipmentInfoPODRepository;
-import com.cargotracker.repository.search.ShipmentInfoPODSearchRepository;
+//import com.cargotracker.repository.search.ShipmentInfoPODSearchRepository;
 import com.cargotracker.service.ShipmentInfoPODService;
 import com.cargotracker.service.dto.ShipmentInfoPODDTO;
 import com.cargotracker.service.mapper.ShipmentInfoPODMapper;
@@ -33,7 +33,7 @@ import java.util.List;
 
 import static com.cargotracker.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
+//import static org.elasticsearch.index.query.QueryBuilders.queryStringQuery;
 import static org.hamcrest.Matchers.hasItem;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -70,8 +70,8 @@ public class ShipmentInfoPODResourceIntTest {
      *
      * @see com.cargotracker.repository.search.ShipmentInfoPODSearchRepositoryMockConfiguration
      */
-    @Autowired
-    private ShipmentInfoPODSearchRepository mockShipmentInfoPODSearchRepository;
+    //@Autowired
+    //private ShipmentInfoPODSearchRepository mockShipmentInfoPODSearchRepository;
 
     @Autowired
     private MappingJackson2HttpMessageConverter jacksonMessageConverter;
@@ -144,7 +144,7 @@ public class ShipmentInfoPODResourceIntTest {
         assertThat(testShipmentInfoPOD.getComments()).isEqualTo(DEFAULT_COMMENTS);
 
         // Validate the ShipmentInfoPOD in Elasticsearch
-        verify(mockShipmentInfoPODSearchRepository, times(1)).save(testShipmentInfoPOD);
+        //verify(mockShipmentInfoPODSearchRepository, times(1)).save(testShipmentInfoPOD);
     }
 
     @Test
@@ -167,7 +167,7 @@ public class ShipmentInfoPODResourceIntTest {
         assertThat(shipmentInfoPODList).hasSize(databaseSizeBeforeCreate);
 
         // Validate the ShipmentInfoPOD in Elasticsearch
-        verify(mockShipmentInfoPODSearchRepository, times(0)).save(shipmentInfoPOD);
+        //verify(mockShipmentInfoPODSearchRepository, times(0)).save(shipmentInfoPOD);
     }
 
     @Test
@@ -242,7 +242,7 @@ public class ShipmentInfoPODResourceIntTest {
         assertThat(testShipmentInfoPOD.getComments()).isEqualTo(UPDATED_COMMENTS);
 
         // Validate the ShipmentInfoPOD in Elasticsearch
-        verify(mockShipmentInfoPODSearchRepository, times(1)).save(testShipmentInfoPOD);
+        //verify(mockShipmentInfoPODSearchRepository, times(1)).save(testShipmentInfoPOD);
     }
 
     @Test
@@ -264,7 +264,7 @@ public class ShipmentInfoPODResourceIntTest {
         assertThat(shipmentInfoPODList).hasSize(databaseSizeBeforeUpdate);
 
         // Validate the ShipmentInfoPOD in Elasticsearch
-        verify(mockShipmentInfoPODSearchRepository, times(0)).save(shipmentInfoPOD);
+        //verify(mockShipmentInfoPODSearchRepository, times(0)).save(shipmentInfoPOD);
     }
 
     @Test
@@ -285,10 +285,10 @@ public class ShipmentInfoPODResourceIntTest {
         assertThat(shipmentInfoPODList).hasSize(databaseSizeBeforeDelete - 1);
 
         // Validate the ShipmentInfoPOD in Elasticsearch
-        verify(mockShipmentInfoPODSearchRepository, times(1)).deleteById(shipmentInfoPOD.getId());
+        //verify(mockShipmentInfoPODSearchRepository, times(1)).deleteById(shipmentInfoPOD.getId());
     }
 
-    @Test
+    /*@Test
     @Transactional
     public void searchShipmentInfoPOD() throws Exception {
         // Initialize the database
@@ -303,7 +303,7 @@ public class ShipmentInfoPODResourceIntTest {
             .andExpect(jsonPath("$.[*].podContentType").value(hasItem(DEFAULT_POD_CONTENT_TYPE)))
             .andExpect(jsonPath("$.[*].pod").value(hasItem(Base64Utils.encodeToString(DEFAULT_POD))))
             .andExpect(jsonPath("$.[*].comments").value(hasItem(DEFAULT_COMMENTS)));
-    }
+    }*/
 
     @Test
     @Transactional

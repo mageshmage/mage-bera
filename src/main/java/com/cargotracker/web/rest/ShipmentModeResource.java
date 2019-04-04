@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * REST controller for managing ShipmentMode.
@@ -120,10 +120,10 @@ public class ShipmentModeResource {
      * @param query the query of the shipmentMode search
      * @return the result of the search
      */
-    @GetMapping("/_search/shipment-modes")
+    /*@GetMapping("/_search/shipment-modes")
     public List<ShipmentModeDTO> searchShipmentModes(@RequestParam String query) {
         log.debug("REST request to search ShipmentModes for query {}", query);
         return shipmentModeService.search(query);
-    }
+    }*/
 
 }

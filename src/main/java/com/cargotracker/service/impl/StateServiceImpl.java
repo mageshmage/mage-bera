@@ -3,7 +3,7 @@ package com.cargotracker.service.impl;
 import com.cargotracker.service.StateService;
 import com.cargotracker.domain.State;
 import com.cargotracker.repository.StateRepository;
-import com.cargotracker.repository.search.StateSearchRepository;
+//import com.cargotracker.repository.search.StateSearchRepository;
 import com.cargotracker.service.dto.StateDTO;
 import com.cargotracker.service.mapper.StateMapper;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing State.
@@ -33,12 +33,14 @@ public class StateServiceImpl implements StateService {
 
     private final StateMapper stateMapper;
 
-    private final StateSearchRepository stateSearchRepository;
+    //private final StateSearchRepository stateSearchRepository;
 
-    public StateServiceImpl(StateRepository stateRepository, StateMapper stateMapper, StateSearchRepository stateSearchRepository) {
+    public StateServiceImpl(StateRepository stateRepository, StateMapper stateMapper
+    		//, StateSearchRepository stateSearchRepository
+    		) {
         this.stateRepository = stateRepository;
         this.stateMapper = stateMapper;
-        this.stateSearchRepository = stateSearchRepository;
+        //this.stateSearchRepository = stateSearchRepository;
     }
 
     /**
@@ -53,7 +55,7 @@ public class StateServiceImpl implements StateService {
         State state = stateMapper.toEntity(stateDTO);
         state = stateRepository.save(state);
         StateDTO result = stateMapper.toDto(state);
-        stateSearchRepository.save(state);
+        //stateSearchRepository.save(state);
         result.setCountryName(state.getCountry().getCountryName());
         return result;
     }
@@ -96,7 +98,7 @@ public class StateServiceImpl implements StateService {
     public void delete(Long id) {
         log.debug("Request to delete State : {}", id);
         stateRepository.deleteById(id);
-        stateSearchRepository.deleteById(id);
+        //stateSearchRepository.deleteById(id);
     }
 
     /**
@@ -105,7 +107,7 @@ public class StateServiceImpl implements StateService {
      * @param query the query of the search
      * @return the list of entities
      */
-    @Override
+    /*@Override
     @Transactional(readOnly = true)
     public List<StateDTO> search(String query) {
         log.debug("Request to search States for query {}", query);
@@ -113,5 +115,5 @@ public class StateServiceImpl implements StateService {
             .stream(stateSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .map(stateMapper::toDto)
             .collect(Collectors.toList());
-    }
+    }*/
 }

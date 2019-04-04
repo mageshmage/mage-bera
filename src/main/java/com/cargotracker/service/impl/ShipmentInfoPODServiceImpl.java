@@ -3,7 +3,7 @@ package com.cargotracker.service.impl;
 import com.cargotracker.service.ShipmentInfoPODService;
 import com.cargotracker.domain.ShipmentInfoPOD;
 import com.cargotracker.repository.ShipmentInfoPODRepository;
-import com.cargotracker.repository.search.ShipmentInfoPODSearchRepository;
+//import com.cargotracker.repository.search.ShipmentInfoPODSearchRepository;
 import com.cargotracker.service.dto.ShipmentInfoPODDTO;
 import com.cargotracker.service.mapper.ShipmentInfoPODMapper;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static org.elasticsearch.index.query.QueryBuilders.*;
+//import static org.elasticsearch.index.query.QueryBuilders.*;
 
 /**
  * Service Implementation for managing ShipmentInfoPOD.
@@ -33,12 +33,14 @@ public class ShipmentInfoPODServiceImpl implements ShipmentInfoPODService {
 
     private final ShipmentInfoPODMapper shipmentInfoPODMapper;
 
-    private final ShipmentInfoPODSearchRepository shipmentInfoPODSearchRepository;
+    //private final ShipmentInfoPODSearchRepository shipmentInfoPODSearchRepository;
 
-    public ShipmentInfoPODServiceImpl(ShipmentInfoPODRepository shipmentInfoPODRepository, ShipmentInfoPODMapper shipmentInfoPODMapper, ShipmentInfoPODSearchRepository shipmentInfoPODSearchRepository) {
+    public ShipmentInfoPODServiceImpl(ShipmentInfoPODRepository shipmentInfoPODRepository, ShipmentInfoPODMapper shipmentInfoPODMapper
+    		//, ShipmentInfoPODSearchRepository shipmentInfoPODSearchRepository
+    		) {
         this.shipmentInfoPODRepository = shipmentInfoPODRepository;
         this.shipmentInfoPODMapper = shipmentInfoPODMapper;
-        this.shipmentInfoPODSearchRepository = shipmentInfoPODSearchRepository;
+        //this.shipmentInfoPODSearchRepository = shipmentInfoPODSearchRepository;
     }
 
     /**
@@ -53,7 +55,7 @@ public class ShipmentInfoPODServiceImpl implements ShipmentInfoPODService {
         ShipmentInfoPOD shipmentInfoPOD = shipmentInfoPODMapper.toEntity(shipmentInfoPODDTO);
         shipmentInfoPOD = shipmentInfoPODRepository.save(shipmentInfoPOD);
         ShipmentInfoPODDTO result = shipmentInfoPODMapper.toDto(shipmentInfoPOD);
-        shipmentInfoPODSearchRepository.save(shipmentInfoPOD);
+        //shipmentInfoPODSearchRepository.save(shipmentInfoPOD);
         return result;
     }
 
@@ -95,7 +97,7 @@ public class ShipmentInfoPODServiceImpl implements ShipmentInfoPODService {
     public void delete(Long id) {
         log.debug("Request to delete ShipmentInfoPOD : {}", id);
         shipmentInfoPODRepository.deleteById(id);
-        shipmentInfoPODSearchRepository.deleteById(id);
+        //shipmentInfoPODSearchRepository.deleteById(id);
     }
 
     /**
@@ -104,7 +106,7 @@ public class ShipmentInfoPODServiceImpl implements ShipmentInfoPODService {
      * @param query the query of the search
      * @return the list of entities
      */
-    @Override
+    /*@Override
     @Transactional(readOnly = true)
     public List<ShipmentInfoPODDTO> search(String query) {
         log.debug("Request to search ShipmentInfoPODS for query {}", query);
@@ -112,5 +114,5 @@ public class ShipmentInfoPODServiceImpl implements ShipmentInfoPODService {
             .stream(shipmentInfoPODSearchRepository.search(queryStringQuery(query)).spliterator(), false)
             .map(shipmentInfoPODMapper::toDto)
             .collect(Collectors.toList());
-    }
+    }*/
 }
