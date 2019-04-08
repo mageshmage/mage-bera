@@ -14,6 +14,9 @@ export interface IUser {
   password?: string;
   vendorId?: number;
   vendorname?: string;
+  autoConsignment?: boolean;
+  prefix?: string;
+  expireDate?: Date;
 }
 
 export const defaultValue: Readonly<IUser> = {
@@ -31,5 +34,8 @@ export const defaultValue: Readonly<IUser> = {
   lastModifiedDate: null,
   password: '',
   vendorId: null,
-  vendorname: ''
+  vendorname: '',
+  autoConsignment: false,
+  prefix: '',
+  expireDate: null
 };

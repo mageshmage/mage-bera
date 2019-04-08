@@ -86,6 +86,12 @@ public class CarrierDetailsResource {
         log.debug("REST request to get all CarrierDetails");
         return carrierDetailsService.findAll();
     }
+    
+    @GetMapping("/carrier-details-byvendor/{id}")
+    public List<CarrierDetailsDTO> getCarrierDetailsByVendor(@PathVariable Long id) {
+        log.debug("REST request to get CarrierDetails By VendorId : {}", id);
+        return carrierDetailsService.findAllByVendor(id);
+    }
 
     /**
      * GET  /carrier-details/:id : get the "id" carrierDetails.

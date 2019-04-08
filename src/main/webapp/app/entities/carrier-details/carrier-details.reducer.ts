@@ -1,9 +1,7 @@
 import axios from 'axios';
 import { ICrudSearchAction, ICrudGetAction, ICrudGetAllAction, ICrudPutAction, ICrudDeleteAction } from 'react-jhipster';
-
-import { cleanEntity } from 'app/shared/util/entity-utils';
+import { cleanEntity, ICrudGetAllActionByVendor } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
-
 import { ICarrierDetails, defaultValue } from 'app/shared/model/carrier-details.model';
 
 export const ACTION_TYPES = {
@@ -100,6 +98,7 @@ export default (state: CarrierDetailsState = initialState, action): CarrierDetai
 };
 
 const apiUrl = 'api/carrier-details';
+const apiUrlByVendor = 'api/carrier-details-byvendor';
 const apiSearchUrl = 'api/_search/carrier-details';
 
 // Actions
@@ -112,6 +111,11 @@ export const getSearchEntities: ICrudSearchAction<ICarrierDetails> = (query, pag
 export const getEntities: ICrudGetAllAction<ICarrierDetails> = (page, size, sort) => ({
   type: ACTION_TYPES.FETCH_CARRIERDETAILS_LIST,
   payload: axios.get<ICarrierDetails>(`${apiUrl}?cacheBuster=${new Date().getTime()}`)
+});
+
+export const getCarierDetailsByVendorId: ICrudGetAllActionByVendor<ICarrierDetails> = (vendorId, page, size, sort) => ({
+  type: ACTION_TYPES.FETCH_CARRIERDETAILS_LIST,
+  payload: axios.get<ICarrierDetails>(`${apiUrlByVendor}/${vendorId}?cacheBuster=${new Date().getTime()}`)
 });
 
 export const getEntity: ICrudGetAction<ICarrierDetails> = id => {

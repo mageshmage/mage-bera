@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, RouteComponentProps } from 'react-router-dom';
-import { Button, Row, Col } from 'reactstrap';
+import { Button, Row, Col, Label, FormGroup, Card, CardBody, CardTitle } from 'reactstrap';
+import { AvForm, AvGroup, AvInput, AvField } from 'availity-reactstrap-validation';
 // tslint:disable-next-line:no-unused-variable
 import { Translate, ICrudGetAction, TextFormat } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,171 +12,510 @@ import { getEntity } from './shipment-information.reducer';
 import { IShipmentInfo } from 'app/shared/model/shipment-info.model';
 // tslint:disable-next-line:no-unused-variable
 import { APP_DATE_FORMAT, APP_LOCAL_DATE_FORMAT } from 'app/config/constants';
+import { convertDateTimeFromServer, convertDateTimeToServer } from 'app/shared/util/date-utils';
 
 export interface IShipmentInformationDetailProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
 export class ShipmentInformationDetail extends React.Component<IShipmentInformationDetailProps> {
   componentDidMount() {
+    //alert('ShipmentInformationDetail');
     this.props.getEntity(this.props.match.params.id);
   }
 
   render() {
     const { shipmentInfoEntity } = this.props;
     return (
-      <Row>
-        <Col md="8">
-          <h2>
-            <Translate contentKey="cargotrackerApp.shipmentInfo.detail.title">ShipmentInfo</Translate> [<b>{shipmentInfoEntity.id}</b>]
-          </h2>
-          <dl className="jh-entity-details">
-            <dt>
-              <span id="consignmentNo">
-                <Translate contentKey="cargotrackerApp.shipmentInfo.consignmentNo">Consignment No</Translate>
+      <Row className="justify-content-center">
+        <Col md="12">
+          <AvForm model={shipmentInfoEntity}>
+            <Row>
+              <Col sm={6}>
+                <Card>
+                  <CardTitle>Consignor</CardTitle>
+                  <CardBody>
+                    <Row>
+                      <Col sm={6}>
+                        <FormGroup row>
+                          <Col sm={4}>
+                            <Label id="nameLabel" for="name" className="cargotracker-label">
+                              <Translate contentKey="cargotrackerApp.shiperReceiverInfo.name">Name</Translate> :
+                              <span className="cargotracker-mandate-field">* </span>
+                            </Label>
+                          </Col>
+                          <Col sm={8}>
+                            <input readOnly value={shipmentInfoEntity.shipperInfo.name} className="form-control" type="text" />
+                          </Col>
+                        </FormGroup>
+                      </Col>
+                      <Col sm={6}>
+                        <FormGroup row>
+                          <Col sm={4}>
+                            <Label id="phoneNoLabel" for="phoneNo" className="cargotracker-label">
+                              <Translate contentKey="cargotrackerApp.shiperReceiverInfo.phoneNo">Phone No</Translate> :
+                              <span className="cargotracker-mandate-field">* </span>
+                            </Label>
+                          </Col>
+                          <Col sm={8}>
+                            <input readOnly value={shipmentInfoEntity.shipperInfo.phoneNo} className="form-control" type="text" />
+                          </Col>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col sm={12}>
+                        <FormGroup row>
+                          <Col sm={2}>
+                            <Label id="addressLabel" for="address" className="cargotracker-label">
+                              <Translate contentKey="cargotrackerApp.shiperReceiverInfo.address">Address</Translate> :
+                              <span className="cargotracker-mandate-field">* </span>
+                            </Label>
+                          </Col>
+                          <Col sm={10}>
+                            <textarea readOnly value={shipmentInfoEntity.shipperInfo.address} className="form-control" />
+                          </Col>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col sm={6}>
+                        <FormGroup row>
+                          <Col sm={4}>
+                            <Label id="cityLabel" for="city" className="cargotracker-label">
+                              <Translate contentKey="cargotrackerApp.shiperReceiverInfo.city">City</Translate>
+                            </Label>
+                          </Col>
+                          <Col sm={8}>
+                            <input readOnly value={shipmentInfoEntity.shipperInfo.city} className="form-control" type="text" />
+                          </Col>
+                        </FormGroup>
+                      </Col>
+                      <Col sm={6}>
+                        <FormGroup row>
+                          <Col sm={4}>
+                            <Label id="pincodeLabel" for="pincode" className="cargotracker-label">
+                              <Translate contentKey="cargotrackerApp.shiperReceiverInfo.pincode">Pincode</Translate> :
+                              <span className="cargotracker-mandate-field">* </span>
+                            </Label>
+                          </Col>
+                          <Col sm={8}>
+                            <input readOnly value={shipmentInfoEntity.shipperInfo.pincode} className="form-control" type="text" />
+                          </Col>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col sm={8}>
+                        <FormGroup row>
+                          <Col sm={3}>
+                            <Label id="emailIdLabel" for="emailId" className="cargotracker-label">
+                              <Translate contentKey="cargotrackerApp.shiperReceiverInfo.emailId">Email Id</Translate>
+                            </Label>
+                          </Col>
+                          <Col sm={9}>
+                            <input readOnly value={shipmentInfoEntity.shipperInfo.emailId} className="form-control" type="text" />
+                          </Col>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                  </CardBody>
+                </Card>
+              </Col>
+              <Col sm={6}>
+                <Card>
+                  <CardTitle>Consignee</CardTitle>
+                  <CardBody>
+                    <Row>
+                      <Col sm={6}>
+                        <FormGroup row>
+                          <Col sm={4}>
+                            <Label id="nameLabel" for="name" className="cargotracker-label">
+                              <Translate contentKey="cargotrackerApp.shiperReceiverInfo.name">Name</Translate> :
+                              <span className="cargotracker-mandate-field">* </span>
+                            </Label>
+                          </Col>
+                          <Col sm={8}>
+                            <input readOnly value={shipmentInfoEntity.receiverInfo.name} className="form-control" type="text" />
+                          </Col>
+                        </FormGroup>
+                      </Col>
+                      <Col sm={6}>
+                        <FormGroup row>
+                          <Col sm={4}>
+                            <Label id="phoneNoLabel" for="phoneNo" className="cargotracker-label">
+                              <Translate contentKey="cargotrackerApp.shiperReceiverInfo.phoneNo">Phone No</Translate> :
+                              <span className="cargotracker-mandate-field">* </span>
+                            </Label>
+                          </Col>
+                          <Col sm={8}>
+                            <input readOnly value={shipmentInfoEntity.receiverInfo.phoneNo} className="form-control" type="text" />
+                          </Col>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col sm={12}>
+                        <FormGroup row>
+                          <Col sm={2}>
+                            <Label id="addressLabel" for="address" className="cargotracker-label">
+                              <Translate contentKey="cargotrackerApp.shiperReceiverInfo.address">Address</Translate> :
+                              <span className="cargotracker-mandate-field">* </span>
+                            </Label>
+                          </Col>
+                          <Col sm={10}>
+                            <textarea readOnly value={shipmentInfoEntity.shipperInfo.address} className="form-control" />
+                          </Col>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col sm={6}>
+                        <FormGroup row>
+                          <Col sm={4}>
+                            <Label id="cityLabel" for="city" className="cargotracker-label">
+                              <Translate contentKey="cargotrackerApp.shiperReceiverInfo.city">City</Translate>
+                            </Label>
+                          </Col>
+                          <Col sm={8}>
+                            <input readOnly value={shipmentInfoEntity.receiverInfo.city} className="form-control" type="text" />
+                          </Col>
+                        </FormGroup>
+                      </Col>
+                      <Col sm={6}>
+                        <FormGroup row>
+                          <Col sm={4}>
+                            <Label id="pincodeLabel" for="pincode" className="cargotracker-label">
+                              <Translate contentKey="cargotrackerApp.shiperReceiverInfo.pincode">Pincode</Translate> :
+                              <span className="cargotracker-mandate-field">* </span>
+                            </Label>
+                          </Col>
+                          <Col sm={8}>
+                            <input readOnly value={shipmentInfoEntity.receiverInfo.pincode} className="form-control" type="text" />
+                          </Col>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+
+                    <Row>
+                      <Col sm={8}>
+                        <FormGroup row>
+                          <Col sm={3}>
+                            <Label id="emailIdLabel" for="emailId" className="cargotracker-label">
+                              <Translate contentKey="cargotrackerApp.shiperReceiverInfo.emailId">Email Id</Translate>
+                            </Label>
+                          </Col>
+                          <Col sm={9}>
+                            <input readOnly value={shipmentInfoEntity.receiverInfo.emailId} className="form-control" type="text" />
+                          </Col>
+                        </FormGroup>
+                      </Col>
+                    </Row>
+                  </CardBody>
+                </Card>
+              </Col>
+            </Row>
+            <Card>
+              <CardTitle>Shipment Details</CardTitle>
+              <CardBody>
+                <Row>
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={5}>
+                        <Label id="consignmentNoLabel" for="consignmentNo" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.consignmentNo">Consignment No : </Translate> :
+                          <span className="cargotracker-mandate-field">* </span>
+                        </Label>
+                      </Col>
+                      <Col sm={7}>
+                        <input readOnly value={shipmentInfoEntity.consignmentNo} className="form-control" type="text" />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={5}>
+                        <Label id="bookingDateLabel" for="bookingDate" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.bookingDate">Booking Date :</Translate> :
+                          <span className="cargotracker-mandate-field">* </span>
+                        </Label>
+                      </Col>
+                      <Col sm={7}>
+                        <input
+                          readOnly
+                          value={convertDateTimeFromServer(shipmentInfoEntity.bookingDate)}
+                          className="form-control"
+                          type="text"
+                        />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={5}>
+                        <Label id="expectedDeliveryDateLabel" for="expectedDeliveryDate" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.expectedDeliveryDate">Expected Delivery Date</Translate> :
+                          <span className="cargotracker-mandate-field">* </span>
+                        </Label>
+                      </Col>
+                      <Col sm={7}>
+                        <input
+                          readOnly
+                          value={convertDateTimeFromServer(shipmentInfoEntity.expectedDeliveryDate)}
+                          className="form-control"
+                          type="text"
+                        />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={5}>
+                        <Label for="shipmentType.id" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.shipmentType">Shipment Type</Translate> :
+                          <span className="cargotracker-mandate-field">* </span>
+                        </Label>
+                      </Col>
+                      <Col sm={7}>
+                        <input readOnly value={shipmentInfoEntity.shipmentTypeValue} className="form-control" type="text" />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={5}>
+                        <Label for="shipmentMode.id" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.shipmentMode">Shipment Mode</Translate> :
+                          <span className="cargotracker-mandate-field">* </span>
+                        </Label>
+                      </Col>
+                      <Col sm={7}>
+                        <input readOnly value={shipmentInfoEntity.shipmentModeValue} className="form-control" type="text" />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={5}>
+                        <Label for="paymentMode.id" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.paymentMode">Payment Mode</Translate> :
+                          <span className="cargotracker-mandate-field">* </span>
+                        </Label>
+                      </Col>
+                      <Col sm={7}>
+                        <input readOnly value={shipmentInfoEntity.paymentModeValue} className="form-control" type="text" />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={5}>
+                        <Label for="trackingStatus.id" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.trackingStatus">Tracking Status</Translate> :
+                          <span className="cargotracker-mandate-field">* </span>
+                        </Label>
+                      </Col>
+                      <Col sm={7}>
+                        <input readOnly value={shipmentInfoEntity.trackingStatusValue} className="form-control" type="text" />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={5}>
+                        <Label for="origin.id" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.origin">Origin</Translate>
+                          <span className="cargotracker-mandate-field">* </span>
+                        </Label>
+                      </Col>
+                      <Col sm={7}>
+                        <input readOnly value={shipmentInfoEntity.originValue} className="form-control" type="text" />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={5}>
+                        <Label for="destination.id" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.destination">Destination</Translate>
+                          <span className="cargotracker-mandate-field">* </span>
+                        </Label>
+                      </Col>
+                      <Col sm={7}>
+                        <input readOnly value={shipmentInfoEntity.destinationValue} className="form-control" type="text" />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={5}>
+                        <Label id="actualWeightLabel" for="actualWeight" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.actualWeight">Actual Weight</Translate>
+                        </Label>
+                      </Col>
+                      <Col sm={7}>
+                        <input readOnly value={shipmentInfoEntity.actualWeight} className="form-control" type="text" />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={5}>
+                        <Label id="volumetricWeightLabel" for="volumetricWeight" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.volumetricWeight">Volumetric Weight</Translate>
+                        </Label>
+                      </Col>
+                      <Col sm={7}>
+                        <input readOnly value={shipmentInfoEntity.volumetricWeight} className="form-control" type="text" />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={5}>
+                        <Label id="lengthLabel" for="length" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.length">Length</Translate>
+                        </Label>
+                      </Col>
+                      <Col sm={7}>
+                        <input readOnly value={shipmentInfoEntity.length} className="form-control" type="text" />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={5}>
+                        <Label id="widthLabel" for="width" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.width">Width</Translate>
+                        </Label>
+                      </Col>
+                      <Col sm={7}>
+                        <input readOnly value={shipmentInfoEntity.width} className="form-control" type="text" />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={5}>
+                        <Label id="heightLabel" for="height" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.height">Height</Translate>
+                        </Label>
+                      </Col>
+                      <Col sm={7}>
+                        <input readOnly value={shipmentInfoEntity.height} className="form-control" type="text" />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={5}>
+                        <Label id="quantityLabel" for="quantity" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.quantity">Quantity</Translate>
+                        </Label>
+                      </Col>
+                      <Col sm={7}>
+                        <input readOnly value={shipmentInfoEntity.quantity} className="form-control" type="text" />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={5}>
+                        <Label id="totalFrightLabel" for="totalFright" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.totalFright">Total Fright</Translate>
+                        </Label>
+                      </Col>
+                      <Col sm={7}>
+                        <input readOnly value={shipmentInfoEntity.totalFright} className="form-control" type="text" />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                  <Col sm={8}>
+                    <FormGroup row>
+                      <Col sm={2}>
+                        <Label id="packageDesciptionLabel" for="packageDesciption" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.packageDesciption">Package Desciption</Translate>
+                        </Label>
+                      </Col>
+                      <Col sm={10}>
+                        <textarea readOnly value={shipmentInfoEntity.packageDesciption} className="form-control" />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={2}>
+                        <Label id="isThirdPartyLabel" for="packageDesciption" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.isThirdParty">Is Third Party</Translate>
+                        </Label>
+                      </Col>
+                      <Col sm={10}>
+                        <input type="checkbox" readOnly checked={shipmentInfoEntity.isThirdParty} className="form-control" />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={5}>
+                        <Label id="carrierRefNoLabel" for="carrierRefNo" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.carrierRefNo">Carrier Ref No</Translate>
+                        </Label>
+                      </Col>
+                      <Col sm={7}>
+                        <input readOnly value={shipmentInfoEntity.carrierRefNo} className="form-control" type="text" />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                  <Col sm={4}>
+                    <FormGroup row>
+                      <Col sm={5}>
+                        <Label for="carrierDetails.id" className="cargotracker-label">
+                          <Translate contentKey="cargotrackerApp.shipmentInfo.carrierDetails">Carrier Details</Translate>
+                        </Label>
+                      </Col>
+                      <Col sm={7}>
+                        <input readOnly value={shipmentInfoEntity.carrierDetailsValue} className="form-control" type="text" />
+                      </Col>
+                    </FormGroup>
+                  </Col>
+                </Row>
+              </CardBody>
+            </Card>
+            <Button tag={Link} to="/shipment-information" replace color="info">
+              <FontAwesomeIcon icon="arrow-left" />{' '}
+              <span className="d-none d-md-inline">
+                <Translate contentKey="entity.action.back">Back</Translate>
               </span>
-            </dt>
-            <dd>{shipmentInfoEntity.consignmentNo}</dd>
-            <dt>
-              <span id="bookingDate">
-                <Translate contentKey="cargotrackerApp.shipmentInfo.bookingDate">Booking Date</Translate>
+            </Button>
+            &nbsp;
+            <Button tag={Link} to={`/shipment-information/${shipmentInfoEntity.id}/edit`} replace color="primary">
+              <FontAwesomeIcon icon="pencil-alt" />{' '}
+              <span className="d-none d-md-inline">
+                <Translate contentKey="entity.action.edit">Edit</Translate>
               </span>
-            </dt>
-            <dd>
-              <TextFormat value={shipmentInfoEntity.bookingDate} type="date" format={APP_DATE_FORMAT} />
-            </dd>
-            <dt>
-              <span id="expectedDeliveryDate">
-                <Translate contentKey="cargotrackerApp.shipmentInfo.expectedDeliveryDate">Expected Delivery Date</Translate>
-              </span>
-            </dt>
-            <dd>
-              <TextFormat value={shipmentInfoEntity.expectedDeliveryDate} type="date" format={APP_DATE_FORMAT} />
-            </dd>
-            <dt>
-              <span id="actualWeight">
-                <Translate contentKey="cargotrackerApp.shipmentInfo.actualWeight">Actual Weight</Translate>
-              </span>
-            </dt>
-            <dd>{shipmentInfoEntity.actualWeight}</dd>
-            <dt>
-              <span id="volumetricWeight">
-                <Translate contentKey="cargotrackerApp.shipmentInfo.volumetricWeight">Volumetric Weight</Translate>
-              </span>
-            </dt>
-            <dd>{shipmentInfoEntity.volumetricWeight}</dd>
-            <dt>
-              <span id="length">
-                <Translate contentKey="cargotrackerApp.shipmentInfo.length">Length</Translate>
-              </span>
-            </dt>
-            <dd>{shipmentInfoEntity.length}</dd>
-            <dt>
-              <span id="width">
-                <Translate contentKey="cargotrackerApp.shipmentInfo.width">Width</Translate>
-              </span>
-            </dt>
-            <dd>{shipmentInfoEntity.width}</dd>
-            <dt>
-              <span id="height">
-                <Translate contentKey="cargotrackerApp.shipmentInfo.height">Height</Translate>
-              </span>
-            </dt>
-            <dd>{shipmentInfoEntity.height}</dd>
-            <dt>
-              <span id="quantity">
-                <Translate contentKey="cargotrackerApp.shipmentInfo.quantity">Quantity</Translate>
-              </span>
-            </dt>
-            <dd>{shipmentInfoEntity.quantity}</dd>
-            <dt>
-              <span id="totalFright">
-                <Translate contentKey="cargotrackerApp.shipmentInfo.totalFright">Total Fright</Translate>
-              </span>
-            </dt>
-            <dd>{shipmentInfoEntity.totalFright}</dd>
-            <dt>
-              <span id="packageDesciption">
-                <Translate contentKey="cargotrackerApp.shipmentInfo.packageDesciption">Package Desciption</Translate>
-              </span>
-            </dt>
-            <dd>{shipmentInfoEntity.packageDesciption}</dd>
-            <dt>
-              <span id="isThirdParty">
-                <Translate contentKey="cargotrackerApp.shipmentInfo.isThirdParty">Is Third Party</Translate>
-              </span>
-            </dt>
-            <dd>{shipmentInfoEntity.isThirdParty ? 'true' : 'false'}</dd>
-            <dt>
-              <span id="carrierRefNo">
-                <Translate contentKey="cargotrackerApp.shipmentInfo.carrierRefNo">Carrier Ref No</Translate>
-              </span>
-            </dt>
-            <dd>{shipmentInfoEntity.carrierRefNo}</dd>
-            <dt>
-              <span id="deliveredDate">
-                <Translate contentKey="cargotrackerApp.shipmentInfo.deliveredDate">Delivered Date</Translate>
-              </span>
-            </dt>
-            <dd>
-              <TextFormat value={shipmentInfoEntity.deliveredDate} type="date" format={APP_DATE_FORMAT} />
-            </dd>
-            <dt>
-              <span id="receivedBy">
-                <Translate contentKey="cargotrackerApp.shipmentInfo.receivedBy">Received By</Translate>
-              </span>
-            </dt>
-            <dd>{shipmentInfoEntity.receivedBy}</dd>
-            <dt>
-              <span id="relationShip">
-                <Translate contentKey="cargotrackerApp.shipmentInfo.relationShip">Relation Ship</Translate>
-              </span>
-            </dt>
-            <dd>{shipmentInfoEntity.relationShip}</dd>
-            <dt>
-              <Translate contentKey="cargotrackerApp.shipmentInfo.carrierDetails">Carrier Details</Translate>
-            </dt>
-            <dd>{shipmentInfoEntity.carrierDetailsId ? shipmentInfoEntity.carrierDetailsId : ''}</dd>
-            <dt>
-              <Translate contentKey="cargotrackerApp.shipmentInfo.shipmentType">Shipment Type</Translate>
-            </dt>
-            <dd>{shipmentInfoEntity.shipmentTypeId ? shipmentInfoEntity.shipmentTypeId : ''}</dd>
-            <dt>
-              <Translate contentKey="cargotrackerApp.shipmentInfo.shipmentMode">Shipment Mode</Translate>
-            </dt>
-            <dd>{shipmentInfoEntity.shipmentModeId ? shipmentInfoEntity.shipmentModeId : ''}</dd>
-            <dt>
-              <Translate contentKey="cargotrackerApp.shipmentInfo.paymentMode">Payment Mode</Translate>
-            </dt>
-            <dd>{shipmentInfoEntity.paymentModeId ? shipmentInfoEntity.paymentModeId : ''}</dd>
-            <dt>
-              <Translate contentKey="cargotrackerApp.shipmentInfo.trackingStatus">Tracking Status</Translate>
-            </dt>
-            <dd>{shipmentInfoEntity.trackingStatusId ? shipmentInfoEntity.trackingStatusId : ''}</dd>
-            <dt>
-              <Translate contentKey="cargotrackerApp.shipmentInfo.vendor">Vendor</Translate>
-            </dt>
-            <dd>{shipmentInfoEntity.vendorId ? shipmentInfoEntity.vendorId : ''}</dd>
-            <dt>
-              <Translate contentKey="cargotrackerApp.shipmentInfo.origin">Origin</Translate>
-            </dt>
-            <dd>{shipmentInfoEntity.originId ? shipmentInfoEntity.originId : ''}</dd>
-            <dt>
-              <Translate contentKey="cargotrackerApp.shipmentInfo.destination">Destination</Translate>
-            </dt>
-            <dd>{shipmentInfoEntity.destinationId ? shipmentInfoEntity.destinationId : ''}</dd>
-          </dl>
-          <Button tag={Link} to="/shipment-information" replace color="info">
-            <FontAwesomeIcon icon="arrow-left" />{' '}
-            <span className="d-none d-md-inline">
-              <Translate contentKey="entity.action.back">Back</Translate>
-            </span>
-          </Button>
-          &nbsp;
-          <Button tag={Link} to={`/shipment-information/${shipmentInfoEntity.id}/edit`} replace color="primary">
-            <FontAwesomeIcon icon="pencil-alt" />{' '}
-            <span className="d-none d-md-inline">
-              <Translate contentKey="entity.action.edit">Edit</Translate>
-            </span>
-          </Button>
+            </Button>
+          </AvForm>
         </Col>
       </Row>
     );

@@ -2,7 +2,9 @@ package com.cargotracker.service.impl;
 
 import com.cargotracker.service.CarrierDetailsService;
 import com.cargotracker.domain.CarrierDetails;
+import com.cargotracker.domain.Vendor;
 import com.cargotracker.repository.CarrierDetailsRepository;
+import com.cargotracker.repository.VendorRepository;
 //import com.cargotracker.repository.search.CarrierDetailsSearchRepository;
 import com.cargotracker.service.dto.CarrierDetailsDTO;
 import com.cargotracker.service.mapper.CarrierDetailsMapper;
@@ -30,16 +32,20 @@ public class CarrierDetailsServiceImpl implements CarrierDetailsService {
     private final Logger log = LoggerFactory.getLogger(CarrierDetailsServiceImpl.class);
 
     private final CarrierDetailsRepository carrierDetailsRepository;
+    
+    private final VendorRepository vendorRepository;
 
     private final CarrierDetailsMapper carrierDetailsMapper;
 
     //private final CarrierDetailsSearchRepository carrierDetailsSearchRepository;
 
-    public CarrierDetailsServiceImpl(CarrierDetailsRepository carrierDetailsRepository, CarrierDetailsMapper carrierDetailsMapper
+    public CarrierDetailsServiceImpl(CarrierDetailsRepository carrierDetailsRepository, CarrierDetailsMapper carrierDetailsMapper,
+    		VendorRepository vendorRepository
     		//, CarrierDetailsSearchRepository carrierDetailsSearchRepository
     		) {
         this.carrierDetailsRepository = carrierDetailsRepository;
         this.carrierDetailsMapper = carrierDetailsMapper;
+        this.vendorRepository = vendorRepository;
         //this.carrierDetailsSearchRepository = carrierDetailsSearchRepository;
     }
 
@@ -70,6 +76,16 @@ public class CarrierDetailsServiceImpl implements CarrierDetailsService {
     public List<CarrierDetailsDTO> findAll() {
         log.debug("Request to get all CarrierDetails");
         return carrierDetailsRepository.findAll().stream()
+            .map(carrierDetailsMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<CarrierDetailsDTO> findAllByVendor(Long vendorId) {
+        log.debug("Request to get all CarrierDetails By Vendor");
+        Vendor vendor = vendorRepository.findById(vendorId).get();
+        return carrierDetailsRepository.findAllByVendor(vendor).stream()
             .map(carrierDetailsMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }

@@ -168,6 +168,9 @@ public class UserResource {
 					if (userExtra != null) {
 						userDTO.setVendorId(userExtra.getVendor().getId());
 						userDTO.setVendorname(userExtra.getVendor().getVendorname());
+						userDTO.setAutoConsignment(userExtra.isAutoConsignment());
+						userDTO.setPrefix(userExtra.getPrefix());
+						userDTO.setExpireDate(userExtra.getExpireDate());
 					}
 				}
 			}
@@ -195,9 +198,30 @@ public class UserResource {
     @GetMapping("/users/{login:" + Constants.LOGIN_REGEX + "}")
     public ResponseEntity<UserDTO> getUser(@PathVariable String login) {
         log.debug("REST request to get User : {}", login);
-        return ResponseUtil.wrapOrNotFound(
-            userService.getUserWithAuthoritiesByLogin(login)
-                .map(UserDTO::new));
+        
+        UserDTO userDTO = userService.getUserWithAuthoritiesByLogin(login).map(UserDTO::new).get();
+        
+        User user = userRepository.findById(userDTO.getId()).get();
+		if (user.getId() != null) {
+			Long userExtraId = userExtraRepository.findExtraUserByUserId(user.getId());
+			if (userExtraId != null) {
+				UserExtra userExtra = userExtraRepository.findById(userExtraId).get();
+				// UserExtra userExtra = userExtraRepository.findOneByUser(user).get();
+				if (userExtra != null) {
+					userDTO.setVendorId(userExtra.getVendor().getId());
+					userDTO.setVendorname(userExtra.getVendor().getVendorname());
+					userDTO.setAutoConsignment(userExtra.isAutoConsignment());
+					userDTO.setPrefix(userExtra.getPrefix());
+					userDTO.setExpireDate(userExtra.getExpireDate());
+				}
+			}
+		}
+		
+		return ResponseEntity.ok().body(userDTO);
+        
+        //return ResponseUtil.wrapOrNotFound(
+            //userService.getUserWithAuthoritiesByLogin(login)
+                //.map(UserDTO::new));
     }
 
     /**

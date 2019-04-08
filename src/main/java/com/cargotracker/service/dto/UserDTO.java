@@ -10,6 +10,7 @@ import javax.validation.constraints.NotBlank;
 
 import javax.validation.constraints.*;
 import java.time.Instant;
+import java.time.ZonedDateTime;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -56,6 +57,12 @@ public class UserDTO {
 	private Long vendorId;
 
 	private String vendorname;
+
+	private boolean autoConsignment;
+
+	private String prefix;
+
+	private ZonedDateTime expireDate;
 
 	public UserDTO() {
 		// Empty constructor needed for Jackson.
@@ -195,6 +202,30 @@ public class UserDTO {
 
 	public void setVendorname(String vendorname) {
 		this.vendorname = vendorname;
+	}
+
+	public boolean isAutoConsignment() {
+		return autoConsignment;
+	}
+
+	public void setAutoConsignment(boolean autoConsignment) {
+		this.autoConsignment = autoConsignment;
+	}
+
+	public String getPrefix() {
+		return prefix;
+	}
+
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
+	}
+
+	public ZonedDateTime getExpireDate() {
+		return expireDate;
+	}
+
+	public void setExpireDate(ZonedDateTime expireDate) {
+		this.expireDate = expireDate;
 	}
 
 	@Override

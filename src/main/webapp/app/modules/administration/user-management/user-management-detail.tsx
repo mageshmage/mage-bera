@@ -30,7 +30,8 @@ export class UserManagementDetail extends React.Component<IUserManagementDetailP
               <Translate contentKey="userManagement.login">Login</Translate>
             </dt>
             <dd>
-              <span>{user.login}</span>&nbsp;
+              <span>{user.login}</span>
+              &nbsp;
               {user.activated ? (
                 <Badge color="success">
                   <Translate contentKey="userManagement.activated">Activated</Translate>
@@ -90,6 +91,20 @@ export class UserManagementDetail extends React.Component<IUserManagementDetailP
                     ))
                   : null}
               </ul>
+            </dd>
+            <dt>
+              <Translate contentKey="userManagement.autoConsigment">Auto Consignment</Translate>
+            </dt>
+            <dd>{user.autoConsignment}</dd>
+            <dt>
+              <Translate contentKey="userManagement.prefix">Prefix</Translate>
+            </dt>
+            <dd>{user.prefix}</dd>
+            <dt>
+              <Translate contentKey="userManagement.expiredDate">Expired Date</Translate>
+            </dt>
+            <dd>
+              <TextFormat value={user.expireDate} type="date" format={APP_DATE_FORMAT} blankOnInvalid />
             </dd>
           </dl>
         </Row>

@@ -44,8 +44,30 @@ export interface IShipmentInfo {
   receiverInfo?: IShiperReceiverInfo;
 }
 
-export const defaultValue: Readonly<IShipmentInfo> = {
+export const defaultValue: IShipmentInfo = {
   isThirdParty: false,
+  vendorId: 0,
   shipperInfo: defaultValueShipper,
   receiverInfo: defaultValueReceiver
 };
+
+export interface IShipmentInformationSearchDTO {
+  consignmentNo?: string;
+  bookingDateFrom?: Moment;
+  bookingDateTo?: Moment;
+  expectedDeliveryDateFrom?: Moment;
+  expectedDeliveryDateTo?: Moment;
+  carrierRefNo?: string;
+  deliveredDateFrom?: Moment;
+  deliveredDateTo?: Moment;
+  carrierDetailsId?: number;
+  shipmentTypeId?: number;
+  shipmentModeId?: number;
+  paymentModeId?: number;
+  trackingStatusId?: number;
+  vendorId?: number;
+  originId?: number;
+  destinationId?: number;
+}
+
+export const defaultValueShipmentInformationSearchDTO: Readonly<IShipmentInformationSearchDTO> = {};

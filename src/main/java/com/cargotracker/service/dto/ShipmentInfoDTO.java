@@ -4,6 +4,7 @@ import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -85,6 +86,16 @@ public class ShipmentInfoDTO implements Serializable {
 	private Long destinationId;
 
 	private String destinationValue;
+
+	private List<ShipmentTrackingDTO> shipmentTrackings;
+
+	private List<ShipmentInfoPODDTO> shipmentInfoPODs;
+
+	private List<ShiperReceiverInfoDTO> shipperReceiverInfos;
+
+	private ShiperReceiverInfoDTO shipperInfo;
+
+	private ShiperReceiverInfoDTO receiverInfo;
 
 	public Long getId() {
 		return id;
@@ -364,6 +375,46 @@ public class ShipmentInfoDTO implements Serializable {
 			return false;
 		}
 		return Objects.equals(getId(), shipmentInfoDTO.getId());
+	}
+
+	public List<ShipmentTrackingDTO> getShipmentTrackings() {
+		return shipmentTrackings;
+	}
+
+	public void setShipmentTrackings(List<ShipmentTrackingDTO> shipmentTrackings) {
+		this.shipmentTrackings = shipmentTrackings;
+	}
+
+	public List<ShipmentInfoPODDTO> getShipmentInfoPODs() {
+		return shipmentInfoPODs;
+	}
+
+	public void setShipmentInfoPODs(List<ShipmentInfoPODDTO> shipmentInfoPODs) {
+		this.shipmentInfoPODs = shipmentInfoPODs;
+	}
+
+	public List<ShiperReceiverInfoDTO> getShipperReceiverInfos() {
+		return shipperReceiverInfos;
+	}
+
+	public void setShipperReceiverInfos(List<ShiperReceiverInfoDTO> shipperReceiverInfos) {
+		this.shipperReceiverInfos = shipperReceiverInfos;
+	}
+
+	public ShiperReceiverInfoDTO getShipperInfo() {
+		return shipperInfo;
+	}
+
+	public void setShipperInfo(ShiperReceiverInfoDTO shipperInfo) {
+		this.shipperInfo = shipperInfo;
+	}
+
+	public ShiperReceiverInfoDTO getReceiverInfo() {
+		return receiverInfo;
+	}
+
+	public void setReceiverInfo(ShiperReceiverInfoDTO receiverInfo) {
+		this.receiverInfo = receiverInfo;
 	}
 
 	@Override

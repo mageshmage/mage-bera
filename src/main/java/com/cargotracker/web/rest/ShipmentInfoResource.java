@@ -4,6 +4,8 @@ import com.cargotracker.web.rest.errors.BadRequestAlertException;
 import com.cargotracker.web.rest.util.HeaderUtil;
 import com.cargotracker.web.rest.util.PaginationUtil;
 import com.cargotracker.service.dto.ShipmentInfoDTO;
+import com.cargotracker.service.dto.ShipmentInformationSearchDTO;
+
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,6 +61,18 @@ public class ShipmentInfoResource {
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
     }
+    
+    @PostMapping("/shipment-informations")
+    public ResponseEntity<ShipmentInfoDTO> createShipmentInformations(@Valid @RequestBody ShipmentInfoDTO shipmentInfoDTO) throws URISyntaxException {
+        log.debug("REST request to save ShipmentInfo : {}", shipmentInfoDTO);
+        if (shipmentInfoDTO.getId() != null) {
+            throw new BadRequestAlertException("A new shipmentInfo cannot already have an ID", ENTITY_NAME, "idexists");
+        }
+        ShipmentInfoDTO result = shipmentInfoService.saveShipmentInformation(shipmentInfoDTO);
+        return ResponseEntity.created(new URI("/api/shipment-infos/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
+            .body(result);
+    }
 
     /**
      * PUT  /shipment-infos : Updates an existing shipmentInfo.
@@ -80,6 +94,18 @@ public class ShipmentInfoResource {
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, shipmentInfoDTO.getId().toString()))
             .body(result);
     }
+    
+    @PutMapping("/shipment-informations")
+    public ResponseEntity<ShipmentInfoDTO> updateShipmentInformation(@Valid @RequestBody ShipmentInfoDTO shipmentInfoDTO) throws URISyntaxException {
+        log.debug("REST request to update ShipmentInfo : {}", shipmentInfoDTO);
+        if (shipmentInfoDTO.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        ShipmentInfoDTO result = shipmentInfoService.saveShipmentInformation(shipmentInfoDTO);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, shipmentInfoDTO.getId().toString()))
+            .body(result);
+    }
 
     /**
      * GET  /shipment-infos : get all the shipmentInfos.
@@ -94,6 +120,14 @@ public class ShipmentInfoResource {
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/shipment-infos");
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
+    
+    @PostMapping("/shipment-informationsSearch")
+    public ResponseEntity<List<ShipmentInfoDTO>> getAllShipmentInformations(Pageable pageable, @Valid @RequestBody ShipmentInformationSearchDTO shipmentSearchDto) {
+        log.debug("REST request to get a page of ShipmentInfos");
+        Page<ShipmentInfoDTO> page = shipmentInfoService.findAllShipmentInformations(pageable, shipmentSearchDto);
+        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/shipment-informations");
+        return ResponseEntity.ok().headers(headers).body(page.getContent());
+    }
 
     /**
      * GET  /shipment-infos/:id : get the "id" shipmentInfo.
@@ -106,6 +140,14 @@ public class ShipmentInfoResource {
         log.debug("REST request to get ShipmentInfo : {}", id);
         Optional<ShipmentInfoDTO> shipmentInfoDTO = shipmentInfoService.findOne(id);
         return ResponseUtil.wrapOrNotFound(shipmentInfoDTO);
+    }
+    
+    @GetMapping("/shipment-informations/{id}")
+    public ResponseEntity<ShipmentInfoDTO> getShipmentInformation(@PathVariable Long id) {
+        log.debug("REST request to get ShipmentInformation : {}", id);
+        ShipmentInfoDTO shipmentInfoDTO = shipmentInfoService.findOneShipmentInformation(id);
+        //return ResponseUtil.wrapOrNotFound(shipmentInfoDTO);
+        return ResponseEntity.ok().body(shipmentInfoDTO);
     }
 
     /**

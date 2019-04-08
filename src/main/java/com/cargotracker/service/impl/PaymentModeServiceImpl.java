@@ -2,7 +2,10 @@ package com.cargotracker.service.impl;
 
 import com.cargotracker.service.PaymentModeService;
 import com.cargotracker.domain.PaymentMode;
+import com.cargotracker.domain.Vendor;
 import com.cargotracker.repository.PaymentModeRepository;
+import com.cargotracker.repository.VendorRepository;
+import com.cargotracker.service.dto.CarrierDetailsDTO;
 //import com.cargotracker.repository.search.PaymentModeSearchRepository;
 import com.cargotracker.service.dto.PaymentModeDTO;
 import com.cargotracker.service.mapper.PaymentModeMapper;
@@ -30,15 +33,19 @@ public class PaymentModeServiceImpl implements PaymentModeService {
     private final Logger log = LoggerFactory.getLogger(PaymentModeServiceImpl.class);
 
     private final PaymentModeRepository paymentModeRepository;
+    
+    private final VendorRepository vendorRepository;
 
     private final PaymentModeMapper paymentModeMapper;
 
     //private final PaymentModeSearchRepository paymentModeSearchRepository;
 
-    public PaymentModeServiceImpl(PaymentModeRepository paymentModeRepository, PaymentModeMapper paymentModeMapper
+    public PaymentModeServiceImpl(PaymentModeRepository paymentModeRepository, PaymentModeMapper paymentModeMapper,
+    		VendorRepository vendorRepository
     		//, PaymentModeSearchRepository paymentModeSearchRepository
     		) {
         this.paymentModeRepository = paymentModeRepository;
+        this.vendorRepository = vendorRepository;
         this.paymentModeMapper = paymentModeMapper;
         //this.paymentModeSearchRepository = paymentModeSearchRepository;
     }
@@ -70,6 +77,16 @@ public class PaymentModeServiceImpl implements PaymentModeService {
     public List<PaymentModeDTO> findAll() {
         log.debug("Request to get all PaymentModes");
         return paymentModeRepository.findAll().stream()
+            .map(paymentModeMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<PaymentModeDTO> findAllByVendor(Long vendorId) {
+        log.debug("Request to get all CarrierDetails By Vendor");
+        Vendor vendor = vendorRepository.findById(vendorId).get();
+        return paymentModeRepository.findAllByVendor(vendor).stream()
             .map(paymentModeMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }

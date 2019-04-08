@@ -2,7 +2,10 @@ package com.cargotracker.service.impl;
 
 import com.cargotracker.service.ShipmentModeService;
 import com.cargotracker.domain.ShipmentMode;
+import com.cargotracker.domain.Vendor;
 import com.cargotracker.repository.ShipmentModeRepository;
+import com.cargotracker.repository.VendorRepository;
+import com.cargotracker.service.dto.CarrierDetailsDTO;
 //import com.cargotracker.repository.search.ShipmentModeSearchRepository;
 import com.cargotracker.service.dto.ShipmentModeDTO;
 import com.cargotracker.service.mapper.ShipmentModeMapper;
@@ -30,16 +33,20 @@ public class ShipmentModeServiceImpl implements ShipmentModeService {
     private final Logger log = LoggerFactory.getLogger(ShipmentModeServiceImpl.class);
 
     private final ShipmentModeRepository shipmentModeRepository;
+    
+    private final VendorRepository vendorRepository;
 
     private final ShipmentModeMapper shipmentModeMapper;
 
     //private final ShipmentModeSearchRepository shipmentModeSearchRepository;
 
-    public ShipmentModeServiceImpl(ShipmentModeRepository shipmentModeRepository, ShipmentModeMapper shipmentModeMapper
+    public ShipmentModeServiceImpl(ShipmentModeRepository shipmentModeRepository, ShipmentModeMapper shipmentModeMapper,
+    		VendorRepository vendorRepository
     		//, ShipmentModeSearchRepository shipmentModeSearchRepository
     		) {
         this.shipmentModeRepository = shipmentModeRepository;
         this.shipmentModeMapper = shipmentModeMapper;
+        this.vendorRepository = vendorRepository;
         //this.shipmentModeSearchRepository = shipmentModeSearchRepository;
     }
 
@@ -70,6 +77,16 @@ public class ShipmentModeServiceImpl implements ShipmentModeService {
     public List<ShipmentModeDTO> findAll() {
         log.debug("Request to get all ShipmentModes");
         return shipmentModeRepository.findAll().stream()
+            .map(shipmentModeMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<ShipmentModeDTO> findAllByVendor(Long vendorId) {
+        log.debug("Request to get all CarrierDetails By Vendor");
+        Vendor vendor = vendorRepository.findById(vendorId).get();
+        return shipmentModeRepository.findAllByVendor(vendor).stream()
             .map(shipmentModeMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }

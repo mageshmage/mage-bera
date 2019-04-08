@@ -2,6 +2,7 @@ package com.cargotracker.web.rest;
 import com.cargotracker.service.PaymentModeService;
 import com.cargotracker.web.rest.errors.BadRequestAlertException;
 import com.cargotracker.web.rest.util.HeaderUtil;
+import com.cargotracker.service.dto.CarrierDetailsDTO;
 import com.cargotracker.service.dto.PaymentModeDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -85,6 +86,12 @@ public class PaymentModeResource {
     public List<PaymentModeDTO> getAllPaymentModes() {
         log.debug("REST request to get all PaymentModes");
         return paymentModeService.findAll();
+    }
+    
+    @GetMapping("/payment-modes-byvendor/{id}")
+    public List<PaymentModeDTO> getPaymentModesByVendor(@PathVariable Long id) {
+        log.debug("REST request to get PaymentModes By VendorId : {}", id);
+        return paymentModeService.findAllByVendor(id);
     }
 
     /**

@@ -1,6 +1,10 @@
 package com.cargotracker.repository;
 
 import com.cargotracker.domain.PaymentMode;
+import com.cargotracker.domain.Vendor;
+
+import java.util.List;
+
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +15,7 @@ import org.springframework.stereotype.Repository;
 @SuppressWarnings("unused")
 @Repository
 public interface PaymentModeRepository extends JpaRepository<PaymentMode, Long> {
+	
+	List<PaymentMode> findAllByVendor(Vendor vendor);
 
 }

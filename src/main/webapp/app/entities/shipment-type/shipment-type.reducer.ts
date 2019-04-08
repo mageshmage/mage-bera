@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ICrudSearchAction, ICrudGetAction, ICrudGetAllAction, ICrudPutAction, ICrudDeleteAction } from 'react-jhipster';
 
-import { cleanEntity } from 'app/shared/util/entity-utils';
+import { cleanEntity, ICrudGetAllActionByVendor } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
 import { IShipmentType, defaultValue } from 'app/shared/model/shipment-type.model';
@@ -100,6 +100,7 @@ export default (state: ShipmentTypeState = initialState, action): ShipmentTypeSt
 };
 
 const apiUrl = 'api/shipment-types';
+const apiUrlByVendor = 'api/shipment-types-byvendor';
 const apiSearchUrl = 'api/_search/shipment-types';
 
 // Actions
@@ -112,6 +113,11 @@ export const getSearchEntities: ICrudSearchAction<IShipmentType> = (query, page,
 export const getEntities: ICrudGetAllAction<IShipmentType> = (page, size, sort) => ({
   type: ACTION_TYPES.FETCH_SHIPMENTTYPE_LIST,
   payload: axios.get<IShipmentType>(`${apiUrl}?cacheBuster=${new Date().getTime()}`)
+});
+
+export const getShipmentTypesByVendorId: ICrudGetAllActionByVendor<IShipmentType> = (vendorId, page, size, sort) => ({
+  type: ACTION_TYPES.FETCH_SHIPMENTTYPE_LIST,
+  payload: axios.get<IShipmentType>(`${apiUrlByVendor}/${vendorId}?cacheBuster=${new Date().getTime()}`)
 });
 
 export const getEntity: ICrudGetAction<IShipmentType> = id => {

@@ -2,6 +2,7 @@ package com.cargotracker.web.rest;
 import com.cargotracker.service.ShipmentModeService;
 import com.cargotracker.web.rest.errors.BadRequestAlertException;
 import com.cargotracker.web.rest.util.HeaderUtil;
+import com.cargotracker.service.dto.CarrierDetailsDTO;
 import com.cargotracker.service.dto.ShipmentModeDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -85,6 +86,12 @@ public class ShipmentModeResource {
     public List<ShipmentModeDTO> getAllShipmentModes() {
         log.debug("REST request to get all ShipmentModes");
         return shipmentModeService.findAll();
+    }
+    
+    @GetMapping("/shipment-modes-byvendor/{id}")
+    public List<ShipmentModeDTO> getCarrierDetailsByVendor(@PathVariable Long id) {
+        log.debug("REST request to get ShipmentModes By VendorId : {}", id);
+        return shipmentModeService.findAllByVendor(id);
     }
 
     /**

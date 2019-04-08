@@ -2,6 +2,7 @@ package com.cargotracker.web.rest;
 import com.cargotracker.service.TrackingStatusService;
 import com.cargotracker.web.rest.errors.BadRequestAlertException;
 import com.cargotracker.web.rest.util.HeaderUtil;
+import com.cargotracker.service.dto.PaymentModeDTO;
 import com.cargotracker.service.dto.TrackingStatusDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -85,6 +86,12 @@ public class TrackingStatusResource {
     public List<TrackingStatusDTO> getAllTrackingStatuses() {
         log.debug("REST request to get all TrackingStatuses");
         return trackingStatusService.findAll();
+    }
+    
+    @GetMapping("/tracking-statuses-byvendor/{id}")
+    public List<TrackingStatusDTO> getTrackingStatusByVendor(@PathVariable Long id) {
+        log.debug("REST request to get PaymentModes By VendorId : {}", id);
+        return trackingStatusService.findAllByVendor(id);
     }
 
     /**

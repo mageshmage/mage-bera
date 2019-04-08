@@ -2,7 +2,10 @@ package com.cargotracker.service.impl;
 
 import com.cargotracker.service.TrackingStatusService;
 import com.cargotracker.domain.TrackingStatus;
+import com.cargotracker.domain.Vendor;
 import com.cargotracker.repository.TrackingStatusRepository;
+import com.cargotracker.repository.VendorRepository;
+import com.cargotracker.service.dto.CarrierDetailsDTO;
 //import com.cargotracker.repository.search.TrackingStatusSearchRepository;
 import com.cargotracker.service.dto.TrackingStatusDTO;
 import com.cargotracker.service.mapper.TrackingStatusMapper;
@@ -30,15 +33,20 @@ public class TrackingStatusServiceImpl implements TrackingStatusService {
     private final Logger log = LoggerFactory.getLogger(TrackingStatusServiceImpl.class);
 
     private final TrackingStatusRepository trackingStatusRepository;
+    
+    private final VendorRepository vendorRepository;
 
     private final TrackingStatusMapper trackingStatusMapper;
 
     //private final TrackingStatusSearchRepository trackingStatusSearchRepository;
 
-    public TrackingStatusServiceImpl(TrackingStatusRepository trackingStatusRepository, TrackingStatusMapper trackingStatusMapper
+    public TrackingStatusServiceImpl(TrackingStatusRepository trackingStatusRepository,
+    		VendorRepository vendorRepository,
+    		TrackingStatusMapper trackingStatusMapper
     		//, TrackingStatusSearchRepository trackingStatusSearchRepository
     		) {
         this.trackingStatusRepository = trackingStatusRepository;
+        this.vendorRepository = vendorRepository;
         this.trackingStatusMapper = trackingStatusMapper;
         //this.trackingStatusSearchRepository = trackingStatusSearchRepository;
     }
@@ -70,6 +78,16 @@ public class TrackingStatusServiceImpl implements TrackingStatusService {
     public List<TrackingStatusDTO> findAll() {
         log.debug("Request to get all TrackingStatuses");
         return trackingStatusRepository.findAll().stream()
+            .map(trackingStatusMapper::toDto)
+            .collect(Collectors.toCollection(LinkedList::new));
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<TrackingStatusDTO> findAllByVendor(Long vendorId) {
+        log.debug("Request to get all CarrierDetails By Vendor");
+        Vendor vendor = vendorRepository.findById(vendorId).get();
+        return trackingStatusRepository.findAllByVendor(vendor).stream()
             .map(trackingStatusMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
     }

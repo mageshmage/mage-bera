@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ICrudSearchAction, ICrudGetAction, ICrudGetAllAction, ICrudPutAction, ICrudDeleteAction } from 'react-jhipster';
 
-import { cleanEntity } from 'app/shared/util/entity-utils';
+import { cleanEntity, ICrudGetAllActionByDTO, ICrudGetActionAsync } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
 import { IShipmentInfo, defaultValue } from 'app/shared/model/shipment-info.model';
@@ -101,7 +101,8 @@ export default (state: ShipmentInformationState = initialState, action): Shipmen
   }
 };
 
-const apiUrl = 'api/shipment-infos';
+const apiUrl = 'api/shipment-informations';
+const apiSTOSearchUrl = 'api/shipment-informationsSearch';
 const apiSearchUrl = 'api/_search/shipment-infos';
 
 // Actions
@@ -119,12 +120,21 @@ export const getEntities: ICrudGetAllAction<IShipmentInfo> = (page, size, sort) 
   };
 };
 
-export const getEntity: ICrudGetAction<IShipmentInfo> = id => {
-  const requestUrl = `${apiUrl}/${id}`;
+export const getEntitiesSearch: ICrudGetAllActionByDTO<IShipmentInfo> = (searchData, page, size, sort) => {
+  const requestUrl = `${apiSTOSearchUrl}${sort ? `?page=${page}&size=${size}&sort=${sort}` : ''}`;
   return {
+    type: ACTION_TYPES.FETCH_SHIPMENTINFO_LIST,
+    payload: axios.post<IShipmentInfo>(`${requestUrl}${sort ? '&' : '?'}cacheBuster=${new Date().getTime()}`, searchData)
+  };
+};
+
+export const getEntity: ICrudGetActionAsync<IShipmentInfo> = id => async dispatch => {
+  const requestUrl = `${apiUrl}/${id}`;
+  const result = await dispatch({
     type: ACTION_TYPES.FETCH_SHIPMENTINFO,
     payload: axios.get<IShipmentInfo>(requestUrl)
-  };
+  });
+  return result;
 };
 
 export const createEntity: ICrudPutAction<IShipmentInfo> = entity => async dispatch => {

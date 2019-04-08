@@ -2,6 +2,7 @@ package com.cargotracker.web.rest;
 import com.cargotracker.service.ShipmentTypeService;
 import com.cargotracker.web.rest.errors.BadRequestAlertException;
 import com.cargotracker.web.rest.util.HeaderUtil;
+import com.cargotracker.service.dto.CarrierDetailsDTO;
 import com.cargotracker.service.dto.ShipmentTypeDTO;
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
@@ -85,6 +86,12 @@ public class ShipmentTypeResource {
     public List<ShipmentTypeDTO> getAllShipmentTypes() {
         log.debug("REST request to get all ShipmentTypes");
         return shipmentTypeService.findAll();
+    }
+    
+    @GetMapping("/shipment-types-byvendor/{id}")
+    public List<ShipmentTypeDTO> getShipmentTypesByVendor(@PathVariable Long id) {
+        log.debug("REST request to get Shipment Type By VendorId : {}", id);
+        return shipmentTypeService.findAllByVendor(id);
     }
 
     /**

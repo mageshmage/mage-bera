@@ -9,6 +9,7 @@ import { getEntities as getVendors } from 'app/entities/vendor/vendor.reducer';
 import { locales, languages } from 'app/config/translation';
 import { getUser, getRoles, updateUser, createUser, reset } from './user-management.reducer';
 import { IRootState } from 'app/shared/reducers';
+import { convertDateTimeFromServer, convertDateTimeToServer } from 'app/shared/util/date-utils';
 
 export interface IUserManagementUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ login: string }> {}
 
@@ -199,7 +200,9 @@ export class UserManagementUpdate extends React.Component<IUserManagementUpdateP
                     <Translate contentKey="cargotrackerApp.shipmentType.vendor">Vendor</Translate>
                   </Label>
                   <AvInput id="shipment-type-vendor" type="select" className="form-control" name="vendorId">
-                    <option value="" key="0" />
+                    <option value={-1} key={-1}>
+                      --Select--
+                    </option>
                     {vendors
                       ? vendors.map(otherEntity => (
                           <option value={otherEntity.id} key={otherEntity.id}>
@@ -208,6 +211,53 @@ export class UserManagementUpdate extends React.Component<IUserManagementUpdateP
                         ))
                       : null}
                   </AvInput>
+                </AvGroup>
+                <AvGroup check>
+                  <Label>
+                    <AvInput type="checkbox" name="activated" value={user.autoConsignment} />{' '}
+                    <Translate contentKey="userManagement.autoConsigment">Auto Consigment</Translate>
+                  </Label>
+                </AvGroup>
+                <AvGroup>
+                  <Label for="prefix">
+                    <Translate contentKey="userManagement.prefix">Prefix</Translate>
+                  </Label>
+                  <AvField
+                    type="text"
+                    className="form-control"
+                    name="prefix"
+                    validate={{
+                      required: {
+                        value: true,
+                        errorMessage: translate('register.messages.validate.login.required')
+                      },
+                      minLength: {
+                        value: 1,
+                        errorMessage: translate('register.messages.validate.login.minlength')
+                      },
+                      maxLength: {
+                        value: 50,
+                        errorMessage: translate('register.messages.validate.login.maxlength')
+                      }
+                    }}
+                    value={user.prefix}
+                  />
+                </AvGroup>
+                <AvGroup>
+                  <Label for="vendor.expiredDate">
+                    <Translate contentKey="userManagement.expiredDate">Expired Date</Translate>
+                  </Label>
+                  <AvInput
+                    id="shipment-info-expiredDate"
+                    type="datetime-local"
+                    className="form-control"
+                    name="expiredDate"
+                    placeholder={'YYYY-MM-DD HH:mm'}
+                    value={!user.id ? null : convertDateTimeFromServer(user.prefix)}
+                    validate={{
+                      required: { value: true, errorMessage: translate('entity.validation.required') }
+                    }}
+                  />
                 </AvGroup>
                 <Button tag={Link} to="/admin/user-management" replace color="info">
                   <FontAwesomeIcon icon="arrow-left" />

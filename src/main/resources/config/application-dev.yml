@@ -21,7 +21,7 @@ logging:
 
 spring:
     profiles:
-        active: prod
+        active: dev
         include:
             - swagger
             # Uncomment to activate TLS for the dev profile
@@ -36,9 +36,9 @@ spring:
             indent-output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:postgresql://ec2-50-17-246-114.compute-1.amazonaws.com:5432/d5frdaeidm1v56
-        username: kcwhzjjuuakldi
-        password: 97ddcddabf8ccf6e3556428ffb82400061f988ade8915ced45d019d626cb6d80
+        url: jdbc:postgresql://localhost:5432/cargotracker
+        username: postgres
+        password: welcome
         hikari:
             poolName: Hikari
             auto-commit: false

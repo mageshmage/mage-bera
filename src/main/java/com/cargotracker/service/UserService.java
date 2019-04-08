@@ -174,6 +174,9 @@ public class UserService {
 		UserExtra userExtra = new UserExtra();
 		userExtra.setVendor(vendor);
 		userExtra.setUser(user);
+		userExtra.setAutoConsignment(userDTO.isAutoConsignment());
+		userExtra.setPrefix(userDTO.getPrefix());
+		userExtra.setExpireDate(userDTO.getExpireDate());
 		userExtraRepository.save(userExtra);
 		userRepository.save(user);
 		//userSearchRepository.save(user);
@@ -241,6 +244,9 @@ public class UserService {
 							
 							userExtra.setVendor(vendor);
 							userExtra.setUser(user);
+							userExtra.setAutoConsignment(userDTO.isAutoConsignment());
+							userExtra.setPrefix(userDTO.getPrefix());
+							userExtra.setExpireDate(userDTO.getExpireDate());
 							userExtraRepository.save(userExtra);
 						}
 					}
@@ -249,6 +255,9 @@ public class UserService {
 						userExtra = new UserExtra();
 						userExtra.setVendor(vendor);
 						userExtra.setUser(user);
+						userExtra.setAutoConsignment(userDTO.isAutoConsignment());
+						userExtra.setPrefix(userDTO.getPrefix());
+						userExtra.setExpireDate(userDTO.getExpireDate());
 						userExtraRepository.save(userExtra);
 					}
 					

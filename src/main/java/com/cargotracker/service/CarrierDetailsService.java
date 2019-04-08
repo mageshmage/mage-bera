@@ -24,6 +24,8 @@ public interface CarrierDetailsService {
      * @return the list of entities
      */
     List<CarrierDetailsDTO> findAll();
+    
+    List<CarrierDetailsDTO> findAllByVendor(Long vendorId);
 
 
     /**

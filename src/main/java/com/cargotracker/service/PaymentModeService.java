@@ -24,6 +24,8 @@ public interface PaymentModeService {
      * @return the list of entities
      */
     List<PaymentModeDTO> findAll();
+    
+    List<PaymentModeDTO> findAllByVendor(Long vendorId);
 
 
     /**

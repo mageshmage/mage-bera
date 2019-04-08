@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ICrudSearchAction, ICrudGetAction, ICrudGetAllAction, ICrudPutAction, ICrudDeleteAction } from 'react-jhipster';
 
-import { cleanEntity } from 'app/shared/util/entity-utils';
+import { cleanEntity, ICrudGetAllActionByVendor } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
 import { IPaymentMode, defaultValue } from 'app/shared/model/payment-mode.model';
@@ -100,6 +100,7 @@ export default (state: PaymentModeState = initialState, action): PaymentModeStat
 };
 
 const apiUrl = 'api/payment-modes';
+const apiUrlByVendor = 'api/payment-modes-byvendor';
 const apiSearchUrl = 'api/_search/payment-modes';
 
 // Actions
@@ -112,6 +113,11 @@ export const getSearchEntities: ICrudSearchAction<IPaymentMode> = (query, page, 
 export const getEntities: ICrudGetAllAction<IPaymentMode> = (page, size, sort) => ({
   type: ACTION_TYPES.FETCH_PAYMENTMODE_LIST,
   payload: axios.get<IPaymentMode>(`${apiUrl}?cacheBuster=${new Date().getTime()}`)
+});
+
+export const getPaymentModesByVendorId: ICrudGetAllActionByVendor<IPaymentMode> = (vendorId, page, size, sort) => ({
+  type: ACTION_TYPES.FETCH_PAYMENTMODE_LIST,
+  payload: axios.get<IPaymentMode>(`${apiUrlByVendor}/${vendorId}?cacheBuster=${new Date().getTime()}`)
 });
 
 export const getEntity: ICrudGetAction<IPaymentMode> = id => {

@@ -9,15 +9,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IRootState } from 'app/shared/reducers';
 
 import { ICarrierDetails } from 'app/shared/model/carrier-details.model';
-import { getEntities as getCarrierDetails } from 'app/entities/carrier-details/carrier-details.reducer';
+import { getEntities as getCarrierDetails, getCarierDetailsByVendorId } from 'app/entities/carrier-details/carrier-details.reducer';
 import { IShipmentType } from 'app/shared/model/shipment-type.model';
-import { getEntities as getShipmentTypes } from 'app/entities/shipment-type/shipment-type.reducer';
+import { getEntities as getShipmentTypes, getShipmentTypesByVendorId } from 'app/entities/shipment-type/shipment-type.reducer';
 import { IShipmentMode } from 'app/shared/model/shipment-mode.model';
-import { getEntities as getShipmentModes } from 'app/entities/shipment-mode/shipment-mode.reducer';
+import { getEntities as getShipmentModes, getShipmentModesByVendorId } from 'app/entities/shipment-mode/shipment-mode.reducer';
 import { IPaymentMode } from 'app/shared/model/payment-mode.model';
-import { getEntities as getPaymentModes } from 'app/entities/payment-mode/payment-mode.reducer';
+import { getEntities as getPaymentModes, getPaymentModesByVendorId } from 'app/entities/payment-mode/payment-mode.reducer';
 import { ITrackingStatus } from 'app/shared/model/tracking-status.model';
-import { getEntities as getTrackingStatuses } from 'app/entities/tracking-status/tracking-status.reducer';
+import { getEntities as getTrackingStatuses, getTrackingStatusByVendorId } from 'app/entities/tracking-status/tracking-status.reducer';
 import { IVendor } from 'app/shared/model/vendor.model';
 import { getEntities as getVendors } from 'app/entities/vendor/vendor.reducer';
 import { IState } from 'app/shared/model/state.model';
@@ -71,13 +71,28 @@ export class ShipmentInformationUpdate extends React.Component<IShipmentInformat
       this.props.getEntity(this.props.match.params.id);
     }
 
-    this.props.getCarrierDetails();
-    this.props.getShipmentTypes();
-    this.props.getShipmentModes();
-    this.props.getPaymentModes();
-    this.props.getTrackingStatuses();
-    this.props.getVendors();
-    this.props.getStates();
+    const { vendorId, carrierDetails, shipmentTypes, shipmentModes, paymentModes, trackingStatuses, states } = this.props;
+
+    if (vendorId !== undefined && vendorId !== null) {
+      if (carrierDetails !== undefined && carrierDetails.length === 0) {
+        this.props.getCarierDetailsByVendorId(this.props.vendorId);
+      }
+      if (shipmentTypes !== undefined && shipmentTypes.length === 0) {
+        this.props.getShipmentTypesByVendorId(this.props.vendorId);
+      }
+      if (shipmentModes !== undefined && shipmentModes.length === 0) {
+        this.props.getShipmentModesByVendorId(this.props.vendorId);
+      }
+      if (paymentModes !== undefined && paymentModes.length === 0) {
+        this.props.getPaymentModesByVendorId(this.props.vendorId);
+      }
+      if (trackingStatuses !== undefined && trackingStatuses.length === 0) {
+        this.props.getTrackingStatusByVendorId(this.props.vendorId);
+      }
+      if (states !== undefined && states.length === 0) {
+        this.props.getStates();
+      }
+    }
   }
 
   saveEntity = (event, errors, values) => {
@@ -86,18 +101,19 @@ export class ShipmentInformationUpdate extends React.Component<IShipmentInformat
     values.deliveredDate = convertDateTimeToServer(values.deliveredDate);
 
     if (errors.length === 0) {
-      const { shipmentInfoEntity } = this.props;
-      console.log(JSON.stringify(shipmentInfoEntity, null, 2));
-      console.log(JSON.stringify(values, null, 2));
+      const { shipmentInfoEntity, vendorId } = this.props;
+      // console.log(JSON.stringify(shipmentInfoEntity, null, 2));
+      // console.log(JSON.stringify(values, null, 2));
+      shipmentInfoEntity.vendorId = vendorId;
       const entity = {
         ...shipmentInfoEntity,
         ...values
       };
-      console.log(JSON.stringify(entity, null, 2));
+      // console.log(JSON.stringify(entity, null, 2));
       if (this.state.isNew) {
-        //this.props.createEntity(entity);
+        this.props.createEntity(entity);
       } else {
-        //this.props.updateEntity(entity);
+        this.props.updateEntity(entity);
       }
     }
   };
@@ -893,16 +909,16 @@ const mapStateToProps = (storeState: IRootState) => ({
   shipmentInfoEntity: storeState.shipmentInformation.entity,
   loading: storeState.shipmentInformation.loading,
   updating: storeState.shipmentInformation.updating,
-  updateSuccess: storeState.shipmentInformation.updateSuccess
+  updateSuccess: storeState.shipmentInformation.updateSuccess,
+  vendorId: storeState.authentication.account.vendorId
 });
 
 const mapDispatchToProps = {
-  getCarrierDetails,
-  getShipmentTypes,
-  getShipmentModes,
-  getPaymentModes,
-  getTrackingStatuses,
-  getVendors,
+  getCarierDetailsByVendorId,
+  getShipmentTypesByVendorId,
+  getShipmentModesByVendorId,
+  getPaymentModesByVendorId,
+  getTrackingStatusByVendorId,
   getStates,
   getEntity,
   updateEntity,

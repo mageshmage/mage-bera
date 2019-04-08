@@ -24,6 +24,8 @@ public interface TrackingStatusService {
      * @return the list of entities
      */
     List<TrackingStatusDTO> findAll();
+    
+    List<TrackingStatusDTO> findAllByVendor(Long vendorId);
 
 
     /**

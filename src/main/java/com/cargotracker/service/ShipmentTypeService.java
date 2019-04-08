@@ -24,6 +24,8 @@ public interface ShipmentTypeService {
      * @return the list of entities
      */
     List<ShipmentTypeDTO> findAll();
+    
+    List<ShipmentTypeDTO> findAllByVendor(Long vendorId);
 
 
     /**

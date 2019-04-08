@@ -2,7 +2,7 @@
   "cargotrackerApp": {
     "shipmentInfo": {
       "home": {
-        "title": "Shipment Infos",
+        "title": "Shipment Information Search",
         "createLabel": "Create a new Shipment Info",
         "createOrEditLabel": "Create or edit a Shipment Info",
         "create": "Create a new Shipment Information",
@@ -20,7 +20,11 @@
       },
       "consignmentNo": "Consignment No",
       "bookingDate": "Booking Date",
+      "bookingDateFrom": "Booking Date From",
+      "bookingDateTo": "Booking Date To",
       "expectedDeliveryDate": "Expected Delivery Date",
+      "expectedDeliveryDateFrom": "Expected Delivery Date From",
+      "expectedDeliveryDateTo": "Expected Delivery Date To",
       "actualWeight": "Actual Weight",
       "volumetricWeight": "Volumetric Weight",
       "length": "Length",

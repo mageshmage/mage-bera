@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { ICrudSearchAction, ICrudGetAction, ICrudGetAllAction, ICrudPutAction, ICrudDeleteAction } from 'react-jhipster';
 
-import { cleanEntity } from 'app/shared/util/entity-utils';
+import { cleanEntity, ICrudGetAllActionByVendor } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
 import { ITrackingStatus, defaultValue } from 'app/shared/model/tracking-status.model';
@@ -100,6 +100,7 @@ export default (state: TrackingStatusState = initialState, action): TrackingStat
 };
 
 const apiUrl = 'api/tracking-statuses';
+const apiUrlByVendor = 'api/tracking-statuses-byvendor';
 const apiSearchUrl = 'api/_search/tracking-statuses';
 
 // Actions
@@ -112,6 +113,11 @@ export const getSearchEntities: ICrudSearchAction<ITrackingStatus> = (query, pag
 export const getEntities: ICrudGetAllAction<ITrackingStatus> = (page, size, sort) => ({
   type: ACTION_TYPES.FETCH_TRACKINGSTATUS_LIST,
   payload: axios.get<ITrackingStatus>(`${apiUrl}?cacheBuster=${new Date().getTime()}`)
+});
+
+export const getTrackingStatusByVendorId: ICrudGetAllActionByVendor<ITrackingStatus> = (vendorId, page, size, sort) => ({
+  type: ACTION_TYPES.FETCH_TRACKINGSTATUS_LIST,
+  payload: axios.get<ITrackingStatus>(`${apiUrlByVendor}/${vendorId}?cacheBuster=${new Date().getTime()}`)
 });
 
 export const getEntity: ICrudGetAction<ITrackingStatus> = id => {

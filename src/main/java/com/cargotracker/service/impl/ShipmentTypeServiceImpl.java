@@ -2,7 +2,10 @@ package com.cargotracker.service.impl;
 
 import com.cargotracker.service.ShipmentTypeService;
 import com.cargotracker.domain.ShipmentType;
+import com.cargotracker.domain.Vendor;
 import com.cargotracker.repository.ShipmentTypeRepository;
+import com.cargotracker.repository.VendorRepository;
+import com.cargotracker.service.dto.CarrierDetailsDTO;
 //import com.cargotracker.repository.search.ShipmentTypeSearchRepository;
 import com.cargotracker.service.dto.ShipmentTypeDTO;
 import com.cargotracker.service.mapper.ShipmentTypeMapper;
@@ -32,14 +35,18 @@ public class ShipmentTypeServiceImpl implements ShipmentTypeService {
     private final ShipmentTypeRepository shipmentTypeRepository;
 
     private final ShipmentTypeMapper shipmentTypeMapper;
+    
+    private final VendorRepository vendorRepository;
 
     //private final ShipmentTypeSearchRepository shipmentTypeSearchRepository;
 
-    public ShipmentTypeServiceImpl(ShipmentTypeRepository shipmentTypeRepository, ShipmentTypeMapper shipmentTypeMapper
+    public ShipmentTypeServiceImpl(ShipmentTypeRepository shipmentTypeRepository, ShipmentTypeMapper shipmentTypeMapper,
+    		VendorRepository vendorRepository
     		//, ShipmentTypeSearchRepository shipmentTypeSearchRepository
     		) {
         this.shipmentTypeRepository = shipmentTypeRepository;
         this.shipmentTypeMapper = shipmentTypeMapper;
+        this.vendorRepository =vendorRepository;
         //this.shipmentTypeSearchRepository = shipmentTypeSearchRepository;
     }
 
@@ -72,6 +79,16 @@ public class ShipmentTypeServiceImpl implements ShipmentTypeService {
         return shipmentTypeRepository.findAll().stream()
             .map(shipmentTypeMapper::toDto)
             .collect(Collectors.toCollection(LinkedList::new));
+    }
+    
+    @Override
+    @Transactional(readOnly = true)
+    public List<ShipmentTypeDTO> findAllByVendor(Long vendorId) {
+        log.debug("Request to get all CarrierDetails By Vendor");
+        Vendor vendor = vendorRepository.findById(vendorId).get();
+        return shipmentTypeRepository.findAllByVendor(vendor).stream()
+                .map(shipmentTypeMapper::toDto)
+                .collect(Collectors.toCollection(LinkedList::new));
     }
 
 
