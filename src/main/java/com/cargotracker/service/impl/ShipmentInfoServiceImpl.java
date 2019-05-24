@@ -3,14 +3,19 @@ package com.cargotracker.service.impl;
 import com.cargotracker.service.ShipmentInfoService;
 import com.cargotracker.domain.ShiperReceiverInfo;
 import com.cargotracker.domain.ShipmentInfo;
+import com.cargotracker.domain.ShipmentTracking;
 import com.cargotracker.domain.enumeration.ShiperReceiverType;
 import com.cargotracker.repository.ShiperReceiverInfoRepository;
 import com.cargotracker.repository.ShipmentInfoRepository;
 import com.cargotracker.repository.ShipmentInformationRepository;
+import com.cargotracker.repository.ShipmentTrackingRepository;
+import com.cargotracker.repository.StateRepository;
+import com.cargotracker.repository.TrackingStatusRepository;
 import com.cargotracker.service.dto.ShiperReceiverInfoDTO;
 //import com.cargotracker.repository.search.ShipmentInfoSearchRepository;
 import com.cargotracker.service.dto.ShipmentInfoDTO;
 import com.cargotracker.service.dto.ShipmentInformationSearchDTO;
+import com.cargotracker.service.dto.ShipmentTrackingDTO;
 import com.cargotracker.service.mapper.ShiperReceiverInfoMapper;
 import com.cargotracker.service.mapper.ShipmentInfoMapper;
 
@@ -24,6 +29,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -50,18 +57,30 @@ public class ShipmentInfoServiceImpl implements ShipmentInfoService {
     private final ShiperReceiverInfoRepository shiperReceiverInfoRepository;
 
     private final ShiperReceiverInfoMapper shiperReceiverInfoMapper;
+    
+    private final ShipmentTrackingRepository shipmentTrackingRepository;
+    
+    private final StateRepository stateRepository;
+    
+    private final TrackingStatusRepository trackingStatusRepository;
 
     //private final ShipmentInfoSearchRepository shipmentInfoSearchRepository;
 
     public ShipmentInfoServiceImpl(ShipmentInfoRepository shipmentInfoRepository, ShipmentInfoMapper shipmentInfoMapper,
     		ShiperReceiverInfoRepository shiperReceiverInfoRepository,
-    		ShiperReceiverInfoMapper shiperReceiverInfoMapper
+    		ShiperReceiverInfoMapper shiperReceiverInfoMapper,
+    		ShipmentTrackingRepository shipmentTrackingRepository,
+    		StateRepository stateRepository,
+    		TrackingStatusRepository trackingStatusRepository
     		//, ShipmentInfoSearchRepository shipmentInfoSearchRepository
     		) {
         this.shipmentInfoRepository = shipmentInfoRepository;
         this.shipmentInfoMapper = shipmentInfoMapper;
         this.shiperReceiverInfoRepository = shiperReceiverInfoRepository;
         this.shiperReceiverInfoMapper = shiperReceiverInfoMapper;
+        this.shipmentTrackingRepository = shipmentTrackingRepository;
+        this.stateRepository = stateRepository;
+        this.trackingStatusRepository = trackingStatusRepository;
         //this.shipmentInfoSearchRepository = shipmentInfoSearchRepository;
     }
 
@@ -107,6 +126,20 @@ public class ShipmentInfoServiceImpl implements ShipmentInfoService {
         receiverInfo.setType(ShiperReceiverType.CONSIGNEE);
         receiverInfo.setShipmentInfo(shipmentInfo);
         receiverInfo = shiperReceiverInfoRepository.save(receiverInfo);
+        
+        ZoneId  india = ZoneId.of("Asia/Kolkata");
+        ShipmentTracking shipmentTracking = new ShipmentTracking();
+        if(shipmentInfoDTO.getId() == null) {
+        	shipmentTracking.setPlace(stateRepository.findById(shipmentInfo.getOrigin().getId()).get().getStateName());
+            shipmentTracking.setShipmentInfo(shipmentInfo);
+            //shipmentTracking.setStatus(trackingStatusRepository.findById(shipmentInfo.getTrackingStatus().getId()).get().getValue());
+            shipmentTracking.setStatus("Shipment Created");
+            shipmentTracking.setTrackingDate(ZonedDateTime.now(india));
+            
+            shipmentTrackingRepository.save(shipmentTracking);
+        }
+        
+        
         
         result.setCarrierDetailsValue(shipmentInfo.getCarrierDetails() != null ? shipmentInfo.getCarrierDetails().getValue() : null);
         result.setShipmentTypeValue(shipmentInfo.getShipmentType() != null ? shipmentInfo.getShipmentType().getValue() : null);

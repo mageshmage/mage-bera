@@ -15,6 +15,8 @@ import AuthenticateRoute from 'app/shared/auth/authenticate-route';
 import ErrorBoundaryRoute from 'app/shared/error/error-boundary-route';
 import { AUTHORITIES } from 'app/config/constants';
 import ShipmentInformation from 'app/modules/shipmentinformation';
+import ShipmentInformationPOD from 'app/modules/shipmentinformationpod';
+import ShipmentTracking from 'app/modules/shipmenttracking';
 
 // tslint:disable:space-in-parens
 const Account = Loadable({
@@ -47,6 +49,8 @@ const Routes = () => (
       <PrivateRoute path="/account" component={Account} hasAnyAuthorities={[AUTHORITIES.ADMIN, AUTHORITIES.USER]} />
       <PrivateRoute path="/entity" component={Entities} hasAnyAuthorities={[AUTHORITIES.ADMIN]} />
       <AuthenticateRoute path="/shipment-information" component={ShipmentInformation} />
+      <AuthenticateRoute path="/shipment-information-pod" component={ShipmentInformationPOD} />
+      <AuthenticateRoute path="/shipment-tracking" component={ShipmentTracking} />
       <ErrorBoundaryRoute path="/" component={Home} />
     </Switch>
   </div>

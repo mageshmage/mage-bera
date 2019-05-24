@@ -48,3 +48,13 @@ export declare type ICrudGetAllActionByDTO<T> = (
 export declare type IPayloadResult<T> = ((dispatch: any) => IPayload<T> | Promise<IPayload<T>>);
 
 export declare type ICrudGetActionAsync<T> = (id: string | number) => IPayload<T> | ((dispatch: any) => IPayload<T>) | IPayloadResult<T>;
+
+export declare type ICrudSearchAction<T> = (
+  search?: string,
+  vendorId?: number,
+  page?: number,
+  size?: number,
+  sort?: string
+) => IPayload<T> | ((dispatch: any) => IPayload<T>);
+
+export declare type ICrudGetAutoFillAction<T> = (search?: string, vendorId?: number) => IPayload<T> | ((dispatch: any) => IPayload<T>);

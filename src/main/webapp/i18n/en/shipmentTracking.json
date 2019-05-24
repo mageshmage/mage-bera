@@ -17,9 +17,18 @@
         "title": "Shipment Tracking"
       },
       "trackingDate": "Tracking Date",
+      "trackingTime": "Tracking Time",
       "place": "Place",
       "status": "Status",
-      "shipmentInfo": "Shipment Info"
+      "shipmentInfo": "Shipment Info",
+      "public": {
+        "trackingId": "Enter Tracking Id",
+        "trackingDetails": "Tracking Details",
+        "currentStatus": "Current Status",
+        "deliveredOn": "Delivered On",
+        "receivedBy": "Received By",
+        "relationShip": "Relationship"
+      }
     }
   }
 }

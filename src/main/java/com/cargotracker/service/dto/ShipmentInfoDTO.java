@@ -47,6 +47,14 @@ public class ShipmentInfoDTO implements Serializable {
 	@NotNull
 	private Boolean isThirdParty;
 
+	private Boolean isDelivered;
+
+	private Boolean isInTransit;
+
+	private Boolean isReachedNearestHub;
+
+	private Boolean isOutForDelivery;
+
 	private String carrierRefNo;
 
 	private ZonedDateTime deliveredDate;
@@ -199,6 +207,38 @@ public class ShipmentInfoDTO implements Serializable {
 
 	public void setIsThirdParty(Boolean isThirdParty) {
 		this.isThirdParty = isThirdParty;
+	}
+
+	public Boolean getIsDelivered() {
+		return isDelivered;
+	}
+
+	public void setIsDelivered(Boolean isDelivered) {
+		this.isDelivered = isDelivered;
+	}
+
+	public Boolean getIsInTransit() {
+		return isInTransit;
+	}
+
+	public void setIsInTransit(Boolean isInTransit) {
+		this.isInTransit = isInTransit;
+	}
+
+	public Boolean getIsReachedNearestHub() {
+		return isReachedNearestHub;
+	}
+
+	public void setIsReachedNearestHub(Boolean isReachedNearestHub) {
+		this.isReachedNearestHub = isReachedNearestHub;
+	}
+
+	public Boolean getIsOutForDelivery() {
+		return isOutForDelivery;
+	}
+
+	public void setIsOutForDelivery(Boolean isOutForDelivery) {
+		this.isOutForDelivery = isOutForDelivery;
 	}
 
 	public String getCarrierRefNo() {

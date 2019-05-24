@@ -124,5 +124,18 @@ public class ShipmentInfoPODResource {
         log.debug("REST request to search ShipmentInfoPODS for query {}", query);
         return shipmentInfoPODService.search(query);
     }*/
+    
+    @GetMapping("/shipment-info-podssearch")
+    public ResponseEntity<List<ShipmentInfoPODDTO>> searchShipmentInfoPODS(@RequestParam String query, @RequestParam Long vendorId) {
+        log.debug("REST request to search ShipmentInfoPODS for query {}", query);
+        List<ShipmentInfoPODDTO> shipmentInfoPODDTOList = null;
+        try {
+        	shipmentInfoPODDTOList =  shipmentInfoPODService.searchShipmentInfoPOD(query, vendorId);
+        }
+        catch(Exception ex) {
+        	return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok().body(shipmentInfoPODDTOList);
+    }
 
 }

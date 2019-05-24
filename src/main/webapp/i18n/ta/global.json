@@ -55,6 +55,8 @@
     "form": {
       "username": "பயனர் பெயர்",
       "username.placeholder": "உங்கள் பயனர் பெயர்",
+      "currentpassword": "Current password",
+      "currentpassword.placeholder": "Current password",
       "newpassword": "புதிய கடவுச்சொல்",
       "newpassword.placeholder": "புதிய கடவுச்சொல்",
       "confirmpassword": "புதிய கடவுச்சொல் உறுதி செய்க",
@@ -115,7 +117,8 @@
       "edit": "திருத்து",
       "open": "Open",
       "save": "சேமி",
-      "view": "பார்"
+      "view": "பார்",
+      "search": "தேடல்"
     },
     "detail": {
       "field": "களம்",
@@ -146,7 +149,8 @@
     "userexists": "உள் நுழை பெயர் எடுக்கப்பட்டது!",
     "emailexists": "மின்னஞ்சல் உபயோகிக்கப்பட்டது!",
     "idexists": "புது {{entityName}} -க்கு ஐ.டி இருக்கமுடியாது",
-    "idnull": "Invalid ID"
+    "idnull": "Invalid ID",
+    "noConsignmentResult": "No Tracking Id found"
   },
-  "footer": "இது உங்கள் முடிப்பு"
+  "footer": "Copyright © 2019 "
 }

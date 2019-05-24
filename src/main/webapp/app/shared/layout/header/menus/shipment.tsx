@@ -13,12 +13,12 @@ export const ShipmentMenu = props => (
       &nbsp;
       <Translate contentKey="global.menu.shipment.information" />
     </DropdownItem>
-    <DropdownItem tag={Link} to="/entity/shipment-tracking">
+    <DropdownItem tag={Link} to="/shipment-tracking">
       <FontAwesomeIcon icon="map-marker" fixedWidth />
       &nbsp;
       <Translate contentKey="global.menu.shipment.tracking" />
     </DropdownItem>
-    <DropdownItem tag={Link} to="/entity/shipment-info-pod">
+    <DropdownItem tag={Link} to="/shipment-information-pod">
       <FontAwesomeIcon icon="upload" fixedWidth />
       &nbsp;
       <Translate contentKey="global.menu.shipment.uploadpod" />

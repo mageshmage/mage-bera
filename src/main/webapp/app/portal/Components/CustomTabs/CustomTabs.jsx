@@ -10,9 +10,9 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Icon from "@material-ui/core/Icon";
 // core components
-import Card from "components/Card/Card.jsx";
-import CardBody from "components/Card/CardBody.jsx";
-import CardHeader from "components/Card/CardHeader.jsx";
+import Card from "app/portal/Components/Card/Card.jsx";
+import CardBody from "app/portal/Components/Card/CardBody.jsx";
+import CardHeader from "app/portal/Components/Card/CardHeader.jsx";
 
 import customTabsStyle from "app/assets/jss/material-kit-react/components/customTabsStyle.jsx";
 
@@ -102,7 +102,8 @@ CustomTabs.propTypes = {
     "danger",
     "info",
     "primary",
-    "rose"
+    "rose",
+    "godeliver"
   ]),
   title: PropTypes.string,
   tabs: PropTypes.arrayOf(

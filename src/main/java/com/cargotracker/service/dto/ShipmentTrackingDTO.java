@@ -1,4 +1,5 @@
 package com.cargotracker.service.dto;
+
 import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
@@ -9,89 +10,143 @@ import java.util.Objects;
  */
 public class ShipmentTrackingDTO implements Serializable {
 
-    private Long id;
+	private Long id;
 
-    @NotNull
-    private ZonedDateTime trackingDate;
+	@NotNull
+	private ZonedDateTime trackingDate;
 
-    @NotNull
-    private String place;
+	@NotNull
+	private String place;
 
-    @NotNull
-    private String status;
+	@NotNull
+	private String status;
 
+	private Long shipmentInfoId;
 
-    private Long shipmentInfoId;
+	private Boolean isDelivered;
 
-    public Long getId() {
-        return id;
-    }
+	private Boolean isInTransit;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	private Boolean isReachedNearestHub;
 
-    public ZonedDateTime getTrackingDate() {
-        return trackingDate;
-    }
+	private Boolean isOutForDelivery;
 
-    public void setTrackingDate(ZonedDateTime trackingDate) {
-        this.trackingDate = trackingDate;
-    }
+	private String receivedBy;
 
-    public String getPlace() {
-        return place;
-    }
+	private String relationShip;
 
-    public void setPlace(String place) {
-        this.place = place;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getStatus() {
-        return status;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+	public ZonedDateTime getTrackingDate() {
+		return trackingDate;
+	}
 
-    public Long getShipmentInfoId() {
-        return shipmentInfoId;
-    }
+	public void setTrackingDate(ZonedDateTime trackingDate) {
+		this.trackingDate = trackingDate;
+	}
 
-    public void setShipmentInfoId(Long shipmentInfoId) {
-        this.shipmentInfoId = shipmentInfoId;
-    }
+	public String getPlace() {
+		return place;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+	public void setPlace(String place) {
+		this.place = place;
+	}
 
-        ShipmentTrackingDTO shipmentTrackingDTO = (ShipmentTrackingDTO) o;
-        if (shipmentTrackingDTO.getId() == null || getId() == null) {
-            return false;
-        }
-        return Objects.equals(getId(), shipmentTrackingDTO.getId());
-    }
+	public String getStatus() {
+		return status;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(getId());
-    }
+	public void setStatus(String status) {
+		this.status = status;
+	}
 
-    @Override
-    public String toString() {
-        return "ShipmentTrackingDTO{" +
-            "id=" + getId() +
-            ", trackingDate='" + getTrackingDate() + "'" +
-            ", place='" + getPlace() + "'" +
-            ", status='" + getStatus() + "'" +
-            ", shipmentInfo=" + getShipmentInfoId() +
-            "}";
-    }
+	public Long getShipmentInfoId() {
+		return shipmentInfoId;
+	}
+
+	public void setShipmentInfoId(Long shipmentInfoId) {
+		this.shipmentInfoId = shipmentInfoId;
+	}
+
+	public Boolean getIsDelivered() {
+		return isDelivered;
+	}
+
+	public void setIsDelivered(Boolean isDelivered) {
+		this.isDelivered = isDelivered;
+	}
+
+	public String getReceivedBy() {
+		return receivedBy;
+	}
+
+	public void setReceivedBy(String receivedBy) {
+		this.receivedBy = receivedBy;
+	}
+
+	public String getRelationShip() {
+		return relationShip;
+	}
+
+	public void setRelationShip(String relationShip) {
+		this.relationShip = relationShip;
+	}
+
+	public Boolean getIsInTransit() {
+		return isInTransit;
+	}
+
+	public void setIsInTransit(Boolean isInTransit) {
+		this.isInTransit = isInTransit;
+	}
+
+	public Boolean getIsReachedNearestHub() {
+		return isReachedNearestHub;
+	}
+
+	public void setIsReachedNearestHub(Boolean isReachedNearestHub) {
+		this.isReachedNearestHub = isReachedNearestHub;
+	}
+
+	public Boolean getIsOutForDelivery() {
+		return isOutForDelivery;
+	}
+
+	public void setIsOutForDelivery(Boolean isOutForDelivery) {
+		this.isOutForDelivery = isOutForDelivery;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) {
+			return true;
+		}
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+
+		ShipmentTrackingDTO shipmentTrackingDTO = (ShipmentTrackingDTO) o;
+		if (shipmentTrackingDTO.getId() == null || getId() == null) {
+			return false;
+		}
+		return Objects.equals(getId(), shipmentTrackingDTO.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(getId());
+	}
+
+	@Override
+	public String toString() {
+		return "ShipmentTrackingDTO{" + "id=" + getId() + ", trackingDate='" + getTrackingDate() + "'" + ", place='"
+				+ getPlace() + "'" + ", status='" + getStatus() + "'" + ", shipmentInfo=" + getShipmentInfoId() + "}";
+	}
 }

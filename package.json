@@ -62,7 +62,9 @@
     "redux-promise-middleware": "5.1.1",
     "redux-thunk": "2.3.0",
     "tslib": "1.9.3",
-    "uuid": "3.3.2"
+    "uuid": "3.3.2",
+    "react-google-maps": "9.4.5",
+    "recompose": "0.30.0"
   },
   "devDependencies": {
     "@types/chai": "4.1.4",
@@ -108,11 +110,14 @@
     "mocha": "5.2.0",
     "moment-locales-webpack-plugin": "1.0.7",
     "optimize-css-assets-webpack-plugin": "5.0.0",
+    "postcss-loader": "3.0.0",
     "prettier": "1.14.3",
     "protractor": "5.4.0",
     "react-infinite-scroller": "1.2.0",
     "redux-mock-store": "1.5.3",
     "rimraf": "2.6.2",
+    "sass": "1.13.0",
+    "sass-loader": "7.1.0",
     "simple-progress-webpack-plugin": "1.1.2",
     "sinon": "6.1.5",
     "source-map-loader": "0.2.4",

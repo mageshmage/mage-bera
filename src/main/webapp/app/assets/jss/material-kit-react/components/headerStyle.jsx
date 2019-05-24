@@ -54,7 +54,8 @@ const headerStyle = {
   title: {
     ...defaultFont,
     lineHeight: "30px",
-    fontSize: "18px",
+    fontSize: "20px",
+    fontWeight: "700",
     borderRadius: "3px",
     textTransform: "none",
     color: "inherit",
@@ -78,6 +79,12 @@ const headerStyle = {
     color: "#FFFFFF",
     boxShadow:
       "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(0, 188, 212, 0.46)"
+  },
+  godeliver: {
+    backgroundColor: "#43bb26f2",
+    color: "#FFFFFF",
+    boxShadow:
+      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px #43bb26f2"
   },
   success: {
     backgroundColor: successColor,

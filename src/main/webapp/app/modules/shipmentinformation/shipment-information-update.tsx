@@ -27,6 +27,7 @@ import { IShipmentInfo } from 'app/shared/model/shipment-info.model';
 // tslint:disable-next-line:no-unused-variable
 import { convertDateTimeFromServer, convertDateTimeToServer } from 'app/shared/util/date-utils';
 import { mapIdList } from 'app/shared/util/entity-utils';
+import moment from 'moment';
 
 export interface IShipmentInformationUpdateProps extends StateProps, DispatchProps, RouteComponentProps<{ id: string }> {}
 
@@ -157,7 +158,7 @@ export class ShipmentInformationUpdate extends React.Component<IShipmentInformat
             {loading ? (
               <p>Loading...</p>
             ) : (
-              <AvForm model={isNew ? {} : shipmentInfoEntity} onSubmit={this.saveEntity}>
+              <AvForm model={isNew ? { bookingDate: moment().format('YYYY-MM-DDTHH:mm') } : shipmentInfoEntity} onSubmit={this.saveEntity}>
                 {/*!isNew ? (
                     <AvGroup>
                       <Label for="id">

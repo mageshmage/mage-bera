@@ -117,7 +117,8 @@
       "edit": "संपादित करा",
       "open": "Open",
       "save": "जतन करा",
-      "view": "पहा"
+      "view": "पहा",
+      "search": "शोध"
     },
     "detail": {
       "field": "फील्ड",
@@ -148,7 +149,8 @@
     "userexists": "लॉगिन नाव आधीच वापरले आहे!",
     "emailexists": "ई-मेल आधीच वापरात आहे!",
     "idexists": "एक नवीन {{entityName}} आधीच आयडी असू शकत नाही",
-    "idnull": "Invalid ID"
+    "idnull": "Invalid ID",
+    "noConsignmentResult": "No Tracking Id found"
   },
-  "footer": "हे आपल्या तळटीप आहे"
+  "footer": "Copyright © 2019 "
 }
