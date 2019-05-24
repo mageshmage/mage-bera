@@ -49,4 +49,6 @@ public interface ShipmentInfoPODService {
      * @return the list of entities
      */
     //List<ShipmentInfoPODDTO> search(String query);
+    
+    List<ShipmentInfoPODDTO> searchShipmentInfoPOD(String query, Long vendorId) throws Exception;
 }

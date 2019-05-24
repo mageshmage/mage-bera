@@ -34,6 +34,9 @@ import { faTruck } from '@fortawesome/free-solid-svg-icons/faTruck';
 import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle';
+import { faPhone } from '@fortawesome/free-solid-svg-icons/faPhone';
+import { faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons/faEnvelopeOpen';
 
 export const loadIcons = () => {
   library.add(
@@ -70,6 +73,9 @@ export const loadIcons = () => {
     faEnvelope,
     faMapMarker,
     faTruck,
-    faUpload
+    faUpload,
+    faCheckCircle,
+    faPhone,
+    faEnvelopeOpen
   );
 };

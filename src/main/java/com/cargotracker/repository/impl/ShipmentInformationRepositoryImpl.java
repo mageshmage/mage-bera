@@ -2,6 +2,7 @@ package com.cargotracker.repository.impl;
 
 import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -75,7 +76,7 @@ public class ShipmentInformationRepositoryImpl implements CustomShipmentInformat
 		List<ShipmentInfoDTO> shipmentInfoDTOList = null;
 		long total = 0;
 		try {
-
+			shipmentInfoDTOList = new ArrayList<ShipmentInfoDTO>();
 			QShipmentInfo qShipmentInfo = QShipmentInfo.shipmentInfo;
 			QShiperReceiverInfo qShiperReceiverInfo = QShiperReceiverInfo.shiperReceiverInfo;
 			//QSupplierUser qSupplierUser = QSupplierUser.supplierUser;
@@ -100,6 +101,9 @@ public class ShipmentInformationRepositoryImpl implements CustomShipmentInformat
 			if (shipmentSearchDto.getVendorId() != null) {
 				query.where((qShipmentInfo.vendor.id.eq(shipmentSearchDto.getVendorId())));
 			}
+			else {
+				return new PageImpl<ShipmentInfoDTO>(shipmentInfoDTOList, pageable, total);
+			}
 			
 			if (shipmentSearchDto.getTrackingStatusId() != null && shipmentSearchDto.getTrackingStatusId() > 0) {
 				query.where((qShipmentInfo.trackingStatus.id.eq(shipmentSearchDto.getTrackingStatusId())));
@@ -115,6 +119,10 @@ public class ShipmentInformationRepositoryImpl implements CustomShipmentInformat
 				}
 				query.where((qShipmentInfo.bookingDate.between(shipmentSearchDto.getBookingDateFrom(), shipmentSearchDto.getBookingDateTo())));
 			}
+			else {
+				query.where((qShipmentInfo.bookingDate.between(ZonedDateTime.now().minusDays(1), ZonedDateTime.now().plusDays(1))));
+			}
+			
 			if (shipmentSearchDto.getDeliveredDateFrom() != null) {
 				if(shipmentSearchDto.getDeliveredDateTo() == null) {
 					shipmentSearchDto.setDeliveredDateTo(ZonedDateTime.now());
@@ -161,8 +169,6 @@ public class ShipmentInformationRepositoryImpl implements CustomShipmentInformat
 			total = query.fetchCount();
 			List<Tuple> content = query.fetch();
 
-			shipmentInfoDTOList = new ArrayList<ShipmentInfoDTO>();
-
 			for (Tuple tuple : content) {
 				//ShipmentInfoDTO shipmentInfoDTO = new ShipmentInfoDTO();
 				
@@ -170,6 +176,7 @@ public class ShipmentInformationRepositoryImpl implements CustomShipmentInformat
 				
 				Optional<ShipmentInfo> shipmentInfo = shipmentInfoRepository.findById(id);
 				
+				if(shipmentInfo.isPresent()) {
 				ShipmentInfoDTO shipmentInfoDTO = shipmentInfo.map(shipmentInfoMapper::toDto).get();
 				
 				//List<Long> ids = new ArrayList<Long>();
@@ -205,6 +212,7 @@ public class ShipmentInformationRepositoryImpl implements CustomShipmentInformat
 					supplierSearchResponseDTO.setSubmissionTime(date);
 				}*/
 				shipmentInfoDTOList.add(shipmentInfoDTO);
+				}
 			}
 
 		} catch (Exception ex) {

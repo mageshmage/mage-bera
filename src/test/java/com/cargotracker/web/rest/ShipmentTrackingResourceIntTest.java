@@ -3,6 +3,7 @@ package com.cargotracker.web.rest;
 import com.cargotracker.CargotrackerApp;
 
 import com.cargotracker.domain.ShipmentTracking;
+import com.cargotracker.repository.ShipmentInfoRepository;
 import com.cargotracker.repository.ShipmentTrackingRepository;
 //import com.cargotracker.repository.search.ShipmentTrackingSearchRepository;
 import com.cargotracker.service.ShipmentTrackingService;
@@ -98,11 +99,13 @@ public class ShipmentTrackingResourceIntTest {
     private MockMvc restShipmentTrackingMockMvc;
 
     private ShipmentTracking shipmentTracking;
+    
+    private ShipmentInfoRepository shipmentInfoRepository;
 
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-        final ShipmentTrackingResource shipmentTrackingResource = new ShipmentTrackingResource(shipmentTrackingService);
+        final ShipmentTrackingResource shipmentTrackingResource = new ShipmentTrackingResource(shipmentTrackingService, shipmentInfoRepository);
         this.restShipmentTrackingMockMvc = MockMvcBuilders.standaloneSetup(shipmentTrackingResource)
             .setCustomArgumentResolvers(pageableArgumentResolver)
             .setControllerAdvice(exceptionTranslator)

@@ -16,7 +16,10 @@ import { Switch } from 'react-router-dom';
 import { HashRouter as Router } from 'react-router-dom';
 import LandingPage from 'app/portal/LandingPage/LandingPage';
 import ProfilePage from 'app/portal/ProfilePage/ProfilePage';
+import GoDeliverNCRPage from 'app/portal/GoDeliverNCR/HomePage';
+import GoDeliverINDPage from 'app/portal/GoDeliverIND/HomePage';
 import { Route, Redirect, RouteProps } from 'react-router-dom';
+import 'app/assets/scss/material-kit-react.scss?v=1.4.0';
 
 const devTools = process.env.NODE_ENV === 'development' ? <DevTools /> : null;
 
@@ -36,6 +39,8 @@ const render = Component =>
       <Switch>
         <Route path="/landing-page" component={LandingPage} />
         <Route path="/profile-page" component={ProfilePage} />
+        <Route path="/godeliverncr-page" component={GoDeliverNCRPage} />
+        <Route path="/godeliverind-page" component={GoDeliverINDPage} />
         <Route path="/" component={() => <Component store={store} devTools={devTools} />} />
       </Switch>
     </Router>,

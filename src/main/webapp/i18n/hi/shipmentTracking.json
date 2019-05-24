@@ -2,7 +2,7 @@
   "cargotrackerApp": {
     "shipmentTracking": {
       "home": {
-        "title": "ShipmentTrackings",
+        "title": "Shipment Trackings",
         "createLabel": "नया Shipment Tracking बनाएँ",
         "createOrEditLabel": "Shipment Tracking बनाएँ या संपादित करें",
         "search": "Shipment Tracking खोजें"
@@ -17,9 +17,18 @@
         "title": "Shipment Tracking"
       },
       "trackingDate": "Tracking Date",
+      "trackingTime": "Tracking Time",
       "place": "Place",
       "status": "Status",
-      "shipmentInfo": "Shipment Info"
+      "shipmentInfo": "Shipment Info",
+      "public": {
+        "trackingId": "Enter Tracking Id",
+        "trackingDetails": "Tracking Details",
+        "currentStatus": "Current Status",
+        "deliveredOn": "Delivered On",
+        "receivedBy": "Received By",
+        "relationShip": "Relationship"
+      }
     }
   }
 }

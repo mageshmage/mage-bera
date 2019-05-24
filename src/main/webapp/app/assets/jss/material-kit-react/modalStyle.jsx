@@ -1,6 +1,8 @@
 const modalStyle = {
   modal: {
-    borderRadius: "6px"
+    borderRadius: "6px",
+    width: "1200px",
+    maxWidth: "1200px"
   },
   modalHeader: {
     borderBottom: "none",
@@ -12,7 +14,10 @@ const modalStyle = {
   },
   modalTitle: {
     margin: "0",
-    lineHeight: "1.42857143"
+    lineHeight: "1.42857143",
+    fontWeight: "700",
+    textAlign: "center",
+    color: "#43bb26f2"
   },
   modalCloseButton: {
     color: "#999999",
@@ -28,6 +33,9 @@ const modalStyle = {
     fontWeight: "700",
     lineHeight: "1",
     float: "right"
+  },
+  modalCloseButton1 :{
+    color: "#43bb26f2"
   },
   modalClose: {
     width: "16px",

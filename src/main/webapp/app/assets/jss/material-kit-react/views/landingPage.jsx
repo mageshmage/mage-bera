@@ -33,7 +33,19 @@ const landingPageStyle = {
     borderRadius: "6px",
     boxShadow:
       "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)"
-  }
+  },
+  inputRootCustomClasses: {
+    margin: "0!important"
+  },
+  formControl: {
+    margin: "0 !important",
+    paddingTop: "0"
+  },
+  searchIcon: {
+    width: "20px",
+    height: "20px",
+    color: "inherit"
+  },
 };
 
 export default landingPageStyle;

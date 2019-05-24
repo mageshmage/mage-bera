@@ -2,9 +2,11 @@
   "cargotrackerApp": {
     "shipmentInfo": {
       "home": {
-        "title": "Shipment Infos",
-        "createLabel": "Shipment Info-ஐ உருவாக்கு",
+        "title": "Shipment Information Search",
+        "createLabel": "Shipment-ஐ உருவாக்கு",
         "createOrEditLabel": "Shipment Info -ஐ மாற்று (அ) உருவாக்கு",
+        "create": "Create a new Shipment Information",
+        "edit": "Edit a Shipment Information",
         "search": "Search for Shipment Info"
       },
       "created": "Shipment Info புதிதாக உருவாக்கப்பட்டது, அடையாளம் {{ param }}",
@@ -18,7 +20,11 @@
       },
       "consignmentNo": "Consignment No",
       "bookingDate": "Booking Date",
+      "bookingDateFrom": "Booking Date From",
+      "bookingDateTo": "Booking Date To",
       "expectedDeliveryDate": "Expected Delivery Date",
+      "expectedDeliveryDateFrom": "Expected Delivery Date From",
+      "expectedDeliveryDateTo": "Expected Delivery Date To",
       "actualWeight": "Actual Weight",
       "volumetricWeight": "Volumetric Weight",
       "length": "Length",
@@ -28,6 +34,10 @@
       "totalFright": "Total Fright",
       "packageDesciption": "Package Desciption",
       "isThirdParty": "Is Third Party",
+      "isDelivered": "Is Delivered",
+      "isInTransit": "Is InTransit",
+      "isReachedNearestHub": "Is Reached Nearest Hub",
+      "isOutForDelivery": "Is Out for Delivery",
       "carrierRefNo": "Carrier Ref No",
       "deliveredDate": "Delivered Date",
       "receivedBy": "Received By",

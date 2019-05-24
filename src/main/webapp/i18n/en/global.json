@@ -150,7 +150,8 @@
     "userexists": "Login name already used!",
     "emailexists": "Email is already in use!",
     "idexists": "A new {{ entityName }} cannot already have an ID",
-    "idnull": "Invalid ID"
+    "idnull": "Invalid ID",
+    "noConsignmentResult": "No Tracking Id found"
   },
-  "footer": "This is your footer"
+  "footer": "Copyright © 2019 "
 }

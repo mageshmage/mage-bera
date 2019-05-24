@@ -23,7 +23,13 @@ const cardHeaderStyle = {
   successCardHeader,
   dangerCardHeader,
   infoCardHeader,
-  primaryCardHeader
+  primaryCardHeader,
+  godeliverCardHeader : {
+    backgroundColor: "#43bb26f2",
+    color: "#FFFFFF",
+    boxShadow:
+      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px #43bb26f2"
+  }
 };
 
 export default cardHeaderStyle;

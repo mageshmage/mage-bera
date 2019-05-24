@@ -13,6 +13,7 @@ export const ACTION_TYPES = {
   CREATE_SHIPMENTINFO: 'shipmentInfomation/CREATE_SHIPMENTINFO',
   UPDATE_SHIPMENTINFO: 'shipmentInfomation/UPDATE_SHIPMENTINFO',
   DELETE_SHIPMENTINFO: 'shipmentInfomation/DELETE_SHIPMENTINFO',
+  SEARCH_CONSIGNMENTNO: 'shipmentInfomation/SEARCH_CONSIGNMENTNO',
   RESET: 'shipmentInfomation/RESET'
 };
 
@@ -33,6 +34,7 @@ export type ShipmentInformationState = Readonly<typeof initialState>;
 export default (state: ShipmentInformationState = initialState, action): ShipmentInformationState => {
   switch (action.type) {
     case REQUEST(ACTION_TYPES.SEARCH_SHIPMENTINFOS):
+    case REQUEST(ACTION_TYPES.SEARCH_CONSIGNMENTNO):
     case REQUEST(ACTION_TYPES.FETCH_SHIPMENTINFO_LIST):
     case REQUEST(ACTION_TYPES.FETCH_SHIPMENTINFO):
       return {
@@ -63,6 +65,15 @@ export default (state: ShipmentInformationState = initialState, action): Shipmen
         updateSuccess: false,
         errorMessage: action.payload
       };
+    case FAILURE(ACTION_TYPES.SEARCH_CONSIGNMENTNO):
+      return {
+        ...state,
+        loading: false,
+        updating: false,
+        updateSuccess: false,
+        errorMessage: action.payload,
+        entity: {}
+      };
     case SUCCESS(ACTION_TYPES.SEARCH_SHIPMENTINFOS):
     case SUCCESS(ACTION_TYPES.FETCH_SHIPMENTINFO_LIST):
       return {
@@ -70,6 +81,12 @@ export default (state: ShipmentInformationState = initialState, action): Shipmen
         loading: false,
         totalItems: action.payload.headers['x-total-count'],
         entities: action.payload.data
+      };
+    case SUCCESS(ACTION_TYPES.SEARCH_CONSIGNMENTNO):
+      return {
+        ...state,
+        loading: false,
+        entity: action.payload.data
       };
     case SUCCESS(ACTION_TYPES.FETCH_SHIPMENTINFO):
       return {
@@ -103,6 +120,7 @@ export default (state: ShipmentInformationState = initialState, action): Shipmen
 
 const apiUrl = 'api/shipment-informations';
 const apiSTOSearchUrl = 'api/shipment-informationsSearch';
+const apiSearchConsignmentUrl = 'api/shipment-trackingssearchpublic';
 const apiSearchUrl = 'api/_search/shipment-infos';
 
 // Actions
@@ -110,6 +128,11 @@ const apiSearchUrl = 'api/_search/shipment-infos';
 export const getSearchEntities: ICrudSearchAction<IShipmentInfo> = (query, page, size, sort) => ({
   type: ACTION_TYPES.SEARCH_SHIPMENTINFOS,
   payload: axios.get<IShipmentInfo>(`${apiSearchUrl}?query=${query}${sort ? `&page=${page}&size=${size}&sort=${sort}` : ''}`)
+});
+
+export const getSearchWithConsignmentNo: ICrudSearchAction<IShipmentInfo> = (query, page, size, sort) => ({
+  type: ACTION_TYPES.SEARCH_CONSIGNMENTNO,
+  payload: axios.get<IShipmentInfo>(`${apiSearchConsignmentUrl}?query=${query}`)
 });
 
 export const getEntities: ICrudGetAllAction<IShipmentInfo> = (page, size, sort) => {

@@ -3,7 +3,7 @@
     "shipmentInfo": {
       "home": {
         "title": "Shipment Information Search",
-        "createLabel": "Create a new Shipment Info",
+        "createLabel": "Create",
         "createOrEditLabel": "Create or edit a Shipment Info",
         "create": "Create a new Shipment Information",
         "edit": "Edit a Shipment Information",
@@ -34,6 +34,10 @@
       "totalFright": "Total Fright",
       "packageDesciption": "Package Desciption",
       "isThirdParty": "Is Third Party",
+      "isDelivered": "Is Delivered",
+      "isInTransit": "Is InTransit",
+      "isReachedNearestHub": "Is Reached Nearest Hub",
+      "isOutForDelivery": "Is Out for Delivery",
       "carrierRefNo": "Carrier Ref No",
       "deliveredDate": "Delivered Date",
       "receivedBy": "Received By",

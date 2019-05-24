@@ -151,11 +151,6 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
       <div>
         <h2 id="shipment-info-heading">
           <Translate contentKey="cargotrackerApp.shipmentInfo.home.title">Shipment Infos</Translate>
-          <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
-            <FontAwesomeIcon icon="plus" />
-            &nbsp;
-            <Translate contentKey="cargotrackerApp.shipmentInfo.home.createLabel">Create new Shipment Info</Translate>
-          </Link>
         </h2>
         {/*<Row>
           <Col sm="12">
@@ -282,7 +277,7 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
                         <Col sm={7}>
                           <AvInput
                             id="shipment-info-bookingDateFrom"
-                            type="datetime-local"
+                            type="date"
                             className="form-control"
                             name="bookingDateFrom"
                             placeholder={'YYYY-MM-DD HH:mm'}
@@ -302,7 +297,7 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
                         <Col sm={7}>
                           <AvInput
                             id="shipment-info-bookingDateTo"
-                            type="datetime-local"
+                            type="date"
                             className="form-control"
                             name="bookingDateTo"
                             placeholder={'YYYY-MM-DD HH:mm'}
@@ -325,7 +320,7 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
                         <Col sm={7}>
                           <AvInput
                             id="shipment-info-expectedDeliveryDateFrom"
-                            type="datetime-local"
+                            type="date"
                             className="form-control"
                             name="expectedDeliveryDateFrom"
                             placeholder={'YYYY-MM-DD HH:mm'}
@@ -348,7 +343,7 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
                         <Col sm={7}>
                           <AvInput
                             id="shipment-info-expectedDeliveryDateTo"
-                            type="datetime-local"
+                            type="date"
                             className="form-expectedDeliveryDateTo"
                             name="expectedDeliveryDate"
                             placeholder={'YYYY-MM-DD HH:mm'}
@@ -473,6 +468,11 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
                     &nbsp;
                     <Translate contentKey="entity.action.search">Search</Translate>
                   </Button>
+                  <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
+                    <FontAwesomeIcon icon="plus" />
+                    &nbsp;
+                    <Translate contentKey="cargotrackerApp.shipmentInfo.home.createLabel">Create new Shipment Info</Translate>
+                  </Link>
                 </CardFooter>
               </Card>
             </AvForm>
@@ -480,54 +480,47 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
         </Row>
 
         <div className="table-responsive">
-          <Table responsive>
+          <Table responsive hover bordered>
             <thead>
               <tr>
-                <th className="hand" onClick={this.sort('id')}>
-                  <Translate contentKey="global.field.id">ID</Translate> <FontAwesomeIcon icon="sort" />
+                <th className="hand">
+                  <Translate contentKey="global.field.id">ID</Translate>
                 </th>
-                <th className="hand" onClick={this.sort('consignmentNo')}>
+                <th className="hand">
                   <Translate contentKey="cargotrackerApp.shipmentInfo.consignmentNo">Consignment No</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
                 </th>
-                <th className="hand" onClick={this.sort('bookingDate')}>
-                  <Translate contentKey="cargotrackerApp.shipmentInfo.bookingDate">Booking Date</Translate> <FontAwesomeIcon icon="sort" />
+                <th className="hand">
+                  <Translate contentKey="cargotrackerApp.shipmentInfo.bookingDate">Booking Date</Translate>
                 </th>
-                <th className="hand" onClick={this.sort('expectedDeliveryDate')}>
+                <th className="hand">
                   <Translate contentKey="cargotrackerApp.shipmentInfo.expectedDeliveryDate">Expected Delivery Date</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
                 </th>
 
-                <th className="hand" onClick={this.sort('deliveredDate')}>
+                <th className="hand">
                   <Translate contentKey="cargotrackerApp.shipmentInfo.deliveredDate">Delivered Date</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
                 </th>
 
                 <th>
                   <Translate contentKey="cargotrackerApp.shipmentInfo.carrierDetails">Carrier Details</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
                   <Translate contentKey="cargotrackerApp.shipmentInfo.shipmentType">Shipment Type</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
                   <Translate contentKey="cargotrackerApp.shipmentInfo.shipmentMode">Shipment Mode</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
                 </th>
 
                 <th>
                   <Translate contentKey="cargotrackerApp.shipmentInfo.trackingStatus">Tracking Status</Translate>{' '}
-                  <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  <Translate contentKey="cargotrackerApp.shipmentInfo.vendor">Vendor</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="cargotrackerApp.shipmentInfo.vendor">Vendor</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="cargotrackerApp.shipmentInfo.origin">Origin</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="cargotrackerApp.shipmentInfo.origin">Origin</Translate>
                 </th>
                 <th>
-                  <Translate contentKey="cargotrackerApp.shipmentInfo.destination">Destination</Translate> <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="cargotrackerApp.shipmentInfo.destination">Destination</Translate>
                 </th>
                 <th />
               </tr>
@@ -536,9 +529,10 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
               {shipmentInfoList.map((shipmentInfo, i) => (
                 <tr key={`entity-${i}`}>
                   <td>
-                    <Button tag={Link} to={`${match.url}/${shipmentInfo.id}`} color="link" size="sm">
+                    {/*<Button tag={Link} to={`${match.url}/${shipmentInfo.id}`} color="link" size="sm">
                       {shipmentInfo.id}
-                    </Button>
+                    </Button>*/}
+                    {i + 1}
                   </td>
                   <td>{shipmentInfo.consignmentNo}</td>
                   <td>

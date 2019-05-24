@@ -117,7 +117,8 @@
       "edit": "संपादित करें",
       "open": "Open",
       "save": "सहेजें",
-      "view": "देखें"
+      "view": "देखें",
+      "search": "खोज"
     },
     "detail": {
       "field": "फ़ील्ड",
@@ -148,7 +149,8 @@
     "userexists": "लॉगिन नाम पहले से ही इस्तेमाल किया!",
     "emailexists": "ई-मेल पहले से ही उपयोग में है!",
     "idexists": "एक नई एंटिटी {{ entityName }} पहले से ही एक ID है नहीं कर सकता",
-    "idnull": "Invalid ID"
+    "idnull": "Invalid ID",
+    "noConsignmentResult": "No Tracking Id found"
   },
-  "footer": "यह आपके पाद लेख है"
+  "footer": "Copyright © 2019 "
 }

@@ -70,6 +70,14 @@ import shipmentInformation, {
   ShipmentInformationState
 } from 'app/modules/shipmentinformation/shipment-information.reducer';
 // prettier-ignore
+import shipmentTrackingSolo, {
+  ShipmentTrackingSoloState
+} from 'app/modules/shipmenttracking/shipment-tracking.reducer';
+// prettier-ignore
+import shipmentInfoPODSolo, {
+  ShipmentInfoPODSoloState
+} from 'app/modules/shipmentinformationpod/shipment-info-pod.reducer';
+// prettier-ignore
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */
 
 export interface IRootState {
@@ -97,6 +105,8 @@ export interface IRootState {
   readonly state: StateState;
   readonly country: CountryState;
   readonly shipmentInformation: ShipmentInformationState;
+  readonly shipmentTrackingSolo: ShipmentTrackingSoloState;
+  readonly shipmentInfoPODSolo: ShipmentInfoPODSoloState;
   /* jhipster-needle-add-reducer-type - JHipster will add reducer type here */
   readonly loadingBar: any;
 }
@@ -126,6 +136,8 @@ const rootReducer = combineReducers<IRootState>({
   state,
   country,
   shipmentInformation,
+  shipmentTrackingSolo,
+  shipmentInfoPODSolo,
   /* jhipster-needle-add-reducer-combine - JHipster will add reducer here */
   loadingBar
 });

@@ -27,7 +27,7 @@ export const BrandIcon = props => (
 
 export const Brand = props => (
   <NavbarBrand tag={Link} to="/" className="brand-logo">
-    <BrandIcon />
+    {/*<BrandIcon />*/}
     <span className="brand-title">
       <Translate contentKey="global.title">Cargo Tracker</Translate>
     </span>
@@ -39,7 +39,7 @@ export const Home = props => (
   <NavItem>
     <NavLink tag={Link} to="/" className="d-flex align-items-center">
       <FontAwesomeIcon icon="home" />
-      <span>
+      <span className="cargoLable">
         <Translate contentKey="global.menu.home">Home</Translate>
       </span>
     </NavLink>

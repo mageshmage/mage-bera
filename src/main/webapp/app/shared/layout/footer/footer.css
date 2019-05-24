@@ -1,3 +1,15 @@
 .footer {
-  height: 50px;
+  height: 15px;
+  background-color: #0099cc;
+  color: white;
+  font-family: verdana, arial;
+  font-size: 11px;
+  bottom: 0;
+  margin-bottom: 0;
+  border-width: 1px 0 0;
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  text-align: center;
 }

@@ -1,10 +1,12 @@
 package com.cargotracker.service;
 
+import com.cargotracker.service.dto.ShipmentInfoDTO;
 import com.cargotracker.service.dto.ShipmentTrackingDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -53,4 +55,10 @@ public interface ShipmentTrackingService {
      * @return the list of entities
      */
     //Page<ShipmentTrackingDTO> search(String query, Pageable pageable);
+    
+    List<ShipmentTrackingDTO> searchConsignment(String query, Long vendorId);
+    
+    ShipmentInfoDTO searchConsignmentPublic(String query);
+    
+    ShipmentTrackingDTO autoFillNewTracking(String query, Long vendorId);
 }
