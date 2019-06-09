@@ -104,11 +104,11 @@ export class ShipmentTracking extends React.Component<IShipmentTrackingProps, IS
     const { shipmentTrackingList, match, totalItems, isEnable } = this.props;
     return (
       <div>
-        <h2 id="shipment-tracking-heading">
+        <h2 id="shipment-tracking-heading" className="cargoTitle">
           <Translate contentKey="cargotrackerApp.shipmentTracking.home.title">Shipment Trackings</Translate>
         </h2>
         <Row>
-          <Col sm="4">
+          <Col sm="6">
             <AvForm onSubmit={this.search}>
               <AvGroup>
                 <InputGroup>
@@ -120,13 +120,21 @@ export class ShipmentTracking extends React.Component<IShipmentTrackingProps, IS
                     placeholder={translate('cargotrackerApp.shipmentTracking.home.search')}
                   />
                   &nbsp;
-                  <Button className="input-group-addon">
+                  <Button className="input-group-addon" color="primary">
                     <FontAwesomeIcon icon="search" />
                   </Button>
                   &nbsp;
-                  <Button type="reset" className="input-group-addon" onClick={this.clear}>
+                  <Button type="reset" className="input-group-addon" onClick={this.clear} color="danger">
                     <FontAwesomeIcon icon="trash" />
                   </Button>
+                  &nbsp;
+                  {!(shipmentTrackingList.length > 0) && (
+                    <Link to={`${match.url}/bulk`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
+                      <FontAwesomeIcon icon="plus" />
+                      &nbsp;
+                      <Translate contentKey="cargotrackerApp.shipmentTracking.home.createLabelBulk">Create new Shipment Info</Translate>
+                    </Link>
+                  )}
                 </InputGroup>
               </AvGroup>
             </AvForm>

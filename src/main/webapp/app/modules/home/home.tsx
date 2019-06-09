@@ -33,7 +33,13 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
     //alert('search - ' + this.state.search + ' VendorId - ' + this.props.vendorId)
 
     let vendorId: number = 0;
-    if (this.props.vendorId != undefined) vendorId = this.props.vendorId;
+    if (this.props.vendorId != undefined) {
+      vendorId = this.props.vendorId;
+    } else if (this.props.vendorIdState != null && this.props.vendorIdState != undefined) {
+      //alert('Vendor');
+      vendorId = this.props.vendorIdState;
+    }
+
     if (this.state.search) {
       this.props.getSearchWithConsignmentNo(this.state.search, vendorId);
     }
@@ -101,11 +107,11 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
                       placeholder={translate('cargotrackerApp.shipmentTracking.public.trackingId')}
                     />
                     &nbsp;
-                    <Button className="input-group-addon">
+                    <Button className="input-group-addon" color="primary">
                       <FontAwesomeIcon icon="search" />
                     </Button>
                     &nbsp;
-                    <Button type="reset" className="input-group-addon" onClick={this.clear}>
+                    <Button type="reset" className="input-group-addon" onClick={this.clear} color="danger">
                       <FontAwesomeIcon icon="trash" />
                     </Button>
                   </InputGroup>
@@ -308,7 +314,8 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
 const mapStateToProps = storeState => ({
   account: storeState.authentication.account,
   isAuthenticated: storeState.authentication.isAuthenticated,
-  shipmentInfo: storeState.shipmentInformation.entity
+  shipmentInfo: storeState.shipmentInformation.entity,
+  vendorIdState: storeState.authentication.account.vendorId
 });
 
 const mapDispatchToProps = { getSession, getSearchWithConsignmentNo, reset };

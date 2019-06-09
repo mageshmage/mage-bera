@@ -2,6 +2,10 @@
 
 select * from jhi_user;
 
+--update jhi_user
+--set password_hash = '$2a$10$1cPu6y0y35mdMNTeyyzdNOxcL/EYErAwh0.2SemGVqB/q/QJ3AP8G'
+--where id = 6;
+
 select * from jhi_authority;
 
 select * from jhi_user_authority;

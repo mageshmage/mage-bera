@@ -228,9 +228,13 @@ public class ShipmentTrackingResource {
             throw new BadRequestAlertException("VendorId CanNot be null", ENTITY_NAME, "idexists");
         }
         ExcelResponse result = shipmentTrackingService.createShipmentTrackingBulk(file, vendorId);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, "Bulk Tracking Load Done"))
-            .body(result);
+        
+        if (!result.getIsError()) {
+			return ResponseEntity.ok().headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, "Bulk Tracking Load Done"))
+					.body(result);
+		} else {
+			return ResponseEntity.ok().body(result);
+		}
     }
 	
 

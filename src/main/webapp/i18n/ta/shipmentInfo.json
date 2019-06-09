@@ -3,7 +3,9 @@
     "shipmentInfo": {
       "home": {
         "title": "Shipment Information Search",
+        "titleBulk": "Shipment Information Bulk",
         "createLabel": "Shipment-ஐ உருவாக்கு",
+        "createLabelBulk": "Create Bulk",
         "createOrEditLabel": "Shipment Info -ஐ மாற்று (அ) உருவாக்கு",
         "create": "Create a new Shipment Information",
         "edit": "Edit a Shipment Information",
@@ -16,7 +18,7 @@
         "question": "நீக்குவதற்கு உறுதி செய் Shipment Info {{ id }}?"
       },
       "detail": {
-        "title": "Shipment Info"
+        "title": "Shipment Information Details"
       },
       "consignmentNo": "Consignment No",
       "bookingDate": "Booking Date",

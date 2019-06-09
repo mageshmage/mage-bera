@@ -9,7 +9,9 @@
         "main": "Shipment",
         "information": "Shipment Information",
         "tracking": "Shipment Tracking",
-        "uploadpod": "Upload POD"
+        "uploadpod": "Upload POD",
+        "informationBulk": "Shipment Information Bulk",
+        "trackingBulk": "Shipment Tracking Bulk"
       },
       "entities": {
         "main": "Entities",
@@ -150,6 +152,7 @@
     "userexists": "Login name already used!",
     "emailexists": "Email is already in use!",
     "idexists": "A new {{ entityName }} cannot already have an ID",
+    "consignmentExists": "ConsignmentNo Exists",
     "idnull": "Invalid ID",
     "noConsignmentResult": "No Tracking Id found"
   },

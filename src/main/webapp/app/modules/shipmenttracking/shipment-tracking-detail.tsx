@@ -24,7 +24,7 @@ export class ShipmentTrackingDetail extends React.Component<IShipmentTrackingDet
     return (
       <Row>
         <Col md="8">
-          <h2>
+          <h2 className="cargoTitle">
             <Translate contentKey="cargotrackerApp.shipmentTracking.detail.title">ShipmentTracking</Translate> [
             <b>{shipmentTrackingEntity.id}</b>]
           </h2>

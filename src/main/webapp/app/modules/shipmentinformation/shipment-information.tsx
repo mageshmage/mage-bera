@@ -149,7 +149,7 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
     const { carrierDetails, shipmentTypes, shipmentModes, paymentModes, trackingStatuses, states, loading, updating } = this.props;
     return (
       <div>
-        <h2 id="shipment-info-heading">
+        <h2 id="shipment-info-heading" className="cargoTitle">
           <Translate contentKey="cargotrackerApp.shipmentInfo.home.title">Shipment Infos</Translate>
         </h2>
         {/*<Row>
@@ -468,6 +468,13 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
                     &nbsp;
                     <Translate contentKey="entity.action.search">Search</Translate>
                   </Button>
+                  &nbsp;
+                  <Link to={`${match.url}/bulk`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
+                    <FontAwesomeIcon icon="plus" />
+                    &nbsp;
+                    <Translate contentKey="cargotrackerApp.shipmentInfo.home.createLabelBulk">Create new Shipment Info Bulk</Translate>
+                  </Link>
+                  &nbsp;
                   <Link to={`${match.url}/new`} className="btn btn-primary float-right jh-create-entity" id="jh-create-entity">
                     <FontAwesomeIcon icon="plus" />
                     &nbsp;

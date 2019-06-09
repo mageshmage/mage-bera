@@ -3,7 +3,9 @@
     "shipmentTracking": {
       "home": {
         "title": "Shipment Trackings",
+        "titleBulk": "Shipment Tracking Bulk",
         "createLabel": "Create a new Shipment Tracking",
+        "createLabelBulk": "Create Bulk Tracking",
         "createOrEditLabel": "Create or edit a Shipment Tracking",
         "search": "Search for Shipment Tracking"
       },

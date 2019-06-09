@@ -56,7 +56,7 @@ export class ShipmentInfoPOD extends React.Component<IShipmentInfoPODProps, IShi
     const { shipmentInfoPODList, match, isEnable } = this.props;
     return (
       <div>
-        <h2 id="shipment-info-pod-heading">
+        <h2 id="shipment-info-pod-heading" className="cargoTitle">
           <Translate contentKey="cargotrackerApp.shipmentInfoPOD.home.title">Shipment Info PODS</Translate>
         </h2>
         <Row>
@@ -72,11 +72,11 @@ export class ShipmentInfoPOD extends React.Component<IShipmentInfoPODProps, IShi
                     placeholder={translate('cargotrackerApp.shipmentInfoPOD.home.search')}
                   />
                   &nbsp;
-                  <Button className="input-group-addon">
+                  <Button className="input-group-addon" color="primary">
                     <FontAwesomeIcon icon="search" />
                   </Button>
                   &nbsp;
-                  <Button type="reset" className="input-group-addon" onClick={this.clear}>
+                  <Button type="reset" className="input-group-addon" onClick={this.clear} color="danger">
                     <FontAwesomeIcon icon="trash" />
                   </Button>
                 </InputGroup>

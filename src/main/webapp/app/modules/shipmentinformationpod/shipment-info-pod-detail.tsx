@@ -24,9 +24,9 @@ export class ShipmentInfoPODDetail extends React.Component<IShipmentInfoPODDetai
     return (
       <Row>
         <Col md="8">
-          <h2>
-            <Translate contentKey="cargotrackerApp.shipmentInfoPOD.detail.title">ShipmentInfoPOD</Translate> [
-            <b>{shipmentInfoPODEntity.id}</b>]
+          <h2 className="cargoTitle">
+            <Translate contentKey="cargotrackerApp.shipmentInfoPOD.detail.title">ShipmentInfoPOD</Translate>
+            {/*[<b>{shipmentInfoPODEntity.id}</b>]*/}
           </h2>
           <dl className="jh-entity-details">
             <dt>

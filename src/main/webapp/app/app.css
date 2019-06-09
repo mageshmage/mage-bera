@@ -300,6 +300,12 @@ h4 {
   font-weight: 500;
 }
 
+.cargoTitle {
+  font-size: 24px;
+  color: #0c55af;
+  font-weight: 500;
+}
+
 .cargoLable {
   font-size: 14px;
   font-weight: 700;

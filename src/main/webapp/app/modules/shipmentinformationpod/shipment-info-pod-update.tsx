@@ -97,7 +97,7 @@ export class ShipmentInfoPODUpdate extends React.Component<IShipmentInfoPODUpdat
       <div>
         <Row className="justify-content-center">
           <Col md="8">
-            <h2 id="cargotrackerApp.shipmentInfoPOD.home.createOrEditLabel">
+            <h2 id="cargotrackerApp.shipmentInfoPOD.home.createOrEditLabel" className="cargoTitle">
               <Translate contentKey="cargotrackerApp.shipmentInfoPOD.home.createOrEditLabel">Create or edit a ShipmentInfoPOD</Translate>
             </h2>
           </Col>

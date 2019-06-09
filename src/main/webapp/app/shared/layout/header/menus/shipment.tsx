@@ -23,5 +23,15 @@ export const ShipmentMenu = props => (
       &nbsp;
       <Translate contentKey="global.menu.shipment.uploadpod" />
     </DropdownItem>
+    <DropdownItem tag={Link} to="/shipment-information/bulk">
+      <FontAwesomeIcon icon="envelope" fixedWidth />
+      &nbsp;
+      <Translate contentKey="global.menu.shipment.informationBulk" />
+    </DropdownItem>
+    <DropdownItem tag={Link} to="/shipment-tracking/bulk">
+      <FontAwesomeIcon icon="map-marker" fixedWidth />
+      &nbsp;
+      <Translate contentKey="global.menu.shipment.trackingBulk" />
+    </DropdownItem>
   </NavDropdown>
 );

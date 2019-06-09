@@ -51,6 +51,15 @@ export const defaultValue: IShipmentInfo = {
   receiverInfo: defaultValueReceiver
 };
 
+export interface IShipmentInfoBulkResponse {
+  isError?: boolean;
+  errorList?: String[];
+}
+export const defaultValueBulk: IShipmentInfoBulkResponse = {
+  isError: false,
+  errorList: []
+};
+
 export interface IShipmentInformationSearchDTO {
   consignmentNo?: string;
   bookingDateFrom?: Moment;

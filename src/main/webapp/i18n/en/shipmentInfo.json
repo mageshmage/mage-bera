@@ -3,7 +3,9 @@
     "shipmentInfo": {
       "home": {
         "title": "Shipment Information Search",
+        "titleBulk": "Shipment Information Bulk",
         "createLabel": "Create",
+        "createLabelBulk": "Create Bulk",
         "createOrEditLabel": "Create or edit a Shipment Info",
         "create": "Create a new Shipment Information",
         "edit": "Edit a Shipment Information",
@@ -16,7 +18,7 @@
         "question": "Are you sure you want to delete Shipment Info {{ id }}?"
       },
       "detail": {
-        "title": "Shipment Info"
+        "title": "Shipment Information Details"
       },
       "consignmentNo": "Consignment No",
       "bookingDate": "Booking Date",

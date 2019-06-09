@@ -9,13 +9,14 @@ import {
 } from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
-import { IShipmentInfo, defaultValue } from 'app/shared/model/shipment-info.model';
+import { IShipmentInfo, defaultValue, defaultValueBulk, IShipmentInfoBulkResponse } from 'app/shared/model/shipment-info.model';
 
 export const ACTION_TYPES = {
   SEARCH_SHIPMENTINFOS: 'shipmentInfomation/SEARCH_SHIPMENTINFOS',
   FETCH_SHIPMENTINFO_LIST: 'shipmentInfomation/FETCH_SHIPMENTINFO_LIST',
   FETCH_SHIPMENTINFO: 'shipmentInfomation/FETCH_SHIPMENTINFO',
   CREATE_SHIPMENTINFO: 'shipmentInfomation/CREATE_SHIPMENTINFO',
+  BULK_SHIPMENTINFO: 'shipmentInfomation/BULK_SHIPMENTINFO',
   UPDATE_SHIPMENTINFO: 'shipmentInfomation/UPDATE_SHIPMENTINFO',
   DELETE_SHIPMENTINFO: 'shipmentInfomation/DELETE_SHIPMENTINFO',
   SEARCH_CONSIGNMENTNO: 'shipmentInfomation/SEARCH_CONSIGNMENTNO',
@@ -29,7 +30,8 @@ const initialState = {
   entity: defaultValue,
   updating: false,
   totalItems: 0,
-  updateSuccess: false
+  updateSuccess: false,
+  bulkResponse: defaultValueBulk
 };
 
 export type ShipmentInformationState = Readonly<typeof initialState>;
@@ -49,18 +51,21 @@ export default (state: ShipmentInformationState = initialState, action): Shipmen
         loading: true
       };
     case REQUEST(ACTION_TYPES.CREATE_SHIPMENTINFO):
+    case REQUEST(ACTION_TYPES.BULK_SHIPMENTINFO):
     case REQUEST(ACTION_TYPES.UPDATE_SHIPMENTINFO):
     case REQUEST(ACTION_TYPES.DELETE_SHIPMENTINFO):
       return {
         ...state,
         errorMessage: null,
         updateSuccess: false,
-        updating: true
+        updating: true,
+        bulkResponse: null
       };
     case FAILURE(ACTION_TYPES.SEARCH_SHIPMENTINFOS):
     case FAILURE(ACTION_TYPES.FETCH_SHIPMENTINFO_LIST):
     case FAILURE(ACTION_TYPES.FETCH_SHIPMENTINFO):
     case FAILURE(ACTION_TYPES.CREATE_SHIPMENTINFO):
+    case FAILURE(ACTION_TYPES.BULK_SHIPMENTINFO):
     case FAILURE(ACTION_TYPES.UPDATE_SHIPMENTINFO):
     case FAILURE(ACTION_TYPES.DELETE_SHIPMENTINFO):
       return {
@@ -68,7 +73,8 @@ export default (state: ShipmentInformationState = initialState, action): Shipmen
         loading: false,
         updating: false,
         updateSuccess: false,
-        errorMessage: action.payload
+        errorMessage: action.payload,
+        bulkResponse: null
       };
     case FAILURE(ACTION_TYPES.SEARCH_CONSIGNMENTNO):
       return {
@@ -114,6 +120,13 @@ export default (state: ShipmentInformationState = initialState, action): Shipmen
         updateSuccess: true,
         entity: {}
       };
+    case SUCCESS(ACTION_TYPES.BULK_SHIPMENTINFO):
+      return {
+        ...state,
+        updating: false,
+        updateSuccess: true,
+        bulkResponse: action.payload.data
+      };
     case ACTION_TYPES.RESET:
       return {
         ...initialState
@@ -127,6 +140,7 @@ const apiUrl = 'api/shipment-informations';
 const apiSTOSearchUrl = 'api/shipment-informationsSearch';
 const apiSearchConsignmentUrl = 'api/shipment-trackingssearchpublic';
 const apiSearchUrl = 'api/_search/shipment-infos';
+const apiUrlBulk = 'api/shipment-informations-bulk';
 
 // Actions
 
@@ -171,6 +185,18 @@ export const createEntity: ICrudPutAction<IShipmentInfo> = entity => async dispa
     payload: axios.post(apiUrl, cleanEntity(entity))
   });
   dispatch(getEntities());
+  return result;
+};
+
+export const createEntityBulk = formData => async dispatch => {
+  const result = await dispatch({
+    type: ACTION_TYPES.BULK_SHIPMENTINFO,
+    payload: axios.post(apiUrlBulk, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+  });
   return result;
 };
 

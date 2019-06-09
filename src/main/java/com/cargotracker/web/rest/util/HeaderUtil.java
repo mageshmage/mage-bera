@@ -41,6 +41,13 @@ public final class HeaderUtil {
         headers.add("X-" + APPLICATION_NAME + "-params", "");
         return headers;
     }
+    
+    public static HttpHeaders uploadFailedAlert() {
+    	HttpHeaders headers = new HttpHeaders();
+        headers.add("X-" + APPLICATION_NAME + "-error", "error." + "Upload Failed - Please verify the reason");
+        headers.add("X-" + APPLICATION_NAME + "-params", "");
+        return headers;
+    }
 
     public static HttpHeaders createFailureAlert(String entityName, String errorKey, String defaultMessage) {
         log.error("Entity processing failed, {}", defaultMessage);

@@ -75,7 +75,7 @@ import shipmentTrackingSolo, {
 } from 'app/modules/shipmenttracking/shipment-tracking.reducer';
 // prettier-ignore
 import shipmentInfoPODSolo, {
-  ShipmentInfoPODSoloState
+  ShipmentInfoPODState as ShipmentInfoPODSoloState
 } from 'app/modules/shipmentinformationpod/shipment-info-pod.reducer';
 // prettier-ignore
 /* jhipster-needle-add-reducer-import - JHipster will add reducer here */

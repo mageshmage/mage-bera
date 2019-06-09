@@ -3,7 +3,9 @@
     "shipmentTracking": {
       "home": {
         "title": "Shipment Trackings",
+        "titleBulk": "Shipment Tracking Bulk",
         "createLabel": "नया Shipment Tracking बनाएँ",
+        "createLabelBulk": "Create Bulk Tracking",
         "createOrEditLabel": "Shipment Tracking बनाएँ या संपादित करें",
         "search": "Shipment Tracking खोजें"
       },

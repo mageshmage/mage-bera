@@ -3,7 +3,9 @@
     "shipmentTracking": {
       "home": {
         "title": "Shipment Trackings",
+        "titleBulk": "Shipment Tracking Bulk",
         "createLabel": "Shipment Tracking-ஐ உருவாக்கு",
+        "createLabelBulk": "Create Bulk Tracking",
         "createOrEditLabel": "Shipment Tracking -ஐ மாற்று (அ) உருவாக்கு",
         "search": "Search for Shipment Tracking"
       },

@@ -157,9 +157,19 @@ public class ShipmentInfoServiceImpl implements ShipmentInfoService {
 	}
 
 	@Override
-	public ShipmentInfoDTO saveShipmentInformation(ShipmentInfoDTO shipmentInfoDTO) {
+	public ShipmentInfoDTO saveShipmentInformation(ShipmentInfoDTO shipmentInfoDTO) throws Exception {
 		log.debug("Request to save ShipmentInformation : {}", shipmentInfoDTO);
+		
 		ShipmentInfo shipmentInfo = shipmentInfoMapper.toEntity(shipmentInfoDTO);
+		
+		Vendor vendor = vendorRepository.findById(shipmentInfoDTO.getVendorId()).get();
+		
+		List<ShipmentInfo> shipmentInfoList = shipmentInfoRepository.findByConsignmentNoAndVendor(shipmentInfoDTO.getConsignmentNo(), vendor);
+		
+		if(shipmentInfoList.size() > 0 && shipmentInfoDTO.getId() == null) {
+			log.warn("Consignment No : " + shipmentInfoDTO.getConsignmentNo() + " - Already Exist in our System.");
+			throw new Exception("Consignment Exist");
+		}
 		
 
 		log.debug("Request to save ShiperInfo : {}", shipmentInfoDTO.getShipperInfo());

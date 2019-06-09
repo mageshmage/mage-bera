@@ -92,7 +92,7 @@ export class ShipmentTrackingUpdate extends React.Component<IShipmentTrackingUpd
       <div>
         <Row className="justify-content-center">
           <Col md="8">
-            <h2 id="cargotrackerApp.shipmentTracking.home.createOrEditLabel">
+            <h2 id="cargotrackerApp.shipmentTracking.home.createOrEditLabel" className="cargoTitle">
               <Translate contentKey="cargotrackerApp.shipmentTracking.home.createOrEditLabel">Create or edit a ShipmentTracking</Translate>
             </h2>
           </Col>

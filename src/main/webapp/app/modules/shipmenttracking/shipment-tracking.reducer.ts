@@ -6,11 +6,14 @@ import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util'
 
 import { IShipmentTracking, defaultValue } from 'app/shared/model/shipment-tracking.model';
 
+import { defaultValueBulk } from 'app/shared/model/shipment-info.model';
+
 export const ACTION_TYPES = {
   SEARCH_SHIPMENTTRACKINGS: 'shipmentTrackingSolo/SEARCH_SHIPMENTTRACKINGS',
   FETCH_SHIPMENTTRACKING_LIST: 'shipmentTrackingSolo/FETCH_SHIPMENTTRACKING_LIST',
   FETCH_SHIPMENTTRACKING: 'shipmentTrackingSolo/FETCH_SHIPMENTTRACKING',
   CREATE_SHIPMENTTRACKING: 'shipmentTrackingSolo/CREATE_SHIPMENTTRACKING',
+  BULK_SHIPMENTTRACKING: 'shipmentInfomation/BULK_SHIPMENTTRACKING',
   UPDATE_SHIPMENTTRACKING: 'shipmentTrackingSolo/UPDATE_SHIPMENTTRACKING',
   DELETE_SHIPMENTTRACKING: 'shipmentTrackingSolo/DELETE_SHIPMENTTRACKING',
   RESET: 'shipmentTrackingSolo/RESET',
@@ -29,7 +32,8 @@ const initialState = {
   totalItems: 0,
   updateSuccess: false,
   isEnable: false,
-  search: ''
+  search: '',
+  bulkResponse: defaultValueBulk
 };
 
 export type ShipmentTrackingSoloState = Readonly<typeof initialState>;
@@ -49,6 +53,7 @@ export default (state: ShipmentTrackingSoloState = initialState, action): Shipme
         loading: true
       };
     case REQUEST(ACTION_TYPES.CREATE_SHIPMENTTRACKING):
+    case REQUEST(ACTION_TYPES.BULK_SHIPMENTTRACKING):
     case REQUEST(ACTION_TYPES.UPDATE_SHIPMENTTRACKING):
     case REQUEST(ACTION_TYPES.DELETE_SHIPMENTTRACKING):
       return {
@@ -56,13 +61,15 @@ export default (state: ShipmentTrackingSoloState = initialState, action): Shipme
         errorMessage: null,
         updateSuccess: false,
         updating: true,
-        isEnable: false
+        isEnable: false,
+        bulkResponse: null
       };
     case FAILURE(ACTION_TYPES.SEARCH_SHIPMENTTRACKINGS):
     case FAILURE(ACTION_TYPES.FETCH_SHIPMENTTRACKING_LIST):
     case FAILURE(ACTION_TYPES.FETCH_SHIPMENTTRACKING):
     case FAILURE(ACTION_TYPES.FETCH_SHIPMENTTRACKING_AUTOFILL):
     case FAILURE(ACTION_TYPES.CREATE_SHIPMENTTRACKING):
+    case FAILURE(ACTION_TYPES.BULK_SHIPMENTTRACKING):
     case FAILURE(ACTION_TYPES.UPDATE_SHIPMENTTRACKING):
     case FAILURE(ACTION_TYPES.DELETE_SHIPMENTTRACKING):
       return {
@@ -71,7 +78,8 @@ export default (state: ShipmentTrackingSoloState = initialState, action): Shipme
         updating: false,
         updateSuccess: false,
         errorMessage: action.payload,
-        isEnable: false
+        isEnable: false,
+        bulkResponse: null
       };
     case SUCCESS(ACTION_TYPES.SEARCH_SHIPMENTTRACKINGS):
     case SUCCESS(ACTION_TYPES.FETCH_SHIPMENTTRACKING_LIST):
@@ -104,6 +112,13 @@ export default (state: ShipmentTrackingSoloState = initialState, action): Shipme
         updateSuccess: true,
         entity: {}
       };
+    case SUCCESS(ACTION_TYPES.BULK_SHIPMENTTRACKING):
+      return {
+        ...state,
+        updating: false,
+        updateSuccess: true,
+        bulkResponse: action.payload.data
+      };
     case ACTION_TYPES.RESET:
       return {
         ...initialState
@@ -135,6 +150,7 @@ export default (state: ShipmentTrackingSoloState = initialState, action): Shipme
 const apiUrl = 'api/shipment-trackings';
 const apiSearchUrl = 'api/shipment-trackingssearch';
 const apiAutoFillNewTracking = 'api/shipment-trackings-autoFillNewTracking';
+const apiUrlBulk = 'api/shipment-tracking-bulk';
 
 // Actions
 
@@ -175,6 +191,18 @@ export const createEntity: ICrudPutAction<IShipmentTracking> = entity => async d
     payload: axios.post(apiUrl, cleanEntity(entity))
   });
   //dispatch(getEntities());
+  return result;
+};
+
+export const createEntityBulk = formData => async dispatch => {
+  const result = await dispatch({
+    type: ACTION_TYPES.BULK_SHIPMENTTRACKING,
+    payload: axios.post(apiUrlBulk, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+  });
   return result;
 };
 

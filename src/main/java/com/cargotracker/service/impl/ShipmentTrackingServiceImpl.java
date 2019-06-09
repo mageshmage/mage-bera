@@ -95,6 +95,69 @@ public class ShipmentTrackingServiceImpl implements ShipmentTrackingService {
 		ShipmentTrackingDTO result = null;
 		
 		// shipmentTrackingSearchRepository.save(shipmentTracking);
+		
+		shipmentTracking = shipmentTrackingRepository.save(shipmentTracking);
+		result = shipmentTrackingMapper.toDto(shipmentTracking);
+
+		ZoneId india = ZoneId.of("Asia/Kolkata");
+		ShipmentInfo shipmentInfo = shipmentInfoRepository.findById(shipmentTrackingDTO.getShipmentInfoId()).get();
+
+		if (shipmentTrackingDTO.getIsDelivered() != null && shipmentTrackingDTO.getIsDelivered()) {
+			/*if(shipmentInfo.getIsDelivered() == null || !shipmentInfo.getIsDelivered()) {
+				shipmentTracking = shipmentTrackingRepository.save(shipmentTracking);
+				result = shipmentTrackingMapper.toDto(shipmentTracking);
+			}*/
+			shipmentInfo.setDeliveredDate(ZonedDateTime.now(india));
+			shipmentInfo.setIsDelivered(true);
+			shipmentInfo.setIsInTransit(true);
+			shipmentInfo.setIsReachedNearestHub(true);
+			shipmentInfo.setIsOutForDelivery(true);
+			shipmentInfo.setReceivedBy(shipmentTrackingDTO.getReceivedBy());
+			shipmentInfo.setRelationShip(shipmentTrackingDTO.getRelationShip());
+		} else {
+			if (shipmentTrackingDTO.getIsOutForDelivery() != null && shipmentTrackingDTO.getIsOutForDelivery()) {
+				/*if(shipmentInfo.getIsOutForDelivery() == null || !shipmentInfo.getIsOutForDelivery()) {
+					shipmentTracking = shipmentTrackingRepository.save(shipmentTracking);
+					result = shipmentTrackingMapper.toDto(shipmentTracking);
+				}*/
+				shipmentInfo.setIsInTransit(true);
+				shipmentInfo.setIsReachedNearestHub(true);
+				shipmentInfo.setIsOutForDelivery(true);
+			} else if (shipmentTrackingDTO.getIsReachedNearestHub() != null &&shipmentTrackingDTO.getIsReachedNearestHub()) {
+				/*if(shipmentInfo.getIsReachedNearestHub() == null || !shipmentInfo.getIsReachedNearestHub()) {
+					shipmentTracking = shipmentTrackingRepository.save(shipmentTracking);
+					result = shipmentTrackingMapper.toDto(shipmentTracking);
+				}*/
+				shipmentInfo.setIsInTransit(true);
+				shipmentInfo.setIsReachedNearestHub(true);
+				shipmentInfo.setIsOutForDelivery(false);
+			} else if (shipmentTrackingDTO.getIsInTransit() != null && shipmentTrackingDTO.getIsInTransit()) {
+				/*if(shipmentInfo.getIsInTransit() == null || !shipmentInfo.getIsInTransit()) {
+					shipmentTracking = shipmentTrackingRepository.save(shipmentTracking);
+					result = shipmentTrackingMapper.toDto(shipmentTracking);
+				}*/
+				shipmentInfo.setIsInTransit(true);
+				shipmentInfo.setIsReachedNearestHub(false);
+				shipmentInfo.setIsOutForDelivery(false);
+			}
+			shipmentInfo.setDeliveredDate(null);
+			shipmentInfo.setIsDelivered(false);
+			shipmentInfo.setReceivedBy(null);
+			shipmentInfo.setRelationShip(null);
+		}
+
+		shipmentInfoRepository.save(shipmentInfo);
+
+		return result;
+	}
+	
+	@Override
+	public ShipmentTrackingDTO saveBulk(ShipmentTrackingDTO shipmentTrackingDTO) {
+		log.debug("Request to save ShipmentTracking : {}", shipmentTrackingDTO);
+		ShipmentTracking shipmentTracking = shipmentTrackingMapper.toEntity(shipmentTrackingDTO);
+		ShipmentTrackingDTO result = null;
+		
+		// shipmentTrackingSearchRepository.save(shipmentTracking);
 
 		ZoneId india = ZoneId.of("Asia/Kolkata");
 		ShipmentInfo shipmentInfo = shipmentInfoRepository.findById(shipmentTrackingDTO.getShipmentInfoId()).get();
@@ -670,7 +733,7 @@ public class ShipmentTrackingServiceImpl implements ShipmentTrackingService {
 
 			if (shipmentTrackingDTOList.size() > 0) {
 				for (ShipmentTrackingDTO itr : shipmentTrackingDTOList) {
-					save(itr);
+					saveBulk(itr);
 				}
 			}
 

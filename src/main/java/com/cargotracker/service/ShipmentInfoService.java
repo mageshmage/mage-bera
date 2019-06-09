@@ -24,7 +24,7 @@ public interface ShipmentInfoService {
      */
     ShipmentInfoDTO save(ShipmentInfoDTO shipmentInfoDTO);
     
-    ShipmentInfoDTO saveShipmentInformation(ShipmentInfoDTO shipmentInfoDTO);
+    ShipmentInfoDTO saveShipmentInformation(ShipmentInfoDTO shipmentInfoDTO) throws Exception;
     
     ExcelResponse saveShipmentInformationBulk(MultipartFile file, Long vendorId) throws IOException;
 

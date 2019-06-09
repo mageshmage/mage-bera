@@ -24,6 +24,8 @@ public interface ShipmentTrackingService {
      * @return the persisted entity
      */
     ShipmentTrackingDTO save(ShipmentTrackingDTO shipmentTrackingDTO);
+    
+    ShipmentTrackingDTO saveBulk(ShipmentTrackingDTO shipmentTrackingDTO);
 
     /**
      * Get all the shipmentTrackings.
