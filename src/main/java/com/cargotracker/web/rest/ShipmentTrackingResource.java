@@ -6,6 +6,7 @@ import com.cargotracker.service.ShipmentTrackingService;
 import com.cargotracker.web.rest.errors.BadRequestAlertException;
 import com.cargotracker.web.rest.util.HeaderUtil;
 import com.cargotracker.web.rest.util.PaginationUtil;
+import com.cargotracker.service.dto.ExcelResponse;
 import com.cargotracker.service.dto.ShipmentInfoDTO;
 import com.cargotracker.service.dto.ShipmentTrackingDTO;
 import io.github.jhipster.web.util.ResponseUtil;
@@ -17,8 +18,11 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -192,9 +196,9 @@ public class ShipmentTrackingResource {
 	}
 
 	@GetMapping("/shipment-trackingssearchpublic")
-	public ResponseEntity<ShipmentInfoDTO> searchShipmentTrackingsPublic(@RequestParam String query) {
+	public ResponseEntity<ShipmentInfoDTO> searchShipmentTrackingsPublic(@RequestParam String query, @RequestParam String vendorId) {
 		log.debug("REST request to search for a page of searchShipmentTrackingsPublic for query {}", query);
-		ShipmentInfoDTO page = shipmentTrackingService.searchConsignmentPublic(query);
+		ShipmentInfoDTO page = shipmentTrackingService.searchConsignmentPublic(query, vendorId);
 		// HttpHeaders headers =
 		// PaginationUtil.generateSearchPaginationHttpHeaders(query, page,
 		// "/api/_search/shipment-trackings");
@@ -215,6 +219,19 @@ public class ShipmentTrackingResource {
 		// "/api/_search/shipment-trackings");
 		return ResponseEntity.ok().body(page);
 	}
+	
+	@PostMapping("/shipment-tracking-bulk")
+    public ResponseEntity<ExcelResponse> createShipmentTrackingBulk(@RequestParam MultipartFile file,
+    		@RequestParam Long vendorId) throws URISyntaxException, IOException {
+        log.debug("REST request to save ShipmentTracking Bulk : ");
+        if (vendorId == null) {
+            throw new BadRequestAlertException("VendorId CanNot be null", ENTITY_NAME, "idexists");
+        }
+        ExcelResponse result = shipmentTrackingService.createShipmentTrackingBulk(file, vendorId);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, "Bulk Tracking Load Done"))
+            .body(result);
+    }
 	
 
 }

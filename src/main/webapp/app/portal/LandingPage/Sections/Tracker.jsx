@@ -119,7 +119,7 @@ class Tracker extends React.Component {
                                 <div className="container-fluid view-container" id="app-view-container">
                                     <Card className="jh-card">
                                         <ErrorBoundary>
-                                            <Home vendorId={2}/>
+                                            <Home vendorId={1}/>
                                         </ErrorBoundary>
                                     </Card>
                                 </div>

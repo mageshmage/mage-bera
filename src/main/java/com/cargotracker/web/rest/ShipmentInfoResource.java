@@ -1,28 +1,27 @@
 package com.cargotracker.web.rest;
+
 import com.cargotracker.service.ShipmentInfoService;
 import com.cargotracker.web.rest.errors.BadRequestAlertException;
 import com.cargotracker.web.rest.util.HeaderUtil;
 import com.cargotracker.web.rest.util.PaginationUtil;
+import com.cargotracker.service.dto.ExcelResponse;
 import com.cargotracker.service.dto.ShipmentInfoDTO;
 import com.cargotracker.service.dto.ShipmentInformationSearchDTO;
-
 import io.github.jhipster.web.util.ResponseUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.multipart.MultipartFile;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.StreamSupport;
 
 //import static org.elasticsearch.index.query.QueryBuilders.*;
 
@@ -161,6 +160,19 @@ public class ShipmentInfoResource {
         log.debug("REST request to delete ShipmentInfo : {}", id);
         shipmentInfoService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+    
+    @PostMapping("/shipment-informations-bulk")
+    public ResponseEntity<ExcelResponse> createShipmentInformationsBulk(@RequestParam MultipartFile file,
+    		@RequestParam Long vendorId) throws URISyntaxException, IOException {
+        log.debug("REST request to save ShipmentInfos Bulk : ");
+        if (vendorId == null) {
+            throw new BadRequestAlertException("VendorId CanNot be null", ENTITY_NAME, "idexists");
+        }
+        ExcelResponse result = shipmentInfoService.saveShipmentInformationBulk(file, vendorId);
+        return ResponseEntity.ok()
+            .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, "Bulk Load Done"))
+            .body(result);
     }
 
     /**

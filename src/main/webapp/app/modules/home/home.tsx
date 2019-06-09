@@ -12,7 +12,9 @@ import { getSearchWithConsignmentNo, reset } from 'app/modules/shipmentinformati
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { APP_DATEONLY_FORMAT, APP_TIMEONLY_FORMAT, APP_TIMESTAMP_FORMAT } from 'app/config/constants';
 
-export interface IHomeProp extends StateProps, DispatchProps {}
+export interface IHomeProp extends StateProps, DispatchProps {
+  vendorId: number;
+}
 
 export interface IHomeState {
   search: string;
@@ -28,9 +30,12 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
   }
 
   search = () => {
-    //alert('search - ' + this.state.search)
+    //alert('search - ' + this.state.search + ' VendorId - ' + this.props.vendorId)
+
+    let vendorId: number = 0;
+    if (this.props.vendorId != undefined) vendorId = this.props.vendorId;
     if (this.state.search) {
-      this.props.getSearchWithConsignmentNo(this.state.search);
+      this.props.getSearchWithConsignmentNo(this.state.search, vendorId);
     }
   };
 

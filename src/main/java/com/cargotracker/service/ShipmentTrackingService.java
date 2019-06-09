@@ -1,11 +1,14 @@
 package com.cargotracker.service;
 
+import com.cargotracker.service.dto.ExcelResponse;
 import com.cargotracker.service.dto.ShipmentInfoDTO;
 import com.cargotracker.service.dto.ShipmentTrackingDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -58,7 +61,9 @@ public interface ShipmentTrackingService {
     
     List<ShipmentTrackingDTO> searchConsignment(String query, Long vendorId);
     
-    ShipmentInfoDTO searchConsignmentPublic(String query);
+    ShipmentInfoDTO searchConsignmentPublic(String query, String vendorId);
     
     ShipmentTrackingDTO autoFillNewTracking(String query, Long vendorId);
+    
+    ExcelResponse createShipmentTrackingBulk(MultipartFile file, Long vendorId) throws IOException;
 }

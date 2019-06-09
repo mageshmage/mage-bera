@@ -23,10 +23,32 @@ import TeamSection from "./Sections/TeamSection.jsx";
 import WorkSection from "./Sections/WorkSection.jsx";
 import SectionCarousel from "./Sections/SectionCarousel.jsx";
 import AboutUs from "./Sections/AboutUs.jsx"
-
+import { LocationOnOutlined } from "@material-ui/icons";
+import Tracker from "./Sections/Tracker";
 const dashboardRoutes = [];
 
 class LandingPage extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+        classicModal: false
+    };
+}
+
+handleClickOpen(modal) {
+  var x = [];
+  x[modal] = true;
+  this.setState(x);
+}
+
+onModalClose = event =>{
+  //alert('onModalClose');
+  var x = [];
+  x['classicModal'] = false;
+  this.setState(x);
+}
+
   render() {
     const { classes, ...rest } = this.props;
     return (
@@ -35,7 +57,19 @@ class LandingPage extends React.Component {
           color="transparent"
           routes={dashboardRoutes}
           brand="GK Logistics Services"
-          rightLinks={<HeaderLinks />}
+          rightLinks={
+            <div>
+              
+            <Button
+              color="transparent"
+              className={classes.navLink}
+              onClick={() => this.handleClickOpen("classicModal")}
+            >
+              <LocationOnOutlined className={classes.icons} /> Tracking
+            </Button>
+            {/*<HeaderLinks />*/}
+            </div>
+            }
           fixed
           changeColorOnScroll={{
             height: 400,
@@ -43,6 +77,10 @@ class LandingPage extends React.Component {
           }}
           {...rest}
         />
+        {this.state.classicModal &&(
+          <Tracker parentState={this.state.classicModal} onModalClose= {this.onModalClose}/>
+          )
+        }
         <Parallax filter image={require("app/assets/img/plane.jpg")}>
           <div className={classes.container}>
             <GridContainer>

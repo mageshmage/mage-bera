@@ -30,7 +30,7 @@ import "./style.css";
 import CustomInput from "app/portal/components/CustomInput/CustomInput.jsx";
 import Search from "@material-ui/icons/Search";
 import ContactUs from "./Sections/ContactUS";
-import Tracker from "./Sections/Tracker"
+import Tracker from "./Sections/Tracker";
 import { LocationOnOutlined } from "@material-ui/icons";
 
 const dashboardRoutes = [];

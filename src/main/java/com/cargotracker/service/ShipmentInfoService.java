@@ -1,11 +1,14 @@
 package com.cargotracker.service;
 
+import com.cargotracker.service.dto.ExcelResponse;
 import com.cargotracker.service.dto.ShipmentInfoDTO;
 import com.cargotracker.service.dto.ShipmentInformationSearchDTO;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 
 /**
@@ -22,6 +25,8 @@ public interface ShipmentInfoService {
     ShipmentInfoDTO save(ShipmentInfoDTO shipmentInfoDTO);
     
     ShipmentInfoDTO saveShipmentInformation(ShipmentInfoDTO shipmentInfoDTO);
+    
+    ExcelResponse saveShipmentInformationBulk(MultipartFile file, Long vendorId) throws IOException;
 
     /**
      * Get all the shipmentInfos.

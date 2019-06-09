@@ -1,7 +1,12 @@
 import axios from 'axios';
 import { ICrudSearchAction, ICrudGetAction, ICrudGetAllAction, ICrudPutAction, ICrudDeleteAction } from 'react-jhipster';
 
-import { cleanEntity, ICrudGetAllActionByDTO, ICrudGetActionAsync } from 'app/shared/util/entity-utils';
+import {
+  cleanEntity,
+  ICrudGetAllActionByDTO,
+  ICrudGetActionAsync,
+  ICrudSearchAction as ICrudSearchActionVendor
+} from 'app/shared/util/entity-utils';
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 
 import { IShipmentInfo, defaultValue } from 'app/shared/model/shipment-info.model';
@@ -130,9 +135,9 @@ export const getSearchEntities: ICrudSearchAction<IShipmentInfo> = (query, page,
   payload: axios.get<IShipmentInfo>(`${apiSearchUrl}?query=${query}${sort ? `&page=${page}&size=${size}&sort=${sort}` : ''}`)
 });
 
-export const getSearchWithConsignmentNo: ICrudSearchAction<IShipmentInfo> = (query, page, size, sort) => ({
+export const getSearchWithConsignmentNo: ICrudSearchActionVendor<IShipmentInfo> = (query, vendorId, page, size, sort) => ({
   type: ACTION_TYPES.SEARCH_CONSIGNMENTNO,
-  payload: axios.get<IShipmentInfo>(`${apiSearchConsignmentUrl}?query=${query}`)
+  payload: axios.get<IShipmentInfo>(`${apiSearchConsignmentUrl}?query=${query}&vendorId=${vendorId}`)
 });
 
 export const getEntities: ICrudGetAllAction<IShipmentInfo> = (page, size, sort) => {
