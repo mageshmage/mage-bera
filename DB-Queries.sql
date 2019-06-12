@@ -24,4 +24,10 @@ select * from shipment_tracking order by id desc;
 
 select * from shipment_type;
 
+select * from shipment_mode;
+
+select * from payment_mode;
+
+select * from carrier_details;
+
 select * from vendor;
