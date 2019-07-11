@@ -18,7 +18,7 @@ import com.cargotracker.web.rest.errors.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.cache.CacheManager;
+//import org.springframework.cache.CacheManager;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -52,19 +52,19 @@ public class UserService {
 
 	private final UserExtraRepository userExtraRepository;
 
-	private final CacheManager cacheManager;
+	//private final CacheManager cacheManager;
 
 	public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder,
 			//UserSearchRepository userSearchRepository,
 			AuthorityRepository authorityRepository,
-			VendorRepository vendorRepository, UserExtraRepository userExtraRepository, CacheManager cacheManager) {
+			VendorRepository vendorRepository, UserExtraRepository userExtraRepository) {
 		this.userRepository = userRepository;
 		this.passwordEncoder = passwordEncoder;
 		//this.userSearchRepository = userSearchRepository;
 		this.authorityRepository = authorityRepository;
 		this.vendorRepository = vendorRepository;
 		this.userExtraRepository =userExtraRepository;
-		this.cacheManager = cacheManager;
+		//this.cacheManager = cacheManager;
 	}
 
 	public Optional<User> activateRegistration(String key) {
@@ -338,7 +338,7 @@ public class UserService {
 	}
 
 	private void clearUserCaches(User user) {
-		Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE)).evict(user.getLogin());
-		Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)).evict(user.getEmail());
+		//Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_LOGIN_CACHE)).evict(user.getLogin());
+		//Objects.requireNonNull(cacheManager.getCache(UserRepository.USERS_BY_EMAIL_CACHE)).evict(user.getEmail());
 	}
 }

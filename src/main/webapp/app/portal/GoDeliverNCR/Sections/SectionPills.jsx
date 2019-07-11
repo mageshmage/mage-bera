@@ -68,13 +68,13 @@ class SectionPills extends React.Component {
                           </p>
                           <br />
                           <h4 className={classes.h4}>
-                            You book it... We GO Deliver!
+                            Direct to Every direction !!!
                           </h4>
                         </span>
                         </GridItem>
                         <GridItem xs={4} sm={4} md={4} lg={4}>
                           <div>
-                            <img src={goDeliverNCRSameDay} alt="..." className={imageClasses} />
+                            <img src="content/images/godeliversameday230.jpg" alt="..." className={imageClasses} />
                           </div>
                         </GridItem>
                         </GridContainer>
@@ -104,13 +104,13 @@ class SectionPills extends React.Component {
                           </p>
                           <br />
                           <h4 className={classes.h4}>
-                            You book it... We GO Deliver!
+                          Direct to Every direction !!!
                           </h4>
                         </span>
                         </GridItem>
                         <GridItem xs={4} sm={4} md={4} lg={4}>
                           <div>
-                            <img src={goDeliverNCROverNight} alt="..." className={imageClasses} />
+                            <img src="content/images/godeliverovernight230.jpg" alt="..." className={imageClasses} />
                           </div>
                         </GridItem>
                         </GridContainer>
@@ -146,13 +146,13 @@ class SectionPills extends React.Component {
                           </p>
                           <br />
                           <h4 className={classes.h4}>
-                            You book it... We GO Deliver!
+                          Direct to Every direction !!!
                           </h4>
                         </span>
                         </GridItem>
                         <GridItem xs={4} sm={4} md={4} lg={4}>
                           <div>
-                            <img src={goDeliverNCRScheduled} alt="..." className={imageClasses} />
+                            <img src="content/images/godeliverscheduled230.jpg" alt="..." className={imageClasses} />
                           </div>
                         </GridItem>
                         </GridContainer>

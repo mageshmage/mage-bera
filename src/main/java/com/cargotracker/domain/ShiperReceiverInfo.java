@@ -2,8 +2,8 @@ package com.cargotracker.domain;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+//import org.hibernate.annotations.Cache;
+//import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -19,7 +19,7 @@ import com.cargotracker.domain.enumeration.ShiperReceiverType;
  */
 @Entity
 @Table(name = "shiper_receiver_info")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 //@Document(indexName = "shiperreceiverinfo")
 public class ShiperReceiverInfo implements Serializable {
 

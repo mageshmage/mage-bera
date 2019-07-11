@@ -1,23 +1,23 @@
 package com.cargotracker.config;
 
-import java.time.Duration;
+//import java.time.Duration;
 
-import org.ehcache.config.builders.*;
-import org.ehcache.jsr107.Eh107Configuration;
+//import org.ehcache.config.builders.*;
+//import org.ehcache.jsr107.Eh107Configuration;
 
-import io.github.jhipster.config.jcache.BeanClassLoaderAwareJCacheRegionFactory;
-import io.github.jhipster.config.JHipsterConstants;
-import io.github.jhipster.config.JHipsterProperties;
+//import io.github.jhipster.config.jcache.BeanClassLoaderAwareJCacheRegionFactory;
+//import io.github.jhipster.config.JHipsterConstants;
+//import io.github.jhipster.config.JHipsterProperties;
 
-import org.springframework.boot.autoconfigure.cache.JCacheManagerCustomizer;
-import org.springframework.cache.annotation.EnableCaching;
+//import org.springframework.boot.autoconfigure.cache.JCacheManagerCustomizer;
+//import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.context.annotation.*;
 
 @Configuration
-@EnableCaching
+//@EnableCaching
 public class CacheConfiguration {
 
-    private final javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration;
+    /*private final javax.cache.configuration.Configuration<Object, Object> jcacheConfiguration;
 
     public CacheConfiguration(JHipsterProperties jHipsterProperties) {
         BeanClassLoaderAwareJCacheRegionFactory.setBeanClassLoader(this.getClass().getClassLoader());
@@ -60,5 +60,5 @@ public class CacheConfiguration {
             cm.createCache(com.cargotracker.domain.Country.class.getName() + ".states", jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
-    }
+    }*/
 }

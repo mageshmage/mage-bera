@@ -1,8 +1,8 @@
 package com.cargotracker.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+//import org.hibernate.annotations.Cache;
+//import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -20,7 +20,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "shipment_info")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 // @Document(indexName = "shipmentinfo")
 public class ShipmentInfo implements Serializable {
 
@@ -127,13 +127,13 @@ public class ShipmentInfo implements Serializable {
 	private State destination;
 
 	@OneToMany(mappedBy = "shipmentInfo")
-	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	private Set<ShipmentTracking> shipmentTrackings = new HashSet<>();
 	@OneToMany(mappedBy = "shipmentInfo")
-	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	private Set<ShipmentInfoPOD> shipmentInfoPODs = new HashSet<>();
 	@OneToMany(mappedBy = "shipmentInfo")
-	@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+	//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 	private Set<ShiperReceiverInfo> shipperReceiverInfos = new HashSet<>();
 
 	// jhipster-needle-entity-add-field - JHipster will add fields here, do not

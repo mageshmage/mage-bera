@@ -14,12 +14,12 @@ import org.springframework.core.task.TaskExecutor;
 
 import io.github.jhipster.config.JHipsterConstants;
 import io.github.jhipster.config.liquibase.AsyncSpringLiquibase;
-import liquibase.integration.spring.SpringLiquibase;
+//import liquibase.integration.spring.SpringLiquibase;
 
 @Configuration
 public class LiquibaseConfiguration {
 
-    private final Logger log = LoggerFactory.getLogger(LiquibaseConfiguration.class);
+    /*private final Logger log = LoggerFactory.getLogger(LiquibaseConfiguration.class);
 
     private final Environment env;
 
@@ -49,5 +49,5 @@ public class LiquibaseConfiguration {
             log.debug("Configuring Liquibase");
         }
         return liquibase;
-    }
+    }*/
 }

@@ -13,6 +13,11 @@ import {
 } from "app/assets/jss/material-kit-react.jsx";
 
 const headerStyle = {
+  logo: {
+    borderRadius: "50% !important",
+    height: "75px",
+    width: "75px"
+  },
   appBar: {
     display: "flex",
     border: "0",
@@ -58,7 +63,7 @@ const headerStyle = {
     fontWeight: "700",
     borderRadius: "3px",
     textTransform: "none",
-    color: "inherit",
+    color: "#4caf50",
     padding: "8px 16px",
     "&:hover,&:focus": {
       color: "inherit",
@@ -81,10 +86,10 @@ const headerStyle = {
       "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(0, 188, 212, 0.46)"
   },
   godeliver: {
-    backgroundColor: "#43bb26f2",
+    backgroundColor: "#FFFFFF",
     color: "#FFFFFF",
     boxShadow:
-      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px #43bb26f2"
+      "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px #656565f2"
   },
   success: {
     backgroundColor: successColor,

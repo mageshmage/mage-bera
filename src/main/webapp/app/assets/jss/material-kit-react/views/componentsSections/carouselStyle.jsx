@@ -8,6 +8,11 @@ const carouselStyle = {
   marginAuto: {
     marginLeft: "auto !important",
     marginRight: "auto !important"
+  },
+  dashboard:{
+    maxWidth: "1800px",
+    marginLeft: "auto !important",
+    marginRight: "auto !important"
   }
 };
 

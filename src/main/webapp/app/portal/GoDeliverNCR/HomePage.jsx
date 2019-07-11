@@ -26,6 +26,7 @@ import AboutUs from "./Sections/AboutUs.jsx";
 import Jobs from "./Sections/Jobs";
 import Map from "./Sections/Map";
 import SectionPills from "./Sections/SectionPills";
+import Dashboard from "./Sections/Dashboard";
 import "./style.css";
 import CustomInput from "app/portal/components/CustomInput/CustomInput.jsx";
 import Search from "@material-ui/icons/Search";
@@ -107,7 +108,8 @@ onModalClose = event =>{
           <Tracker parentState={this.state.classicModal} onModalClose= {this.onModalClose}/>
           )
         }
-        <Parallax filter image={require("app/assets/img/plane.jpg")}>
+        {/* image={require("app/assets/img/plane.jpg")}*/}
+        <Parallax filter >
           <div className={classes.container}>
             <GridContainer>
               <GridItem xs={12} sm={12} md={12} className={classes.titleAlign}>
@@ -126,6 +128,7 @@ onModalClose = event =>{
                   <i className="fas fa-play" />
                   Watch video
                 </Button>*/}
+                <Dashboard />
               </GridItem>
             </GridContainer>
           </div>

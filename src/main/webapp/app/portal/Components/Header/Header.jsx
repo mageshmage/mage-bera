@@ -16,6 +16,8 @@ import Menu from "@material-ui/icons/Menu";
 // core components
 import headerStyle from "app/assets/jss/material-kit-react/components/headerStyle.jsx";
 
+//import profileImage from "app/assets/img/GoDeliver/GoDeliverNCR.jpeg";
+
 class Header extends React.Component {
   constructor(props) {
     super(props);
@@ -74,6 +76,13 @@ class Header extends React.Component {
       [classes.fixed]: fixed
     });
     const brandComponent = <Button className={classes.title}>{brand}</Button>;
+    const img = <img
+    src="content/images/godeliverncr.png"
+    className={classes.img}
+    alt="profile"
+  />
+
+  const logo = <img src="content/images/godeliverncr.jpg" className={classes.logo} alt="Logo" />
     return (
       <AppBar className={appBarClasses}>
         <Toolbar className={classes.container}>
@@ -84,7 +93,10 @@ class Header extends React.Component {
                 {leftLinks}
               </Hidden>
             ) : (
-              brandComponent
+              <>
+              {logo}
+              {brandComponent}
+              </>
             )}
           </div>
           <Hidden smDown implementation="css">

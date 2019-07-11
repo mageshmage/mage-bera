@@ -29,7 +29,7 @@ class Jobs extends React.Component {
             <GridItem xs={12} sm={12} md={6}>
               <div className={classes.profile}>
                 <div>
-                  <img src={profile} alt="..." className={imageClasses} />
+                  <img src="content/images/godeliverjobs230.jpg" alt="..." className={imageClasses} />
                 </div>
                 <div className={classes.name}>
                 {/*<h2 className={classes.title}>Jobs With Us</h2>*/}

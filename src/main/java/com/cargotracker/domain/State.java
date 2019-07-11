@@ -3,8 +3,8 @@ package com.cargotracker.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Cache;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+//import org.hibernate.annotations.Cache;
+//import org.hibernate.annotations.CacheConcurrencyStrategy;
 
 import javax.persistence.*;
 
@@ -19,7 +19,7 @@ import java.util.Objects;
  */
 @Entity
 @Table(name = "state")
-@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+//@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 //@Document(indexName = "state")
 public class State implements Serializable {
 
@@ -36,7 +36,7 @@ public class State implements Serializable {
     private String stateName;
 
     @OneToMany(mappedBy = "state")
-    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    //@Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     private Set<City> cities = new HashSet<>();
     @ManyToOne
     @JsonIgnoreProperties("states")
