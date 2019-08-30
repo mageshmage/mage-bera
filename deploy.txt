@@ -1,0 +1,12 @@
+
+yarn webpack:prod
+
+mvnw package -Pprod -DskipTests
+
+M:\Products\CargoTracker>heroku deploy:war target/cargotracker-0.0.1-SNAPSHOT.war -i Procfile --app cargo-tracker
+
+GoDeliverIND - Direct to Every direction
+GoDeliverIND is one of the leading logistics company in India that offers a wide range of professional 
+    packing and moving services.
+	
+	Cargo Service Delhi, Courier Service Delhi, Courier Service, Packers and movers, Cargo services india

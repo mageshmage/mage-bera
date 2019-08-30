@@ -127,9 +127,9 @@ const navPillsStyle = theme => ({
   godeliver: {
     "&,&:hover": {
       color: "#FFFFFF",
-      backgroundColor: "#4caf50",
+      backgroundColor: "#003366",
       boxShadow:
-        "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px #4caf50"
+        "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px #003366"
     }
   },
   alignCenter: {

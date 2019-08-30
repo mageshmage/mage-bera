@@ -37,6 +37,10 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons/faCheckCircle';
 import { faPhone } from '@fortawesome/free-solid-svg-icons/faPhone';
 import { faEnvelopeOpen } from '@fortawesome/free-solid-svg-icons/faEnvelopeOpen';
+import { faMotorcycle } from '@fortawesome/free-solid-svg-icons/faMotorcycle';
+import { faCar } from '@fortawesome/free-solid-svg-icons/faCar';
+import { faTruckMoving } from '@fortawesome/free-solid-svg-icons/faTruckMoving';
+import { faLocationArrow } from '@fortawesome/free-solid-svg-icons/faLocationArrow';
 
 export const loadIcons = () => {
   library.add(
@@ -76,6 +80,10 @@ export const loadIcons = () => {
     faUpload,
     faCheckCircle,
     faPhone,
-    faEnvelopeOpen
+    faEnvelopeOpen,
+    faMotorcycle,
+    faCar,
+    faTruckMoving,
+    faLocationArrow
   );
 };

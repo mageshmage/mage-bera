@@ -122,6 +122,12 @@ const workStyle = {
   legendItemViolet: {
     color: "#9fa8da",
     width: "200px"
+  },
+  mapResponsive: {
+    overflow: "hidden",
+    //paddingBottom: "30.25%",
+    position:"relative",
+    //height:0
   }
 };
 

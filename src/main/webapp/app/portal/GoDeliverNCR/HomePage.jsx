@@ -1,38 +1,26 @@
 import React from "react";
-// nodejs library that concatenates classes
 import classNames from "classnames";
-// @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-
-// @material-ui/icons
-
-// core components
-import Header from "app/portal/Components/Header/Header.jsx";
-import Footer from "app/portal/Components/Footer/Footer.jsx";
+import Header from "./Sections/Header/Header.jsx";
+import Footer from "./Sections/Footer.jsx";
 import GridContainer from "app/portal/Components/Grid/GridContainer.jsx";
 import GridItem from "app/portal/Components/Grid/GridItem.jsx";
 import Button from "app/portal/Components/CustomButtons/Button.jsx";
-import HeaderLinks from "app/portal/Components/Header/HeaderLinks.jsx";
 import Parallax from "app/portal/Components/Parallax/Parallax.jsx";
-
 import landingPageStyle from "app/assets/jss/material-kit-react/views/landingPage.jsx";
-
-// Sections for this page
 import ProductSection from "./Sections/ProductSection.jsx";
-import TeamSection from "./Sections/TeamSection.jsx";
-//import WorkSection from "./Sections/WorkSection.jsx";
-import SectionCarousel from "./Sections/SectionCarousel.jsx";
 import AboutUs from "./Sections/AboutUs.jsx";
 import Jobs from "./Sections/Jobs";
 import Map from "./Sections/Map";
 import SectionPills from "./Sections/SectionPills";
 import Dashboard from "./Sections/Dashboard";
 import "./style.css";
-import CustomInput from "app/portal/components/CustomInput/CustomInput.jsx";
-import Search from "@material-ui/icons/Search";
-import ContactUs from "./Sections/ContactUS";
 import Tracker from "./Sections/Tracker";
 import { LocationOnOutlined } from "@material-ui/icons";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import CustomDropdown from "app/portal/Components/CustomDropdown/CustomDropdown.jsx";
+import { Link } from "react-router-dom";
 
 const dashboardRoutes = [];
 
@@ -52,7 +40,6 @@ handleClickOpen(modal) {
 }
 
 onModalClose = event =>{
-  //alert('onModalClose');
   var x = [];
   x['classicModal'] = false;
   this.setState(x);
@@ -68,8 +55,9 @@ onModalClose = event =>{
           color="godeliver"
           brand="Go Deliver NCR"
           rightLinks={
-            <div>
-              
+            <>
+            <List className={classes.list}>
+              <ListItem className={classes.listItem}>
                 <Button
                   color="transparent"
                   className={classes.navLink}
@@ -77,30 +65,46 @@ onModalClose = event =>{
                 >
                   <LocationOnOutlined className={classes.icons} /> Tracking
                 </Button>
-            
-              {/*<CustomInput
-                white
-                inputRootCustomClasses={classes.inputRootCustomClasses}
-                formControlProps={{
-                  className: classes.formControl
+                <div className={classes.qlinks}>
+                  <ul className={classes.ul}>
+                    <li className={classes.li}><i className="fa fa-phone"></i>&nbsp; 91-9500302626</li>
+                    <li className={classes.li}><i className="fa fa-envelope"></i>&nbsp; godeliverncr@gmail.com</li>
+                  </ul>
+                </div>
+              </ListItem>
+            </List>
+            </>
+          }
+          leftLinks={
+            <>
+            <List className={classes.list}>
+            <ListItem className={classes.listItem}>
+              <CustomDropdown
+                left
+                hoverColor="info"
+                dropdownHeader="Locations"
+                buttonIcon="map"
+                buttonProps={{
+                  className: classes.navLink,
+                  color: "transparent"
                 }}
-                inputProps={{
-                  placeholder: "Enter Tracking Id",
-                  inputProps: {
-                    "aria-label": "Search",
-                    className: classes.searchInput
-                  }
-                }}
+                dropdownList={[
+                  
+                  { divider: true },
+                    <Link to="/godeliverind-page" className={classes.dropdownLink}>
+                      Go Deliver IND
+                    </Link>,
+                  { divider: true },
+                ]}
               />
-              <Button justIcon round color="white">
-                <Search className={classes.searchIcon} />
-              </Button>*/}
-            </div>
+            </ListItem>
+          </List>
+          </>
           }
           fixed
           changeColorOnScroll={{
             height: 400,
-            color: "white"
+            color: "godeliver"
           }}
           {...rest}
         />
@@ -108,7 +112,6 @@ onModalClose = event =>{
           <Tracker parentState={this.state.classicModal} onModalClose= {this.onModalClose}/>
           )
         }
-        {/* image={require("app/assets/img/plane.jpg")}*/}
         <Parallax filter >
           <div className={classes.container}>
             <GridContainer>
@@ -137,12 +140,12 @@ onModalClose = event =>{
           <div className={classes.container}>
             <SectionPills />
             <ProductSection />
-            <SectionCarousel />
+            {/*<SectionCarousel />*/}
             {/*<TeamSection />*/}
             <Map />
             <AboutUs />
             <Jobs />
-            <ContactUs />
+            {/*<ContactUs />*/}
           </div>
         </div>
         <Footer />

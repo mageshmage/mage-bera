@@ -1,24 +1,13 @@
 import React from "react";
-// nodejs library that concatenates classes
 import classNames from "classnames";
-// @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-// @material-ui/icons
-import Camera from "@material-ui/icons/Camera";
-import Palette from "@material-ui/icons/Palette";
-import Favorite from "@material-ui/icons/Favorite";
-// core components
 import Header from "app/portal/Components/Header/Header.jsx";
 import Footer from "app/portal/Components/Footer/Footer.jsx";
 import Button from "app/portal/Components/CustomButtons/Button.jsx";
 import GridContainer from "app/portal/Components/Grid/GridContainer.jsx";
 import GridItem from "app/portal/Components/Grid/GridItem.jsx";
 import HeaderLinks from "app/portal/Components/Header/HeaderLinks.jsx";
-import NavPills from "app/portal/Components/NavPills/NavPills.jsx";
 import Parallax from "app/portal/Components/Parallax/Parallax.jsx";
-
-import profile from "app/assets/img/faces/magesh.jpg";
-
 import profilePageStyle from "app/assets/jss/material-kit-react/views/profilePage.jsx";
 
 class ProfilePage extends React.Component {
@@ -51,7 +40,7 @@ class ProfilePage extends React.Component {
                 <GridItem xs={12} sm={12} md={6}>
                   <div className={classes.profile}>
                     <div>
-                      <img src={profile} alt="..." className={imageClasses} />
+                      <img src="content/images/magesh.jpg" alt="..." className={imageClasses} />
                     </div>
                     <div className={classes.name}>
                       <h3 className={classes.title}>Magesh Kalaiyarasan</h3>

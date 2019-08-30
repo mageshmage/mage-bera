@@ -1,19 +1,10 @@
 import React from "react";
-// react component for creating beautiful carousel
 import Carousel from "react-slick";
-// @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-// @material-ui/icons
-import LocationOn from "@material-ui/icons/LocationOn";
-// core components
 import GridContainer from "app/portal/Components/Grid/GridContainer.jsx";
 import GridItem from "app/portal/Components/Grid/GridItem.jsx";
 import Card from "app/portal/Components/Card/Card.jsx";
 import carouselStyle from "app/assets/jss/material-kit-react/views/componentsSections/carouselStyle.jsx";
-import image1 from "app/assets/img/air.jpg";
-import image2 from "app/assets/img/train.jpg";
-import image3 from "app/assets/img/road.jpg";
-import image4 from "app/assets/img/doortodoor.jpg";
 
 class SectionCarousel extends React.Component {
   render() {
@@ -35,7 +26,7 @@ class SectionCarousel extends React.Component {
                 <Carousel {...settings}>
                   <div>
                     <img
-                      src={image1}
+                      src="content/images/air.jpg"
                       alt="First slide"
                       className="slick-image"
                     />
@@ -46,7 +37,7 @@ class SectionCarousel extends React.Component {
                   </div>
                   <div>
                     <img
-                      src={image2}
+                      src="content/images/train.jpg"
                       alt="Second slide"
                       className="slick-image"
                     />
@@ -57,7 +48,7 @@ class SectionCarousel extends React.Component {
                   </div>
                   <div>
                     <img
-                      src={image3}
+                      src="content/images/road.jpg"
                       alt="Third slide"
                       className="slick-image"
                     />
@@ -68,7 +59,7 @@ class SectionCarousel extends React.Component {
                   </div>
                   <div>
                     <img
-                      src={image4}
+                      src="content/images/doortodoor.jpg"
                       alt="Third slide"
                       className="slick-image"
                     />

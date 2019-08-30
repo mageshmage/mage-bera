@@ -42,7 +42,7 @@ const infoStyle = {
     color: grayColor
   },
   godeliver: {
-    color: "#4caf50"
+    color: "#003366"
   },
   icon: {
     width: "36px",

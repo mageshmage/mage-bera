@@ -1,6 +1,4 @@
 import React from "react";
-// react plugin for creating date-time-picker
-// @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 import Slide from "@material-ui/core/Slide";
 import IconButton from "@material-ui/core/IconButton";
@@ -8,20 +6,11 @@ import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogActions from "@material-ui/core/DialogActions";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormControl from "@material-ui/core/FormControl";
-import Tooltip from "@material-ui/core/Tooltip";
-import Popover from "@material-ui/core/Popover";
-// @material-ui/icons
-import LibraryBooks from "@material-ui/icons/LibraryBooks";
 import Close from "@material-ui/icons/Close";
-// core components
-import GridContainer from "app/portal/Components/Grid/GridContainer.jsx";
-import GridItem from "app/portal/Components/Grid/GridItem.jsx";
 import Button from "app/portal/Components/CustomButtons/Button.jsx";
 import javascriptStyles from "app/assets/jss/material-kit-react/views/componentsSections/javascriptStyles.jsx";
 import { Card } from 'reactstrap';
-import { ToastContainer, ToastPosition, toast } from 'react-toastify';
+import { ToastContainer, toast } from 'react-toastify';
 import ErrorBoundary from 'app/shared/error/error-boundary';
 import { Provider } from 'react-redux';
 import Home from 'app/modules/home/home';
@@ -78,7 +67,6 @@ class Tracker extends React.Component {
                     root: classes.center,
                     paper: classes.modal
                 }}
-                //open={this.state.classicModal}
                 open={this.props.parentState}
                 TransitionComponent={Transition}
                 keepMounted
@@ -119,7 +107,7 @@ class Tracker extends React.Component {
                                 <div className="container-fluid view-container" id="app-view-container">
                                     <Card className="jh-card">
                                         <ErrorBoundary>
-                                            <Home vendorId={2}/>
+                                            <Home vendorId={2} />
                                         </ErrorBoundary>
                                     </Card>
                                 </div>

@@ -1,23 +1,12 @@
 import React from "react";
-
-// @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-
-// @material-ui/icons
-import Dashboard from "@material-ui/icons/Dashboard";
 import LocalShipping from "@material-ui/icons/LocalShipping";
 import Schedule from "@material-ui/icons/Schedule";
 import DateRange from "@material-ui/icons/DateRange";
-import List from "@material-ui/icons/List";
-
-// core components
 import GridContainer from "app/portal/components/Grid/GridContainer.jsx";
 import GridItem from "app/portal/components/Grid/GridItem.jsx";
 import NavPills from "app/portal/components/NavPills/NavPills.jsx";
 import pillsStyle from "app/assets/jss/material-kit-react/views/componentsSections/pillsStyle.jsx";
-import goDeliverNCRSameDay from "app/assets/img/GoDeliverNCRSameDay.png";
-import goDeliverNCROverNight from "app/assets/img/GoDeliverNCROverNight.png";
-import goDeliverNCRScheduled from "app/assets/img/GoDeliverNCRScheduled.png";
 import classNames from "classnames";
 
 class SectionPills extends React.Component {
@@ -26,7 +15,8 @@ class SectionPills extends React.Component {
     const imageClasses = classNames(
       classes.imgRaised,
       classes.imgRoundedCircle,
-      classes.imgFluid
+      classes.imgFluid,
+      classes.margin30
     );
     return (
       <div className={classes.section}>
@@ -35,11 +25,6 @@ class SectionPills extends React.Component {
             <div className={classes.title}>
               <h3 className={classes.title}>Go Deliver NCR</h3>
             </div>
-            {/*<div className={classes.title}>
-              <h3>
-                <small>With Icons</small>
-              </h3>
-            </div>*/}
             <GridContainer>
               <GridItem xs={12} sm={12} md={12} lg={12}>
                 <NavPills
@@ -50,32 +35,27 @@ class SectionPills extends React.Component {
                       tabIcon: LocalShipping,
                       tabContent: (
                         <GridContainer>
+                          <GridItem xs={4} sm={4} md={4} lg={4}>
+                            <div>
+                              <img src="content/images/godeliversameday230.png" alt="..." className={imageClasses} />
+                            </div>
+                          </GridItem>
                         <GridItem xs={8} sm={8} md={8} lg={8}>
-                        <span>
-                          <p className={classes.paragrap}>
-                            When you need it there Now and tomorrow's just not going to cut the mustard!
-                          </p>
-                          <br />
-                          <p className={classes.paragrap}>
-                            Call on Go Deliver NCR, we guarantee to get it there fast! 
-                            Whether it's critical documents, Consignment or 3 pallets of printed 
-                            literature we'll handle it, we have a varied fleet of vehicles to suite 
-                            your requirements, all of our vehicles are fully tracked in real time 
-                            and carry 5L worth of Goods in Transit cover so your stock is in safe 
-                            hands in the event of a disaster. Fast, Efficient and Cost Effective, 
-                            our clients call on us to "Make it Happen" That means No Fuss, 
-                            No Drama's and No Disappointment.
-                          </p>
-                          <br />
-                          <h4 className={classes.h4}>
-                            Direct to Every direction !!!
-                          </h4>
-                        </span>
-                        </GridItem>
-                        <GridItem xs={4} sm={4} md={4} lg={4}>
-                          <div>
-                            <img src="content/images/godeliversameday230.jpg" alt="..." className={imageClasses} />
-                          </div>
+                          <span>
+                            <p className={classes.paragrap}>
+                            <b>Go Deliver NCR</b> has a number of <b>NCR Same-Day</b> delivery solutions which are ideally placed for your less critical but still time sensitive shipping requirements thus providing a more economical solution. 
+                            </p>
+                            <p className={classes.paragrap}>
+                            You can choose our standard <b>Same-Day</b> solution which guarantees delivery <b>before 6pm</b>, or you can choose from delivery by as early as 
+                            <b> 9am, 10.30 or 12.00</b>. We can also give you a range of Saturday delivery options.
+                            </p>
+                            <p className={classes.paragrap}>
+                            All of our parcels benefit from live tracking and receive a signature upon delivery to give you piece of mind and put you in the driver's seat.
+                            </p>
+                            <h4 className={classes.h4}>
+                              Direct to Every direction !!!
+                            </h4>
+                          </span>
                         </GridItem>
                         </GridContainer>
                       )
@@ -85,34 +65,42 @@ class SectionPills extends React.Component {
                       tabIcon: Schedule,
                       tabContent: (
                         <GridContainer>
+                          <GridItem xs={4} sm={4} md={4} lg={4}>
+                            <div>
+                              <img src="content/images/godeliverovernight230.png" alt="..." className={imageClasses} />
+                            </div>
+                          </GridItem>
                         <GridItem xs={8} sm={8} md={8} lg={8}>
-                        <span>
-                          <p className={classes.paragrap}>
-                            Efficiently unleash cross-media information without
-                            cross-media value. Quickly maximize timely
-                            deliverables for real-time schemas.
-                          </p>
-                          <br />
-                          <p className={classes.paragrap}>
-                            Dramatically maintain clicks-and-mortar solutions
-                            without functional solutions. Dramatically visualize
-                            customer directed convergence without revolutionary
-                            ROI. Collaboratively administrate empowered markets
-                            via plug-and-play networks. Dynamically
-                            procrastinate B2C users after installed base
-                            benefits.
-                          </p>
-                          <br />
-                          <h4 className={classes.h4}>
-                          Direct to Every direction !!!
-                          </h4>
-                        </span>
+                          <span>
+                            <p className={classes.paragrap}>
+                              <b>Go Deliver NCR</b> has a number of NCR Overnight
+                              delivery solutions which are ideally placed for your
+                              less critical but still time sensitive shipping
+                              requirements thus providing a more economical
+                              solution. 
+                            </p>
+                            <p className={classes.paragrap}>
+                              You can choose our standard Overnight
+                              solution which guarantees delivery between <b>7:00pm
+                              to 1:00am</b>, or you can choose from delivery by as early
+                              as <b>7:00am to 9:00am</b>. We can also give you a range of
+                              Saturday and Sunday delivery options, with
+                              reasonable charges extra.
+                            </p>
+                            <p className={classes.paragrap}>
+                              All of our parcels benefit from live tracking and
+                              receive a signature upon delivery to give you piece of
+                              mind and put you in the driver&#39;s seat.
+                            </p>
+                            <p className={classes.paragrap}>
+                              Over Night Charges Extra As Per Requirements!
+                            </p>
+                            <h4 className={classes.h4}>
+                            Direct to Every direction !!!
+                            </h4>
+                          </span>
                         </GridItem>
-                        <GridItem xs={4} sm={4} md={4} lg={4}>
-                          <div>
-                            <img src="content/images/godeliverovernight230.jpg" alt="..." className={imageClasses} />
-                          </div>
-                        </GridItem>
+                        
                         </GridContainer>
                       )
                     },
@@ -121,109 +109,43 @@ class SectionPills extends React.Component {
                       tabIcon: DateRange,
                       tabContent: (
                         <GridContainer>
-                        <GridItem xs={8} sm={8} md={8} lg={8}>
-                        <span>
-                          <p className={classes.paragrap}>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
-                          </p>
-                          <br />
-                          <p className={classes.paragrap}>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
-                          </p>
-                          <br />
-                          <p className={classes.paragrap}>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
-                          </p>
-                          <br />
-                          <h4 className={classes.h4}>
-                          Direct to Every direction !!!
-                          </h4>
-                        </span>
-                        </GridItem>
-                        <GridItem xs={4} sm={4} md={4} lg={4}>
-                          <div>
-                            <img src="content/images/godeliverscheduled230.jpg" alt="..." className={imageClasses} />
-                          </div>
-                        </GridItem>
+                          <GridItem xs={4} sm={4} md={4} lg={4}>
+                            <div>
+                              <img src="content/images/godeliverscheduled230.png" alt="..." className={imageClasses} />
+                            </div>
+                          </GridItem>
+                          <GridItem xs={8} sm={8} md={8} lg={8}>
+                          <span>
+                            <p className={classes.paragrap}>
+                              A <b>Go Delivery Schedule</b> specifies the time for
+                              delivery of goods or services from a supplier to a
+                              customer, and often covers a period of time.
+                            </p>
+                            <p className={classes.paragrap}>
+                              The <b>Go Delivery Schedule</b> Date is the date a shipment
+                              is scheduled for delivery. It can be done by a clients or
+                              customer based on their delivery time. It has to be
+                              done in delivery schedule detailed table or Go Deliver
+                              NCR contacts you by phone and sets up the delivery
+                              schedule.
+                            </p>
+                            <p className={classes.paragrap}>
+                              The <b>Scheduled Delivery</b> Date is determined when Go
+                              Deliver NCR receives the shipment information. If an
+                              exception occurs that changes this date, a
+                              rescheduled delivery date will be provided.
+                            </p>
+                            <h4 className={classes.h4}>
+                            Direct to Every direction !!!
+                            </h4>
+                          </span>
+                          </GridItem>
                         </GridContainer>
                       )
                     }
                   ]}
                 />
               </GridItem>
-              {/*<GridItem xs={12} sm={12} md={12} lg={6}>
-                <NavPills
-                  color="rose"
-                  horizontal={{
-                    tabsGrid: { xs: 12, sm: 4, md: 4 },
-                    contentGrid: { xs: 12, sm: 8, md: 8 }
-                  }}
-                  tabs={[
-                    {
-                      tabButton: "Dashboard",
-                      tabIcon: Dashboard,
-                      tabContent: (
-                        <span>
-                          <p>
-                            Collaboratively administrate empowered markets via
-                            plug-and-play networks. Dynamically procrastinate
-                            B2C users after installed base benefits.
-                          </p>
-                          <br />
-                          <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
-                          </p>
-                          <br />
-                          <p>
-                            Dramatically visualize customer directed convergence
-                            without revolutionary ROI. Collaboratively
-                            administrate empowered markets via plug-and-play
-                            networks. Dynamically procrastinate B2C users after
-                            installed base benefits.
-                          </p>
-                        </span>
-                      )
-                    },
-                    {
-                      tabButton: "Schedule",
-                      tabIcon: Schedule,
-                      tabContent: (
-                        <span>
-                          <p>
-                            Efficiently unleash cross-media information without
-                            cross-media value. Quickly maximize timely
-                            deliverables for real-time schemas.
-                          </p>
-                          <br />
-                          <p>
-                            Dramatically maintain clicks-and-mortar solutions
-                            without functional solutions. Dramatically visualize
-                            customer directed convergence without revolutionary
-                            ROI. Collaboratively administrate empowered markets
-                            via plug-and-play networks. Dynamically
-                            procrastinate B2C users after installed base
-                            benefits.
-                          </p>
-                        </span>
-                      )
-                    }
-                  ]}
-                />
-                </GridItem>*/}
             </GridContainer>
           </div>
         </div>

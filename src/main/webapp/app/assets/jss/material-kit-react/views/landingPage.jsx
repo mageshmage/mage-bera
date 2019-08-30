@@ -2,7 +2,7 @@ import { container, title } from "app/assets/jss/material-kit-react.jsx";
 
 const landingPageStyle = {
   navLink:{
-    color: "#4caf50"
+    color: "#ffffff"
   },
   container: {
     zIndex: "12",
@@ -48,6 +48,31 @@ const landingPageStyle = {
     width: "20px",
     height: "20px",
     color: "inherit"
+  },
+  dropdownLink: {
+    "&,&:hover,&:focus": {
+      color: "inherit",
+      textDecoration: "none",
+      display: "block",
+      padding: "10px 20px"
+    }
+  },
+  ul:{
+    float: "left",
+    width: "100%",
+    padding: "0px",
+    margin: "5px 0px 0px 0px",
+    listStyle: "none"
+  },
+
+  li:{
+    padding: "4px 0px",
+    margin: "0px",
+    listStyle: "none"
+  },
+  qlinks: {
+    float: "left",
+    width: "100%"
   },
 };
 

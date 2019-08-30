@@ -17,14 +17,19 @@ const pillsStyle = {
   paragrap: {
     color: "#3c4858",
     fontWeight: "300",
-    lineHeight: "1.5em"
+    lineHeight: "1.5em",
+    fontSize: "16px"
   },
   h4: {
     color: "#3c4858",
     fontSize: "18px",
     lineHeight: "25px",
     marginBottom: "10px",
-    fontStyle: "normal"
+    fontStyle: "normal",
+    fontWeight: "700"
+  },
+  margin30: {
+    marginLeft: "30%"
   }
 };
 

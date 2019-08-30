@@ -1,24 +1,13 @@
 import React from "react";
-// nodejs library that concatenates classes
 import classNames from "classnames";
-// @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-
-// @material-ui/icons
-
-// core components
 import GridContainer from "app/portal/Components/Grid/GridContainer.jsx";
 import GridItem from "app/portal/Components/Grid/GridItem.jsx";
 import Button from "app/portal/Components/CustomButtons/Button.jsx";
 import Card from "app/portal/Components/Card/Card.jsx";
 import CardBody from "app/portal/Components/Card/CardBody.jsx";
 import CardFooter from "app/portal/Components/Card/CardFooter.jsx";
-
 import teamStyle from "app/assets/jss/material-kit-react/views/landingPageSections/teamStyle.jsx";
-
-import team1 from "app/assets/img/faces/magesh.jpg";
-import team2 from "app/assets/img/faces/magesh.jpg";
-import team3 from "app/assets/img/faces/magesh.jpg";
 
 class TeamSection extends React.Component {
   render() {
@@ -36,7 +25,7 @@ class TeamSection extends React.Component {
             <GridItem xs={12} sm={12} md={4}>
               <Card plain>
                 <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                  <img src={team1} alt="..." className={imageClasses} />
+                  <img src="content/images/magesh.jpg" alt="..." className={imageClasses} />
                 </GridItem>
                 <h4 className={classes.cardTitle}>
                   Gigi Hadid
@@ -79,7 +68,7 @@ class TeamSection extends React.Component {
             <GridItem xs={12} sm={12} md={4}>
               <Card plain>
                 <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                  <img src={team2} alt="..." className={imageClasses} />
+                  <img src="content/images/magesh.jpg" alt="..." className={imageClasses} />
                 </GridItem>
                 <h4 className={classes.cardTitle}>
                   Christian Louboutin
@@ -115,7 +104,7 @@ class TeamSection extends React.Component {
             <GridItem xs={12} sm={12} md={4}>
               <Card plain>
                 <GridItem xs={12} sm={12} md={6} className={classes.itemGrid}>
-                  <img src={team3} alt="..." className={imageClasses} />
+                  <img src="content/images/magesh.jpg" alt="..." className={imageClasses} />
                 </GridItem>
                 <h4 className={classes.cardTitle}>
                   Kendall Jenner

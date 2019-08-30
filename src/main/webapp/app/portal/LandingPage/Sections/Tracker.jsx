@@ -100,7 +100,7 @@ class Tracker extends React.Component {
                     >
                         <Close className={classes.modalClose} />
                     </IconButton>
-                    <h4 className={classes.modalTitle}>GoDeliverNCR Traker</h4>
+                    <h4 className={classes.modalTitle}>GK Logistics Services Traker</h4>
                 </DialogTitle>
                 <DialogContent
                     id="classic-modal-slide-description"

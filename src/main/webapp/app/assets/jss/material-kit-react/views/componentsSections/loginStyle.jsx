@@ -1,6 +1,5 @@
 import { container } from "app/assets/jss/material-kit-react.jsx";
-
-import image from "app/assets/img/sign.jpg";
+//import image from "app/assets/img/sign.jpg";
 
 const loginStyle = {
   section: {
@@ -14,7 +13,7 @@ const loginStyle = {
     border: "0",
     display: "flex",
     alignItems: "center",
-    backgroundImage: "url(" + image + ")"
+    //backgroundImage: "url(" + image + ")"
   },
   container,
   form: {

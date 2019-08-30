@@ -63,7 +63,7 @@ const headerStyle = {
     fontWeight: "700",
     borderRadius: "3px",
     textTransform: "none",
-    color: "#4caf50",
+    color: "#ffffff",
     padding: "8px 16px",
     "&:hover,&:focus": {
       color: "inherit",
@@ -86,7 +86,7 @@ const headerStyle = {
       "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(0, 188, 212, 0.46)"
   },
   godeliver: {
-    backgroundColor: "#FFFFFF",
+    backgroundColor: "#003366",
     color: "#FFFFFF",
     boxShadow:
       "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px #656565f2"

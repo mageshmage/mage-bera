@@ -1,13 +1,8 @@
-/*eslint-disable*/
 import React from "react";
-
-// @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-// @material-ui/icons
 import GridContainer from "app/portal/Components/Grid/GridContainer.jsx";
 import GridItem from "app/portal/Components/Grid/GridItem.jsx";
 import Button from "app/portal/Components/CustomButtons/Button.jsx";
-// core components
 import downloadStyle from "app/assets/jss/material-kit-react/views/landingPageSections/workStyle.jsx";
 
 class AboutUs extends React.Component {
