@@ -15,8 +15,9 @@ const pillsStyle = {
   },
   ...imagesStyle,
   paragrap: {
-    color: "#3c4858",
+    color: "#000000",
     fontWeight: "300",
+    //fontFamily: "none",
     lineHeight: "1.5em",
     fontSize: "16px"
   },
@@ -30,6 +31,9 @@ const pillsStyle = {
   },
   margin30: {
     marginLeft: "30%"
+  },
+  goBold: {
+    fontWeight: "bold"
   }
 };
 

@@ -16,7 +16,7 @@ const profilePageStyle = {
   description: {
     margin: "1.071rem auto 0",
     maxWidth: "600px",
-    color: "#3c4858",
+    color: "#000000",
     textAlign: "left !important",
     fontSize: "16px"
   },
@@ -65,6 +65,9 @@ const profilePageStyle = {
   navWrapper: {
     margin: "20px auto 50px auto",
     textAlign: "center"
+  },
+  goBold: {
+    fontWeight: "bold"
   }
 };
 

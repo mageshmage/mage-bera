@@ -14,7 +14,8 @@ class SectionPills extends React.Component {
     const imageClasses = classNames(
       classes.imgRaised,
       classes.imgRoundedCircle,
-      classes.imgFluid
+      classes.imgFluid,
+      classes.margin30
     );
     return (
       <div className={classes.section}>
@@ -33,6 +34,11 @@ class SectionPills extends React.Component {
                       tabIcon: Schedule,
                       tabContent: (
                         <GridContainer>
+                        <GridItem xs={4} sm={4} md={4} lg={4}>
+                          <div>
+                            <img src="content/images/godeliverind230.png" alt="..." className={imageClasses} />
+                          </div>
+                        </GridItem>
                         <GridItem xs={8} sm={8} md={8} lg={8}>
                         <span>
                           <p className={classes.paragrap}>
@@ -58,11 +64,6 @@ class SectionPills extends React.Component {
                           </h4>
                         </span>
                         </GridItem>
-                        <GridItem xs={4} sm={4} md={4} lg={4}>
-                          <div>
-                            <img src="content/images/godeliverind230.png" alt="..." className={imageClasses} />
-                          </div>
-                        </GridItem>
                         </GridContainer>
                       )
                     },
@@ -71,15 +72,20 @@ class SectionPills extends React.Component {
                       tabIcon: DateRange,
                       tabContent: (
                         <GridContainer>
+                        <GridItem xs={4} sm={4} md={4} lg={4}>
+                          <div>
+                            <img src="content/images/godeliverscheduled230.png" alt="..." className={imageClasses} />
+                          </div>
+                        </GridItem>
                         <GridItem xs={8} sm={8} md={8} lg={8}>
                         <span>
                           <p className={classes.paragrap}>
-                            A <b>Go Delivery Schedule</b> specifies the time for
+                            A <b className={classes.goBold}>Go Delivery Schedule</b> specifies the time for
                             delivery of goods or services from a supplier to a
                             customer, and often covers a period of time.
                           </p>
                           <p className={classes.paragrap}>
-                            The <b>Go Delivery Schedule</b> Date is the date a shipment
+                            The <b className={classes.goBold}>Go Delivery Schedule</b> Date is the date a shipment
                             is scheduled for delivery. It can be done by a clients or
                             customer based on their delivery time. It has to be
                             done in delivery schedule detailed table or Go Deliver
@@ -87,7 +93,7 @@ class SectionPills extends React.Component {
                             schedule.
                           </p>
                           <p className={classes.paragrap}>
-                            The <b>Scheduled Delivery</b> Date is determined when Go
+                            The <b className={classes.goBold}>Scheduled Delivery</b> Date is determined when Go
                             Deliver NCR receives the shipment information. If an
                             exception occurs that changes this date, a
                             rescheduled delivery date will be provided.
@@ -96,11 +102,6 @@ class SectionPills extends React.Component {
                           Direct to Every direction !!!
                           </h4>
                         </span>
-                        </GridItem>
-                        <GridItem xs={4} sm={4} md={4} lg={4}>
-                          <div>
-                            <img src="content/images/godeliverscheduled230.png" alt="..." className={imageClasses} />
-                          </div>
                         </GridItem>
                         </GridContainer>
                       )

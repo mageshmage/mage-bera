@@ -25,8 +25,8 @@ class Jobs extends React.Component {
                 </div>
                 <div className={classes.name}>
                 <p className={classes.description}>
-                <b>Go Deliver NCR</b> are currently looking for Full & Part Time drivers to join their expanding business, 
-                experience not essential, <b>minimum age 21</b>, please apply using our contact us page.
+                <b className={classes.goBold}>Go Deliver NCR</b> are currently looking for Full & Part Time drivers to join their expanding business, 
+                experience not essential, <b className={classes.goBold}>minimum age 21</b>, please apply using our contact us page.
                 </p>
                   <h3 className={classes.title}>Call Us Now - 
                     <span><i className={classes.socials + " fas fa-phone"} /> 91-9500302626</span>

@@ -2,7 +2,8 @@ import { container, title } from "app/assets/jss/material-kit-react.jsx";
 
 const landingPageStyle = {
   navLink:{
-    color: "#ffffff"
+    fontWeight: "800",
+    color: "#3C4858"
   },
   container: {
     zIndex: "12",

@@ -24,19 +24,19 @@ class AboutUs extends React.Component {
                   </div>
                   <div className={classes.name}>
                     <p className={classes.description}>
-                      <b>Go Deliver NCR</b> is specialized in the fast collection and delivery of goods throughout the NCR.
+                      <b className={classes.goBold}>Go Deliver NCR</b> is specialized in the fast collection and delivery of goods throughout the NCR.
                       When you need fast and reliable consignments to deliver your important company documents & parcels it makes perfect sense to turn to Go Deliver NCR.
                     </p>
                     <p className={classes.description}>
-                      <b>With our Head Office in Lodhi Road in New Delhi.</b>
+                      <b className={classes.goBold}>With our Head Office in Lodhi Road in New Delhi.</b>
                     </p>
                     <p className={classes.description}>
-                      Working with well-respected service partners such as <b>G.K Logistics Services, DHL, Fed Ex, DTDC and Blue Dart </b>
+                      Working with well-respected service partners such as <b className={classes.goBold}>G.K Logistics Services, DHL, Fed Ex, DTDC and Blue Dart </b>
                       you can choose a service that best suited to your specific needs to deliver anywhere in India.
                       Go Deliver NCR can boast an impressive array of clients who have recognized the need for us to work with them and not just for them.
                     </p>
                     <p className={classes.description}>
-                      The customer service and support available at <b>Go Deliver NCR</b> is the most important part of the service we offer,
+                      The customer service and support available at <b className={classes.goBold}>Go Deliver NCR</b> is the most important part of the service we offer,
                       we have technology to assist us in providing information but developing strong customer relationships is an area
                       we have and will always continue to focus on and excel in.
                     </p>

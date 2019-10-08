@@ -75,12 +75,62 @@ onModalClose = event =>{
             </List>
             </>
           }
+          rightLinksMobile={
+            <>
+            <List className={classes.list}>
+              <ListItem className={classes.listItem}>
+                <Button
+                  color="transparent"
+                  className={classes.navLink}
+                  onClick={() => this.handleClickOpen("classicModal")}
+                >
+                  <LocationOnOutlined className={classes.icons} /> Tracking
+                </Button>
+                </ListItem>
+                <ListItem className={classes.listItem}>
+                <div className={classes.qlinks}>
+                  <ul className={classes.ul}>
+                    <li className={classes.li}><i className="fa fa-phone"></i>&nbsp; 91-9500302626</li>
+                    <li className={classes.li}><i className="fa fa-envelope"></i>&nbsp; godeliverncr@gmail.com</li>
+                  </ul>
+                </div>
+                </ListItem>
+            </List>
+            </>
+          }
           leftLinks={
             <>
             <List className={classes.list}>
             <ListItem className={classes.listItem}>
               <CustomDropdown
                 left
+                hoverColor="info"
+                dropdownHeader="Locations"
+                buttonIcon="map"
+                buttonProps={{
+                  className: classes.navLink,
+                  color: "transparent"
+                }}
+                dropdownList={[
+                  
+                  { divider: true },
+                    <Link to="/godeliverind-page" className={classes.dropdownLink}>
+                      Go Deliver IND
+                    </Link>,
+                  { divider: true },
+                ]}
+              />
+            </ListItem>
+          </List>
+          </>
+          }
+          leftLinksMobile={
+            <>
+            <List className={classes.list}>
+            <ListItem className={classes.listItem}>
+              <CustomDropdown
+                left
+                buttonText="Switch"
                 hoverColor="info"
                 dropdownHeader="Locations"
                 buttonIcon="map"

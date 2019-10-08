@@ -43,11 +43,11 @@ class SectionPills extends React.Component {
                         <GridItem xs={8} sm={8} md={8} lg={8}>
                           <span>
                             <p className={classes.paragrap}>
-                            <b>Go Deliver NCR</b> has a number of <b>NCR Same-Day</b> delivery solutions which are ideally placed for your less critical but still time sensitive shipping requirements thus providing a more economical solution. 
+                            <b className={classes.goBold}>Go Deliver NCR</b> has a number of <b className={classes.goBold}>NCR Same-Day</b> delivery solutions which are ideally placed for your less critical but still time sensitive shipping requirements thus providing a more economical solution. 
                             </p>
                             <p className={classes.paragrap}>
-                            You can choose our standard <b>Same-Day</b> solution which guarantees delivery <b>before 6pm</b>, or you can choose from delivery by as early as 
-                            <b> 9am, 10.30 or 12.00</b>. We can also give you a range of Saturday delivery options.
+                            You can choose our standard <b className={classes.goBold}>Same-Day</b> solution which guarantees delivery <b className={classes.goBold}>before 6pm</b>, or you can choose from delivery by as early as 
+                            <b className={classes.goBold}> 9am, 10.30 or 12.00</b>. We can also give you a range of Saturday delivery options.
                             </p>
                             <p className={classes.paragrap}>
                             All of our parcels benefit from live tracking and receive a signature upon delivery to give you piece of mind and put you in the driver's seat.
@@ -73,7 +73,7 @@ class SectionPills extends React.Component {
                         <GridItem xs={8} sm={8} md={8} lg={8}>
                           <span>
                             <p className={classes.paragrap}>
-                              <b>Go Deliver NCR</b> has a number of NCR Overnight
+                              <b className={classes.goBold}>Go Deliver NCR</b> has a number of NCR Overnight
                               delivery solutions which are ideally placed for your
                               less critical but still time sensitive shipping
                               requirements thus providing a more economical
@@ -81,9 +81,9 @@ class SectionPills extends React.Component {
                             </p>
                             <p className={classes.paragrap}>
                               You can choose our standard Overnight
-                              solution which guarantees delivery between <b>7:00pm
+                              solution which guarantees delivery between <b className={classes.goBold}>7:00pm
                               to 1:00am</b>, or you can choose from delivery by as early
-                              as <b>7:00am to 9:00am</b>. We can also give you a range of
+                              as <b className={classes.goBold}>7:00am to 9:00am</b>. We can also give you a range of
                               Saturday and Sunday delivery options, with
                               reasonable charges extra.
                             </p>
@@ -117,12 +117,12 @@ class SectionPills extends React.Component {
                           <GridItem xs={8} sm={8} md={8} lg={8}>
                           <span>
                             <p className={classes.paragrap}>
-                              A <b>Go Delivery Schedule</b> specifies the time for
+                              A <b className={classes.goBold}>Go Delivery Schedule</b> specifies the time for
                               delivery of goods or services from a supplier to a
                               customer, and often covers a period of time.
                             </p>
                             <p className={classes.paragrap}>
-                              The <b>Go Delivery Schedule</b> Date is the date a shipment
+                              The <b className={classes.goBold}>Go Delivery Schedule</b> Date is the date a shipment
                               is scheduled for delivery. It can be done by a clients or
                               customer based on their delivery time. It has to be
                               done in delivery schedule detailed table or Go Deliver
@@ -130,7 +130,7 @@ class SectionPills extends React.Component {
                               schedule.
                             </p>
                             <p className={classes.paragrap}>
-                              The <b>Scheduled Delivery</b> Date is determined when Go
+                              The <b className={classes.goBold}>Scheduled Delivery</b> Date is determined when Go
                               Deliver NCR receives the shipment information. If an
                               exception occurs that changes this date, a
                               rescheduled delivery date will be provided.

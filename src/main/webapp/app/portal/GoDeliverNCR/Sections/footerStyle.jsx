@@ -71,7 +71,7 @@ const footerStyle = {
   h4:{
     fontSize: "22px",
     color: "#003366",
-    fontWeight: "normal"
+    fontWeight: "bold"
   },
 
   ul:{
@@ -85,7 +85,8 @@ const footerStyle = {
   li:{
     padding: "4px 0px",
     margin: "0px",
-    listStyle: "none"
+    listStyle: "none",
+    fontWeight: "800"
   },
 
   a: {

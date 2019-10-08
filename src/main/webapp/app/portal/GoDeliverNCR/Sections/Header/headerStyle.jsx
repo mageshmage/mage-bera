@@ -19,15 +19,15 @@ const headerStyle = {
     //width: "75px"
   },
   appBar: {
-    height: "100px",
+    height: "125px",
     display: "flex",
     border: "0",
     borderRadius: "3px",
     //padding: "0.625rem 0",
     marginBottom: "20px",
-    color: "#fff",
+    color: "#3C4858",
     width: "100%",
-    backgroundColor: "#003366",
+    backgroundColor: "#ffffff",
     boxShadow:
       "0 4px 18px 0px rgba(0, 0, 0, 0.12), 0 7px 10px -5px rgba(0, 0, 0, 0.15)",
     transition: "all 150ms ease 0s",
@@ -35,7 +35,8 @@ const headerStyle = {
     flexFlow: "row nowrap",
     justifyContent: "flex-start",
     position: "relative",
-    zIndex: "unset"
+    zIndex: "unset",
+    fontWeight: "800"
   },
   absolute: {
     position: "absolute",
@@ -61,10 +62,10 @@ const headerStyle = {
     ...defaultFont,
     lineHeight: "30px",
     fontSize: "20px",
-    fontWeight: "700",
+    fontWeight: "800",
     borderRadius: "3px",
     textTransform: "none",
-    color: "#ffffff",
+    color: "#3C4858",
     padding: "8px 16px",
     "&:hover,&:focus": {
       color: "inherit",
@@ -87,8 +88,9 @@ const headerStyle = {
       "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px rgba(0, 188, 212, 0.46)"
   },
   godeliver: {
-    backgroundColor: "#003366",
-    color: "#FFFFFF",
+    fontWeight: "800",
+    backgroundColor: "#ffffff",
+    color: "#000000",
     boxShadow:
       "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px #656565f2"
   },

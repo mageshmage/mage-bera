@@ -59,7 +59,9 @@ class Header extends React.Component {
       classes,
       color,
       rightLinks,
+      rightLinksMobile,
       leftLinks,
+      leftLinksMobile,
       brand,
       fixed,
       absolute
@@ -72,7 +74,7 @@ class Header extends React.Component {
     });
     const brandComponent = <Button className={classes.title}>{brand}</Button>;
 
-    const logo = <img src="content/images/godeliverncr.png" className={classes.logo} alt="Logo" />
+    const logo = <img src="content/images/godeliverncr125.png" className={classes.logo} alt="Logo" />
     return (
       <AppBar className={appBarClasses}>
         <Toolbar className={classes.container}>
@@ -120,8 +122,8 @@ class Header extends React.Component {
             onClose={this.handleDrawerToggle}
           >
             <div className={classes.appResponsive}>
-              {leftLinks}
-              {rightLinks}
+              {leftLinksMobile}
+              {rightLinksMobile}
             </div>
           </Drawer>
         </Hidden>

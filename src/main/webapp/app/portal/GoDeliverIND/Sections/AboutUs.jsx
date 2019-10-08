@@ -26,7 +26,7 @@ class AboutUs extends React.Component {
                   <div className={classes.name}>
                     {/*<h2 className={classes.title}>Jobs With Us</h2>*/}
                     <p className={classes.description}>
-                      Go Deliver IND is specialized in the fast collection and delivery of goods throughout the IND.
+                      <b className={classes.goBold}>Go Deliver IND</b> is specialized in the fast collection and delivery of goods throughout the IND.
                       When you need fast and reliable consignments to deliver your important company documents & parcels it makes perfect sense to turn to Go Deliver IND.
               </p>
                     {/*<p className={classes.description}>
@@ -34,15 +34,15 @@ class AboutUs extends React.Component {
               From bikes to large vans Go Deliver NCR have it covered, you can choose a vehicle that fits your needs and budget just as long as your goods fit the vehicle, all our vehicles are tracked and proof of your delivery will be with you within minutes of delivery being made.
               </p>*/}
                     <p className={classes.description}>
-                      <b>With our Head Office in Lodhi Road in New Delhi.</b>
+                      <b className={classes.goBold}>With our Head Office in Lodhi Road in New Delhi.</b>
                     </p>
                     <p className={classes.description}>
-                      Working with well-respected service partners such as <b>G.K Logistics Services, DHL, Fed Ex, DTDC and Blue Dart </b>
+                      Working with well-respected service partners such as <b className={classes.goBold}>G.K Logistics Services, DHL, Fed Ex, DTDC and Blue Dart </b>
                       you can choose a service that best suited to your specific needs to deliver anywhere in India.
-                      <b>Go Deliver IND</b> can boast an impressive array of clients who have recognized the need for us to work with them and not just for them.
+                      <b className={classes.goBold}>Go Deliver IND</b> can boast an impressive array of clients who have recognized the need for us to work with them and not just for them.
               </p>
                     <p className={classes.description}>
-                      The customer service and support available at <b>Go Deliver IND</b> is the most important part of the service we offer,
+                      The customer service and support available at <b className={classes.goBold}>Go Deliver IND</b> is the most important part of the service we offer,
                       we have technology to assist us in providing information but developing strong customer relationships is an area
                       we have and will always continue to focus on and excel in.
               </p>

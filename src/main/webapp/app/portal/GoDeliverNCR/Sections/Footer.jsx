@@ -27,7 +27,7 @@ function Footer({ ...props }) {
           <div className={classes.qlinks}>
             <h4 className={classes.h4}>Contact Us</h4>
             <ul className={classes.ul}>
-              <li className={classes.li}><i className="fa fa-home fa-lg"></i>&nbsp;Go Deliver NCR</li>
+              <li className={classes.li}><i className="fa fa-home fa-lg"></i>&nbsp; B-77, B.K Dutt Colony, Lodhi Road, New Delhi - 110003</li>
               <li className={classes.li}><i className="fa fa-phone"></i>&nbsp; 91-9500302626</li>
               <li className={classes.li}><a className={classes.a} href="mailto:godeliverncr@gmail.com"><i className="fa fa-envelope"></i>&nbsp; godeliverncr@gmail.com</a></li>
             </ul>
