@@ -24,7 +24,7 @@ const headerStyle = {
     border: "0",
     borderRadius: "3px",
     marginBottom: "20px",
-    color: "#3C4858",
+    color: "#003366",
     width: "100%",
     backgroundColor: "#ffffff",
     boxShadow:
@@ -52,7 +52,9 @@ const headerStyle = {
     alignItems: "center",
     justifyContent: "space-between",
     display: "flex",
-    flexWrap: "nowrap"
+    flexWrap: "nowrap",
+    marginLeft: "0px",
+    marginRight: "0px"
   },
   flex: {
     flex: 1
@@ -60,11 +62,11 @@ const headerStyle = {
   title: {
     ...defaultFont,
     lineHeight: "30px",
-    fontSize: "20px",
+    fontSize: "25px",
     fontWeight: "800",
     borderRadius: "3px",
     textTransform: "none",
-    color: "#3C4858",
+    color: "#003366",
     padding: "8px 16px",
     "&:hover,&:focus": {
       color: "inherit",
@@ -177,6 +179,9 @@ const headerStyle = {
     float: "left",
     width: "100%"
   },
+  divWidth: {
+    width: "20px"
+  }
 };
 
 export default headerStyle;

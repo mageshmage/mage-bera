@@ -153,10 +153,22 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
                       </thead>
                       <tbody>
                         <tr key={`entity`}>
-                          <td>{shipmentInfo.isDelivered ? 'Delivered' : 'In Transit'}</td>
+                          <td>
+                            {shipmentInfo.isDelivered ? 'Delivered' : 'In Transit'}
+                            {shipmentInfo.isDelivered && (
+                              <>
+                                <div className="col-sm-1">
+                                  <FontAwesomeIcon icon="check-circle" size="2x" color="green" title="Verified" />
+                                </div>
+                              </>
+                            )}
+                          </td>
                           <td>
                             {shipmentInfo.deliveredDate ? (
-                              <TextFormat type="date" value={shipmentInfo.deliveredDate} format={APP_TIMESTAMP_FORMAT} />
+                              <>
+                                <TextFormat type="date" value={shipmentInfo.deliveredDate} format={APP_DATEONLY_FORMAT} />-
+                                <TextFormat type="date" value={shipmentInfo.deliveredDate} format={APP_TIMEONLY_FORMAT} />
+                              </>
                             ) : (
                               '-'
                             )}

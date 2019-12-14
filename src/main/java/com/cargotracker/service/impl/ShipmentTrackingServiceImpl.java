@@ -107,7 +107,8 @@ public class ShipmentTrackingServiceImpl implements ShipmentTrackingService {
 				shipmentTracking = shipmentTrackingRepository.save(shipmentTracking);
 				result = shipmentTrackingMapper.toDto(shipmentTracking);
 			}*/
-			shipmentInfo.setDeliveredDate(ZonedDateTime.now(india));
+			//shipmentInfo.setDeliveredDate(ZonedDateTime.now(india));
+			shipmentInfo.setDeliveredDate(shipmentTracking.getTrackingDate());
 			shipmentInfo.setIsDelivered(true);
 			shipmentInfo.setIsInTransit(true);
 			shipmentInfo.setIsReachedNearestHub(true);

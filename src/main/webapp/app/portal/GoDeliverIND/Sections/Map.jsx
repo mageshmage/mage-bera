@@ -23,7 +23,9 @@ class Map extends React.Component {
               <p>Delivery Zones - Delhi</p>
               {/*<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1zG6659sE9THPj--h6bjH5mp0Ioul7yPA" width="1000" height="680"></iframe>*/}
               {/*<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1OFWqer5JtkdESjlvgMe3m4gi28VfScte" width="800" height="500"></iframe>*/}
+              <div className={classes.mapResponsive}>
               <iframe src="https://www.google.com/maps/d/u/0/embed?mid=1aKKyDRmOYULvXSkpCZJxa9UoW-9a2V7x" width="800" height="900"></iframe>
+              </div>
             </GridItem>
           </GridContainer>
         </div>

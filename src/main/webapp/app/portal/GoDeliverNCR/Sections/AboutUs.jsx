@@ -30,11 +30,11 @@ class AboutUs extends React.Component {
                     <p className={classes.description}>
                       <b className={classes.goBold}>With our Head Office in Lodhi Road in New Delhi.</b>
                     </p>
-                    <p className={classes.description}>
+                    {/*<p className={classes.description}>
                       Working with well-respected service partners such as <b className={classes.goBold}>G.K Logistics Services, DHL, Fed Ex, DTDC and Blue Dart </b>
                       you can choose a service that best suited to your specific needs to deliver anywhere in India.
                       Go Deliver NCR can boast an impressive array of clients who have recognized the need for us to work with them and not just for them.
-                    </p>
+                    </p>*/}
                     <p className={classes.description}>
                       The customer service and support available at <b className={classes.goBold}>Go Deliver NCR</b> is the most important part of the service we offer,
                       we have technology to assist us in providing information but developing strong customer relationships is an area

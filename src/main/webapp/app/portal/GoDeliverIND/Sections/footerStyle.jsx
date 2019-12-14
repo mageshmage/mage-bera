@@ -30,11 +30,12 @@ const footerStyle = {
   },
   thirty: {
     float: "left",
-    width: "30%"
+    width: "20%",
+    textAlign: "-webkit-center"
   },
   seventy: {
     float: "left",
-    width: "70%"
+    width: "80%"
   },
   qlinks: {
     float: "left",

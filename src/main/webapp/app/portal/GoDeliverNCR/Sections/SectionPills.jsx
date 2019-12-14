@@ -21,7 +21,7 @@ class SectionPills extends React.Component {
     return (
       <div className={classes.section}>
         <div className={classes.container}>
-          <div id="navigation-pills">
+          <div id="navigation-pills" >
             <div className={classes.title}>
               <h3 className={classes.title}>Go Deliver NCR</h3>
             </div>
@@ -35,28 +35,31 @@ class SectionPills extends React.Component {
                       tabIcon: LocalShipping,
                       tabContent: (
                         <GridContainer>
-                          <GridItem xs={4} sm={4} md={4} lg={4}>
+                          <GridItem xs={3} sm={3} md={3} lg={3}>
                             <div>
                               <img src="content/images/godeliversameday230.png" alt="..." className={imageClasses} />
                             </div>
                           </GridItem>
-                        <GridItem xs={8} sm={8} md={8} lg={8}>
-                          <span>
-                            <p className={classes.paragrap}>
-                            <b className={classes.goBold}>Go Deliver NCR</b> has a number of <b className={classes.goBold}>NCR Same-Day</b> delivery solutions which are ideally placed for your less critical but still time sensitive shipping requirements thus providing a more economical solution. 
-                            </p>
-                            <p className={classes.paragrap}>
-                            You can choose our standard <b className={classes.goBold}>Same-Day</b> solution which guarantees delivery <b className={classes.goBold}>before 6pm</b>, or you can choose from delivery by as early as 
-                            <b className={classes.goBold}> 9am, 10.30 or 12.00</b>. We can also give you a range of Saturday delivery options.
-                            </p>
-                            <p className={classes.paragrap}>
-                            All of our parcels benefit from live tracking and receive a signature upon delivery to give you piece of mind and put you in the driver's seat.
-                            </p>
-                            <h4 className={classes.h4}>
-                              Direct to Every direction !!!
-                            </h4>
-                          </span>
-                        </GridItem>
+                          <GridItem xs={1} sm={1} md={1} lg={1}>
+
+                          </GridItem>
+                          <GridItem xs={8} sm={8} md={8} lg={8}>
+                            <span>
+                              <p className={classes.paragrap}>
+                              <b className={classes.goBold}>Go Deliver NCR</b> has a number of <b className={classes.goBold}>NCR Same-Day</b> delivery solutions which are ideally placed for your less critical but still time sensitive shipping requirements thus providing a more economical solution. 
+                              </p>
+                              <p className={classes.paragrap}>
+                              You can choose our standard <b className={classes.goBold}>Same-Day</b> solution which guarantees delivery <b className={classes.goBold}>before 6pm</b>, or you can choose from delivery by as early as 
+                              <b className={classes.goBold}> 9am, 10.30 or 12.00</b>. We can also give you a range of Saturday delivery options.
+                              </p>
+                              <p className={classes.paragrap}>
+                              All of our parcels benefit from live tracking and receive a signature upon delivery to give you piece of mind and put you in the driver's seat.
+                              </p>
+                              <h4 className={classes.h4}>
+                                Direct to Every direction !!!
+                              </h4>
+                            </span>
+                          </GridItem>
                         </GridContainer>
                       )
                     },
@@ -65,42 +68,44 @@ class SectionPills extends React.Component {
                       tabIcon: Schedule,
                       tabContent: (
                         <GridContainer>
-                          <GridItem xs={4} sm={4} md={4} lg={4}>
+                          <GridItem xs={3} sm={3} md={3} lg={3}>
                             <div>
                               <img src="content/images/godeliverovernight230.png" alt="..." className={imageClasses} />
                             </div>
                           </GridItem>
-                        <GridItem xs={8} sm={8} md={8} lg={8}>
-                          <span>
-                            <p className={classes.paragrap}>
-                              <b className={classes.goBold}>Go Deliver NCR</b> has a number of NCR Overnight
-                              delivery solutions which are ideally placed for your
-                              less critical but still time sensitive shipping
-                              requirements thus providing a more economical
-                              solution. 
-                            </p>
-                            <p className={classes.paragrap}>
-                              You can choose our standard Overnight
-                              solution which guarantees delivery between <b className={classes.goBold}>7:00pm
-                              to 1:00am</b>, or you can choose from delivery by as early
-                              as <b className={classes.goBold}>7:00am to 9:00am</b>. We can also give you a range of
-                              Saturday and Sunday delivery options, with
-                              reasonable charges extra.
-                            </p>
-                            <p className={classes.paragrap}>
-                              All of our parcels benefit from live tracking and
-                              receive a signature upon delivery to give you piece of
-                              mind and put you in the driver&#39;s seat.
-                            </p>
-                            <p className={classes.paragrap}>
-                              Over Night Charges Extra As Per Requirements!
-                            </p>
-                            <h4 className={classes.h4}>
-                            Direct to Every direction !!!
-                            </h4>
-                          </span>
-                        </GridItem>
-                        
+                          <GridItem xs={1} sm={1} md={1} lg={1}>
+
+                          </GridItem>
+                          <GridItem xs={8} sm={8} md={8} lg={8}>
+                            <span>
+                              <p className={classes.paragrap}>
+                                <b className={classes.goBold}>Go Deliver NCR</b> has a number of NCR Overnight
+                                delivery solutions which are ideally placed for your
+                                less critical but still time sensitive shipping
+                                requirements thus providing a more economical
+                                solution. 
+                              </p>
+                              <p className={classes.paragrap}>
+                                You can choose our standard Overnight
+                                solution which guarantees delivery between <b className={classes.goBold}>7:00pm
+                                to 1:00am</b>, or you can choose from delivery by as early
+                                as <b className={classes.goBold}>7:00am to 9:00am</b>. We can also give you a range of
+                                Saturday and Sunday delivery options, with
+                                reasonable charges extra.
+                              </p>
+                              <p className={classes.paragrap}>
+                                All of our parcels benefit from live tracking and
+                                receive a signature upon delivery to give you piece of
+                                mind and put you in the driver&#39;s seat.
+                              </p>
+                              <p className={classes.paragrap}>
+                                Over Night Charges Extra As Per Requirements!
+                              </p>
+                              <h4 className={classes.h4}>
+                              Direct to Every direction !!!
+                              </h4>
+                            </span>
+                          </GridItem>
                         </GridContainer>
                       )
                     },
@@ -109,10 +114,13 @@ class SectionPills extends React.Component {
                       tabIcon: DateRange,
                       tabContent: (
                         <GridContainer>
-                          <GridItem xs={4} sm={4} md={4} lg={4}>
+                          <GridItem xs={3} sm={3} md={3} lg={3}>
                             <div>
                               <img src="content/images/godeliverscheduled230.png" alt="..." className={imageClasses} />
                             </div>
+                          </GridItem>
+                          <GridItem xs={1} sm={1} md={1} lg={1}>
+
                           </GridItem>
                           <GridItem xs={8} sm={8} md={8} lg={8}>
                           <span>

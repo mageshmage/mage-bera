@@ -87,7 +87,7 @@ const headerStyle = {
   },
   godeliver: {
     backgroundColor: "#ffffff",
-    color: "#3C4858",
+    color: "#003366",
     boxShadow:
       "0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 12px -5px #62ff00"
   },

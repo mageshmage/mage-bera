@@ -12,8 +12,8 @@ class Map extends React.Component {
         <div className={classes.container}>
           <GridContainer className={classes.textCenter} justify="center">
             <GridItem xs={12} sm={12} md={12}>
-              <h2 className={classes.title}>Delivery Zones - Delhi</h2>
-              <p>Delivery Zones - Delhi</p>
+              <h2 className={classes.title}>Delivery Zones - NCR</h2>
+              <p>Delivery Zones - NCR</p>
               {/*<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1zG6659sE9THPj--h6bjH5mp0Ioul7yPA" width="1000" height="680"></iframe>*/}
               {/*<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1OFWqer5JtkdESjlvgMe3m4gi28VfScte" width="800" height="500"></iframe>*/}
               {/*<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1-OhkVC_hsdagC59nfDxmaFAAY0fTxB6a" width="800" height="500"></iframe>*/}

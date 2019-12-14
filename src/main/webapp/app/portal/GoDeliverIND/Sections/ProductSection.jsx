@@ -13,7 +13,7 @@ class ProductSection extends React.Component {
       <div className={classes.section}>
         <GridContainer justify="center">
           <GridItem xs={12} sm={12} md={8}>
-            <h2 className={classes.title}>At Our Service</h2>
+            <h2 className={classes.title}>Our Services</h2>
           </GridItem>
         </GridContainer>
         <div>

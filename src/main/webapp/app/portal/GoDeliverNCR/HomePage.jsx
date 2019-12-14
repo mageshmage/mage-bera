@@ -65,6 +65,7 @@ onModalClose = event =>{
                 >
                   <LocationOnOutlined className={classes.icons} /> Tracking
                 </Button>
+                <div className={classes.divWidth}></div>
                 <div className={classes.qlinks}>
                   <ul className={classes.ul}>
                     <li className={classes.li}><i className="fa fa-phone"></i>&nbsp; 91-9500302626</li>

@@ -13,7 +13,7 @@ class ProductSection extends React.Component {
       <div className={classes.section}>
         <GridContainer justify="center">
           <GridItem xs={12} sm={12} md={8}>
-            <h2 className={classes.title}>At Our Service</h2>
+            <h2 className={classes.title}>Our Services</h2>
           </GridItem>
         </GridContainer>
         <div>
@@ -39,7 +39,7 @@ class ProductSection extends React.Component {
             <GridItem xs={12} sm={12} md={3}>
               <InfoArea
                 title="Car Cargo"
-                description="We are known for efficient and reliable car cargo forwarding services throughout the globe, with the years of experience and trust of our clients and customers."
+                description="We are known for efficient and reliable car cargo forwarding services throughout pan India."
                 icon={LocalShipping}
                 iconColor="godeliver"
                 vertical

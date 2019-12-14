@@ -11,7 +11,8 @@ const pillsStyle = {
     ...title,
     marginTop: "30px",
     minHeight: "32px",
-    textDecoration: "none"
+    textDecoration: "none",
+    marginLeft: "10px"
   },
   ...imagesStyle,
   paragrap: {
@@ -19,7 +20,8 @@ const pillsStyle = {
     fontWeight: "300",
     //fontFamily: "none",
     lineHeight: "1.5em",
-    fontSize: "16px"
+    fontSize: "16px",
+    textAlign: "justify"
   },
   h4: {
     color: "#3c4858",
@@ -30,10 +32,14 @@ const pillsStyle = {
     fontWeight: "700"
   },
   margin30: {
-    marginLeft: "30%"
+    marginLeft: "20%"
   },
   goBold: {
     fontWeight: "bold"
+  },
+  marginAlignment: {
+    marginRight: "40px",
+    marginLeft: "40px"
   }
 };
 

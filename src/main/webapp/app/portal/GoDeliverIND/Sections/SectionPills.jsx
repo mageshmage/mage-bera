@@ -22,7 +22,7 @@ class SectionPills extends React.Component {
         <div className={classes.container}>
           <div id="navigation-pills">
             <div className={classes.title}>
-              <h3 className={classes.title}>Go Deliver NCR</h3>
+              <h3 className={classes.title}>Go Deliver IND</h3>
             </div>
             <GridContainer>
               <GridItem xs={12} sm={12} md={12} lg={12}>
@@ -34,21 +34,24 @@ class SectionPills extends React.Component {
                       tabIcon: Schedule,
                       tabContent: (
                         <GridContainer>
-                        <GridItem xs={4} sm={4} md={4} lg={4}>
+                        <GridItem xs={3} sm={3} md={3} lg={3}>
                           <div>
                             <img src="content/images/godeliverind230.png" alt="..." className={imageClasses} />
                           </div>
                         </GridItem>
+                        <GridItem xs={1} sm={1} md={1} lg={1}>
+
+                          </GridItem>
                         <GridItem xs={8} sm={8} md={8} lg={8}>
                         <span>
                           <p className={classes.paragrap}>
-                            <b>Go Deliver IND</b> has a number of IND fast
+                            <b className={classes.goBold}>Go Deliver IND</b> has a number of fast
                             delivery solutions across India. 
                           </p>
                           <p className={classes.paragrap}>
                             You can choose our standard Fast Delivery
                             solution which guarantees delivery much reliable time. We can also give you a range of
-                            Saturday and Sunday delivery options, with
+                            <b className={classes.goBold}>Saturday and Sunday</b> delivery options, with
                             reasonable charges extra.
                           </p>
                           <p className={classes.paragrap}>
@@ -72,11 +75,14 @@ class SectionPills extends React.Component {
                       tabIcon: DateRange,
                       tabContent: (
                         <GridContainer>
-                        <GridItem xs={4} sm={4} md={4} lg={4}>
+                        <GridItem xs={3} sm={3} md={3} lg={3}>
                           <div>
                             <img src="content/images/godeliverscheduled230.png" alt="..." className={imageClasses} />
                           </div>
                         </GridItem>
+                        <GridItem xs={1} sm={1} md={1} lg={1}>
+
+                          </GridItem>
                         <GridItem xs={8} sm={8} md={8} lg={8}>
                         <span>
                           <p className={classes.paragrap}>

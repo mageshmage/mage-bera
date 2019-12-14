@@ -3,7 +3,8 @@ import { container, title } from "app/assets/jss/material-kit-react.jsx";
 const landingPageStyle = {
   navLink:{
     fontWeight: "800",
-    color: "#3C4858"
+    color: "#3C4858",
+    background: "#2e6cdc29"
   },
   container: {
     zIndex: "12",
@@ -33,7 +34,7 @@ const landingPageStyle = {
     zIndex: "3"
   },
   mainRaised: {
-    margin: "-60px 30px 0px",
+    margin: "-70px 30px 0px",
     borderRadius: "6px",
     boxShadow:
       "0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)"
@@ -69,12 +70,16 @@ const landingPageStyle = {
   li:{
     padding: "4px 0px",
     margin: "0px",
-    listStyle: "none"
+    listStyle: "none",
+    color: "#003366"
   },
   qlinks: {
     float: "left",
     width: "100%"
   },
+  divWidth: {
+    width: "20px"
+  }
 };
 
 export default landingPageStyle;
