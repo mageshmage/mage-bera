@@ -2,6 +2,7 @@ import { Moment } from 'moment';
 import { IShipmentTracking } from 'app/shared/model/shipment-tracking.model';
 import { IShipmentInfoPOD } from 'app/shared/model/shipment-info-pod.model';
 import { IShiperReceiverInfo, defaultValueShipper, defaultValueReceiver } from 'app/shared/model/shiper-receiver-info.model';
+import { today } from 'app/shared/util/date-utils';
 
 export interface IShipmentInfo {
   id?: number;
@@ -79,4 +80,6 @@ export interface IShipmentInformationSearchDTO {
   destinationId?: number;
 }
 
-export const defaultValueShipmentInformationSearchDTO: Readonly<IShipmentInformationSearchDTO> = {};
+export const defaultValueShipmentInformationSearchDTO: IShipmentInformationSearchDTO = {
+  bookingDateFrom: today()
+};

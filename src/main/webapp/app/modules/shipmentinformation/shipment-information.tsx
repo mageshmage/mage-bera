@@ -34,21 +34,29 @@ import { getShipmentModesByVendorId } from 'app/entities/shipment-mode/shipment-
 import { getPaymentModesByVendorId } from 'app/entities/payment-mode/payment-mode.reducer';
 import { getTrackingStatusByVendorId } from 'app/entities/tracking-status/tracking-status.reducer';
 import { getEntities as getStates } from 'app/entities/state/state.reducer';
+import { tempShipmentSearch } from 'app/shared/reducers/authentication';
+import { formatDate } from 'app/shared/util/date-utils';
 
 export interface IShipmentInformationProps extends StateProps, DispatchProps, RouteComponentProps<{ url: string }> {}
 
 export interface IShipmentInformationState extends IPaginationBaseState {
   search: string;
+  searchCriteria: IShipmentInformationSearchDTO;
 }
 
 export class ShipmentInformation extends React.Component<IShipmentInformationProps, IShipmentInformationState> {
   state: IShipmentInformationState = {
     search: '',
+    searchCriteria: defaultValueShipmentInformationSearchDTO,
     ...getSortState(this.props.location, ITEMS_PER_PAGE)
   };
 
   componentDidMount() {
-    this.getEntities();
+    //this.setState({ searchCriteria: this.props.tempSearchCriteria });
+    //console.log('tempSearchCriteria - ' + JSON.stringify(this.props.tempSearchCriteria, null, 2));
+    //console.log('searchCriteria - ' + JSON.stringify(this.state.searchCriteria, null, 2));
+    this.getEntities(this.props.tempSearchCriteria);
+    //console.log('tempSearchCriteria - ' + JSON.stringify(this.props.tempSearchCriteria, null, 2));
 
     const { vendorId, carrierDetails, shipmentTypes, shipmentModes, paymentModes, trackingStatuses, states } = this.props;
 
@@ -102,30 +110,39 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
   };
 
   sortEntities() {
-    this.getEntities();
+    this.getEntities(null);
     this.props.history.push(`${this.props.location.pathname}?page=${this.state.activePage}&sort=${this.state.sort},${this.state.order}`);
   }
 
   handlePagination = activePage => this.setState({ activePage }, () => this.sortEntities());
 
-  getEntities = () => {
+  getEntities = tempSearchCriteria => {
     const { activePage, itemsPerPage, sort, order, search } = this.state;
     const { vendorId } = this.props;
-    // alert('vendorId - ' + vendorId);
-    const searchData: IShipmentInformationSearchDTO = defaultValueShipmentInformationSearchDTO;
+    //alert('vendorId - ' + JSON.stringify(tempSearchCriteria, null, 2));
+    const searchData: IShipmentInformationSearchDTO = tempSearchCriteria ? tempSearchCriteria : defaultValueShipmentInformationSearchDTO;
     searchData.vendorId = vendorId;
+    //alert('bookingDateFrom - ' + JSON.stringify(tempSearchCriteria, null, 2));
+    let bookingDateFrom;
+    if (searchData.bookingDateFrom) {
+      //alert('bookingDateFrom - ' + searchData.bookingDateFrom);
+      searchData.bookingDateFrom = convertDateTimeToServer(searchData.bookingDateFrom);
+      //alert('bookingDateFrom - ' + searchData.bookingDateFrom + convertDateTimeToServer(searchData.bookingDateFrom));
+    }
 
     if (search) {
       this.props.getSearchEntities(search, activePage - 1, itemsPerPage, `${sort},${order}`);
     } else {
       this.props.getEntitiesSearch(searchData, activePage - 1, itemsPerPage, `${sort},${order}`);
     }
+    //searchData.bookingDateFrom = formatDate(searchData.bookingDateFrom);
+    //this.props.tempShipmentSearch(searchData);
   };
 
   searchEntities = (event, errors, values) => {
     const { activePage, itemsPerPage, sort, order, search } = this.state;
     const { vendorId } = this.props;
-
+    //alert(values.bookingDateFrom);
     values.bookingDateFrom = convertDateTimeToServer(values.bookingDateFrom);
     values.bookingDateTo = convertDateTimeToServer(values.bookingDateTo);
     values.expectedDeliveryDateFrom = convertDateTimeToServer(values.expectedDeliveryDateFrom);
@@ -140,7 +157,9 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
       ...searchData,
       ...values
     };
-
+    this.setState({ searchCriteria: entity });
+    //console.log(JSON.stringify(this.state, null, 2));
+    this.props.tempShipmentSearch(entity);
     this.props.getEntitiesSearch(entity, activePage - 1, itemsPerPage, `${sort},${order}`);
   };
 
@@ -178,7 +197,10 @@ export class ShipmentInformation extends React.Component<IShipmentInformationPro
 
         <Row className="justify-content-center">
           <Col md="12">
-            <AvForm model={defaultValueShipmentInformationSearchDTO} onSubmit={this.searchEntities}>
+            <AvForm
+              model={this.props.tempSearchCriteria ? this.props.tempSearchCriteria : defaultValueShipmentInformationSearchDTO}
+              onSubmit={this.searchEntities}
+            >
               <Card>
                 {/*<CardTitle>Shipment Details Search</CardTitle>*/}
                 <CardBody>
@@ -611,7 +633,8 @@ const mapStateToProps = (storeState: IRootState) => ({
   paymentModes: storeState.paymentMode.entities,
   trackingStatuses: storeState.trackingStatus.entities,
   states: storeState.state.entities,
-  updating: storeState.shipmentInformation.updating
+  updating: storeState.shipmentInformation.updating,
+  tempSearchCriteria: storeState.authentication.searchCriteria
 });
 
 const mapDispatchToProps = {
@@ -624,7 +647,8 @@ const mapDispatchToProps = {
   getShipmentModesByVendorId,
   getPaymentModesByVendorId,
   getTrackingStatusByVendorId,
-  getStates
+  getStates,
+  tempShipmentSearch
 };
 
 type StateProps = ReturnType<typeof mapStateToProps>;

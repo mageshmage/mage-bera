@@ -62,7 +62,7 @@ onModalClose = event =>{
               
             <Button
               color="transparent"
-              className={classes.navLink}
+              className={classes.navLinkWhite}
               onClick={() => this.handleClickOpen("classicModal")}
             >
               <LocationOnOutlined className={classes.icons} /> Tracking

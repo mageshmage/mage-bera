@@ -319,6 +319,18 @@ h4 {
   color: #fff;
 }
 
+.textBold {
+  font-size: 12px;
+  font-weight: 700;
+  font-family: verdana, arial;
+}
+
+.textBoldHeading {
+  font-size: 14px;
+  font-weight: 700;
+  font-family: verdana, arial;
+}
+
 .text-center {
   text-align: center;
 }

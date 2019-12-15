@@ -120,7 +120,7 @@ public class ShipmentInformationRepositoryImpl implements CustomShipmentInformat
 				query.where((qShipmentInfo.bookingDate.between(shipmentSearchDto.getBookingDateFrom(), shipmentSearchDto.getBookingDateTo())));
 			}
 			else {
-				query.where((qShipmentInfo.bookingDate.between(ZonedDateTime.now().minusDays(1), ZonedDateTime.now().plusDays(1))));
+				//query.where((qShipmentInfo.bookingDate.between(ZonedDateTime.now().minusDays(1), ZonedDateTime.now().plusDays(1))));
 			}
 			
 			if (shipmentSearchDto.getDeliveredDateFrom() != null) {
@@ -211,6 +211,7 @@ public class ShipmentInformationRepositoryImpl implements CustomShipmentInformat
 					date = dateFormat.format(orgDate);
 					supplierSearchResponseDTO.setSubmissionTime(date);
 				}*/
+	        	shipmentInfoDTO.setShipmentInfoPODs(new ArrayList<>());
 				shipmentInfoDTOList.add(shipmentInfoDTO);
 				}
 			}

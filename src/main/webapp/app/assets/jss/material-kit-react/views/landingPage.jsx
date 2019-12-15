@@ -6,6 +6,11 @@ const landingPageStyle = {
     color: "#3C4858",
     background: "#2e6cdc29"
   },
+  navLinkWhite:{
+    fontWeight: "800",
+    color: "#ffffff",
+    background: "#2e6cdc29"
+  },
   container: {
     zIndex: "12",
     color: "#FFFFFF",

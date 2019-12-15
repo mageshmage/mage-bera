@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { Row, Col, Alert, Button, InputGroup, Table } from 'reactstrap';
 import { AvForm, AvGroup, AvInput } from 'availity-reactstrap-validation';
 import { IRootState } from 'app/shared/reducers';
-import { getSession } from 'app/shared/reducers/authentication';
+import { getSession, clearTempShipmentSearch } from 'app/shared/reducers/authentication';
 import { getSearchWithConsignmentNo, reset } from 'app/modules/shipmentinformation/shipment-information.reducer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { APP_DATEONLY_FORMAT, APP_TIMEONLY_FORMAT, APP_TIMESTAMP_FORMAT } from 'app/config/constants';
@@ -27,6 +27,7 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
   componentDidMount() {
     this.props.getSession();
     this.props.reset();
+    this.props.clearTempShipmentSearch();
   }
 
   search = () => {
@@ -126,7 +127,7 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
             <Col md="12">
               <Row>
                 <Col sm="12" md={{ size: 8, offset: 2 }}>
-                  <h4>Tracking ID: {this.state.search}</h4>
+                  <h4 className="textBoldHeading">Tracking ID: {this.state.search}</h4>
                   <div className="table-responsive">
                     <Table responsive hover bordered>
                       <thead>
@@ -166,8 +167,8 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
                           <td>
                             {shipmentInfo.deliveredDate ? (
                               <>
-                                <TextFormat type="date" value={shipmentInfo.deliveredDate} format={APP_DATEONLY_FORMAT} />-
-                                <TextFormat type="date" value={shipmentInfo.deliveredDate} format={APP_TIMEONLY_FORMAT} />
+                                <TextFormat type="date" value={shipmentInfo.deliveredDate} format={APP_DATEONLY_FORMAT} /> -
+                                <TextFormat type="date" value={' ' + shipmentInfo.deliveredDate} format={APP_TIMEONLY_FORMAT} />
                               </>
                             ) : (
                               '-'
@@ -206,7 +207,7 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
                   <div className="container">
                     <div className="row bs-wizard col-xs-offset-1 col-sm-offset-1 col-md-offset-1 col-lg-offset-1" id="track_bar">
                       <div className="col-xs-2 bs-wizard-step complete">
-                        <div className="text-center bs-wizard-stepnum">{shipmentInfo.shipperInfo.city}</div>
+                        <div className="text-center bs-wizard-stepnum textBold">{shipmentInfo.shipperInfo.city}</div>
 
                         <div className="progress">
                           <div className="progress-bar" />
@@ -214,7 +215,7 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
 
                         <div className="bs-wizard-dot" />
 
-                        <div className="bs-wizard-info text-center"> Shipment Details Received</div>
+                        <div className="bs-wizard-info text-center textBold"> Shipment Details Received</div>
                       </div>
 
                       <div
@@ -226,7 +227,7 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
 
                         <div className="progress">{shipmentInfo.isInTransit && <div className="progress-bar" />}</div>
 
-                        <div className="bs-wizard-info text-center"> In Transit</div>
+                        <div className="bs-wizard-info text-center textBold"> In Transit</div>
                       </div>
                       <div
                         className={
@@ -240,7 +241,7 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
 
                         <div className="bs-wizard-dot" />
 
-                        <div className="bs-wizard-info text-center"> Arrived at your Nearest Hub</div>
+                        <div className="bs-wizard-info text-center textBold"> Arrived at your Nearest Hub</div>
                       </div>
 
                       <div
@@ -253,11 +254,11 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
 
                         <div className="bs-wizard-dot" />
 
-                        <div className="bs-wizard-info text-center"> Out for Delivery</div>
+                        <div className="bs-wizard-info text-center textBold"> Out for Delivery</div>
                       </div>
 
                       <div className={'col-xs-2 bs-wizard-step ' + (shipmentInfo.isDelivered ? 'active' : '')}>
-                        <div className="text-center bs-wizard-stepnum">{shipmentInfo.receiverInfo.city}</div>
+                        <div className="text-center bs-wizard-stepnum textBold">{shipmentInfo.receiverInfo.city}</div>
 
                         <div className="progress">{shipmentInfo.isDelivered && <div className="progress-bar" />}</div>
 
@@ -267,7 +268,7 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
                           <span className="glyphicon glyphicon-ok txt-white tick" />
                         </div>
 
-                        <div className="bs-wizard-info text-center"> Delivered</div>
+                        <div className="bs-wizard-info text-center textBold"> Delivered</div>
                       </div>
                     </div>
                   </div>
@@ -276,7 +277,7 @@ export class Home extends React.Component<IHomeProp, IHomeState> {
 
               <Row>
                 <Col sm="12" md={{ size: 8, offset: 2 }}>
-                  <h4>
+                  <h4 className="textBoldHeading">
                     <Translate contentKey="cargotrackerApp.shipmentTracking.public.trackingDetails">Tracking Details</Translate>
                   </h4>
 
@@ -330,7 +331,7 @@ const mapStateToProps = storeState => ({
   vendorIdState: storeState.authentication.account.vendorId
 });
 
-const mapDispatchToProps = { getSession, getSearchWithConsignmentNo, reset };
+const mapDispatchToProps = { getSession, getSearchWithConsignmentNo, reset, clearTempShipmentSearch };
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 type DispatchProps = typeof mapDispatchToProps;

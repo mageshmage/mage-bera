@@ -174,7 +174,7 @@ export class ShipmentInformationDetail extends React.Component<IShipmentInformat
                               </Label>
                             </Col>
                             <Col sm={10}>
-                              <textarea readOnly value={shipmentInfoEntity.shipperInfo.address} className="form-control" />
+                              <textarea readOnly value={shipmentInfoEntity.receiverInfo.address} className="form-control" />
                             </Col>
                           </FormGroup>
                         </Col>

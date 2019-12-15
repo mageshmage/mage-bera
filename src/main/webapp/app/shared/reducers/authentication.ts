@@ -3,13 +3,16 @@ import { Storage } from 'react-jhipster';
 
 import { REQUEST, SUCCESS, FAILURE } from 'app/shared/reducers/action-type.util';
 import { setLocale } from 'app/shared/reducers/locale';
+import { defaultValueShipmentInformationSearchDTO } from 'app/shared/model/shipment-info.model';
 
 export const ACTION_TYPES = {
   LOGIN: 'authentication/LOGIN',
   GET_SESSION: 'authentication/GET_SESSION',
   LOGOUT: 'authentication/LOGOUT',
   CLEAR_AUTH: 'authentication/CLEAR_AUTH',
-  ERROR_MESSAGE: 'authentication/ERROR_MESSAGE'
+  ERROR_MESSAGE: 'authentication/ERROR_MESSAGE',
+  SHIPMENT_INFO: 'authentication/SHIPMENT_INFO',
+  CLEAR_SHIPMENT_INFO: 'authentication/CLEAR_SHIPMENT_INFO'
 };
 
 const AUTH_TOKEN_KEY = 'jhi-authenticationToken';
@@ -25,7 +28,8 @@ const initialState = {
   redirectMessage: null as string,
   sessionHasBeenFetched: false,
   idToken: null as string,
-  logoutUrl: null as string
+  logoutUrl: null as string,
+  searchCriteria: defaultValueShipmentInformationSearchDTO
 };
 
 export type AuthenticationState = Readonly<typeof initialState>;
@@ -92,6 +96,16 @@ export default (state: AuthenticationState = initialState, action): Authenticati
         showModalLogin: true,
         isAuthenticated: false
       };
+    case ACTION_TYPES.SHIPMENT_INFO:
+      return {
+        ...state,
+        searchCriteria: action.searchData
+      };
+    case ACTION_TYPES.CLEAR_SHIPMENT_INFO:
+      return {
+        ...state,
+        searchCriteria: null
+      };
     default:
       return state;
   }
@@ -150,5 +164,18 @@ export const clearAuthentication = messageKey => (dispatch, getState) => {
   dispatch(displayAuthError(messageKey));
   dispatch({
     type: ACTION_TYPES.CLEAR_AUTH
+  });
+};
+
+export const tempShipmentSearch = searchData => dispatch => {
+  dispatch({
+    type: ACTION_TYPES.SHIPMENT_INFO,
+    searchData
+  });
+};
+
+export const clearTempShipmentSearch = () => dispatch => {
+  dispatch({
+    type: ACTION_TYPES.CLEAR_SHIPMENT_INFO
   });
 };
